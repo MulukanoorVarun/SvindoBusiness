@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageview"
+            tools:ignore="ContentDescription" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearlayout1"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/imageview"
+            android:weightSum="2">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:text=""
+                android:layout_marginTop="2dp"
+                android:id="@+id/transationtyprtxt"
+                android:textColor="@color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                tools:ignore="HardcodedText"
+                android:textIsSelectable="true" />
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewEnd"
+                android:background="@android:color/transparent"
+                android:text=""
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:textColor="@color/buttongreen"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearlayout1"
+            android:id="@+id/linear2"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toEndOf="@+id/imageview"
+            android:weightSum="2">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"
+                android:text=""
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:id="@+id/description"
+                android:textSize="10sp"
+                android:textColor="@color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                tools:ignore="HardcodedText,SmallSp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_weight="1"
+                android:textAlignment="viewEnd"
+                android:layout_marginEnd="15dp"
+                android:id="@+id/created_datetime"
+                android:textSize="10sp"
+                tools:ignore="HardcodedText,SmallSp,Suspicious0dp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</layout>

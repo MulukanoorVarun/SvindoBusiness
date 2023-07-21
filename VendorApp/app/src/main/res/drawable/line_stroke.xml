@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:left="-5dp"
+        android:right="-5dp"
+        android:top="-5dp">
+        <shape
+            android:shape="line">
+            <!--Give the dashed lines their property
+                 like color, width, and dashGap-->
+            <stroke
+                android:strokeColor="@color/black"
+                android:strokeWidth="2"
+                android:width="1dp"/>
+        </shape>
+    </item>
+</selector>

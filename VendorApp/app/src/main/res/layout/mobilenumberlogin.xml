@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fortempararyimage"
+                android:id="@+id/backgroundimg"
+                android:scaleType="fitXY"
+                tools:ignore="ContentDescription" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="15dp"
+                android:layout_marginTop="310dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mobnum_layout">
+
+                    <ImageView
+                        android:id="@+id/logo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:scaleType="fitXY"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/mobileapplogo"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mobilenumbertxt"
+                        android:textStyle="bold"
+                        android:id="@+id/mobilenum_txt"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_below="@+id/logo"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
+
+                    <EditText
+                        android:id="@+id/mobile_Number_etxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="49dp"
+                        android:layout_below="@+id/mobilenum_txt"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="15dp"
+                        android:autofillHints=""
+                        android:background="@drawable/boarder"
+                        android:hint="@string/please_enter_mobile_number"
+                        android:inputType="number"
+                        android:maxEms="10"
+                        android:maxLength="10"
+                        android:padding="10dp"
+                        android:scaleType="center"
+                        android:text="8989898898"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        tools:ignore="HardcodedText" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/submit"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/continuetxt"
+                        android:scaleType="center"
+                        android:layout_below="@id/mobile_Number_etxt"
+                        android:gravity="center"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginBottom="20dp"
+
+                        android:background="@drawable/buttonbackground"/>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</layout>

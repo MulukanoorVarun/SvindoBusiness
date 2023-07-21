@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Place other views and layouts here as needed -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:background="@drawable/rounded_corners_background"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/business_details_backbutton"
+                        android:src="@drawable/backbutton"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/add_business_details"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                app:cardCornerRadius="10dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/business_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:scaleType="fitXY"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/business_profile"
+                        tools:ignore="ContentDescription" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/change_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/business_profile"
+                        android:gravity="center"
+                        android:background="@drawable/buttonborder"
+                        android:layout_centerHorizontal="true"
+                        android:backgroundTint="@color/white"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/change_image"
+                        android:textColor="@color/red"
+                        android:textSize="12sp"
+                     />
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="25dp"
+                        android:text="@string/name"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/change_photo"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/nameet"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@+id/name"
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:hint="@string/name_txt"
+                        android:textSize="12sp"
+                        android:inputType="text"
+                        android:autofillHints="" />
+
+                    <TextView
+                        android:id="@+id/business_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/business_name"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/nameet"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/business_name_et"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@+id/business_name"
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:hint="@string/business_name_et"
+                        android:textSize="12sp"
+                        android:inputType="text"
+                        android:autofillHints="" />
+                    <TextView
+                        android:id="@+id/mobile_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/contact_mob_num"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/business_name_et"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/mobile_num_et"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@+id/mobile_num"
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:hint="@string/mob_num_et_txt"
+                        android:textSize="12sp"
+                        android:inputType="number"
+                        android:autofillHints="" />
+                    <TextView
+                        android:id="@+id/store_email_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/store_email_id"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/mobile_num_et"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/store_email_id_et"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@+id/store_email_id"
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:hint="@string/store_email_id_et"
+                        android:textSize="12sp"
+                        android:inputType="textEmailAddress"
+                        android:autofillHints="" />
+                    <TextView
+                        android:id="@+id/business_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/business_category"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/store_email_id_et"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                    <EditText
+                        android:id="@+id/business_category_et"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@+id/business_category"
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:hint="@string/store_email_id_et"
+                        android:textSize="12sp"
+                        android:inputType="textEmailAddress"
+                        android:autofillHints="" />
+<!--                    <Spinner-->
+<!--                        android:id="@+id/spinner"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="48dp"-->
+<!--                       android:layout_below="@+id/business_category"-->
+<!--                         />-->
+<!--                    <com.google.android.material.textfield.TextInputLayout-->
+<!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+<!--                        android:layout_width="330dp"-->
+<!--                        android:layout_height="54dp"-->
+<!--                        android:layout_marginStart="13dp"-->
+<!--                        android:layout_below="@+id/business_category"-->
+<!--                        android:id="@+id/textinputlayout">-->
+
+<!--                    <AutoCompleteTextView-->
+<!--                        android:layout_width="320dp"-->
+<!--                        android:layout_height="48dp"-->
+<!--                        android:layout_marginStart="5dp"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:inputType="none"-->
+<!--                        android:id="@+id/categories"/>-->
+<!--                    </com.google.android.material.textfield.TextInputLayout>-->
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/address_txt"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/business_category_et"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/address_et"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@+id/address"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:hint="@string/address_et_txt"
+                        android:textSize="12sp"
+                        android:inputType="text"
+                        android:autofillHints="" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bankdetails_submitbutton"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardlayout"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="19dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/white"
+                android:background="@drawable/buttonbackground"
+                android:padding="13dp"
+                android:text="@string/submit" />
+
+        </RelativeLayout>
+    </ScrollView>
+</layout>

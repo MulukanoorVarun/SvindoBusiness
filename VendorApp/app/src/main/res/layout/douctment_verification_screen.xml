@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/douctmentsbackgroundimg"
+            android:id="@+id/background_img"
+            android:scaleType="fitXY"
+            tools:ignore="ContentDescription" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="15dp"
+            app:cardMaxElevation="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            app:cardElevation="10dp"
+            android:layout_marginTop="230dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#434141"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/pending_douctments"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:id="@+id/business_txtbtn"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="45dp"
+                android:padding="10dp"
+                android:layout_below="@+id/relativelayout2"
+                android:text="@string/businesstxt"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:gravity="center|start"
+                android:textAlignment="viewStart"
+                android:background="@drawable/boarderwithcolor" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="95dp"
+                android:layout_below="@id/business_txtbtn">
+
+                <TextView
+                    android:id="@+id/identificat_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:text="@string/Fassai_txt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="20dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:padding="5dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="18sp"
+                    android:gravity="center|start"
+                    android:background="@drawable/boarderwithcolor"
+                    tools:ignore="RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/pandetails_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:text="@string/pan_txt"
+                    android:layout_below="@+id/identificat_txt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="20dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="90dp"
+                    android:textSize="18sp"
+                    android:padding="5dp"
+                    android:gravity="center|start"
+                    android:background="@drawable/boarderwithcolor"
+                    tools:ignore="RtlHardcoded" />
+                <TextView
+                    android:id="@+id/gestin_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_below="@+id/pandetails_txt"
+                    android:text="@string/gstintxt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:padding="5dp"
+                    android:textSize="18sp"
+                    android:gravity="center|start"
+                    android:background="@drawable/boarderwithcolor"
+                    tools:ignore="RtlHardcoded" />
+
+
+                <TextView
+                    android:id="@+id/bank_account_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:text="@string/bank_accoun"
+                    android:layout_below="@+id/gestin_txt"
+                    android:layout_marginTop="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="20dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:padding="5dp"
+
+                    android:textSize="18sp"
+                    android:gravity="center|start"
+                    android:background="@drawable/boarderwithcolor"
+                    tools:ignore="RtlHardcoded" />
+
+                <!-- Additional TextViews -->
+
+                <TextView
+                    android:id="@+id/emergency_contact_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:text="@string/contacttxt"
+                    android:layout_marginTop="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="20dp"
+                    android:padding="5dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_below="@+id/bank_account_txt"
+                    android:textSize="18sp"
+                    android:gravity="center|start"
+                    android:background="@drawable/boarderwithcolor"
+                    tools:ignore="RtlHardcoded" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/submit"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/continuetxt"
+                    android:scaleType="center"
+                    android:layout_below="@id/emergency_contact_txt"
+                    android:gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/buttonbackground"/>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+    </ScrollView>
+</layout>

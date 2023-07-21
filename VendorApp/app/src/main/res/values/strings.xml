@@ -1,0 +1,413 @@
+<resources>
+    <string name="app_name">VendorApp</string>
+    <string name="mobilenumbertxt">Mobile Number</string>
+    <string name="continuetxt">Continue</string>
+
+    <string name="otp">Enter the Otp Send to</string>
+    <string name="edit">  +91 9000626742</string>
+    <string name="Didint"> Didn\'t recive OTP ?</string>
+    <string name="resend"> RESEND</string>
+    <string name="pending_douctments">Pending Douctments</string>
+    <string name="myprofile">    My Profile</string>
+    <string name="server_error">No Response from server, Please try again later!</string>
+    <string name="identificat"> Identification Documents</string>
+    <string name="vehicle_det"> Vehicle Details</string>
+    <string name="bank_accoun"> Bank Account Details</string>
+
+
+    <string name="emergency_c"> Emergency Contact</string>
+    <string name="try_again">Something went wrong, Please try again later!</string>
+
+    <string name="time_out">Unable to Reach Server, Due to Network Issues</string>
+    <string name="no_network">Check Your Internet Connectivity</string>
+    <string name="please_wait">Please wait.....</string>
+    <string name="session_exp">Your session has expired, please login again</string>
+    <string name="logout_toast">Successfully logged out !</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="snackbar_label">Your account has been blocked!</string>
+    <string name="toolbar_image">toolbar Image</string>
+    <string name="returned_orders">Returned Orders</string>
+    <string name="pending_orders">Pending Orders</string>
+    <string name="completed_orders">Completed Orders</string>
+    <string name="returned_items">Returned Items</string>
+    <string name="no_data_found">No Data Found</string>
+    <string name="edit_order_icon">edit order icon</string>
+    <string name="order_details">Order Details</string>
+    <string name="return_order">Return Order</string>
+    <string name="delivery">Delivery</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">
+<u>Forgot Password</u>
+</string>
+    <string name="channel_id">trolleyDeliveryChannelID</string>
+    <string name="channel_name">trolleyDeliveryChannel</string>
+    <string name="channel_description">Trolley Notifications</string>
+    <string name="notification_id">101</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="resend_otp">
+<u>Resend OTP</u>
+</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="splash_screen">splash screen</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="edit_order">
+<b>Edit Order</b>
+</string>
+    <string name="submit">Submit</string>
+    <string name="return_items">
+<b>Returned Items</b>
+</string>
+    <string name="remove_icon">remove icon</string>
+    <string name="increase_icon">increase icon</string>
+    <string name="set_password">Set Password</string>
+    <string name="login">Login</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="user_block_text">Your account has been blocked due to suspicious activity</string>
+    <string name="allow">Allow Location Permission</string>
+
+    <string name="mobile_number">Mobile Number</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="welcome">Welcome</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_orders">Orders</string>
+    <string name="title_my_account">My Account</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="expenses">Expenses</string>
+    <string name="change_password">Change Password</string>
+    <string name="support">Support</string>
+    <string name="logout">Logout</string>
+    <string name="my_wallet">My Wallet</string>
+    <string name="view_more">View More</string>
+    <string name="order_requests">Order Requests</string>
+    <string name="session_expired">Your session has expired, please login again</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="balance_amount">Balance Amount</string>
+    <string name="amount">Amount</string>
+    <string name="enter_reason">Enter Reason</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="preference_file_key">`in`.webgrid.trolleykarodeliveryperson.PREFERENCE_FILE_KEY</string>
+    <string name="Rs">\u20B9</string>//for rupee symbol
+    <string name="rs">\u20A8</string>//for Rs symbol
+    <string name="camera">Capture photo from camera</string>
+    <string name="gallery">Select photo from gallery</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_source">Select Source</string>
+    <string name="image_selected">Image Selected</string>
+    <string name="reason">Reason</string>
+    <string name="payment_mode">Payment Mode</string>
+    <string name="type_recurring_order">Recurring Order</string>
+    <string name="type_normal_order">Normal Order</string>
+    <string name="type_manual_order">Manual Order</string>
+    <string name="package_order">Document Delivery</string>
+    <string name="delivery_date">Delivery Date</string>
+    <string name="payment_details">Payment Details</string>
+
+    <string name="package_order_accepted">Order Accepted</string>
+    <string name="package_order_picked">Order Picked Up</string>
+    <string name="package_order_reached">Destination Reached</string>
+    <string name="package_order_delivered">Delivered</string>
+    <string name="package_order_del_cancelled">Delivery Boy Cancelled</string>
+    <string name="package_order_cancelled">Cancelled</string>
+
+    <string name="amount_to_be_collected">Amount To Be Collected</string>
+    <string name="instructions">INSTRUCTIONS:</string>
+    <string name="view_map">View Map</string>
+    <string name="date_time">Date | Time</string>
+    <string name="pickup_location">Pickup Location</string>
+    <string name="drop_location">Drop Location</string>
+    <string name="package_content">Package Content</string>
+    <string name="reached_to_destination">Reached To Destination</string>
+    <string name="custmer">Customer name</string>
+    <string name="burger_shop">Burger Shop</string>
+    <string name="pickup_order">Pickup Order</string>
+    <string name="order_id">ORDER ID</string>
+    <string name="_6566text">6566556596</string>
+    <string name="order_deatails">Order Deatails</string>
+    <string name="burgershop">Burger Shop</string>
+    <string name="store_details">Store Details</string>
+    <string name="customer_details">Customer Details</string>
+    <string name="mobilenumber">Mobile Number</string>
+    <string name="otpverification">OTP Verification</string>
+    <string name="my_profile">My Profile</string>
+
+
+    ////////////////////////////////////////////////////////////////////////////////////
+
+
+    <string name="Vehicle_details">Vehicle Details</string>
+    <string name="vehicle_text">
+Enter details of the vehicle that you will use for tasks and orders
+</string>
+    <string name="vehicle_model">Vehicle Model</string>
+    <string name="vehicle_model_et">e.g Bajaj pulsar 220cc</string>
+    <string name="vehicle_num">Vehicle Number</string>
+    <string name="vehicle_num_et">e.g Ts 08 HA 1234</string>
+    <string name="addhartext">Aadhar Card</string>
+    <string name="back_side_photo_txt">
+Back side photo of your Aadhar card with your clear Address
+</string>
+    <string name="front_side_photo_txt">
+Front side photo of your Aadhar card with your clear name and photo
+</string>
+    <string name="btn_txt">Submit</string>
+    <string name="upload_photo_txt">
+*please upload a focused photo of your Aadhar card for faster verification
+</string>
+    <string name="bank_acc_details">Add Bank Account Details</string>
+    <string name="desc_txt">
+Please tell us your account details where we will transact your earnings
+</string>
+    <string name="ifsc_txt">Bank IFSC CODE</string>
+    <string name="bank_name_txt">Bank Name</string>
+    <string name="acc_num_txt">Account number</string>
+    <string name="re_enter_txt">Re-Enter Account number</string>
+    <string name="please_enter_ifsc_txt">Please Enter IFSC code</string>
+    <string name="please_enter_bank_txt">Please Enter Bank name</string>
+    <string name="enter_acc_num_txt">Please Enter Account number</string>
+    <string name="re_enter_acc_num_txt">Please Re-Enter Account number</string>
+    <string name="driving_license">Driving License</string>
+    <string name="license_desc">
+*please upload a focused photo of your Driving License for faster verification
+</string>
+    <string name="license_frnt">
+Front side photo of your Driving License with your clear name and photo
+</string>
+    <string name="license_back">
+Back side photo of your Driving License with your clear Address
+</string>
+    <string name="emergency_contact">Emergency Contact</string>
+    <string name="contact_details">
+Provide contact details of someone you trust as an emergency contact
+</string>
+    <string name="emerge_mob_num">Emergency Contact Mobile Number</string>
+    <string name="emerge_mob_num_et">e.g 9390776532</string>
+    <string name="name_txt">Name</string>
+    <string name="enter_name_et">e.g VARUN</string>
+    <string name="relation_txt">Relation</string>
+    <string name="relation_et">e.g Brother/Sister</string>
+
+    <string name="my_prof_desc">
+Enter the details below so we can get to know and serve you Better
+</string>
+    <string name="prim_mob_num">Primary Mobile Number</string>
+    <string name="prim_mob_num_et">please Enter Mobile number</string>
+    <string name="sec_mob_num">Secondary Mobile Number(Optional)</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name_et">Enter First Name</string>
+    <string name="last_name_et">Enter Last Name</string>
+    <string name="father_name">Father Name</string>
+    <string name="dob">Date Of Birth</string>
+    <string name="city">City</string>
+    <string name="address">Complete Address</string>
+    <string name="father_name_et">Enter Father Name</string>
+    <string name="dob_et">Select Date Of Birth</string>
+    <string name="city_et">Enter City name</string>
+    <string name="address_et">Enter Complete Address</string>
+    <string name="prof_pic">Your Profile Picture</string>
+    <string name="pan_txt">Pan Card Details</string>
+    <string name="pan_desc">
+*please upload a focused photo of your PAN card for faster verification
+</string>
+    <string name="frnt_pan_card">
+Front side photo of your PAN card with your clear name and photo
+</string>
+    <string name="welcome_txt">Welcome Back,Sai</string>
+    <string name="name_text">Kumar Shetty</string>
+    <string name="mob_num">+91 9390776532</string>
+    <string name="total_cash">Total Cash</string>
+    <string name="online_txt">Online</string>
+    <string name="total_balance">Total Balance</string>
+    <string name="amount_txt">₹12,345</string>
+    <string name="txt">1 week</string>
+    <string name="trans_hist">Transactions History</string>
+    <string name="orders_txt">Order :</string>
+    <string name="account_txt">Account</string>
+    <string name="trans_amount_txt">Transaction Amount</string>
+    <string name="trans_time_txt">Transaction Time</string>
+    <string name="amt_txt">+ ₹69.00</string>
+    <string name="time_txt">12:55 AM</string>
+    <string name="cod_txt">COD</string>
+    <string name="button_txt">Change Image</string>
+    <string name="upload_focu">
+*Upload focused photo of below documents for faster verification
+</string>
+    <string name="discriptiotext">Enter details of the vehicle that you will use for tasks and orders</string>
+    <string name="sai_name">Sai</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="order_date">19–06–2023</string>
+    <string name="call_text">CALL</string>
+    <string name="map">MAP</string>
+    <string name="reach_drop_txt">Reached Drop</string>
+    <string name="cust_name_txt">Customer Name :</string>
+    <string name="cust_add_txt">Customer Address</string>
+    <string name="pick_up_zone">Pick Up Zone :</string>
+    <string name="delivery_zone">Delivery Zone :</string>
+    <string name="productdetails">Product Details</string>
+    <string name="reach_location">Reached Drop Location</string>
+    <string name="reached_pickup_txt">Reached Pickup</string>
+    <string name="reachedpickup_location">Reached Pickup Location</string>
+    <string name="tripdistance">Trip distance  :</string>
+    <string name="dropzone">Drop Zone :</string>
+    <string name="pickupfrom">Pickup from</string>
+    <string name="distancetxt">0.6 Km</string>
+    <string name="wipepickup">Pickedorder</string>
+    <string name="pickedorder">Picked Order</string>
+    <string name="paiddetailstxt">Paid Online</string>
+    <string name="dropordertxt">Drop Order</string>
+    <string name="orderdeliverdtxt">Order Delivered</string>
+    <string name="change_image">Change Image</string>
+    <string name="image_discription">Front side photo of your PAN card with your clear name and photo</string>
+    <string name="hedding_discription">*please upload a focused photo of your PAN card for faster verification</string>
+    <string name="storelocationtxt">Store location</string>
+    <string name="bankifsc">Bank IFSC</string>
+    <string name="mobilenumberenter">8989898898</string>
+    <string name="hintfor_mob_number">Please Enter Mobile Number</string>
+    <string name="accountnumber">325346545567</string>
+    <string name="re_enter_account_number">Re-Enter Account number</string>
+    <string name="please_enter_account_number">Please Enter Account number</string>
+    <string name="_325346545567">325346545567</string>
+    <string name="account_number">Account number</string>
+    <string name="please_enter_bank_name">Please Enter Bank name</string>
+    <string name="sbi">SBI</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="please_enter_ifsc_code">Please Enter IFSC code</string>
+    <string name="sbi3478459">SBI3478459</string>
+    <string name="discription1">Please tell us your account details where we will transact your earnings</string>
+    <string name="businesstxt">Business Details</string>
+    <string name="Fassai_txt">Fssai</string>
+    <string name="overviewtxt">Overview</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_orders">Orders</string>
+    <string name="menu_catalogue">Catalogue</string>
+    <string name="menu_profile">Profile</string>
+    <string name="gstintxt">GST IN</string>
+    <string name="contacttxt">Contact</string>
+    <string name="please_enter_mobile_number">Please Enter Mobile number</string>
+    <string name="contactdiscription">Provide contact details of some one you trust as an emergrncy contact</string>
+    //pending Documents
+    <string name="pending_doc">Pending Documents</string>
+    <string name="gst_txt">GSTIN</string>
+    <string name="bank_acc_txt">Bank Account</string>
+    <string name="contact_txt">Contact</string>
+    <string name="store_name">Store Name</string>
+    <string name="acc_txt">Account</string>\
+    <string name="store_name_txt">Kumar Textiles</string>
+    <string name="delivery_cashback_txt">Delivery Cashback</string>
+    <string name="note_txt">NOTE: asdfghjkklrtyui</string>
+    <string name="credit_txt">Available Credits</string>
+    <string name="acc_settings">Account Settings</string>
+    <string name="add_banners_txt">Add Banners</string>
+    <string name="svindo_txt">svindo Gold</string>
+    <string name="notification_txt">Notifications</string>
+    <string name="reports_txt">Reports</string>
+    <string name="insights_txt">Insights</string>
+    <string name="customer_feed_txt">Customer Feedback</string>
+    <string name="discount_coupons_txt">Discount Coupons</string>
+    <string name="privacy_policy_txt">Privacy Policy</string>
+    <string name="terms_conditions_txt">Terms and Conditions</string>
+    <string name="note_desc_txt">Note: Monthly one subscription we be send in free subscription.We want to take more gold membership </string>
+    <string name="note_descn_txt">Only Followers will Recive this notification to send notification to at city level or zone level contact support </string>
+    <string name="notification_description">Notification Description</string>
+    <string name="note_desc_et_txt">Enter notification Description</string>
+    <string name="notification_list">Notifications List</string>
+    <string name="account">Account</string>
+    <string name="withdrwal">withdrwal</string>
+    <string name="transaction_details">Transaction Details</string>
+    <string name="Withdrawal_Amount_txt">Withdrawal Amount</string>
+    <string name="today_sales_amt_txt">Today Sales Amount</string>
+    <string name="item_total">Item Total</string>
+    <string name="admin_commission">Admin Commission</string>
+    <string name="net_amt">Net Amount</string>
+    <string name="description">After cuttings finally you got this amount</string>
+    <string name="add_business_details">Add Business Details</string>
+    <string name="business_name">Business Name</string>
+    <string name="business_name_et">Enter Business name</string>
+    <string name="contact_mob_num">Contact Mobile Number</string>
+    <string name="mob_num_et_txt">Please Enter Mobile number</string>
+    <string name="store_email_id">Store Email ID</string>
+    <string name="store_email_id_et">Enter Email ID</string>
+    <string name="business_category">Business Category</string>
+    <string name="enter_category">Enter Category</string>
+    <string name="address_txt">Address</string>
+    <string name="address_et_txt">Enter complete Address</string>
+    <string name="fssai_deatils">FSSAI Details</string>
+    <string name="fssai_code">FSSAI License number</string>
+    <string name="fssai_et_txt">Enter FSSAI License number</string>
+    <string name="gstin_num">GSTIN Number</string>
+    <string name="gstin_num_et_txt">Enter GSTIN number</string>
+    <string name="gstin_deatils">GSTIN Details</string>
+    <string name="location_txt">Location</string>
+    <string name="location_et_txt">Add location</string>
+    <string name="edit_business_details">Edit Business Details</string>
+    <string name="order_no_txt">Order #22154</string>
+    <string name="week_dropdown">1 week</string>
+    <string name="instant_txt">Instant</string>
+    <string name="general_delivery">General Delivery</string>
+    <string name="self_pickup">Self Pickup</string>
+    <string name="day_time_mention">Today, 03:22 PM</string>
+    <string name="pending">Pending</string>
+    <string name="delivery_type">Delivery Type</string>
+    <string name="delivery_fee">Delivery Fee</string>
+    <string name="subsidy">Subsidy</string>
+    <string name="grand_total">Grand Total</string>
+    <string name="OTP">OTP:2121</string>
+    <string name="name">Name</string>
+    <string name="cust_name">Sravan Kumar</string>
+    <string name="contact_num">+91 9390564645</string>
+    <string name="address_text">Madura nagar Hyderabad,Telangana</string>
+    <string name="accepted">Accepted</string>
+    <string name="delivery_boy_details">Delivery Boy Details</string>
+    <string name="profile">Profile</string>
+    <string name="view_txt">view</string>
+    <string name="overview_desc">you reached +407% more accounts compare to may 9 - may 15</string>
+    <string name="shopviews_no">256</string>
+    <string name="shop_views">Shop views</string>
+    <string name="followers_no">256</string>
+    <string name="followers">Followers</string>
+    <string name="top_liked">Top Liked</string>
+    <string name="recieved_likes">you received likes on 3 products</string>
+    <string name="item_name">TATA Salt</string>
+    <string name="top_rated_products">Top Rated Products</string>
+    <string name="add_new_product">Add New Product</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_category">Product category</string>
+    <string name="product_sub_category">Product Sub Category</string>
+    <string name="price">Price</string>
+    <string name="discount_price">Discount Price</string>
+    <string name="unit">Unit</string>
+    <string name="add_varients">+Add Varients</string>
+    <string name="units_perkg">Units: Per 1KG</string>
+    <string name="product_desc">Product Description</string>
+    <string name="spotlight">Add Spotlight</string>
+    <string name="policies">Policies</string>
+    <string name="return_txt">Return</string>
+    <string name="cashondelivery">Cash On Delivery</string>
+    <string name="repalcement">Replacement</string>
+    <string name="shopexchange">Shop Exchange</string>
+    <string name="typeofdelivery">Type of Delivery</string>
+    <string name="instantdelivery">Instant Delivery</string>
+    <string name="onedaydelivery">One Day Delivery</string>
+    <string name="update">update</string>
+    <string name="MenBlackshoes">Men Black Shoes</string>
+    <string name="RedTape">Red Tape</string>
+    <string name="SportShoes">Sports Shoe</string>
+    <string name="piece">Piece</string>
+    <string name="S">S</string>
+    <string name="M">M</string>
+    <string name="L">L</string>
+    <string name="addon">Add On</string>
+
+    <string-array name="business_categories">
+        <item>Java</item>
+        <item>Kotlin</item>
+        <item>Python</item>
+        <item>CPP</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:background="@drawable/rounded_corners_background"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="UseCompoundDrawables">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/contactbackbutton"
+                        android:src="@drawable/backbutton"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Add Contact Person"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/cardlayout"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="70dp"
+                app:cardCornerRadius="20dp"
+                android:layout_marginEnd="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/desc_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/contactdiscription"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/mob_num_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/desc_txt"
+                        android:text="Contact Mobile Number"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+
+                    <EditText
+                        android:id="@+id/mob_num_et_txt"
+                        android:layout_width="369dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="13dp"
+                        android:layout_marginTop="6dp"
+                        android:padding="10dp"
+                        android:layout_below="@+id/mob_num_txt"
+                        android:background="@drawable/boarder"
+                        android:hint="e.g 9390776532"
+                        android:text="9068959950"
+                        android:inputType="text"
+                        tools:ignore="HardcodedText"
+                        android:autofillHints="" />
+
+                    <TextView
+                        android:id="@+id/name_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/mob_num_et_txt"
+                        android:text="Contact Person Name"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <EditText
+                        android:id="@+id/name_et_txt"
+                        android:layout_width="369dp"
+                        android:layout_height="48dp"
+                        android:layout_below="@+id/name_txt"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="13dp"
+                        android:layout_marginBottom="15dp"
+                        android:padding="10dp"
+                        android:autofillHints=""
+                        android:background="@drawable/boarder"
+                        android:hint="e.g VARUN"
+                        android:inputType="text"
+                        android:text="akash old"
+                        tools:ignore="HardcodedText" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardlayout"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="400dp"
+                android:layout_marginBottom="29dp"
+                android:background="@drawable/buttonbackground"
+                android:padding="13dp"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </RelativeLayout>
+</layout>

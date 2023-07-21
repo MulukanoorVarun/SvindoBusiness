@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:background="@drawable/rounded_corners_background"
+                android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/acc_txt"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                app:cardCornerRadius="10dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/store_pic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/store_img"
+                        tools:ignore="ContentDescription" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="70dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/store_name_txt"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/store_name_txt"
+                            android:textColor="@color/black"
+                            android:textSize="11sp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearlayout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/store_pic"
+                        android:weightSum="2"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/credit_txt"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:textSize="11sp" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="90dp"
+                            android:layout_weight="1"
+                            android:text="@string/amount_txt"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearlayout1"
+                        android:weightSum="2"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/delivery_cashback_txt"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:textSize="15sp"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/note_txt"
+                            android:textColor="@color/black"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardlayout"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                app:cardCornerRadius="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/acc_settgs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/acc_settings"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+                <LinearLayout
+                    android:id="@+id/linearlayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/acc_settgs"
+                    android:weightSum="2"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.utils.widget.ImageFilterView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/add_banners_mg" />
+
+                    <TextView
+                        android:id="@+id/add_banners"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="@string/add_banners_txt"
+                        android:textColor="#606060"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
+
+
+                </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearlayout2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearlayout"
+                        android:weightSum="2"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/svindo_gold_img" />
+
+                        <TextView
+                            android:id="@+id/svindo_gold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/svindo_txt"
+                            android:textColor="#606060"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearlayout3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearlayout2"
+                        android:weightSum="2"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/notification_icon" />
+
+                        <TextView
+                            android:id="@+id/notification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/notification_txt"
+                            android:textColor="#606060"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearlayout4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearlayout3"
+                        android:weightSum="2"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/reports_img" />
+
+                        <TextView
+                            android:id="@+id/reports"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/reports_txt"
+                            android:textColor="#606060"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearlayout5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearlayout4"
+                        android:weightSum="2"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/reports_img" />
+
+                        <TextView
+                            android:id="@+id/insights"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/insights_txt"
+                            android:textColor="#606060"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearlayout6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearlayout5"
+                        android:weightSum="2"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/customer_feedback_img" />
+
+                        <TextView
+                            android:id="@+id/customer_feedback"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/customer_feed_txt"
+                            android:textColor="#606060"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearlayout7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearlayout6"
+                        android:weightSum="2"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/discount_img" />
+
+                        <TextView
+                            android:id="@+id/discount_coupon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/discount_coupons_txt"
+                            android:textColor="#606060"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearlayout8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearlayout7"
+                        android:weightSum="2"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/discount_img" />
+
+                        <TextView
+                            android:id="@+id/privacy_policy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/privacy_policy_txt"
+                            android:textColor="#606060"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearlayout9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearlayout8"
+                        android:weightSum="2"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/discount_img" />
+
+                        <TextView
+                            android:id="@+id/terms_conditions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_weight="1"
+                            android:text="@string/terms_conditions_txt"
+                            android:textColor="#606060"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomnavigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:itemBackground="@color/white"
+                app:itemIconTint="@color/black"
+                app:itemTextColor="@android:color/black"
+                app:menu="@menu/bottom_navigation_menu" />
+        </RelativeLayout>
+</layout>
