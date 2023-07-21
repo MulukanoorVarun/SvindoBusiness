@@ -58,9 +58,9 @@
         <activity
             android:name=".activity.PaymentDetailsandItemsList"
             android:exported="false" />
-        <activity
-            android:name=".activity.LoginActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".activity.LoginActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".activity.NotificationsActivity"
             android:exported="false" />
@@ -88,9 +88,9 @@
         <activity
             android:name=".activity.PancardActivity"
             android:exported="false" />
-        <activity
-            android:name=".activity.BusinessdetailsActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--&lt;!&ndash;            android:name=".activity.BusinessdetailsActivity"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:exported="false" />&ndash;&gt;-->
         <activity
             android:name=".activity.RegistrationActivity"
             android:exported="false" />
@@ -98,7 +98,7 @@
             android:name=".activity.Otpveryfiy_Activity"
             android:exported="false" />
         <activity
-            android:name=".activity.DashboardActivity"
+            android:name=".activity.BusinessdetailsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

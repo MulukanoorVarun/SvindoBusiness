@@ -69,21 +69,36 @@ interface ApiInterface {
     @POST("Home/profile_details_update")
     fun bankaccountdetails(
        @Header("Sessionid") content_type: String?,
-//        @Field("type") type: RequestBody,
-        @Field("ifsc") bank_name: String,
-        @Field("bank_name") ifsc_code: String,
+        @Field("type") type: String,
+        @Field("bank_name") bank_name: String,
+        @Field("ifsc") ifsc_code: String,
         @Field("account_number") account_number: String,
     ): Call<Bankdetails_Response>
 
 
 
     @FormUrlEncoded
-    @POST("Home/contact_details")
+    @POST("Home/profile_details_update")
     fun contactdetails(
       @Header("Sessionid")  content_type:String?,
+        @Field("type") type: String,
         @Field("name") emergency_contact_name: String,
         @Field("mobile_number") emergency_mobile_number: String,
     ): Call<Bankdetails_Response>
+
+    @Multipart
+    @NonNull
+    @POST("Home/profile_details_update")
+    fun pandetails(
+        @HeaderMap headers: Map<String, String>,
+        @Part("type")type: RequestBody,
+        @Part image: MultipartBody.Part
+//
+//        @Header("Sessionid")  content_type:String?,
+//        @Field("type") type: String="pan",
+//        @Field("name") pan_image: String,
+    ): Call<Bankdetails_Response>
+
 
     @POST("Home/Dashboard") fun Dashboarddetails(@Header("Sessionid") Sessionid: String?): Call<DashboardResponseModal>
 

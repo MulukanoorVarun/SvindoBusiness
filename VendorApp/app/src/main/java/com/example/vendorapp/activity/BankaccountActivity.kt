@@ -77,7 +77,7 @@ class BankaccountActivity : AppCompatActivity() {
         ) {
 
         val loginService = ApiClient.buildService(ApiInterface::class.java)
-        val requestCall = loginService.bankaccountdetails(sharedPreference.getValueString("token"),bank_name,ifsc_code,account_number)
+        val requestCall = loginService.bankaccountdetails(sharedPreference.getValueString("token"),"bank_account",bank_name,ifsc_code,account_number)
         requestCall.enqueue(object : Callback<Bankdetails_Response> {
             @SuppressLint("SuspiciousIndentation")
             override fun onResponse(

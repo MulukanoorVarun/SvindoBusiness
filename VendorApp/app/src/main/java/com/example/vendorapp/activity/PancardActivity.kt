@@ -100,7 +100,8 @@ class PancardActivity : AppCompatActivity() {
                 }
 
             }
-        pancardBinding.pancardbutton.setOnClickListener {
+        pancardBinding.pancardsubmitbutton.setOnClickListener {
+            showToast("pancradresponse.message")
 
             uploadprofile(file_1!!)
         }
@@ -220,56 +221,45 @@ class PancardActivity : AppCompatActivity() {
 
 
 
-        private fun uploadprofile(file1: File
-        ) {
+        private fun uploadprofile(file1: File ) {
+            showToast("pancradresponse.message")
             try {
 
                 val uploadBillService = ApiClient.buildService(ApiInterface::class.java)
 
 
                 val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
-                val body1 = MultipartBody.Part.createFormData("adhar_front", file1.name, requestFile1)
+                val body1 = MultipartBody.Part.createFormData("pan_image", file1.name, requestFile1)
 
 
                 val headers: MutableMap<String, String> = HashMap()
-//            headers["Sessionid"] =  sharedPreference.getValueString("token")!!
+            headers["Sessionid"] =  sharedPreference.getValueString("token")!!
 
-                val type: RequestBody = "addhar".toRequestBody("text/plain".toMediaTypeOrNull())
-
-//            val phonenumber: RequestBody = sec_phonenumber.toRequestBody("text/plain".toMediaTypeOrNull())
-//            val sec_phonenumber: RequestBody =  sec_phonenumber.toRequestBody("text/plain".toMediaTypeOrNull())
-//            val fathername: RequestBody = fathername.toRequestBody("text/plain".toMediaTypeOrNull())
-//            val dod: RequestBody = dod.toRequestBody("text/plain".toMediaTypeOrNull())
-//            val gen: RequestBody = "Male".toRequestBody("text/plain".toMediaTypeOrNull())
-//            val pincode: RequestBody = "500045".toRequestBody("text/plain".toMediaTypeOrNull())
-//            val mail: RequestBody = "ak@123".toRequestBody("text/plain".toMediaTypeOrNull())
-//            val loc: RequestBody = "17.446445818443724, 78.44861066842567".toRequestBody("text/plain".toMediaTypeOrNull())
-//            val city: RequestBody = city.toRequestBody("text/plain".toMediaTypeOrNull())
-//            val complete_address: RequestBody = complete_address.toRequestBody("text/plain".toMediaTypeOrNull())
+                val type: RequestBody = "pan".toRequestBody("text/plain".toMediaTypeOrNull())
 
 
-                val requestCall = uploadBillService.UploadBusinessRegFilesInterface(
+                val requestCall = uploadBillService.pandetails(
                     headers,
                     type,
                     body1
                 )
-                requestCall.enqueue(object : Callback<Verify_otp_Response> {
-                    @SuppressLint("SuspiciousIndentation")
+                requestCall.enqueue(object : Callback<Bankdetails_Response> {
                     override fun onResponse(
-                        call: Call<Verify_otp_Response>,
-                        response: Response<Verify_otp_Response>
+                        call: Call<Bankdetails_Response>,
+                        response: Response<Bankdetails_Response>
                     ) {
                         when {
                             response.code() == 200 -> {//status code between 200 to 299
-                                Response = response.body()!!
-                                when (Response.error) {
+                                pancradresponse = response.body()!!
+                                print(pancradresponse);
+                                when (pancradresponse.error) {
                                     "0" -> {
                                         //  sharedPreference.save("in_registration_process", "1")
-                                        startActivity(Intent(this@PancardActivity, BankaccountActivity::class.java))
-                                        showToast(Response.message)
+                                        startActivity(Intent(this@PancardActivity, OrdersScreen::class.java))
+                                        showToast(pancradresponse.message)
                                     }
                                     else -> {
-                                        showToast(Response.message)
+                                        showToast(pancradresponse.message)
                                     }
                                 }
                             }
@@ -286,7 +276,7 @@ class PancardActivity : AppCompatActivity() {
 
                     //invoked in case of Network Error or Establishing connection with Server
                     //or Error Creating Http Request or Error Processing Http Response
-                    override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                    override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
                         showToast(getString(R.string.server_error))
                     }
                 })

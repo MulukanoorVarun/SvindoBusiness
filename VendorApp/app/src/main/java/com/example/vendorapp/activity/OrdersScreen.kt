@@ -33,10 +33,10 @@ class OrdersScreen : AppCompatActivity() {
         ordersBinding.bottomnavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.home -> {
-                    val intent = Intent(this,DashboardActivity::class.java)
-                    overridePendingTransition(0,0);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivity(intent)
+//                    val intent = Intent(this,DashboardActivity::class.java)
+//                    overridePendingTransition(0,0);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                    startActivity(intent)
                     false
                 }
                 R.id.orders -> {

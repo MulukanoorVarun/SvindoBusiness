@@ -43,6 +43,7 @@ import java.io.File
 import java.io.FileOutputStream
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.ImageView
 import android.widget.Spinner
 import com.example.vendorapp.utils.SharedPreference
 
@@ -58,7 +59,7 @@ private lateinit var sharedPreference: SharedPreference
 lateinit var Response: Verify_otp_Response
 private lateinit var businessdetailsResponse: Verify_otp_Response
 class BusinessdetailsActivity : AppCompatActivity() {
-
+    lateinit var imageIV: ImageView;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(this)
@@ -94,12 +95,18 @@ class BusinessdetailsActivity : AppCompatActivity() {
 
         businessdetailsBinding = ActivityBusinessdetailsBinding.inflate(layoutInflater)
         setContentView(businessdetailsBinding.root)
-        val Sessionid = intent.getStringExtra("token")
 
         businessdetailsBinding.changePhoto.setOnClickListener {
 //            val intent = Intent(this, PendingDocuments::class.java)
 //            startActivity(intent)
+//            business_profile
             showAlertDialog()
+//            imageIV = findViewById(R.id.business_profile)
+//            val imgBitmap = BitmapFactory.decodeFile(file_1!!.absolutePath)
+//
+//            // on below line we are setting bitmap to our image view.
+//            imageIV.setImageBitmap(imgBitmap)
+
         }
 
 
@@ -128,6 +135,17 @@ class BusinessdetailsActivity : AppCompatActivity() {
                         val filePath = imageUri?.let { uriPathHelper.getPath(this, it) }
                          filePath?.let {
                                 file_1 = compressImage(filePath, 0.5)
+
+                             imageIV = findViewById(R.id.business_profile)
+                             imageIV.getLayoutParams().height = 350;
+                             imageIV.getLayoutParams().width = 350;
+
+                                val imgBitmap = BitmapFactory.decodeFile(file_1!!.absolutePath)
+
+                                // on below line we are setting bitmap to our image view.
+                                imageIV.setImageBitmap(imgBitmap)
+
+
                             }
                         showToast("Image Selected")
                     } catch (e: Exception) {
@@ -275,6 +293,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
             val fileOutputStream = FileOutputStream(filePath)
             fullSizeBitmap.compress(Bitmap.CompressFormat.JPEG, quality, fileOutputStream)
             fileOutputStream.close()
+
             file = File(filePath)
         }catch (e: Exception){
             e.printStackTrace()
@@ -304,7 +323,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
 
         val name: RequestBody = business_name.toRequestBody("text/plain".toMediaTypeOrNull())
         val business_name: RequestBody = business_name.toRequestBody("text/plain".toMediaTypeOrNull())
-        val type: RequestBody = "1".toRequestBody("text/plain".toMediaTypeOrNull())
+        val type: RequestBody = "business_details".toRequestBody("text/plain".toMediaTypeOrNull())
         val contact_mob_num: RequestBody = contact_mob_num.toRequestBody("text/plain".toMediaTypeOrNull())
         val store_email_id: RequestBody = store_email_id.toRequestBody("text/plain".toMediaTypeOrNull())
         val business_category: RequestBody = business_category.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -327,7 +346,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
                             if (businessdetailsResponse.error=="0")
                             {
                                 print(businessdetailsResponse)
-//                                sharedPreference.save("token", businessdetailsResponse.token);
+                                sharedPreference.save("token", businessdetailsResponse.token);
                                 showToast(businessdetailsResponse.message)
                                 val i = Intent(this@BusinessdetailsActivity, BankaccountActivity::class.java)
                                 startActivity(i)

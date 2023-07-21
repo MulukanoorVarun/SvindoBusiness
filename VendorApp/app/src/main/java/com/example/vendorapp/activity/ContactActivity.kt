@@ -21,11 +21,11 @@ import retrofit2.Response
 @SuppressLint("StaticFieldLeak")
 lateinit var contactbinding : ActivityContactBinding
 lateinit var contactResponse: Bankdetails_Response
-
 class ContactActivity : AppCompatActivity() {
     private lateinit var sharedPreference: SharedPreference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPreference = SharedPreference(this)
         contactbinding = ActivityContactBinding.inflate(layoutInflater)
         setContentView(contactbinding.root)
 
@@ -72,7 +72,7 @@ class ContactActivity : AppCompatActivity() {
     ) {
         //println(SessionManager.getToken());
         val loginService = ApiClient.buildService(ApiInterface::class.java)
-        val requestCall = loginService.contactdetails(sharedPreference.getValueString("token"),emergency_contact_name, emergency_mobile_number)
+        val requestCall = loginService.contactdetails(sharedPreference.getValueString("token"),"contact",emergency_contact_name, emergency_mobile_number)
         requestCall.enqueue(object : Callback<Bankdetails_Response> {
 
 
@@ -130,4 +130,65 @@ class ContactActivity : AppCompatActivity() {
 
     }
 
+
+//    private fun contactdetails(
+//        bank_name: String,
+//        ifsc_code: String,
+//        account_number: String,
+//
+//        ) {
+//
+//        val loginService = ApiClient.buildService(ApiInterface::class.java)
+//        var name=contactbinding.nameEtTxt.text.toString().trim()
+//        var num=contactbinding.mobNumEtTxt.text.toString().trim()
+//        val requestCall = loginService.contactdetails(sharedPreference.getValueString("token"),"bank_account",name,num)
+//        requestCall.enqueue(object : Callback<Bankdetails_Response> {
+//            @SuppressLint("SuspiciousIndentation")
+//            override fun onResponse(
+//                call: Call<Bankdetails_Response>,
+//                response: Response<Bankdetails_Response>
+//            ) {
+//                when {
+//                    response.isSuccessful -> {//status code between 200 to 299
+//
+//                        if (response.isSuccessful) {
+//                            showToast(""+response.body())
+//                            response.body()?.let { showToast(it.message)}
+//                            contactResponse = response.body()!!
+////                            getPreferences(MODE_PRIVATE).edit().putString("error",bankdetailsResponse.error).apply();
+//
+////                            val i = Intent(this@ContactActivity,ContactActivity::class.java)
+////                            startActivity(i)
+//
+//
+//
+//
+//
+//                        }
+//
+////                        Log.d("TAG", "onResponse: " + (response.body()?.error))
+//
+//
+//                    }
+//
+//                    response.code() == 401 -> {//unauthorised
+//                        showToast(getString(R.string.session_exp))
+//                    }
+//                    else -> {//Application-level failure
+//                        //status code in the range of 300's, 400's, and 500's
+//                        showToast(getString(R.string.server_error))
+//                    }
+//                }
+//
+//
+//            }
+//
+//            override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
+//
+//                showToast(getString(R.string.session_exp))
+//            }
+//
+//        })
+//
+//    }
     }

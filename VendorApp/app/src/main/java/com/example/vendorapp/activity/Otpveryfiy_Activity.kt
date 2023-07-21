@@ -166,10 +166,10 @@ class Otpveryfiy_Activity : AppCompatActivity() {
                                     if (response.body()!!.error == "0") {
                                         sharedPreference.save("token", verifyotpResponse.token);
                                         response.body()?.let { showToast(it.message)}
-                                        val intent = Intent(
-                                            this@Otpveryfiy_Activity, DashboardActivity::class.java
-                                        )
-                                        startActivity(intent)
+//                                        val intent = Intent(
+//                                            this@Otpveryfiy_Activity, DashboardActivity::class.java
+//                                        )
+//                                        startActivity(intent)
                                     }else if (response.body()?.error == "2") {
                                         sharedPreference.save("mobile_number", (mobile_number).toString());
                                         val intent = Intent(

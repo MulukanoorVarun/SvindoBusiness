@@ -8,15 +8,30 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import com.example.vendorapp.databinding.ActivityPendingDocumentsBinding
-
+import com.example.vendorapp.modelclass.Bankdetails_Response
+import com.example.vendorapp.services.ApiClient
+import com.example.vendorapp.services.ApiInterface
+import com.example.vendorapp.utils.SharedPreference
+import com.example.vendorapp.utils.showToast
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
 
 
 @SuppressLint("StaticFieldLeak")
 lateinit var douctmentsverifbinding: ActivityPendingDocumentsBinding
-
+lateinit var PanResponse: Bankdetails_Response
 class PendingDocuments : AppCompatActivity() {
+    private lateinit var sharedPreference: SharedPreference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPreference = SharedPreference(this)
         setContentView(R.layout.activity_pending_documents)
         douctmentsverifbinding = ActivityPendingDocumentsBinding.inflate(layoutInflater)
         setContentView(douctmentsverifbinding.root)
@@ -66,4 +81,8 @@ class PendingDocuments : AppCompatActivity() {
         }
 
     }
+
+
+
+
 }
