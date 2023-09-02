@@ -2,43 +2,102 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-feature
-        android:name="android.hardware.telephony"
-        android:required="false" />
-
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission-group.READ_MEDIA_VISUAL" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        tools:ignore="PermissionImpliesUnsupportedChromeOsHardware" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        android:minSdkVersion="28"
+        tools:ignore="ScopedStorage" />
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/svindobusiness"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.VendorApp"
         tools:targetApi="31">
         <activity
-            android:name=".activity.catalogueActivity"
+            android:name=".activity.CustomerFeedback"
+            android:exported="false" />
+        <activity
+            android:name=".activity.EditBusinessdetails"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddSpotlightActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddBannersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddAddonActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddCatalogueProduct"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddPrintingProduct"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UnitsActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".activity.AddNewCouponCode" -->
+        <!-- android:exported="false" /> -->
+        <activity
+            android:name=".activity.CouponsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.TypesOfVarieties"
             android:exported="false" />
         <activity
             android:name=".activity.AddNewProduct"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.catalogueActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.InsightsActivity"
+            android:name=".activity.NotificationsActivity"
             android:exported="false" />
         <activity
             android:name=".activity.AcceptOrder"
@@ -58,11 +117,11 @@
         <activity
             android:name=".activity.PaymentDetailsandItemsList"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".activity.LoginActivity"-->
-<!--            android:exported="false" />-->
         <activity
-            android:name=".activity.NotificationsActivity"
+            android:name=".activity.DashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.InsightsActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ProfileSrceenActivity"
@@ -71,7 +130,7 @@
             android:name=".activity.PayOutAmountActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.EditBusinessdetails"
+            android:name=".activity.GstinActivity"
             android:exported="false" />
         <activity
             android:name=".activity.FssaiActivity"
@@ -80,17 +139,17 @@
             android:name=".activity.ContactActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.GstinActivity"
+            android:name=".activity.PancardActivity"
             android:exported="false" />
         <activity
             android:name=".activity.BankaccountActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.PancardActivity"
+            android:name=".activity.LoginActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--&lt;!&ndash;            android:name=".activity.BusinessdetailsActivity"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:exported="false" />&ndash;&gt;-->
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.RegistrationActivity"
             android:exported="false" />
@@ -99,6 +158,9 @@
             android:exported="false" />
         <activity
             android:name=".activity.BusinessdetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

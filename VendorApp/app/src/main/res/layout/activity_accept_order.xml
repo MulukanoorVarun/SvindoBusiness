@@ -8,7 +8,7 @@
         android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <!-- Place other views and layouts here as needed -->
         <androidx.appcompat.widget.Toolbar
@@ -22,15 +22,17 @@
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
+
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="10dp"
-                    android:id="@+id/bankdetails_backbutton"
+                    android:id="@+id/acceptbackbutton"
                     android:src="@drawable/backbutton"
                     tools:ignore="ContentDescription" />
 
                 <TextView
+                    android:id="@+id/orderno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -49,22 +51,22 @@
             android:orientation="horizontal"
             android:weightSum="2">
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/Orderdate"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1"
+                android:layout_weight="1.6"
                 android:text="@string/day_time_mention"
                 android:textColor="@color/black"
                 android:textSize="13sp"
                />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/orderstatus"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1"
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/ellipse_465"
                 android:text="@string/pending"
@@ -102,6 +104,7 @@
                 />
 
             <TextView
+                android:id="@+id/deliverytype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="105dp"
@@ -125,7 +128,7 @@
             android:background="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
+            android:id="@+id/acceptorderrecyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/view"
@@ -136,7 +139,7 @@
             android:id="@+id/view5"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/recyclerview"
+            android:layout_below="@+id/acceptorderrecyclerview"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
@@ -150,27 +153,38 @@
             android:layout_below="@+id/view5"
             android:weightSum="2">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="5dp"
-                android:layout_weight="1"
                 android:text="@string/grand_total"
+                android:layout_weight="1.6"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 />
-
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="105dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:text="@string/amount_txt"
+                android:text="₹"
                 android:textColor="@color/black"
                 android:textSize="13sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="105dp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/orderamount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="12345"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                tools:ignore="Hardcodedtext"
                 android:textStyle="bold"/>
 
         </LinearLayout>
@@ -178,12 +192,47 @@
 
     </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/Cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_below="@+id/cardlayout"
+            android:layout_marginStart="10dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/Addonslist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="10dp"
+                android:text="Addons List"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:ignore="Hardcodedtext"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/addonsrecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Addonslist"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="20dp" />
+        </RelativeLayout>
+        </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_below="@+id/cardlayout"
+        android:layout_below="@+id/Cardview"
         android:layout_marginStart="10dp"
         app:cardCornerRadius="10dp"
         android:layout_marginTop="15dp"
@@ -221,23 +270,33 @@
             android:orientation="horizontal"
             android:weightSum="2">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="5dp"
-                android:layout_weight="1"
+                android:layout_weight="1.6"
                 android:text="@string/item_total"
                 android:textColor="@color/black"
                 android:textSize="13sp"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="105dp"
+                tools:ignore="HardcodedText" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/itemtotal"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="105dp"
                 android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:text="@string/amount_txt"
+                android:text="12345"
+                android:textAlignment="viewEnd"
+                tools:ignore="HardcodedText"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
 
@@ -250,23 +309,34 @@
             android:orientation="horizontal"
             android:weightSum="2">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="5dp"
-                android:layout_weight="1"
+                android:layout_weight="1.6"
                 android:text="@string/delivery_fee"
                 android:textColor="@color/black"
                 android:textSize="13sp"
                 />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="105dp"
+                android:text="₹"
+                android:textColor="@color/black"
+                android:textSize="13sp"
                 android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:text="@string/amount_txt"
+                android:layout_marginStart="105dp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/deliveryfee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="12345"
+                android:textAlignment="viewEnd"
+                tools:ignore="HardcodedText"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
 
@@ -279,24 +349,34 @@
             android:orientation="horizontal"
             android:weightSum="2">
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/subsidy"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="5dp"
-                android:layout_weight="1"
+                android:layout_weight="1.6"
                 android:text="@string/subsidy"
                 android:textColor="@color/black"
                 android:textSize="13sp"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="105dp"
+                tools:ignore="HardcodedText" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/subsidyamt"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="105dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:text="@string/amount_txt"
+                android:text="12345"
+                android:textAlignment="viewEnd"
+                tools:ignore="HardcodedText"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -318,25 +398,35 @@
             android:orientation="horizontal"
             android:weightSum="2">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="5dp"
-                android:layout_weight="1"
+                android:layout_weight="1.6"
                 android:text="@string/grand_total"
                 android:textColor="@color/black"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 />
-
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="₹"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:layout_marginTop="5dp"
                 android:layout_marginStart="105dp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/grandtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:text="@string/amount_txt"
+                android:text="12345"
+                android:textAlignment="viewEnd"
+                tools:ignore="Hardcodedtext"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold"/>
@@ -364,11 +454,11 @@
             android:orientation="horizontal"
             android:weightSum="2">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:text="@string/customer_details"
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/frame_2_"
@@ -378,18 +468,27 @@
                 />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:text="@string/OTP"
+                android:text="OTP:"
                 android:textColor="@color/green"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                tools:ignore="Hardcodedtext" />
+            <TextView
+                android:id="@+id/otptext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="2dp"
+                android:text=""
+                android:textColor="@color/green"
+                android:textSize="13sp"
+                tools:ignore="Hardcodedtext" />
 
         </LinearLayout>
         <View
-            android:id="@+id/view4"
+            android:id="@+id/View4"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@+id/linearlayout6"
@@ -402,7 +501,7 @@
             android:id="@+id/relativelayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view4">
+            android:layout_below="@+id/View4">
             <TextView
                 android:id="@+id/name_txt"
                 android:layout_width="match_parent"
@@ -424,25 +523,25 @@
                 android:textColor="@color/black"
                 android:textSize="13sp" />
             <TextView
-                android:id="@+id/contact"
+                android:id="@+id/mode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/name"
-                android:text="@string/contact_txt"
+                android:text="@string/payment_mode"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="13sp" />
             <TextView
-                android:id="@+id/contact_txt"
+                android:id="@+id/paymentmode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/contact_num"
-                android:layout_below="@+id/contact"
-                android:textColor="@color/black"
+                android:text="@string/online_txt"
+                android:layout_below="@+id/mode"
+                android:textColor="#00BF63"
                 android:textSize="13sp" />
             <TextView
                 android:id="@+id/address"
@@ -450,7 +549,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/contact_txt"
+                android:layout_below="@+id/paymentmode"
                 android:text="@string/address_txt"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -469,6 +568,134 @@
         </RelativeLayout>
     </RelativeLayout>
     </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/Cardview1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_below="@+id/cardview1"
+            android:layout_marginStart="10dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+                <TextView
+                    android:id="@+id/deliveryboydetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/delivery_boy_details"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/deliveryboydetails"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#BFBEBE" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/view4"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/deliveryboyimg"
+                    android:src="@drawable/deliveryboy_img"
+                    tools:ignore="ContentDescription" />
+                <LinearLayout
+                    android:id="@+id/linearlayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/deliveryboydetails"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/name_text"
+                        android:drawablePadding="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/contactnumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/contact_num"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/callicon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view4"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="20dp"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:textColor="#F22F9333"
+                    android:textIsSelectable="true"
+                    android:drawableEnd="@drawable/callicon" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:id="@+id/linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/Cardview1"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:weightSum="2">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rejectbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginEnd="19dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/red"
+                    android:background="@drawable/rejectbtnbg"
+                    android:padding="13dp"
+                    android:text="@string/reject" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/acceptbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginEnd="19dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:background="@drawable/buttonbackground"
+                    android:padding="13dp"
+                    android:text="@string/accept" />
+            </LinearLayout>
     </RelativeLayout>
     </ScrollView>
 </layout>

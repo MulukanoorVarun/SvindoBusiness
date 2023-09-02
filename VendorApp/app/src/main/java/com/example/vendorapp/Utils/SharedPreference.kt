@@ -36,10 +36,15 @@ class SharedPreference(context: Context) {
         return sharedPref.getBoolean(KEY_NAME, defaultValue)
     }
     fun clearSharedPreference() {
-        val editor: SharedPreferences.Editor = sharedPref.edit()
-        //sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-        editor.clear()
-        editor.apply()
+//        val editor: SharedPreferences.Editor = sharedPref.edit()
+//        //sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+//        editor.clear()
+//        editor.apply()
+//        editor.apply()
+         sharedPref.edit().clear().apply();
+//        editor.clear()
+//        editor.apply()
+//        finish()
     }
 
     fun removeValue(KEY_NAME: String) {

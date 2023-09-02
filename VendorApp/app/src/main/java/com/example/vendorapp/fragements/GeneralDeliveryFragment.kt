@@ -1,60 +1,331 @@
 package com.example.vendorapp.fragements
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vendorapp.R
+import com.example.vendorapp.adapters.InstantAdapter
+import com.example.vendorapp.databinding.GeneraldeliveryfragmentBinding
+import com.example.vendorapp.modelclass.OrdersListModal
+import com.example.vendorapp.services.ApiClient
+import com.example.vendorapp.services.ApiInterface
+import com.example.vendorapp.utils.SharedPreference
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.concurrent.TimeoutException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GeneralDeliveryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@SuppressLint("StaticFieldLeak")
+private lateinit var generalbinding: GeneraldeliveryfragmentBinding
+
 class GeneralDeliveryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var sharedPreference: SharedPreference
+    lateinit var generalResponse: OrdersListModal
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var adapter: InstantAdapter
+
+    var status=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        sharedPreference= SharedPreference(requireContext())
         }
-    }
+
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.generaldeliveryfragment, container, false)
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        generalbinding = GeneraldeliveryfragmentBinding.inflate(inflater, container, false)
+
+        generalbinding = GeneraldeliveryfragmentBinding.inflate(layoutInflater)
+
+        linearLayoutManager = LinearLayoutManager(context)
+        generalbinding.newordersRequestsViewRecyclerview.layoutManager = linearLayoutManager
+        generalbinding.newordersRequestsViewRecyclerview.hasFixedSize()
+
+
+        generalbinding.Allbtn.setBackgroundResource(R.drawable.buttonbackground);
+        generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background);
+        generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background);
+        generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background);
+
+
+
+        generalbinding.Allbtn.setOnClickListener {
+            generalbinding.Allbtn.setBackgroundResource(R.drawable.button_loading_background);
+            generalbinding.Allbtn.setEnabled(false)
+            generalbinding.Pendingbtn.setEnabled(false)
+            generalbinding.pickupbtn.setEnabled(false)
+            generalbinding.Acceptedbtn.setEnabled(false)
+            generalbinding.returnbtn.setEnabled(false)
+            generalbinding.shopexchange.setEnabled(false)
+
+            Handler().postDelayed({
+                generalbinding.Allbtn.setEnabled(true)
+                generalbinding.Pendingbtn.setEnabled(true)
+                generalbinding.pickupbtn.setEnabled(true)
+                generalbinding.Acceptedbtn.setEnabled(true)
+                generalbinding.returnbtn.setEnabled(true)
+                generalbinding.shopexchange.setEnabled(true)
+                generalbinding.Allbtn.setBackgroundResource(R.drawable.buttonbackground)
+            }, 2000)
+
+
+
+            generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status = "all"
+            )
+        }
+        generalbinding.Pendingbtn.setOnClickListener {
+            generalbinding.Pendingbtn.setBackgroundResource(R.drawable.button_loading_background);
+            generalbinding.Allbtn.setEnabled(false)
+            generalbinding.Pendingbtn.setEnabled(false)
+            generalbinding.pickupbtn.setEnabled(false)
+            generalbinding.Acceptedbtn.setEnabled(false)
+            generalbinding.returnbtn.setEnabled(false)
+            generalbinding.shopexchange.setEnabled(false)
+
+            Handler().postDelayed({
+                generalbinding.Allbtn.setEnabled(true)
+                generalbinding.Pendingbtn.setEnabled(true)
+                generalbinding.pickupbtn.setEnabled(true)
+                generalbinding.Acceptedbtn.setEnabled(true)
+                generalbinding.returnbtn.setEnabled(true)
+                generalbinding.shopexchange.setEnabled(true)
+                generalbinding.Pendingbtn.setBackgroundResource(R.drawable.buttonbackground)
+            }, 2000)
+
+
+
+            generalbinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="Pending"
+            )
+        }
+        generalbinding.Acceptedbtn.setOnClickListener {
+
+            generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.button_loading_background);
+            generalbinding.Allbtn.setEnabled(false)
+            generalbinding.Pendingbtn.setEnabled(false)
+            generalbinding.pickupbtn.setEnabled(false)
+            generalbinding.Acceptedbtn.setEnabled(false)
+            generalbinding.returnbtn.setEnabled(false)
+            generalbinding.shopexchange.setEnabled(false)
+
+            Handler().postDelayed({
+                generalbinding.Allbtn.setEnabled(true)
+                generalbinding.Pendingbtn.setEnabled(true)
+                generalbinding.pickupbtn.setEnabled(true)
+                generalbinding.Acceptedbtn.setEnabled(true)
+                generalbinding.returnbtn.setEnabled(true)
+                generalbinding.shopexchange.setEnabled(true)
+                generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.buttonbackground)
+            }, 2000)
+
+
+
+            generalbinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status = "Accepted"
+            )
+        }
+
+
+        generalbinding.pickupbtn.setOnClickListener {
+            generalbinding.pickupbtn.setBackgroundResource(R.drawable.button_loading_background)
+            generalbinding.Allbtn.setEnabled(false)
+            generalbinding.Pendingbtn.setEnabled(false)
+            generalbinding.pickupbtn.setEnabled(false)
+            generalbinding.Acceptedbtn.setEnabled(false)
+            generalbinding.returnbtn.setEnabled(false)
+            generalbinding.shopexchange.setEnabled(false)
+
+            Handler().postDelayed({
+                generalbinding.Allbtn.setEnabled(true)
+                generalbinding.Pendingbtn.setEnabled(true)
+                generalbinding.pickupbtn.setEnabled(true)
+                generalbinding.Acceptedbtn.setEnabled(true)
+                generalbinding.returnbtn.setEnabled(true)
+                generalbinding.shopexchange.setEnabled(true)
+                generalbinding.pickupbtn.setBackgroundResource(R.drawable.buttonbackground)
+            }, 2000)
+
+
+
+            generalbinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="Delivered"
+            )
+        }
+
+        generalbinding.returnbtn.setOnClickListener {
+            generalbinding.returnbtn.setBackgroundResource(R.drawable.button_loading_background);
+            generalbinding.Allbtn.setEnabled(false)
+            generalbinding.Pendingbtn.setEnabled(false)
+            generalbinding.pickupbtn.setEnabled(false)
+            generalbinding.Acceptedbtn.setEnabled(false)
+            generalbinding.returnbtn.setEnabled(false)
+            generalbinding.shopexchange.setEnabled(false)
+
+            Handler().postDelayed({
+                generalbinding.Allbtn.setEnabled(true)
+                generalbinding.Pendingbtn.setEnabled(true)
+                generalbinding.pickupbtn.setEnabled(true)
+                generalbinding.Acceptedbtn.setEnabled(true)
+                generalbinding.returnbtn.setEnabled(true)
+                generalbinding.shopexchange.setEnabled(true)
+                generalbinding.returnbtn.setBackgroundResource(R.drawable.buttonbackground)
+            },2000)
+
+
+
+            generalbinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="Return"
+            )
+        }
+
+
+        generalbinding.shopexchange.setOnClickListener {
+            generalbinding.shopexchange.setBackgroundResource(R.drawable.button_loading_background);
+            generalbinding.Allbtn.setEnabled(false)
+            generalbinding.Pendingbtn.setEnabled(false)
+            generalbinding.pickupbtn.setEnabled(false)
+            generalbinding.Acceptedbtn.setEnabled(false)
+            generalbinding.returnbtn.setEnabled(false)
+            generalbinding.shopexchange.setEnabled(false)
+
+            Handler().postDelayed({
+                generalbinding.Allbtn.setEnabled(true)
+                generalbinding.Pendingbtn.setEnabled(true)
+                generalbinding.pickupbtn.setEnabled(true)
+                generalbinding.Acceptedbtn.setEnabled(true)
+                generalbinding.returnbtn.setEnabled(true)
+                generalbinding.shopexchange.setEnabled(true)
+                generalbinding.shopexchange.setBackgroundResource(R.drawable.buttonbackground)
+            },2000)
+
+
+
+            generalbinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="ShopExchange"
+            )
+        }
+
+        //   return inflater.inflate(R.layout.instantsfragment, container, false)
+        return generalbinding.root
+    }
+    fun Ordersdetails(
+        status:String,
+    ) {
+        try {
+            // dashboardBinding.progressBarLay.visibility = View.VISIBLE
+            val ordersService = ApiClient.buildService(ApiInterface::class.java)
+            val requestCall = ordersService.OrdersDetails(sharedPreference.getValueString("token"),"Genral",status)
+            requestCall.enqueue(object : Callback<OrdersListModal> {
+                override fun onResponse(
+                    call: Call<OrdersListModal>,
+                    response: Response<OrdersListModal>
+                ) {
+
+                    //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    try {
+                        when {
+                            response.code() == 200 -> {
+
+                                generalResponse = response.body()!!
+                                // print(instantResponse)
+                                if (generalResponse != null) {
+                                    if (generalResponse.error == "0") {
+                                        if (generalResponse.orders.isNotEmpty()) {
+
+                                            generalbinding.newordersRequestsViewRecyclerview.visibility =
+                                                View.VISIBLE
+                                            adapter = context?.let {
+                                                InstantAdapter(
+                                                    generalResponse.orders,
+                                                    context = it
+                                                )
+                                            }!!
+                                            generalbinding.newordersRequestsViewRecyclerview.adapter =
+                                                adapter
+
+                                        } else {
+                                            Toast.makeText(
+                                                context,
+                                                "List is Empty",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            generalbinding.newordersRequestsViewRecyclerview.visibility =
+                                                View.GONE
+                                            //generalbinding.noData.visibility = View.VISIBLE
+                                        }
+                                    }
+                                }
+
+                            }
+
+                            response.code() == 401 -> {
+                                Toast.makeText(context,getString(R.string.session_exp), Toast.LENGTH_SHORT).show()
+
+                            }
+
+                            else -> {
+                                Toast.makeText(context,getString(R.string.server_error), Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+
+                    } catch (e: TimeoutException) {
+                        Toast.makeText(context,getString(R.string.time_out), Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<OrdersListModal>, t: Throwable) {
+                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
+                }
+
+            })
+
+
+        } catch (e: Exception) {
+            //dashboardBinding.progressBarLay.visibility = View.GONE
+            Toast.makeText(context,e.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GeneralDeliveryFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            GeneralDeliveryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

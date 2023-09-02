@@ -1,0 +1,49 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="175dp"
+    android:height="100dp"
+    android:viewportWidth="175"
+    android:viewportHeight="100">
+  <path
+      android:pathData="M11,0L164.86,0A10,10 0,0 1,174.86 10L174.86,90A10,10 0,0 1,164.86 100L11,100A10,10 0,0 1,1 90L1,10A10,10 0,0 1,11 0z"
+      android:fillColor="#D2E9E9"/>
+  <group>
+    <clip-path
+        android:pathData="M10.78,0L164.64,0A10,10 0,0 1,174.64 10L174.64,90A10,10 0,0 1,164.64 100L10.78,100A10,10 0,0 1,0.78 90L0.78,10A10,10 0,0 1,10.78 0z"/>
+    <path
+        android:pathData="M7.13,93.96m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
+        android:fillColor="#8BABAB"/>
+    <path
+        android:pathData="M16.7,93.96m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
+        android:fillColor="#8BABAB"/>
+    <path
+        android:pathData="M26.26,93.96m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
+        android:fillColor="#8BABAB"/>
+    <path
+        android:pathData="M7.13,84.4m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
+        android:fillColor="#8BABAB"/>
+    <path
+        android:pathData="M16.7,84.4m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
+        android:fillColor="#8BABAB"/>
+    <path
+        android:pathData="M26.26,84.4m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
+        android:fillColor="#8BABAB"/>
+    <path
+        android:pathData="M7.13,74.84m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
+        android:fillColor="#8BABAB"/>
+    <path
+        android:pathData="M16.7,74.84m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
+        android:fillColor="#8BABAB"/>
+    <path
+        android:pathData="M26.26,74.84m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
+        android:fillColor="#8BABAB"/>
+    <path
+        android:pathData="M7.13,65.28m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
+        android:fillColor="#8BABAB"/>
+    <path
+        android:pathData="M16.7,65.28m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
+        android:fillColor="#8BABAB"/>
+    <path
+        android:pathData="M26.26,65.28m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
+        android:fillColor="#8BABAB"/>
+  </group>
+</vector>

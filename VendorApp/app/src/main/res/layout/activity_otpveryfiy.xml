@@ -64,7 +64,7 @@
                         android:layout_marginStart="60dp"
                         android:text="@string/otp"
                         android:textColor="#E5302F2F"
-                        android:padding="2dp" />
+                        android:padding="1dp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/editmobile_numbertxt"
@@ -74,9 +74,8 @@
                         android:text="@string/edit"
                         android:drawableEnd="@drawable/baseline_edit_24"
                         android:textColor="#E5302F2F"
-                        android:layout_marginStart="5dp"
                         android:layout_below="@id/otp_txt"
-                        android:padding="2dp" />
+                        android:padding="1dp" />
 
                     <RelativeLayout
                         android:id="@+id/relativelayout2"

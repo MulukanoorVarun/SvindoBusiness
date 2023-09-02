@@ -12,16 +12,31 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_corners_background"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+            <SearchView
+                android:id="@+id/searchview"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:background="@drawable/boarder"
+                android:layout_marginEnd="40dp"
+                android:layout_centerHorizontal="true" />
+
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="12dp"
+                android:layout_below="@+id/searchview"
                 app:tabIndicatorColor="@color/white"
                 android:background="#2178AE"
                 app:tabSelectedTextColor="@color/white"
                 app:tabTextColor="@android:color/white" />
+</RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
@@ -29,7 +44,6 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar">
         </androidx.viewpager.widget.ViewPager>
-
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomnavigation"
@@ -39,7 +53,7 @@
             app:itemBackground="@color/white"
             app:itemIconTint="@color/black"
             app:itemTextColor="@android:color/black"
-            app:menu="@menu/bottom_navigation_menu" />
+            app:menu="@menu/bottom_navigation_menu"/>
 
     </RelativeLayout>
 </layout>

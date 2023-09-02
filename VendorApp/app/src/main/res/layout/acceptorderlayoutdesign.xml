@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardclicking"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="5dp"
+            android:padding="15dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="15dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/productImage"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:scaleType="centerCrop"
+                    tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/productname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sugar"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/productImage"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:layout_marginStart="10dp"
+                    tools:ignore="HardcodedText" />
+                <LinearLayout
+                    android:id="@+id/linearlayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/productImage"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/productname"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/productquanity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:layout_marginStart="10dp"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/productunit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="piece"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:layout_marginStart="10dp"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearlayout1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/productImage"
+                    android:layout_marginTop="25dp"
+                    android:layout_below="@+id/linearlayout"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/productcount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:layout_marginStart="10dp"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/symbol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="x"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:layout_marginStart="10dp"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="₹"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:layout_marginStart="10dp"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/productprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/Linearlayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_below="@+id/linearlayout"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="₹"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/productprice2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+
+                        tools:ignore="HardcodedText" />
+
+                </LinearLayout>
+<!--                <androidx.appcompat.widget.AppCompatButton-->
+<!--                    android:id="@+id/viewaddons"-->
+<!--                    android:layout_width="90dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:text="View Addons"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_alignParentBottom="true"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_marginTop="2dp"-->
+<!--                    android:textColor="@color/green"-->
+<!--                    android:background="@color/white"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    android:textSize="11sp"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    tools:ignore="HardcodedText" />-->
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</layout>

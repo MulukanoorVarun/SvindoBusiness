@@ -1,60 +1,325 @@
 package com.example.vendorapp.fragements
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vendorapp.R
+import com.example.vendorapp.adapters.InstantAdapter
+import com.example.vendorapp.databinding.FragmentSelfPickupBinding
+import com.example.vendorapp.modelclass.OrdersListModal
+import com.example.vendorapp.services.ApiClient
+import com.example.vendorapp.services.ApiInterface
+import com.example.vendorapp.utils.SharedPreference
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.concurrent.TimeoutException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@SuppressLint("StaticFieldLeak")
+private lateinit var selfPickupBinding: FragmentSelfPickupBinding
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SelfPickupFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SelfPickupFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var sharedPreference: SharedPreference
+    lateinit var instantResponse: OrdersListModal
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var adapter: InstantAdapter
+
+    var status=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        sharedPreference= SharedPreference(requireContext())
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_self_pickup, container, false)
+        sharedPreference= SharedPreference(requireContext())
+        selfPickupBinding = FragmentSelfPickupBinding.inflate(inflater, container, false)
+        selfPickupBinding = FragmentSelfPickupBinding.inflate(layoutInflater)
+        linearLayoutManager = LinearLayoutManager(context)
+        selfPickupBinding.newordersRequestsViewRecyclerview.layoutManager = linearLayoutManager
+        selfPickupBinding.newordersRequestsViewRecyclerview.hasFixedSize()
+
+        selfPickupBinding.Allbtn.setOnClickListener {
+            selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.button_loading_background);
+            selfPickupBinding.Allbtn.setEnabled(false)
+            selfPickupBinding.Pendingbtn.setEnabled(false)
+            selfPickupBinding.pickupbtn.setEnabled(false)
+            selfPickupBinding.Acceptedbtn.setEnabled(false)
+            selfPickupBinding.returnbtn.setEnabled(false)
+            selfPickupBinding.shopexchange.setEnabled(false)
+
+            Handler().postDelayed({
+                selfPickupBinding.Allbtn.setEnabled(true)
+                selfPickupBinding.Pendingbtn.setEnabled(true)
+                selfPickupBinding.pickupbtn.setEnabled(true)
+                selfPickupBinding.Acceptedbtn.setEnabled(true)
+                selfPickupBinding.returnbtn.setEnabled(true)
+                selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.buttonbackground);
+            }, 2000)
+
+
+
+            selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+        }
+        Ordersdetails(
+            status = "all"
+        )
+        selfPickupBinding.Pendingbtn.setOnClickListener {
+            selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.button_loading_background);
+            selfPickupBinding.Allbtn.setEnabled(false)
+            selfPickupBinding.Pendingbtn.setEnabled(false)
+            selfPickupBinding.pickupbtn.setEnabled(false)
+            selfPickupBinding.Acceptedbtn.setEnabled(false)
+            selfPickupBinding.returnbtn.setEnabled(false)
+            selfPickupBinding.shopexchange.setEnabled(false)
+
+            Handler().postDelayed({
+                selfPickupBinding.Allbtn.setEnabled(true)
+                selfPickupBinding.Pendingbtn.setEnabled(true)
+                selfPickupBinding.pickupbtn.setEnabled(true)
+                selfPickupBinding.Acceptedbtn.setEnabled(true)
+                selfPickupBinding.returnbtn.setEnabled(true)
+                selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.buttonbackground)
+            }, 2000)
+
+
+            selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="Pending"
+            )
+        }
+        selfPickupBinding.Acceptedbtn.setOnClickListener {
+
+            selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.button_loading_background);
+            selfPickupBinding.Allbtn.setEnabled(false)
+            selfPickupBinding.Pendingbtn.setEnabled(false)
+            selfPickupBinding.pickupbtn.setEnabled(false)
+            selfPickupBinding.Acceptedbtn.setEnabled(false)
+            selfPickupBinding.returnbtn.setEnabled(false)
+            selfPickupBinding.shopexchange.setEnabled(false)
+
+            Handler().postDelayed({
+                selfPickupBinding.Allbtn.setEnabled(true)
+                selfPickupBinding.Pendingbtn.setEnabled(true)
+                selfPickupBinding.pickupbtn.setEnabled(true)
+                selfPickupBinding.Acceptedbtn.setEnabled(true)
+                selfPickupBinding.returnbtn.setEnabled(true)
+                selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.buttonbackground)
+            }, 2000)
+
+
+
+            selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status = "Accepted"
+            )
+        }
+
+
+        selfPickupBinding.pickupbtn.setOnClickListener {
+            selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.button_loading_background);
+            selfPickupBinding.Allbtn.setEnabled(false)
+            selfPickupBinding.Pendingbtn.setEnabled(false)
+            selfPickupBinding.pickupbtn.setEnabled(false)
+            selfPickupBinding.Acceptedbtn.setEnabled(false)
+            selfPickupBinding.returnbtn.setEnabled(false)
+            selfPickupBinding.shopexchange.setEnabled(false)
+
+            Handler().postDelayed({
+                selfPickupBinding.Allbtn.setEnabled(true)
+                selfPickupBinding.Pendingbtn.setEnabled(true)
+                selfPickupBinding.pickupbtn.setEnabled(true)
+                selfPickupBinding.Acceptedbtn.setEnabled(true)
+                selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.returnbtn.setEnabled(true)
+                selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.buttonbackground)
+            }, 2000)
+
+
+
+            selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="Delivered"
+            )
+        }
+
+
+        selfPickupBinding.returnbtn.setOnClickListener {
+            selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.button_loading_background);
+            selfPickupBinding.Allbtn.setEnabled(false)
+            selfPickupBinding.Pendingbtn.setEnabled(false)
+            selfPickupBinding.pickupbtn.setEnabled(false)
+            selfPickupBinding.Acceptedbtn.setEnabled(false)
+            selfPickupBinding.returnbtn.setEnabled(false)
+            selfPickupBinding.shopexchange.setEnabled(false)
+
+            Handler().postDelayed({
+                selfPickupBinding.Allbtn.setEnabled(true)
+                selfPickupBinding.Pendingbtn.setEnabled(true)
+                selfPickupBinding.pickupbtn.setEnabled(true)
+                selfPickupBinding.Acceptedbtn.setEnabled(true)
+                selfPickupBinding.returnbtn.setEnabled(true)
+                selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.buttonbackground);
+            }, 2000)
+
+
+
+            selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="Return"
+            )
+        }
+
+        selfPickupBinding.shopexchange.setOnClickListener {
+            selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.button_loading_background)
+            selfPickupBinding.Allbtn.setEnabled(false)
+            selfPickupBinding.Pendingbtn.setEnabled(false)
+            selfPickupBinding.pickupbtn.setEnabled(false)
+            selfPickupBinding.Acceptedbtn.setEnabled(false)
+            selfPickupBinding.returnbtn.setEnabled(false)
+            selfPickupBinding.shopexchange.setEnabled(false)
+
+            Handler().postDelayed({
+                selfPickupBinding.Allbtn.setEnabled(true)
+                selfPickupBinding.Pendingbtn.setEnabled(true)
+                selfPickupBinding.pickupbtn.setEnabled(true)
+                selfPickupBinding.Acceptedbtn.setEnabled(true)
+                selfPickupBinding.returnbtn.setEnabled(true)
+                selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.buttonbackground)
+            }, 2000)
+
+
+
+            selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="ShopExchange"
+            )
+        }
+
+
+
+        //   return inflater.inflate(R.layout.instantsfragment, container, false)
+        return selfPickupBinding.root
+    }
+    fun Ordersdetails(
+        status:String,
+    ) {
+        try {
+            // dashboardBinding.progressBarLay.visibility = View.VISIBLE
+            val ordersService = ApiClient.buildService(ApiInterface::class.java)
+            val requestCall = ordersService.OrdersDetails(sharedPreference.getValueString("token"),"Self Pickup",status)
+            requestCall.enqueue(object : Callback<OrdersListModal> {
+                override fun onResponse(
+                    call: Call<OrdersListModal>,
+                    response: Response<OrdersListModal>
+                ) {
+
+                    //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    try {
+                        when {
+                            response.code() == 200 -> {
+
+                                instantResponse = response.body()!!
+                                // print(instantResponse)
+                                if (instantResponse!= null) {
+                                    if (instantResponse.error == "0") {
+                                        if (instantResponse.orders.isNotEmpty()) {
+
+                                            selfPickupBinding.newordersRequestsViewRecyclerview.visibility =
+                                                View.VISIBLE
+                                            adapter = context?.let {
+                                                InstantAdapter(
+                                                    instantResponse.orders,
+                                                    context = it
+                                                )
+                                            }!!
+                                            selfPickupBinding.newordersRequestsViewRecyclerview.adapter =
+                                                adapter
+
+                                        } else {
+                                            Toast.makeText(
+                                                context,
+                                                "List is Empty",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            selfPickupBinding.newordersRequestsViewRecyclerview.visibility =
+                                                View.GONE
+                                            //selfPickupBinding.noData.visibility = View.VISIBLE
+                                        }
+                                    }
+                                }
+
+                            }
+
+                            response.code() == 401 -> {
+                                Toast.makeText(context,getString(R.string.session_exp), Toast.LENGTH_SHORT).show()
+
+                            }
+
+                            else -> {
+                                Toast.makeText(context,getString(R.string.server_error), Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+
+                    } catch (e: TimeoutException) {
+                        Toast.makeText(context,getString(R.string.time_out), Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<OrdersListModal>, t: Throwable) {
+                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
+                }
+
+            })
+
+
+        } catch (e: Exception) {
+            //dashboardBinding.progressBarLay.visibility = View.GONE
+            Toast.makeText(context,e.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SelfPickupFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SelfPickupFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
+

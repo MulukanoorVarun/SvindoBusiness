@@ -27,12 +27,12 @@
                 app:tabTextColor="@android:color/white" />
         </androidx.appcompat.widget.Toolbar>
 
+
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar">
-
     </androidx.viewpager.widget.ViewPager>
 
 

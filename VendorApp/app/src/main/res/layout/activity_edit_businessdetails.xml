@@ -3,20 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content">
             <!-- Place other views and layouts here as needed -->
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:background="@drawable/rounded_corners_background"
-
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -28,7 +22,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="2dp"
                         android:layout_marginTop="10dp"
-                        android:id="@+id/business_details_backbutton"
+                        android:id="@+id/editbusiness_details_backbutton"
                         android:src="@drawable/backbutton"
                         tools:ignore="ContentDescription" />
 
@@ -43,40 +37,99 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/linear1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp">
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/account_status"
+                android:textSize="12sp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/verifiedstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="6dp"
+                android:text=""
+                android:textSize="13sp"
+                android:textColor="@color/green" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear1"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="5dp"
+                android:text="Note: Contact customer support for verification"
+                android:textSize="11sp"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText" />
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_below="@+id/note"
                 android:layout_marginStart="10dp"
                 app:cardCornerRadius="10dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-<!--                    <ImageView-->
-<!--                        android:id="@+id/background_img"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_marginTop="10dp"-->
-<!--                        android:scaleType="fitXY"-->
-<!--                        android:layout_gravity="center_horizontal"-->
-<!--                        android:layout_centerHorizontal="true"-->
-<!--                        android:src="@drawable/edit"-->
-<!--                        tools:ignore="ContentDescription" />-->
+                            <ImageView
+                                android:id="@+id/banner_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:scaleType="centerCrop"
+                                tools:ignore="ContentDescription"/>
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="140dp"
+                                android:layout_height="140dp"
+                                android:id="@+id/business_profile"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="80dp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/imageviewboarder"
+                                tools:ignore="ContentDescription" />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginStart="15dp"-->
+<!--                                android:layout_marginTop="45dp"-->
+<!--                                android:layout_centerHorizontal="true"-->
+<!--                                android:layout_marginEnd="10dp"-->
+<!--                                android:text="+"-->
+<!--                                android:textSize="20sp"-->
+<!--                                android:textStyle="bold"-->
+<!--                                android:textColor="#00BF63"-->
+<!--                                tools:ignore="Hardcodedtext" />-->
 
-                    <ImageView
-                        android:id="@+id/business_profile"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="10dp"
-                        android:scaleType="fitXY"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/business_profile"
-                        tools:ignore="ContentDescription" />
+<!--                    <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                        android:layout_width="125dp"-->
+<!--                        android:layout_height="125dp"-->
+<!--                        android:id="@+id/business_profile"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:layout_marginTop="100dp"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:background="@drawable/imageviewboarder"-->
+<!--                        tools:ignore="ContentDescription" />-->
                     <Button
                         android:id="@+id/change_photo"
                         android:layout_width="wrap_content"
@@ -91,7 +144,7 @@
                         android:textSize="12sp"
                         />
                     <TextView
-                        android:id="@+id/business_name"
+                        android:id="@+id/businessname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="13dp"
@@ -104,17 +157,18 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/business_name_et"
+                        android:id="@+id/businessnameet"
                         android:layout_width="369dp"
                         android:layout_height="49dp"
                         android:layout_marginStart="13dp"
                         android:layout_marginEnd="13dp"
                         android:layout_marginTop="6dp"
-                        android:layout_below="@+id/business_name"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                        android:layout_below="@+id/businessname"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
                         android:hint="@string/business_name_et"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:inputType="text"
                         android:autofillHints="" />
                     <TextView
@@ -126,7 +180,7 @@
                         android:layout_marginTop="6dp"
                         android:text="@string/contact_mob_num"
                         android:textSize="16sp"
-                        android:layout_below="@+id/business_name_et"
+                        android:layout_below="@+id/businessnameet"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -139,9 +193,10 @@
                         android:layout_below="@+id/mobile_num"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
+                        android:maxLength="10"
                         android:hint="@string/mob_num_et_txt"
-                        android:textSize="12sp"
-                        android:inputType="text"
+                        android:textSize="14sp"
+                        android:inputType="number"
                         android:autofillHints="" />
                     <TextView
                         android:id="@+id/store_email_id"
@@ -167,7 +222,7 @@
                         android:padding="10dp"
                         android:layout_marginEnd="13dp"
                         android:hint="@string/store_email_id_et"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:inputType="textEmailAddress"
                         android:autofillHints="" />
                     <TextView
@@ -183,20 +238,29 @@
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
-                    <EditText
-                        android:id="@+id/business_category_et"
-                        android:layout_width="369dp"
+<!--                    <EditText-->
+<!--                        android:id="@+id/business_category_et"-->
+<!--                        android:layout_width="369dp"-->
+<!--                        android:layout_height="49dp"-->
+<!--                        android:layout_marginStart="13dp"-->
+<!--                        android:layout_marginEnd="13dp"-->
+<!--                        android:layout_marginTop="6dp"-->
+<!--                        android:layout_below="@+id/business_category"-->
+<!--                        android:background="@drawable/boarder"-->
+<!--                        android:padding="10dp"-->
+<!--                        android:hint="@string/enter_category"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:inputType="text"-->
+<!--                        android:autofillHints="" />-->
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:layout_width="370dp"
                         android:layout_height="49dp"
                         android:layout_marginStart="13dp"
-                        android:layout_marginEnd="13dp"
-                        android:layout_marginTop="6dp"
                         android:layout_below="@+id/business_category"
-                        android:background="@drawable/boarder"
-                        android:padding="10dp"
-                        android:hint="@string/enter_category"
-                        android:textSize="12sp"
-                        android:inputType="text"
-                        android:autofillHints="" />
+                        android:spinnerMode="dialog"
+                        android:prompt="@string/prompt"
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/categoryspinnerview" />
                     <TextView
                         android:id="@+id/address"
                         android:layout_width="match_parent"
@@ -206,7 +270,7 @@
                         android:layout_marginTop="6dp"
                         android:text="@string/address_txt"
                         android:textSize="16sp"
-                        android:layout_below="@+id/business_category_et"
+                        android:layout_below="@+id/categoryspinnerview"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -221,7 +285,7 @@
                         android:background="@drawable/boarder"
                         android:padding="10dp"
                         android:hint="@string/address_et_txt"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:inputType="text"
                         android:autofillHints="" />
                     <TextView
@@ -249,25 +313,652 @@
                         android:background="@drawable/boarder"
                         android:padding="10dp"
                         android:hint="@string/location_et_txt"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:inputType="text"
                         android:autofillHints="" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/editdetailssubmitbutton"
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/location_et"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginBottom="20dp"
+                        android:textColor="@color/white"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/buttonbackground"
+                        android:padding="13dp"
+                        android:text="@string/submit" />
+
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/bankdetails_submitbutton"
-                android:layout_width="320dp"
+
+            <TextView
+                android:id="@+id/Fssaidetails"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Fssai Details"
+                android:textSize="16sp"
                 android:layout_below="@+id/cardlayout"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="19dp"
-                android:layout_marginBottom="20dp"
-                android:textColor="@color/white"
-                android:background="@drawable/buttonbackground"
-                android:padding="13dp"
-                android:text="@string/submit" />
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:ignore="Hardcodedtext"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/FssaiCardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@+id/Fssaidetails"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="20dp"
+                tools:ignore="ExtraText">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="372dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="14dp"
+                        android:gravity="center_horizontal"
+                        android:layout_marginEnd="10dp"
+                        android:text="*please upload a focused photo of your FSSAI Certificate for faster verification"
+                        android:textColor="@color/black"
+                        tools:ignore="Hardcodedtext"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardlayout1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="80dp"
+                        android:layout_marginEnd="13dp"
+                        android:background="@color/white"
+                        app:cardBackgroundColor="@color/white"
+                        android:layout_marginBottom="10dp"
+                        app:cardCornerRadius="20dp"
+                        tools:ignore="ExtraText">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="28dp"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center_horizontal"
+                            android:layout_marginEnd="28dp"
+                            android:text="Front side photo of your FSSAI Cerificate with your clear name and photo"
+                            android:textColor="@color/black"
+                            tools:ignore="Hardcodedtext"/>
+
+                            <ImageView
+                                android:id="@+id/Fssaiimage"
+                                android:layout_width="300dp"
+                                android:layout_height="200dp"
+                                android:layout_marginEnd="13dp"
+                                android:layout_marginTop="10dp"
+                                android:scaleType="fitXY"
+                                android:elevation="10dp"
+                                android:background="@drawable/imageboarder"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@+id/tv2"
+                                tools:ignore="ContentDescription" />
+
+
+
+                            <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/fssaicamerabutton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_gravity="center"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@+id/Fssaiimage"
+                            android:background="@drawable/buttonborder"
+                            android:padding="10dp"
+                                android:layout_marginBottom="10dp"
+                            android:text="@string/change_image"
+                            android:textColor="#F22F9333"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/baseline_photo_camera_24"/>
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/fssai_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/cardlayout1"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/fssai_code"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/fssai_et_txt"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="13dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_below="@+id/fssai_txt"
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
+                        android:textSize="14sp"
+                        android:hint="@string/fssai_et_txt"
+                        android:inputType="text"
+                        android:layout_marginBottom="15dp"
+                        android:autofillHints="" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/fssaisubmitbutton"
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/fssai_et_txt"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginBottom="20dp"
+                        android:textColor="@color/white"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/buttonbackground"
+                        android:padding="13dp"
+                        android:text="@string/submit" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/Gstdetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:text="GSTIN Details"
+                android:textSize="16sp"
+                android:layout_below="@+id/FssaiCardview"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:ignore="Hardcodedtext"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/GstinCardlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@+id/Gstdetails"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="20dp"
+                tools:ignore="ExtraText">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/gsttv1"
+                        android:layout_width="372dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="14dp"
+                        android:gravity="center_horizontal"
+                        android:layout_marginEnd="10dp"
+                        android:text="*please upload a focused photo of your GSTIN for faster verification"
+                        android:textColor="@color/black"
+                        tools:ignore="Hardcodedtext"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/gstcardlayout1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="80dp"
+                        android:layout_marginEnd="13dp"
+                        android:background="@color/white"
+                        app:cardBackgroundColor="@color/white"
+                        android:layout_marginBottom="10dp"
+                        app:cardCornerRadius="20dp"
+                        tools:ignore="ExtraText">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/gsttv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="28dp"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center_horizontal"
+                            android:layout_marginEnd="28dp"
+                            android:text="Front side photo of your GASTIN  with your clear name and photo"
+                            android:textColor="@color/black"
+                            tools:ignore="Hardcodedtext"/>
+                            <ImageView
+                                android:id="@+id/Gstimage"
+                                android:layout_width="300dp"
+                                android:layout_height="200dp"
+                                android:layout_marginEnd="13dp"
+                                android:layout_marginTop="10dp"
+                                android:scaleType="fitXY"
+                                android:elevation="10dp"
+                                android:background="@drawable/imageboarder"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@+id/gsttv2"
+                                tools:ignore="ContentDescription" />
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/gstcamerabutton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_below="@+id/Gstimage"
+                            android:layout_marginEnd="20dp"
+                            android:layout_gravity="center"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/buttonborder"
+                            android:padding="10dp"
+                            android:text="@string/change_image"
+                            android:textColor="#F22F9333"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/baseline_photo_camera_24"/>
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/gstin_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/gstcardlayout1"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/gstin_num"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/gstin_et_txt"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="13dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_below="@+id/gstin_txt"
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
+                        android:hint="@string/gstin_num_et_txt"
+                        android:inputType="text"
+                        android:layout_marginBottom="15dp"
+                        android:autofillHints="" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/gstsubmitbutton"
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/gstin_et_txt"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginBottom="20dp"
+                        android:textColor="@color/white"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/buttonbackground"
+                        android:padding="13dp"
+                        android:text="@string/submit" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/PANdetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:text="PAN Details"
+                android:textSize="16sp"
+                android:layout_below="@+id/GstinCardlayout"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:ignore="Hardcodedtext"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Pancardlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@+id/PANdetails"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="20dp"
+                tools:ignore="ExtraText">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/pantv1"
+                        android:layout_width="372dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:gravity="center"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/hedding_discription"
+                        android:textColor="@color/black" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/pancardlayout1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="80dp"
+                        android:layout_marginEnd="13dp"
+                        android:background="@color/white"
+                        app:cardBackgroundColor="@color/white"
+                        android:layout_marginBottom="10dp"
+                        app:cardCornerRadius="20dp"
+                        tools:ignore="ExtraText">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/pantv2"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="28dp"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center"
+                            android:layout_marginEnd="28dp"
+                            android:text="@string/image_discription"
+                            android:textColor="@color/black" />
+
+                            <ImageView
+                                android:id="@+id/PANimage"
+                                android:layout_width="300dp"
+                                android:layout_height="200dp"
+                                android:layout_marginEnd="13dp"
+                                android:layout_marginTop="10dp"
+                                android:scaleType="fitXY"
+                                android:elevation="10dp"
+                                android:background="@drawable/imageboarder"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@+id/pantv2"
+                                tools:ignore="ContentDescription" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/pancamerabutton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_below="@+id/PANimage"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="10dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/buttonborder"
+                            android:padding="10dp"
+                            android:text="@string/change_image"
+                            android:textColor="#F22F9333"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/baseline_photo_camera_24"/>
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/panno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="6dp"
+                        android:text="PAN Number"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/pancardlayout1"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:ignore="Hardcodedtext"/>
+
+                    <EditText
+                        android:id="@+id/panNOet"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@+id/panno"
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
+                        android:hint="Enter PAN Number"
+                        android:textSize="14sp"
+                        tools:ignore="Hardcodedtext"
+                        android:inputType="text"
+                        android:autofillHints="" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/pansubmitbutton"
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/panNOet"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginBottom="20dp"
+                        android:textColor="@color/white"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/buttonbackground"
+                        android:padding="13dp"
+                        android:text="@string/submit" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/Bankdetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Bank Details"
+                android:textSize="16sp"
+                android:layout_below="@+id/Pancardlayout"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:ignore="Hardcodedtext"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/bankcardlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@+id/Bankdetails"
+                android:layout_marginStart="10dp"
+                app:cardCornerRadius="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/desc_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:gravity="center"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/discription1"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/ifsc_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/bankifsc"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/desc_txt"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/ifsc_et_txt"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_below="@+id/ifsc_txt"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="13dp"
+                        android:layout_marginTop="5dp"
+                        android:autofillHints=""
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
+                        android:background="@drawable/boarder"
+                        android:hint="@string/please_enter_ifsc_code"
+                        android:inputType="text"
+                        android:textSize="14sp"
+                        android:padding="10dp"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/bank_name_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/ifsc_et_txt"
+                        android:text="@string/bank_name"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/bank_name_et_txt"
+                        android:layout_width="368dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="13dp"
+                        android:layout_marginTop="5dp"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
+                        android:layout_below="@+id/bank_name_txt"
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:text=""
+                        android:textSize="14sp"
+                        android:hint="@string/please_enter_bank_name"
+                        android:inputType="text"
+                        android:autofillHints="" />
+
+                    <TextView
+                        android:id="@+id/acc_num_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/bank_name_et_txt"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/account_number"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/acc_num_et_txt"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="13dp"
+                        android:layout_marginTop="5dp"
+                        android:digits="0123456789 "
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:text=""
+                        android:textSize="14sp"
+                        android:layout_below="@+id/acc_num_txt"
+                        android:hint="@string/please_enter_account_number"
+                        android:inputType="number"
+                        android:autofillHints="" />
+                    <TextView
+                        android:id="@+id/re_acc_num_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/acc_num_et_txt"
+                        android:text="@string/re_enter_account_number"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                    <EditText
+                        android:id="@+id/re_acc_num_et_txt"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="13dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:text=""
+                        android:digits="0123456789 "
+                        android:textSize="14sp"
+                        android:layout_below="@+id/re_acc_num_txt"
+                        android:hint="@string/re_enter_acc_num_txt"
+                        android:inputType="number"
+                        android:autofillHints="" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/banksubmitbutton"
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/re_acc_num_et_txt"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginBottom="20dp"
+                        android:textColor="@color/white"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/buttonbackground"
+                        android:padding="13dp"
+                        android:text="@string/submit" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
 
         </RelativeLayout>
     </ScrollView>
+    </RelativeLayout>
 </layout>

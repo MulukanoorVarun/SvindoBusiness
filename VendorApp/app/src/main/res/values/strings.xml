@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">VendorApp</string>
+    <string name="app_name">Svindo Business</string>
     <string name="mobilenumbertxt">Mobile Number</string>
     <string name="continuetxt">Continue</string>
 
-    <string name="otp">Enter the Otp Send to</string>
-    <string name="edit">  +91 9000626742</string>
+    <string name="otp">Enter the Otp Send to  +91</string>
+    <string name="edit">9000626742</string>
     <string name="Didint"> Didn\'t recive OTP ?</string>
     <string name="resend"> RESEND</string>
     <string name="pending_douctments">Pending Douctments</string>
@@ -261,7 +261,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="paiddetailstxt">Paid Online</string>
     <string name="dropordertxt">Drop Order</string>
     <string name="orderdeliverdtxt">Order Delivered</string>
-    <string name="change_image">Change Image</string>
+    <string name="change_image">Upload Image</string>
     <string name="image_discription">Front side photo of your PAN card with your clear name and photo</string>
     <string name="hedding_discription">*please upload a focused photo of your PAN card for faster verification</string>
     <string name="storelocationtxt">Store location</string>
@@ -299,10 +299,10 @@ Front side photo of your PAN card with your clear name and photo
     <string name="acc_txt">Account</string>\
     <string name="store_name_txt">Kumar Textiles</string>
     <string name="delivery_cashback_txt">Delivery Cashback</string>
-    <string name="note_txt">NOTE: asdfghjkklrtyui</string>
+    <string name="note_txt">NOTE:Enabling this option grants customer a  </string>
     <string name="credit_txt">Available Credits</string>
     <string name="acc_settings">Account Settings</string>
-    <string name="add_banners_txt">Add Banners</string>
+    <string name="add_banners_txt">Banner Ads</string>
     <string name="svindo_txt">svindo Gold</string>
     <string name="notification_txt">Notifications</string>
     <string name="reports_txt">Reports</string>
@@ -350,7 +350,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="instant_txt">Instant</string>
     <string name="general_delivery">General Delivery</string>
     <string name="self_pickup">Self Pickup</string>
-    <string name="day_time_mention">Today, 03:22 PM</string>
+    <string name="day_time_mention">10th May23 || 03:22 PM</string>
     <string name="pending">Pending</string>
     <string name="delivery_type">Delivery Type</string>
     <string name="delivery_fee">Delivery Fee</string>
@@ -366,9 +366,9 @@ Front side photo of your PAN card with your clear name and photo
     <string name="profile">Profile</string>
     <string name="view_txt">view</string>
     <string name="overview_desc">you reached +407% more accounts compare to may 9 - may 15</string>
-    <string name="shopviews_no">256</string>
+    <string name="shopviews_no">0</string>
     <string name="shop_views">Shop views</string>
-    <string name="followers_no">256</string>
+    <string name="followers_no">0</string>
     <string name="followers">Followers</string>
     <string name="top_liked">Top Liked</string>
     <string name="recieved_likes">you received likes on 3 products</string>
@@ -378,8 +378,8 @@ Front side photo of your PAN card with your clear name and photo
     <string name="product_name">Product Name</string>
     <string name="product_category">Product category</string>
     <string name="product_sub_category">Product Sub Category</string>
-    <string name="price">Price</string>
-    <string name="discount_price">Discount Price</string>
+    <string name="price">MRP Price</string>
+    <string name="discount_price">Sale Price</string>
     <string name="unit">Unit</string>
     <string name="add_varients">+Add Varients</string>
     <string name="units_perkg">Units: Per 1KG</string>
@@ -392,7 +392,8 @@ Front side photo of your PAN card with your clear name and photo
     <string name="shopexchange">Shop Exchange</string>
     <string name="typeofdelivery">Type of Delivery</string>
     <string name="instantdelivery">Instant Delivery</string>
-    <string name="onedaydelivery">One Day Delivery</string>
+    <string name="selfpickup">Self Pickup</string>
+    <string name="generaldelivery">General Delivery</string>
     <string name="update">update</string>
     <string name="MenBlackshoes">Men Black Shoes</string>
     <string name="RedTape">Red Tape</string>
@@ -402,12 +403,74 @@ Front side photo of your PAN card with your clear name and photo
     <string name="M">M</string>
     <string name="L">L</string>
     <string name="addon">Add On</string>
+    <string name="reject">Reject</string>
+    <string name="accept">Accept Order</string>
+    <string name="addtypeofvariety">Add Type of Varites</string>
+    <string name="color">Color</string>
+    <string name="fabric">Fabric</string>
+    <string name="age">Age</string>
+    <string name="height">Height</string>
+    <string name="width">Width</string>
+    <string name="pattern">Pattern</string>
+    <string name="size">Size</string>
+    <string name="itemweight">Item Weight</string>
+    <string name="all">All</string>
+    <string name="readyforpickup">Ready For Pickup</string>
+    <string name="delivered">Delivered</string>
+    <string name="totalsale">Total Sale</string>
+    <string name="mostbuyedproducts">Most Buyed Products</string>
+    <string name="add_new_addon">Add New Addon</string>
+    <string name="add_new_spotlight">Add New Spotlight</string>
+    <string name="coupons">Coupons</string>
+    <string name="add_new">Add New</string>
+    <string name="mycoupons">My Coupons</string>
+    <string name="valid_time">Valid until July 27th 2023</string>
+    <string name="percent">50% OFF</string>
+    <string name="coup_desc">For every pizza order you have get 50% OFF by minimum spending amount is 200 </string>
+    <string name="addnewcouponcode">Add New Coupon Code</string>
+    <string name="enter_coupon_code">Enter the coupon code</string>
+    <string name="enter_minmax">Enter Min amount</string>
+    <string name="maxamt">Enter max amount</string>
+    <string name="enter_desc">Enter description</string>
+    <string name="validity">Enter validity days</string>
+    <string name="stock">Stock</string>
+    <string name="generaldeliveryindays">General Delivery Time Required in Days</string>
+    <string name="prompt">Select Category</string>
+    <string name="unitprompt">Select Unit</string>
+    <string name="subcatprompt">Select SubCategory</string>
+    <string name="serviceprompt">Select Service</string>
+    <string name="zoneprompt">Select Zone</string>
+    <string name="pincodeprompt">Select Pincode</string>
+    <string name="add_printing_product">Add Printing Product</string>
+    <string name="product">Product</string>
+    <string name="colors">Colors</string>
+    <string name="add">Add +</string>
+    <string name="Material">Material</string>
+    <string name="addcolor">Add Color</string>
+    <string name="_0">Rs.0</string>
+    <string name="account_status">Account Status:</string>
+    <string name="verified">Verified</string>
+    <string name="select_course">Select Course</string>
+    <string name="search">Search product</string>
+    <string name="search_for_product">Search For Product</string>
+    <string name="subsidy_on_their_delivery_charges">%  subsidy on their </string>
+    <string name="delivery_charges">delivery charges</string>
+    <string name="shop_status">Shop Status</string>
+    <string name="views">Views</string>
+    <string name="clicks">Clicks</string>
+    <string name="delete">delete</string>
 
-    <string-array name="business_categories">
-        <item>Java</item>
-        <item>Kotlin</item>
-        <item>Python</item>
-        <item>CPP</item>
+
+    <string-array name="services">
+        <item>Food</item>
+        <item>Services</item>
+        <item>Product Sales</item>
+    </string-array>
+
+    <string-array name="redirects">
+        <item>Stores</item>
+        <item>Products</item>
+
     </string-array>
 
 </resources>

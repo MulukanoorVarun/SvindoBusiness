@@ -22,15 +22,17 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
+
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="2dp"
                         android:layout_marginTop="10dp"
-                        android:id="@+id/bankdetails_backbutton"
+                        android:id="@+id/shiporderbackbutton"
                         android:src="@drawable/backbutton"
                         tools:ignore="ContentDescription" />
 
                     <TextView
+                        android:id="@+id/orderno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
@@ -49,22 +51,22 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/Orderdate"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="13dp"
                     android:layout_marginTop="10dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:text="@string/day_time_mention"
                     android:textColor="@color/black"
                     android:textSize="13sp"
                     />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/orderstatus"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="100dp"
                     android:layout_marginTop="10dp"
-                    android:layout_weight="1"
                     android:drawablePadding="5dp"
                     android:drawableStart="@drawable/accepted_denot"
                     android:text="@string/accepted"
@@ -122,6 +124,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/orderamount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="105dp"
@@ -139,11 +142,45 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardview1"
+                android:id="@+id/Cardview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_below="@+id/cardlayout"
+                android:layout_marginStart="10dp"
+                app:cardCornerRadius="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/Addonslist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Addons List"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        tools:ignore="Hardcodedtext"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/addonsrecyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Addonslist"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginBottom="20dp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@+id/Cardview"
                 android:layout_marginStart="10dp"
                 app:cardCornerRadius="10dp"
                 android:layout_marginTop="15dp"
@@ -158,11 +195,11 @@
                         android:orientation="horizontal"
                         android:weightSum="2">
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="10dp"
-                            android:layout_weight="1"
+                            android:layout_weight="1.5"
                             android:text="@string/customer_details"
                             android:drawablePadding="5dp"
                             android:drawableStart="@drawable/frame_2_"
@@ -172,14 +209,23 @@
                             />
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="105dp"
                             android:layout_marginTop="10dp"
-                            android:layout_weight="1"
-                            android:text="@string/OTP"
-                            android:textColor="#00BF63"
-                            android:textSize="12sp" />
+                            android:text="OTP:"
+                            android:textColor="@color/green"
+                            android:textSize="13sp"
+                            tools:ignore="Hardcodedtext" />
+                        <TextView
+                            android:id="@+id/otptext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="2dp"
+                            android:text=""
+                            android:textColor="@color/green"
+                            android:textSize="13sp"
+                            tools:ignore="Hardcodedtext" />
 
                     </LinearLayout>
                     <View
@@ -250,7 +296,7 @@
                             android:textStyle="bold"
                             android:textSize="13sp" />
                         <TextView
-                            android:id="@+id/address_txt"
+                            android:id="@+id/addresstxt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="13dp"
@@ -262,6 +308,50 @@
                             android:textSize="13sp" />
                     </RelativeLayout>
                 </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@+id/cardview1"
+                android:layout_marginTop="70dp">
+                <LinearLayout
+                    android:id="@+id/linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:weightSum="2">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/rejectbutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/red"
+                        android:background="@drawable/rejectbtnbg"
+                        android:padding="13dp"
+                        android:text="@string/reject" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/shipbutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:background="@drawable/buttonbackground"
+                        android:padding="13dp"
+                        android:text="ship order"
+                        tools:ignore="Hardcodedtext"/>
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
     </ScrollView>

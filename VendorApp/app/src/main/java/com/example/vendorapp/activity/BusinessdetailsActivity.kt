@@ -9,27 +9,32 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
-import android.widget.Toast
+import android.provider.Settings
+import android.util.Patterns
+import android.view.View
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.exifinterface.media.ExifInterface
 import com.example.deliverypartner.utils.URIPathHelper
 import com.example.vendorapp.R
+import com.example.vendorapp.adapters.*
 import com.example.vendorapp.databinding.ActivityBusinessdetailsBinding
-import com.example.vendorapp.modelclass.Bankdetails_Response
-import com.example.vendorapp.modelclass.Mobileotp_Response
-import com.example.vendorapp.modelclass.Verify_otp_Response
+import com.example.vendorapp.databinding.ActivityGstinBinding
+import com.example.vendorapp.databinding.SpinneritemdesignBinding
+import com.example.vendorapp.modelclass.*
 import com.example.vendorapp.services.ApiClient
 import com.example.vendorapp.services.ApiInterface
-import com.example.vendorapp.services.SessionManager
+import com.example.vendorapp.utils.SharedPreference
 import com.example.vendorapp.utils.getFileSizeInMB
-import com.example.vendorapp.utils.rotateImage
 import com.example.vendorapp.utils.showToast
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -41,75 +46,74 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.ImageView
-import android.widget.Spinner
-import com.example.vendorapp.utils.SharedPreference
+import java.util.concurrent.TimeoutException
+import kotlin.system.exitProcess
 
 
 @SuppressLint("StaticFieldLeak")
-lateinit var businessdetailsBinding: ActivityBusinessdetailsBinding
-//private lateinit var businessdetailsResponse:Bankdetails_Response
-private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-private lateinit var galleryResultLauncher: ActivityResultLauncher<Intent>
-private var imageUri: Uri? = null
-private  var file_1: File? = null
-private lateinit var sharedPreference: SharedPreference
-lateinit var Response: Verify_otp_Response
-private lateinit var businessdetailsResponse: Verify_otp_Response
 class BusinessdetailsActivity : AppCompatActivity() {
-    lateinit var imageIV: ImageView;
+    lateinit var businessdetailsBinding: ActivityBusinessdetailsBinding
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var galleryResultLauncher: ActivityResultLauncher<Intent>
+    private var imageUri: Uri? = null
+    private  var file_1: File? = null
+    lateinit var Response: Verify_otp_Response
+    private lateinit var businessdetailsResponse: Verify_otp_Response
+    private lateinit var sharedPreference: SharedPreference
+    private lateinit var gstinBinding: ActivityGstinBinding
+    private lateinit var binding: SpinneritemdesignBinding
+    private lateinit var spinner: Spinner
+    private val itemList: MutableList<Maincategory> = ArrayList()
+
+
+    private val cameraPermissionCode = 201
+    val storagePermissionCode = 202
+    private val emailPattern = "(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+
+
+    var cat_id=""
+    var sericeitem=""
+    var Zone_id=""
+    var subzone_id=""
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(this)
         setContentView(R.layout.activity_businessdetails)
-
-
-
-
-//        val languages = resources.getStringArray(R.array.business_categories)
-//        // create an array adapter and pass the required parameter
-//        // in our case pass the context, drop down layout , and array.
-//        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, languages)
-//        // get reference to the autocomplete text view
-//        val autocompleteTV = findViewById<AutoCompleteTextView>(R.id.categories)
-//        // set adapter to the autocomplete tv to the arrayAdapter
-//        autocompleteTV.setAdapter(arrayAdapter)
-
-
-       /* val spinner: Spinner = findViewById(R.id.spinner)
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.business_categories,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinner.adapter = adapter
-        }*/
-
-
-
         businessdetailsBinding = ActivityBusinessdetailsBinding.inflate(layoutInflater)
+        gstinBinding = ActivityGstinBinding.inflate(layoutInflater)
         setContentView(businessdetailsBinding.root)
 
-        businessdetailsBinding.changePhoto.setOnClickListener {
-//            val intent = Intent(this, PendingDocuments::class.java)
-//            startActivity(intent)
-//            business_profile
-            showAlertDialog()
-//            imageIV = findViewById(R.id.business_profile)
-//            val imgBitmap = BitmapFactory.decodeFile(file_1!!.absolutePath)
-//
-//            // on below line we are setting bitmap to our image view.
-//            imageIV.setImageBitmap(imgBitmap)
 
+        businessdetailsBinding.changePhoto.setOnClickListener {
+            showAlertDialog()
+        }
+
+        val loginButton = findViewById<ImageView>(R.id.business_details_backbutton)
+        loginButton.setOnClickListener { this.onBackPressed()
         }
 
 
+        //implementing Services Spinner view
+        val Services = resources.getStringArray(R.array.services)
+         spinner = findViewById(R.id.Servicesspinnerview)
+        if (spinner != null) {
+            val adapter =  ServicesAdapter(this, R.layout.spinneritemlayout, Services)
+            spinner.adapter = adapter
+            spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                    val selectedItem = Services[position]
+                     sericeitem= selectedItem
+                    showToast(sericeitem)
+
+                }
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+            }
+        }
 
 
         resultLauncher =
@@ -117,83 +121,117 @@ class BusinessdetailsActivity : AppCompatActivity() {
                 if (result.resultCode == Activity.RESULT_OK) {
                     val uriPathHelper = URIPathHelper()
                     val filePath = imageUri?.let { uriPathHelper.getPath(this, it) }
-                   filePath?.let {
+                    val bitmap = imageUri?.let { decodeUri(it) }
+                    businessdetailsBinding.businessProfile.setImageBitmap(bitmap)
+
+                    filePath?.let {
                             file_1 = compressImage(filePath, 0.5)
                         }
                 }
-
             }
-
         galleryResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     val data = result.data
                     imageUri = data!!.data
+
                     val uriPathHelper = URIPathHelper()
                     try {
-
                         val filePath = imageUri?.let { uriPathHelper.getPath(this, it) }
+
+                        val bitmap = imageUri?.let { decodeUri(it) }
+                        businessdetailsBinding.businessProfile.setImageBitmap(bitmap)
+
                          filePath?.let {
                                 file_1 = compressImage(filePath, 0.5)
-
-                             imageIV = findViewById(R.id.business_profile)
-                             imageIV.getLayoutParams().height = 350;
-                             imageIV.getLayoutParams().width = 350;
-
-                                val imgBitmap = BitmapFactory.decodeFile(file_1!!.absolutePath)
-
-                                // on below line we are setting bitmap to our image view.
-                                imageIV.setImageBitmap(imgBitmap)
-
-
                             }
                         showToast("Image Selected")
                     } catch (e: Exception) {
                         showToast("Image Not Selected")
                     }
-
                 }
-
             }
 
 
 
+//        businessdetailsBinding.businessDetailsBackbutton.setOnClickListener {
 
-
-        businessdetailsBinding.businessDetailsBackbutton.setOnClickListener {
-
-//            val intent = Intent(this, PendingDocuments::class.java)
-//            startActivity(intent)
-        }
-
-
-
+//        }
+        businessdetailsBinding.bankdetailsSubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
         businessdetailsBinding.bankdetailsSubmitbutton.setOnClickListener {
-            val name = businessdetailsBinding.nameet.text.toString().trim()
+            businessdetailsBinding.bankdetailsSubmitbutton.setBackgroundResource(R.drawable.button_loading_background);
+            businessdetailsBinding.bankdetailsSubmitbutton.setEnabled(false)
+            Handler().postDelayed({
+                businessdetailsBinding.bankdetailsSubmitbutton.setEnabled(true)
+                businessdetailsBinding.bankdetailsSubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
+            }, 2000)
+
+
+//            if (businessdetailsBinding.mobileNumEt.text.toString().trim().isEmpty()) {
+//                businessdetailsBinding.mobileNumEt.requestFocus()
+//                businessdetailsBinding.mobileNumEt.error = "Enter Mobilenumber"
+//            } else if (businessdetailsBinding.mobileNumEt.toString().trim().length < 10){
+//                businessdetailsBinding.mobileNumEt.requestFocus()
+//                showToast("Mobile number should be of minimum of 10 numbers")
+//            } else {
+//                 contact_mob_num = businessdetailsBinding.mobileNumEt.text.toString().trim()
+//            }
+
+
+//            if (businessdetailsBinding.storeEmailIdEt.text.toString().trim().isNotEmpty()&& Patterns.EMAIL_ADDRESS.matcher(businessdetailsBinding.storeEmailIdEt.text.toString().trim()).matches()) {
+//                store_email_id = businessdetailsBinding.storeEmailIdEt.text.toString().trim()
+//                Toast.makeText(this, "Email Verified !", Toast.LENGTH_SHORT).show()
+//            } else {
+//                Toast.makeText(this, "Enter valid Email address !", Toast.LENGTH_SHORT).show()
+//            }
+
+
             val business_name = businessdetailsBinding.businessNameEt.text.toString().trim()
+            val address = businessdetailsBinding.addressEt.text.toString().trim()
             val contact_mob_num = businessdetailsBinding.mobileNumEt.text.toString().trim()
             val store_email_id = businessdetailsBinding.storeEmailIdEt.text.toString().trim()
-           // val business_category = businessdetailsBinding.businessCategoryEt.text.toString().trim()
-            val address = businessdetailsBinding.addressEt.text.toString().trim()
 
-            if (business_name.isNotEmpty() && contact_mob_num.isNotEmpty() && store_email_id.isNotEmpty() &&  address.isNotEmpty()) {
-
-
+            if (business_name.isNotEmpty() && address.isNotEmpty() && contact_mob_num.length == 10 && contact_mob_num.isNotEmpty() && store_email_id.isNotEmpty() && store_email_id.matches(emailPattern.toRegex()) && address.isNotEmpty() && file_1 != null) {
                 businessdetails(
                     businessdetailsBinding.nameet.text.toString().trim(),
                     businessdetailsBinding.businessNameEt.text.toString().trim(),
-                    businessdetailsBinding.mobileNumEt.text.toString().trim(),
-                    businessdetailsBinding.storeEmailIdEt.text.toString().trim(),
-                    businessdetailsBinding.businessCategoryEt.text.toString().trim(),
+                    contact_mob_num.toString().trim(),
+                    sharedPreference.getValueString("mobile_number").toString(),
+                    store_email_id.toString().trim(),
+                    business_category = cat_id.toString().trim(),
                     businessdetailsBinding.addressEt.text.toString().trim(),
+                    sericeitem.toString().trim(),
+                    subzone_id.toString().trim(),
                     file_1!!
                 )
-
-
             } else {
                 Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+                if (!store_email_id.matches(emailPattern.toRegex())) {
+                    businessdetailsBinding.storeEmailIdEt.setError("Please Enter Mailid in correct format Ex:user@gmail.com")
+                }
+
+                if (contact_mob_num.length < 10) {
+                    businessdetailsBinding.mobileNumEt.setError("Mobile number should be 10 digits")
+                }
             }
         }
+        CategoriesList()
+        ZonesList()
+
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setTitle("Really Exit?")
+            .setMessage("Are you sure you want to exit?")
+            .setNegativeButton(android.R.string.no, null)
+            .setPositiveButton(android.R.string.yes)
+            { arg0, arg1 ->
+                setResult(RESULT_OK, Intent().putExtra("EXIT", true))
+                moveTaskToBack(true)
+                exitProcess(-1)
+            }.create().show()
     }
 
     private fun showAlertDialog() {
@@ -212,80 +250,155 @@ class BusinessdetailsActivity : AppCompatActivity() {
 
                 }
             }
-
         }
         val dialog = builder.create()
         dialog.show()
     }
-
-
     private fun gallery() {
+//        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+//           // showToast("Hello")
+//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+//        }else {
+//            openGallery()
+//        }
 
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
-            showToast("Hello")
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED && Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU){
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+        }else if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_DENIED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_MEDIA_IMAGES), 1)
         }else {
             openGallery()
         }
-    }
 
+    }
+    private fun decodeUri(uri: Uri): Bitmap? {
+        val inputStream = contentResolver.openInputStream(uri)
+        val options = BitmapFactory.Options()
+        options.inPreferredConfig = Bitmap.Config.RGB_565
+        return BitmapFactory.decodeStream(inputStream, null, options)
+    }
     private fun openGallery(){
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
         galleryResultLauncher.launch(intent)
-
     }
 
+
+
+//    private fun camera() {
+//        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
+//            // showToast("Hello")
+//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
+//        }else {
+//            openCamera()
+//        }
+//    }
 
 
     private fun camera() {
-//        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
-//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), cameraPermissionCode)
-//        }else if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
-//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), storagePermissionCode)
-//        }else if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
-//            if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
-//                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), storagePermissionCode)
-//            }else{
-//                openCamera()
-//            }
-//        }else {
-        openCamera()
-//        }
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), cameraPermissionCode)
+        }else if((ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) && Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU){
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), storagePermissionCode)
+        }else if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), storagePermissionCode)
+            }else{
+                openCamera()
+            }
+        } else{
+            openCamera()
+        }
     }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            cameraPermissionCode -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if ((ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)) {
+                        camera()
+                    }
+                }else{
+                    val showRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)
+                    if (!showRationale) {
+                        // user also CHECKED "never ask again"
+                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                        val uri = Uri.fromParts("package", packageName, null)
+                        intent.data = uri
+                        startActivity(intent)
+                    } else if (Manifest.permission.CAMERA == Manifest.permission.CAMERA) {
+                        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), cameraPermissionCode) }
 
-
-
-
+                }
+            }
+            storagePermissionCode -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if ((ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+                        camera()
+                    }
+                }else{
+                    val showRationale = ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                    if (!showRationale) {
+                        // user also CHECKED "never ask again"
+                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                        val uri = Uri.fromParts("package", packageName, null)
+                        intent.data = uri
+                        startActivity(intent)
+                    } else if (Manifest.permission.READ_EXTERNAL_STORAGE == Manifest.permission.READ_EXTERNAL_STORAGE) {
+                        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), storagePermissionCode) }
+                }
+            }
+            1 -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if ((ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+                        ) == PackageManager.PERMISSION_GRANTED)
+                    ) {
+                        openGallery()
+                    }
+                }else{
+                    val showRationale = ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                    if (!showRationale) {
+                        // user also CHECKED "never ask again"
+                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                        val uri = Uri.fromParts("package", packageName, null)
+                        intent.data = uri
+                        startActivity(intent)
+                    } else if (Manifest.permission.READ_EXTERNAL_STORAGE == Manifest.permission.READ_EXTERNAL_STORAGE) {
+                        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1) }
+                }
+            }
+        }
+    }
     private fun openCamera(){
         val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, "New Picture")
         values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera")
-        imageUri = contentResolver.insert(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values
-        )
+        imageUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
         resultLauncher.launch(intent)
     }
 
-
-
     fun compressImage(filePath: String, targetMB: Double = 1.0) : File {
         var file = File(filePath)
         var fullSizeBitmap: Bitmap = BitmapFactory.decodeFile(filePath)
+
         val exif = ExifInterface(filePath)
         val exifOrientation: Int = exif.getAttributeInt(
             ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL
         )
-//        val exifDegree: Int = exifOrientationToDegrees(exifOrientation)
-//        fullSizeBitmap = rotateImage(fullSizeBitmap, exifDegree.toFloat())
-
         try {
-
             val fileSizeInMB = getFileSizeInMB(filePath)
-
             var quality = 100
             if(fileSizeInMB > targetMB){//1.0 means target MB
                 quality = ((targetMB/fileSizeInMB)*100).toInt()
@@ -293,43 +406,261 @@ class BusinessdetailsActivity : AppCompatActivity() {
             val fileOutputStream = FileOutputStream(filePath)
             fullSizeBitmap.compress(Bitmap.CompressFormat.JPEG, quality, fileOutputStream)
             fileOutputStream.close()
-
             file = File(filePath)
         }catch (e: Exception){
             e.printStackTrace()
         }
         return file
     }
+    fun ZonesList(){
+        try {
+            val ordersService = ApiClient.buildService(ApiInterface::class.java)
+            val requestCall = ordersService.Zones()
+            requestCall.enqueue(object : Callback<ZonesModalClass> {
+                override fun onResponse(
+                    call: Call<ZonesModalClass>,
+                    response: Response<ZonesModalClass>
+                ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    try {
+                        when {
+                            response.code() == 200 -> {
+                                //data = response.body()!!
+                                if (response.isSuccessful) {
+                                    if (response.body() != null) {
+                                        if (response.body()!!.error == "0") {
+                                            ZonesSpinner(response.body()!!.location_zone)
+                                        } else {
+
+                                        }
+                                    }else{
+
+                                    }
+                                }else{
+
+                                }
+                            }
+                            response.code() == 401 -> {
+                                showToast(getString(R.string.session_exp))
+
+                            }
+                            else -> {
+                                showToast(getString(R.string.server_error))
+                            }
+                        }
 
 
+                    } catch (e: TimeoutException) {
+                        showToast(getString(R.string.time_out))
+                    }
 
+                override fun onFailure(call: Call<ZonesModalClass>, t: Throwable) {
+                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    showToast(t.message.toString())
+                }
+
+            })
+
+
+        } catch (e: Exception) {
+            //dashboardBinding.progressBarLay.visibility = View.GONE
+            showToast(e.message.toString())
+        }
+
+    }
+
+    internal fun ZonesSpinner(items: List<LocationZoneXX>) {
+        spinner = findViewById(R.id.Zonesspinnerview)
+
+        val adapter = ZonesSpinnerAdapter(this, items)
+        spinner.adapter = adapter
+
+        // Handle item selection
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = items[position]
+                Zone_id = selectedItem.id
+
+//                showToast(Zone_id.toString())
+                fetchItemToSubZones(Zone_id)
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?){
+                // Do nothing when nothing is selected
+            }
+        }
+    }
+    fun fetchItemToSubZones(Zone_id: String
+    ){
+        try {
+            val ordersService = ApiClient.buildService(ApiInterface::class.java)
+            val requestCall =
+                ordersService.SubZones(Zone_id)
+            requestCall.enqueue(object : Callback<ZonesModalClass> {
+                override fun onResponse(
+                    call: Call<ZonesModalClass>,
+                    response: Response<ZonesModalClass>
+                ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    try {
+                        when {
+                            response.code() == 200 -> {
+                                if (response.body() != null) {
+                                    if (response.body()!!.error == "0") {
+                                        SubZoneSpinner(response.body()!!.location_sub_zone)
+                                    } else {
+
+                                    }
+                                } else {
+
+                                }
+                            }
+                            response.code() == 401 -> {
+                                showToast(getString(R.string.session_exp))
+
+                            }
+                            else -> {
+                                showToast(getString(R.string.server_error))
+                            }
+                        }
+
+
+                    } catch (e: TimeoutException) {
+                        showToast(getString(R.string.time_out))
+                    }
+
+                override fun onFailure(call: Call<ZonesModalClass>, t: Throwable) {
+                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    showToast(t.message.toString())
+                }
+
+            })
+        } catch (e: Exception) {
+            //dashboardBinding.progressBarLay.visibility = View.GONE
+            showToast(e.message.toString())
+        }
+    }
+    internal fun SubZoneSpinner(items: List<LocationSubZone>) {
+        spinner = findViewById(R.id.SubZonesspinnerview)
+
+        val adapter = SubZonesSpinnerAdapter(this, items)
+        spinner.adapter = adapter
+
+        // Handle item selection
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = items[position]
+                subzone_id = selectedItem.id
+//                showToast(subzone_id.toString())
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing when nothing is selected
+            }
+        }
+    }
+    fun CategoriesList() {
+        try {
+            val ordersService = ApiClient.buildService(ApiInterface::class.java)
+            val requestCall =
+                ordersService.session_freecategoriesListforReg()
+            requestCall.enqueue(object : Callback<CustomSpinAdapter> {
+                override fun onResponse(
+                    call: Call<CustomSpinAdapter>,
+                    response: Response<CustomSpinAdapter>
+                ) =//dashboardBinding.progressBarLay.visibility  = View.GONE
+                    try {
+                        when {
+                            response.code() == 200 -> {
+                                if (response.isSuccessful) {
+                                    if (response.body() != null) {
+                                        if (response.body()!!.error == "0") {
+                                            setupSpinner(response.body()!!.maincategories)
+                                        } else {
+                                        }
+                                    }else{
+
+                                    }
+                                }else{
+
+                                }
+                            }
+                            response.code() == 401 -> {
+                                showToast(getString(R.string.session_exp))
+
+                            }
+                            else -> {
+                                showToast(getString(R.string.server_error))
+                            }
+                        }
+
+
+                    } catch (e: TimeoutException) {
+                        showToast(getString(R.string.time_out))
+                    }
+                override fun onFailure(call: Call<CustomSpinAdapter>, t: Throwable){
+                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    showToast(t.message.toString())
+                }
+
+            })
+        } catch (e: Exception) {
+            //dashboardBinding.progressBarLay.visibility = View.GONE
+            showToast(e.message.toString())
+        }
+    }
+
+    internal fun setupSpinner(items:List<Maincategory>) {
+        spinner = findViewById(R.id.categoryspinnerview)
+
+        val adapter = SpinnerItemsAdapter(this, items)
+        spinner.adapter = adapter
+        // Handle item selection
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = items[position]
+                cat_id= selectedItem.id
+//                showToast(cat_id.toString())
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing when nothing is selected
+            }
+        }
+    }
 
     private fun businessdetails(
         name: String,
         business_name : String,
         contact_mob_num: String,
+        login_num:String,
         store_email_id: String,
         business_category : String,
         address : String,
+        serviceitem:String,
+        subzone_id:String,
         file1: File
-
         ) {
-
         val loginService = ApiClient.buildService(ApiInterface::class.java)
-
         val requestFile2= file1.asRequestBody("image/*".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("logo", file1.name, requestFile2)
-
-
-        val name: RequestBody = business_name.toRequestBody("text/plain".toMediaTypeOrNull())
+        val name: RequestBody = name.toRequestBody("text/plain".toMediaTypeOrNull())
         val business_name: RequestBody = business_name.toRequestBody("text/plain".toMediaTypeOrNull())
-        val type: RequestBody = "business_details".toRequestBody("text/plain".toMediaTypeOrNull())
         val contact_mob_num: RequestBody = contact_mob_num.toRequestBody("text/plain".toMediaTypeOrNull())
+        val login_num: RequestBody = login_num.toRequestBody("text/plain".toMediaTypeOrNull())
         val store_email_id: RequestBody = store_email_id.toRequestBody("text/plain".toMediaTypeOrNull())
         val business_category: RequestBody = business_category.toRequestBody("text/plain".toMediaTypeOrNull())
         val address: RequestBody = address.toRequestBody("text/plain".toMediaTypeOrNull())
-        val loc: RequestBody = "17.439793598348952, 78.43828890255993".toRequestBody("text/plain".toMediaTypeOrNull())
-        val requestCall = loginService.businessdetails(type,name,business_name,contact_mob_num,business_category,store_email_id,address,loc,body)
+        val type: RequestBody ="business_details".toRequestBody("text/plain".toMediaTypeOrNull())
+        val loc: RequestBody ="17.439793598348952, 78.43828890255993".toRequestBody("text/plain".toMediaTypeOrNull())
+        val serviceitem: RequestBody=serviceitem.toRequestBody("text/plain".toMediaTypeOrNull())
+        val subzone_id: RequestBody=subzone_id.toRequestBody("text/plain".toMediaTypeOrNull())
+        val requestCall = loginService.businessdetails(type,business_name,login_num,store_email_id,business_category,address,loc,name,subzone_id,body,serviceitem,contact_mob_num)
         requestCall.enqueue(object : Callback<Verify_otp_Response> {
             @SuppressLint("SuspiciousIndentation")
             override fun onResponse(
@@ -338,22 +669,41 @@ class BusinessdetailsActivity : AppCompatActivity() {
             ) {
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
+                        businessdetailsResponse= response.body()!!
 
-                        if (response.isSuccessful) {
-                            businessdetailsResponse= response.body()!!
-
-
-                            if (businessdetailsResponse.error=="0")
-                            {
-                                print(businessdetailsResponse)
+                        if (businessdetailsResponse.error=="0") {
+                        //    print(businessdetailsResponse)
                                 sharedPreference.save("token", businessdetailsResponse.token);
                                 showToast(businessdetailsResponse.message)
-                                val i = Intent(this@BusinessdetailsActivity, BankaccountActivity::class.java)
+                            if(sericeitem=="Food")
+                            {
+                                sharedPreference.save("gst_skip_enable","1")
+                                val i = Intent(this@BusinessdetailsActivity, FssaiActivity::class.java)
+                               i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                  i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                 startActivity(i)
                             }
-                            else{
-                                showToast(businessdetailsResponse.message)
+                            else if(sericeitem=="Services")
+                            {
+                                sharedPreference.save("gst_skip_enable","1")
+                                val i = Intent(this@BusinessdetailsActivity, GstinActivity::class.java)
+                                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                startActivity(i)
                             }
+                            else if(sericeitem=="Product Sales"){
+                                if(sericeitem=="Product Sales") {
+                                    sharedPreference.save("gst_skip_enable","0")
+//                                    gstinBinding.skipbtn.isEnabled = false
+//                                    gstinBinding.skipbtn.isClickable = false
+                                }
+                                val i = Intent(this@BusinessdetailsActivity, GstinActivity::class.java)
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(i)
+                            }
+                        }else{
+                            showToast(businessdetailsResponse.message)
                         }
                     }
                     response.code() == 401 -> {//unauthorised
@@ -368,85 +718,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
                 showToast(getString(R.string.session_exp))
             }
-
         })
-
-
-    }
-
-
-    private fun uploadprofile(file1: File
-    ) {
-        try {
-
-            val uploadBillService = ApiClient.buildService(ApiInterface::class.java)
-
-
-            val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
-            val body1 = MultipartBody.Part.createFormData("adhar_front", file1.name, requestFile1)
-            val headers: MutableMap<String, String> = HashMap()
-//            headers["Sessionid"] =  sharedPreference.getValueString("token")!!
-
-            val type: RequestBody = "addhar".toRequestBody("text/plain".toMediaTypeOrNull())
-
-//            val phonenumber: RequestBody = sec_phonenumber.toRequestBody("text/plain".toMediaTypeOrNull())
-//            val sec_phonenumber: RequestBody =  sec_phonenumber.toRequestBody("text/plain".toMediaTypeOrNull())
-//            val fathername: RequestBody = fathername.toRequestBody("text/plain".toMediaTypeOrNull())
-//            val dod: RequestBody = dod.toRequestBody("text/plain".toMediaTypeOrNull())
-//            val gen: RequestBody = "Male".toRequestBody("text/plain".toMediaTypeOrNull())
-//            val pincode: RequestBody = "500045".toRequestBody("text/plain".toMediaTypeOrNull())
-//            val mail: RequestBody = "ak@123".toRequestBody("text/plain".toMediaTypeOrNull())
-//            val loc: RequestBody = "17.446445818443724, 78.44861066842567".toRequestBody("text/plain".toMediaTypeOrNull())
-//            val city: RequestBody = city.toRequestBody("text/plain".toMediaTypeOrNull())
-//            val complete_address: RequestBody = complete_address.toRequestBody("text/plain".toMediaTypeOrNull())
-
-
-            val requestCall = uploadBillService.UploadBusinessRegFilesInterface(
-                headers,
-                type,
-                body1
-            )
-            requestCall.enqueue(object : Callback<Verify_otp_Response> {
-                @SuppressLint("SuspiciousIndentation")
-                override fun onResponse(
-                    call: Call<Verify_otp_Response>,
-                    response: Response<Verify_otp_Response>
-                ) {
-                    when {
-                        response.code() == 200 -> {//status code between 200 to 299
-                            Response = response.body()!!
-                            when (Response.error) {
-                                "0" -> {
-                               //  sharedPreference.save("in_registration_process", "1")
-                                    startActivity(Intent(this@BusinessdetailsActivity,PancardActivity::class.java))
-                                    showToast(Response.message)
-                                }
-                                else -> {
-                                    showToast(Response.message)
-                                }
-                            }
-                        }
-                        response.code() == 401 -> {
-                            showToast(getString(R.string.session_exp))
-//                                startActivity(Intent(this@MyprofileActivity, LoginActivity::class.java))
-                        }
-                        else -> {//Application-level failure
-                            //status code in the range of 300's, 400's, and 500's
-                            showToast(getString(R.string.server_error))
-                        }
-                    }
-                }
-
-                //invoked in case of Network Error or Establishing connection with Server
-                //or Error Creating Http Request or Error Processing Http Response
-                override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
-                    showToast(getString(R.string.server_error))
-                }
-            })
-
-        } catch (e: java.lang.Exception) {
-            showToast(e.message.toString())
-        }
     }
 
 

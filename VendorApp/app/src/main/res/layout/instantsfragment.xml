@@ -1,16 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/orders"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/orders_txt"
-        android:textSize="40sp"
-        android:gravity="center"/>
+        android:layout_height="match_parent">
+        <HorizontalScrollView
+            android:id="@+id/horizontal_scrollview"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:scrollbars="none"
+            android:layout_marginTop="15dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/Allbtn"
+                    android:layout_width="84dp"
+                    android:layout_height="45dp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/buttonbackground"
+                    android:text="@string/all" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/Pendingbtn"
+                    android:layout_width="84dp"
+                    android:layout_height="45dp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rejectbtnbg"
+                    android:text="@string/pending" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/Acceptedbtn"
+                    android:layout_width="84dp"
+                    android:layout_height="45dp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/rejectbtnbg"
+                    android:text="@string/accepted" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/pickupbtn"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rejectbtnbg"
+                    android:text="@string/readyforpickup" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/returnbtn"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rejectbtnbg"
+                    android:text="@string/return_order" />
 
-
-
-</RelativeLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/shopexchangebtn"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rejectbtnbg"
+                    android:text="@string/shopexchange" />
+            </LinearLayout>
+        </HorizontalScrollView>
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardview2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/horizontal_scrollview"-->
+<!--            android:layout_marginTop="30dp">-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/newordersRequestsViewRecyclerview"
+                android:layout_below="@+id/horizontal_scrollview" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/noData"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+<!--        </androidx.cardview.widget.CardView>-->
+    </RelativeLayout>
+</layout>

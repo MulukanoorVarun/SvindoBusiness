@@ -224,40 +224,41 @@
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
-        <HorizontalScrollView
-            android:id="@+id/horizontal_scrollview"
-            android:layout_width="match_parent"
-            android:layout_below="@+id/ratingscard"
-            android:layout_height="125dp">
+<!--        <HorizontalScrollView-->
+<!--            android:id="@+id/horizontal_scrollview"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_below="@+id/ratingscard"-->
+<!--            android:layout_height="125dp">-->
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="300dp"
-                    android:background="#c1c1c1"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/notification_image"
-                    tools:ignore="ContentDescription"/>
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                <ImageView-->
+<!--                    android:layout_width="300dp"-->
+<!--                    android:background="#c1c1c1"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@drawable/notification_image"-->
+<!--                    tools:ignore="ContentDescription"/>-->
 
-                <ImageView
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:background="#c1c1c1"
-                    android:src="@drawable/notification_image"
-                    tools:ignore="ContentDescription"/>
+<!--                <ImageView-->
+<!--                    android:layout_width="300dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:background="#c1c1c1"-->
+<!--                    android:src="@drawable/notification_image"-->
+<!--                    tools:ignore="ContentDescription"/>-->
 
-                <ImageView
-                    android:layout_width="300dp"
-                    android:background="#c1c1c1"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/notification_image"
-                    tools:ignore="ContentDescription"/>
-            </LinearLayout>
-        </HorizontalScrollView>
+<!--                <ImageView-->
+<!--                    android:layout_width="300dp"-->
+<!--                    android:background="#c1c1c1"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:src="@drawable/notification_image"-->
+<!--                    tools:ignore="ContentDescription"/>-->
+<!--            </LinearLayout>-->
+<!--        </HorizontalScrollView>-->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -267,7 +268,7 @@
             android:textSize="16sp"
             android:layout_marginTop="10dp"
             android:id="@+id/pendingorderstxt"
-            android:layout_below="@id/horizontal_scrollview"
+            android:layout_below="@id/horizontalrv"
             android:layout_marginStart="15dp"
 
             />

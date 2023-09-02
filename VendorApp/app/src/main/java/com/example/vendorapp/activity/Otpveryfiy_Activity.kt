@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import com.example.vendorapp.utils.SharedPreference
 import com.example.vendorapp.utils.showToast
 import com.example.vendorapp.R
 import com.example.vendorapp.databinding.ActivityOtpveryfiyBinding
+import com.example.vendorapp.fragements.HomeFragment
 import com.example.vendorapp.modelclass.Mobileotp_Response
 import com.example.vendorapp.modelclass.Verify_otp_Response
 import com.example.vendorapp.services.ApiClient
@@ -25,7 +27,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
     private lateinit var genrateotpresponse: Mobileotp_Response
     private lateinit var sharedPreference: SharedPreference
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(this)
         val i = intent
@@ -40,13 +42,23 @@ class Otpveryfiy_Activity : AppCompatActivity() {
 
 
         otpverifybinding.editmobileNumbertxt.setOnClickListener {
-
             val i = Intent(this@Otpveryfiy_Activity, LoginActivity::class.java)
             startActivity(i)
-
         }
         otpverifybinding.firstPinView.setText(otp)
+
+        otpverifybinding.vrfiyBtn.setBackgroundResource(R.drawable.buttonbackground);
         otpverifybinding.vrfiyBtn.setOnClickListener {
+            otpverifybinding.vrfiyBtn.setBackgroundResource(R.drawable.button_loading_background);
+            otpverifybinding.vrfiyBtn.setEnabled(false)
+            Handler().postDelayed({
+                otpverifybinding.vrfiyBtn.setEnabled(true)
+                otpverifybinding.vrfiyBtn.setBackgroundResource(R.drawable.buttonbackground);
+            }, 2000)
+
+
+
+         //   otpverifybinding.vrfiyBtn.isEnabled = false
             if (otpverifybinding.firstPinView.text.toString().trim().isEmpty()) {
                 showToast("OTP should be of minimum of 6 numbers")
                 otpverifybinding.firstPinView.error = "Enter otp"
@@ -70,17 +82,9 @@ class Otpveryfiy_Activity : AppCompatActivity() {
 
         }
         otpverifybinding.resendTxtview.setOnClickListener {
-
-
             if (mobile_number != null) {
                 genotp(mobile_number)
             }
-
-
-
-
-
-
         }
     }
 
@@ -104,7 +108,8 @@ class Otpveryfiy_Activity : AppCompatActivity() {
 
 //                            if (genrateotpresponse.error==0)
 //                            {
-                                showToast(genrateotpresponse.otp.toString()); showToast(genrateotpresponse.message);
+                                showToast(genrateotpresponse.otp.toString());
+                            showToast(genrateotpresponse.message);
 //                            }
 
 //                            val responseMessage = response.body()?.error
@@ -116,12 +121,9 @@ class Otpveryfiy_Activity : AppCompatActivity() {
 //                            i.putExtra("TextBox", com.example.deliverypartner.binding.mobileNumberEtxt.text.toString());
 //                            response.body()?.let { i.putExtra("otpcode", it.otp) };
 //                            startActivity(i)
-
                         }
-
 //                        Log.d("TAG", "onResponse: " + (response.body()?.otp))
                     }
-
                     response.code() == 401 -> {//unauthorised
                         showToast(getString(R.string.session_exp))
                     }
@@ -131,18 +133,14 @@ class Otpveryfiy_Activity : AppCompatActivity() {
                     }
                 }
             }
-
-
-
             //invoked in case of Network Error or Establishing connection with Server
             //or Error Creating Http Request or Error Processing Http Response
             override fun onFailure(call: Call<Mobileotp_Response>, t: Throwable) {
-                showToast(getString(R.string.server_error))
+                showToast(
+                    getString(R.string.server_error))
             }
         })
-
     }
-
     private fun verifyotp(mobile_number: String, otp: String) {
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestCall = loginService.Verify_otp(mobile_number, otp)
@@ -161,29 +159,31 @@ class Otpveryfiy_Activity : AppCompatActivity() {
 
                             verifyotpResponse = response.body()!!
 
-                            response.body()?.let { showToast(it.message)}
-                                if(verifyotpResponse!= null) {
-                                    if (response.body()!!.error == "0") {
-                                        sharedPreference.save("token", verifyotpResponse.token);
-                                        response.body()?.let { showToast(it.message)}
-//                                        val intent = Intent(
-//                                            this@Otpveryfiy_Activity, DashboardActivity::class.java
-//                                        )
-//                                        startActivity(intent)
-                                    }else if (response.body()?.error == "2") {
-                                        sharedPreference.save("mobile_number", (mobile_number).toString());
-                                        val intent = Intent(
-                                            this@Otpveryfiy_Activity, BusinessdetailsActivity::class.java
-                                        )
-                                        startActivity(intent)
-                                    }else {
-                                        response.body()?.let { showToast(it.message)}
-                                    }
+                            response.body()?.let { showToast(it.message) }
+                            if (verifyotpResponse != null) {
+
+                                if (response.body()!!.error == "0") {
+                                    sharedPreference.save("token", verifyotpResponse.token);
+                                    response.body()?.let { showToast(it.message) }
+                                    val intent = Intent(this@Otpveryfiy_Activity, MainActivity::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                    startActivity(intent)
+
+                                } else if (response.body()!!.error == "2") {
+                                    sharedPreference.save("mobile_number", (mobile_number).toString())
+                                    val intent = Intent(this@Otpveryfiy_Activity, BusinessdetailsActivity::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                    startActivity(intent)
+
+                                } else if (response.body()!!.error == "1") {
+                                    response.body()?.let { showToast(it.message) }
                                 }
+                            }
                         }
 //                        Log.d("TAG", "onResponse: " + (response.body()?.error))
                     }
-
                     response.code() == 401 -> {//unauthorised
                         showToast(getString(R.string.session_exp))
                     }
@@ -192,21 +192,13 @@ class Otpveryfiy_Activity : AppCompatActivity() {
                         showToast(getString(R.string.server_error))
                     }
                 }
-
-
             }
-
             override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
 
                 showToast(getString(R.string.session_exp))
             }
-
         })
-
-
-
         }
-
     }
 
 

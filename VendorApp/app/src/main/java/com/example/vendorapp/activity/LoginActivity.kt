@@ -6,7 +6,7 @@ import com.example.vendorapp.R
 import com.example.vendorapp.databinding.MobilenumberloginBinding
 import android.annotation.SuppressLint
 import android.content.Intent
-
+import android.os.Handler
 import android.util.Log
 import com.example.vendorapp.utils.SharedPreference
 import com.example.vendorapp.utils.showToast
@@ -26,6 +26,13 @@ class LoginActivity : AppCompatActivity() {
 //    private lateinit var genrateotpresponse: GenrateotpResponse
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    sharedPreference = SharedPreference(this)
+
+  //  showToast(sharedPreference.getValueString("token").toString())
+    if(sharedPreference.getValueString("token")!=null)
+    {
+        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+    }
         lateinit var otp: String
         val responseMessage = intent.getStringExtra("response_message")
         mobileloginbinding = MobilenumberloginBinding.inflate(layoutInflater)
@@ -38,31 +45,35 @@ class LoginActivity : AppCompatActivity() {
 //        val i = Intent(this@LoginActivity, DashboardActivity::class.java)
 //        startActivity(i)
 //    }
+
+    mobileloginbinding.submit.setBackgroundResource(R.drawable.buttonbackground);
     mobileloginbinding.submit.setOnClickListener {
+       // mobileloginbinding.submit.isEnabled = false
+        mobileloginbinding.submit.setBackgroundResource(R.drawable.button_loading_background);
+        mobileloginbinding.submit.setEnabled(false)
+        Handler().postDelayed({
+            mobileloginbinding.submit.setEnabled(true)
+            mobileloginbinding.submit.setBackgroundResource(R.drawable.buttonbackground);
+        }, 2000)
+
+
             if (mobileloginbinding.mobileNumberEtxt.text.toString().trim().isEmpty()) {
                 mobileloginbinding.mobileNumberEtxt.requestFocus()
                 mobileloginbinding.mobileNumberEtxt.error = "Enter Mobilenumber"
-            } else if (mobileloginbinding.mobileNumberEtxt.text.toString().trim().length < 10) {
-
+            } else if (mobileloginbinding.mobileNumberEtxt.text.toString().trim().length < 10){
                 mobileloginbinding.mobileNumberEtxt.requestFocus()
                 showToast("Mobile number should be of minimum of 10 numbers")
             } else {
                 genotp(
                     mobileloginbinding.mobileNumberEtxt.text.toString().trim(),
-
                     )
             }
-
         }
-
     }
-
-    private fun genotp(mobile_number: String) {
+    private fun genotp(mobile_number: String){
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestCall = loginService.Gen_otp(mobile_number)
         requestCall.enqueue(object : Callback<Mobileotp_Response> {
-            //if you receive http response then this method will executed
-            //your status code decide if your http response is a success or failure
             @SuppressLint("SuspiciousIndentation")
             override fun onResponse(
                 call: Call<Mobileotp_Response>,
@@ -72,21 +83,24 @@ class LoginActivity : AppCompatActivity() {
                     response.isSuccessful -> {//status code between 200 to 299
 
                         if (response.isSuccessful) {
-                            val genrateotpresponse = response.body()?.error
-                            response.body()?.let { showToast(it.otp.toString()); showToast(it.message);  }
-                            val i = Intent(this@LoginActivity, Otpveryfiy_Activity::class.java)
-                            i.putExtra("TextBox", mobileloginbinding.mobileNumberEtxt.text.toString());
-                            response.body()?.let { i.putExtra("otpcode", it.otp) };
-                            startActivity(i)
-
-                        }
-
+                                    val genrateotpresponse = response.body()?.error
+                                    response.body()
+                                        ?.let { showToast(it.otp.toString());
+                                            showToast(it.message); }
+                                    val i = Intent(this@LoginActivity, Otpveryfiy_Activity::class.java)
+                                    //   i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                      //                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                            // i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                    i.putExtra(
+                                        "TextBox",
+                                        mobileloginbinding.mobileNumberEtxt.text.toString()
+                                    );
+                                    response.body()?.let { i.putExtra("otpcode", it.otp) };
+                                    startActivity(i)
+                                }
                         Log.d("TAG", "onResponse: " + (response.body()?.otp))
                         mobileotpResponse = response.body()!!
-
-
                     }
-
                     response.code() == 401 -> {//unauthorised
                         showToast(getString(R.string.session_exp))
                     }
@@ -96,22 +110,11 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
-
-
-
-            //invoked in case of Network Error or Establishing connection with Server
-            //or Error Creating Http Request or Error Processing Http Response
             override fun onFailure(call: Call<Mobileotp_Response>, t: Throwable) {
                 showToast(getString(R.string.server_error))
             }
         })
-
-
     }
-
-
-
-
 }
 
 

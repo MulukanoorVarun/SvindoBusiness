@@ -3,14 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content">
             <!-- Place other views and layouts here as needed -->
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -42,6 +37,14 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardlayout"
@@ -50,22 +53,33 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 app:cardCornerRadius="10dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <ImageView
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
                         android:id="@+id/business_profile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:scaleType="fitXY"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/business_profile"
+                        android:background="@drawable/imageviewboarder"
                         tools:ignore="ContentDescription" />
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/business_profile"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="100dp"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:scaleType="fitXY"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:src="@drawable/imageviewboarder"-->
+<!--                        tools:ignore="ContentDescription" />-->
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/change_photo"
@@ -93,14 +107,15 @@
                         android:layout_below="@+id/change_photo"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
-
                     <EditText
                         android:id="@+id/nameet"
                         android:layout_width="369dp"
                         android:layout_height="49dp"
                         android:layout_marginStart="13dp"
                         android:layout_marginTop="6dp"
+                        android:layout_marginEnd="10dp"
                         android:layout_below="@+id/name"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                         android:background="@drawable/boarder"
                         android:padding="10dp"
                         android:hint="@string/name_txt"
@@ -127,6 +142,8 @@
                         android:layout_height="49dp"
                         android:layout_marginStart="13dp"
                         android:layout_marginTop="6dp"
+                        android:layout_marginEnd="10dp"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                         android:layout_below="@+id/business_name"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
@@ -153,13 +170,16 @@
                         android:layout_height="49dp"
                         android:layout_marginStart="13dp"
                         android:layout_marginTop="6dp"
+                        android:inputType="number"
+                        android:layout_marginEnd="10dp"
                         android:layout_below="@+id/mobile_num"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
+                        android:maxLength="10"
                         android:hint="@string/mob_num_et_txt"
                         android:textSize="12sp"
-                        android:inputType="number"
                         android:autofillHints="" />
+
                     <TextView
                         android:id="@+id/store_email_id"
                         android:layout_width="match_parent"
@@ -172,13 +192,13 @@
                         android:layout_below="@+id/mobile_num_et"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
-
                     <EditText
                         android:id="@+id/store_email_id_et"
                         android:layout_width="369dp"
                         android:layout_height="49dp"
                         android:layout_marginStart="13dp"
                         android:layout_marginTop="6dp"
+                        android:layout_marginEnd="10dp"
                         android:layout_below="@+id/store_email_id"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
@@ -198,41 +218,40 @@
                         android:layout_below="@+id/store_email_id_et"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
-                    <EditText
-                        android:id="@+id/business_category_et"
-                        android:layout_width="369dp"
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:layout_width="370dp"
                         android:layout_height="49dp"
                         android:layout_marginStart="13dp"
-                        android:layout_marginTop="6dp"
                         android:layout_below="@+id/business_category"
-                        android:background="@drawable/boarder"
-                        android:padding="10dp"
-                        android:hint="@string/store_email_id_et"
-                        android:textSize="12sp"
-                        android:inputType="textEmailAddress"
-                        android:autofillHints="" />
-<!--                    <Spinner-->
-<!--                        android:id="@+id/spinner"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="48dp"-->
-<!--                       android:layout_below="@+id/business_category"-->
-<!--                         />-->
-<!--                    <com.google.android.material.textfield.TextInputLayout-->
-<!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
-<!--                        android:layout_width="330dp"-->
-<!--                        android:layout_height="54dp"-->
-<!--                        android:layout_marginStart="13dp"-->
-<!--                        android:layout_below="@+id/business_category"-->
-<!--                        android:id="@+id/textinputlayout">-->
+                        android:spinnerMode="dialog"
+                        android:prompt="@string/prompt"
+                        android:background="@drawable/bg_spinner"
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/categoryspinnerview" />
+                    <TextView
+                        android:id="@+id/Servicetype"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="6dp"
+                        android:text="Services Type"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/categoryspinnerview"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:ignore="Hardcodedtext"/>
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:layout_width="370dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_below="@+id/Servicetype"
+                        android:spinnerMode="dialog"
+                        android:background="@drawable/bg_spinner"
+                        android:prompt="@string/serviceprompt"
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/Servicesspinnerview" />
 
-<!--                    <AutoCompleteTextView-->
-<!--                        android:layout_width="320dp"-->
-<!--                        android:layout_height="48dp"-->
-<!--                        android:layout_marginStart="5dp"-->
-<!--                        android:textSize="12sp"-->
-<!--                        android:inputType="none"-->
-<!--                        android:id="@+id/categories"/>-->
-<!--                    </com.google.android.material.textfield.TextInputLayout>-->
                     <TextView
                         android:id="@+id/address"
                         android:layout_width="match_parent"
@@ -242,24 +261,70 @@
                         android:layout_marginTop="6dp"
                         android:text="@string/address_txt"
                         android:textSize="16sp"
-                        android:layout_below="@+id/business_category_et"
+                        android:layout_below="@+id/Servicesspinnerview"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
-
                     <EditText
                         android:id="@+id/address_et"
                         android:layout_width="369dp"
                         android:layout_height="49dp"
                         android:layout_marginStart="13dp"
                         android:layout_marginTop="6dp"
+                        android:layout_marginEnd="10dp"
                         android:layout_below="@+id/address"
-                        android:layout_marginBottom="15dp"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
                         android:hint="@string/address_et_txt"
                         android:textSize="12sp"
                         android:inputType="text"
                         android:autofillHints="" />
+                    <TextView
+                        android:id="@+id/Zones"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="6dp"
+                        android:text="Zones"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/address_et"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:ignore="Hardcodedtext"/>
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:layout_width="370dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_below="@+id/Zones"
+                        android:spinnerMode="dialog"
+                        android:background="@drawable/bg_spinner"
+                        android:prompt="@string/zoneprompt"
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/Zonesspinnerview" />
+                    <TextView
+                        android:id="@+id/SubZones"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="6dp"
+                        android:text=" Sub Zones"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/Zonesspinnerview"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:ignore="Hardcodedtext"/>
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:layout_width="370dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_below="@+id/SubZones"
+                        android:spinnerMode="dialog"
+                        android:prompt="@string/pincodeprompt"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_spinner"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/SubZonesspinnerview" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <androidx.appcompat.widget.AppCompatButton
@@ -267,6 +332,7 @@
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cardlayout"
+                android:layout_centerHorizontal="true"
                 android:layout_marginStart="19dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="19dp"
@@ -275,7 +341,7 @@
                 android:background="@drawable/buttonbackground"
                 android:padding="13dp"
                 android:text="@string/submit" />
-
         </RelativeLayout>
     </ScrollView>
+    </RelativeLayout>
 </layout>

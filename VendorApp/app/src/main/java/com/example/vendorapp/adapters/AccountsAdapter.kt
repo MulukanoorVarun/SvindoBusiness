@@ -10,11 +10,9 @@ import com.example.vendorapp.databinding.TransactionsDetailsBinding
 import com.example.vendorapp.modelclass.Transaction
 
 
-class AccountsAdapter(private val transaction : List<Transaction>) :
-    RecyclerView.Adapter<AccountsAdapter.MyViewHolder>() {
+class AccountsAdapter(private val transaction : List<Transaction>) : RecyclerView.Adapter<AccountsAdapter.MyViewHolder>() {
 
     class MyViewHolder(private val context: Int, private var binding: TransactionsDetailsBinding) : RecyclerView.ViewHolder(binding.root) {
-
 
 
             @SuppressLint("ResourceAsColor")
@@ -28,36 +26,24 @@ class AccountsAdapter(private val transaction : List<Transaction>) :
 
                 val context = itemView.context
 
-
-
                 if (data.transaction_type=="Debit"&&data.transaction_type!==null){
-//                    binding.imageview.setBackgroundResource(drawable.)
-                 // binding.amount.setTextColor(color.red);
+                    binding.imageview.setBackgroundResource(R.drawable.debiticon)
+                    binding.amount.setTextColor(R.color.red);
                     "- ₹${data.amount}".also { binding.amount.text = it }
                     binding.amount.setTextColor(ContextCompat.getColor(context!!, R.color.red))
 
                 }
                 if (data.transaction_type=="Credit"&&data.transaction_type!==null){
-//                    binding.imageview.setBackgroundResource(drawable.transectionimage2)
-//                    binding.amount.setTextColor(color.buttongreen);
+                    binding.imageview.setBackgroundResource(R.drawable.crediticon)
+                    binding.amount.setTextColor(R.color.buttongreen);
                     "+ ₹${data.amount}".also { binding.amount.text = it }
-
                     binding.amount.setTextColor(ContextCompat.getColor(context!!, R.color.buttongreen))
 
                 }
 
 
             }
-
-
-
-
-
-
-
         }
-
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

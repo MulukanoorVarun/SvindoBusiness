@@ -25,7 +25,7 @@ class OrdersScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPreference = SharedPreference(this)
+       // sharedPreference = SharedPreference(this)
         ordersBinding = ActivityOrdersScreenBinding.inflate(layoutInflater)
         setContentView(ordersBinding.root)
 
@@ -33,16 +33,16 @@ class OrdersScreen : AppCompatActivity() {
         ordersBinding.bottomnavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.home -> {
-//                    val intent = Intent(this,DashboardActivity::class.java)
-//                    overridePendingTransition(0,0);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//                    startActivity(intent)
+                    val intent = Intent(this,DashboardActivity::class.java)
+                    overridePendingTransition(0,0);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent)
                     false
                 }
                 R.id.orders -> {
                     true
                 }
-                R.id.catalouge -> {
+                R.id.catalogue -> {
                     val intent = Intent(this, catalogueActivity::class.java)
                     overridePendingTransition(0,0);
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -54,7 +54,6 @@ class OrdersScreen : AppCompatActivity() {
                     overridePendingTransition(0,0);
                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent)
-
                     false
                 }
 
@@ -63,23 +62,23 @@ class OrdersScreen : AppCompatActivity() {
         }
 
 
-        pager = findViewById(R.id.viewPager)
-        tab = findViewById(R.id.tabs)
-        bar = findViewById(R.id.toolbar)
-        // To make our toolbar show the application
-        // we need to give it to the ActionBar
-        setSupportActionBar(bar)
-        // Initializing the ViewPagerAdapter
-        val adapter = ViewPagerAdapter(supportFragmentManager)
-        // add fragment to the list
-        adapter.addFragment(InstantsFragment(), "Instant")
-        adapter.addFragment(GeneralDeliveryFragment(), "General Delivery")
-        adapter.addFragment(SelfPickupFragment(), "Self Pickup")
-
-
-        // Adding the Adapter to the ViewPager
-        pager.adapter = adapter
-        // bind the viewPager with the TabLayout.
-        tab.setupWithViewPager(pager)
+//        pager = findViewById(R.id.viewPager)
+//        tab = findViewById(R.id.tabs)
+//        bar = findViewById(R.id.toolbar)
+//        // To make our toolbar show the application
+//        // we need to give it to the ActionBar
+//        setSupportActionBar(bar)
+//        // Initializing the ViewPagerAdapter
+//        val adapter = ViewPagerAdapter(supportFragmentManager)
+//        // add fragment to the list
+//        adapter.addFragment(InstantsFragment(), "Instant")
+//        adapter.addFragment(GeneralDeliveryFragment(), "General Delivery")
+//        adapter.addFragment(SelfPickupFragment(), "Self Pickup")
+//
+//
+//        // Adding the Adapter to the ViewPager
+//        pager.adapter = adapter
+//        // bind the viewPager with the TabLayout.
+//        tab.setupWithViewPager(pager)
     }
 }

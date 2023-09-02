@@ -424,6 +424,6 @@
                 app:itemBackground="@color/white"
                 app:itemIconTint="@color/black"
                 app:itemTextColor="@android:color/black"
-                app:menu="@menu/bottom_navigation_menu" />
+                app:menu="@menu/bottom_navigation_menu"/>
         </RelativeLayout>
 </layout>

@@ -5,8 +5,7 @@
         <RelativeLayout
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -18,7 +17,6 @@
                     android:layout_height="wrap_content"
                     tools:ignore="UseCompoundDrawables">
 
-
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -27,17 +25,27 @@
                         android:id="@+id/contactbackbutton"
                         android:src="@drawable/backbutton"
                         tools:ignore="ContentDescription" />
-
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="10dp"
                         android:text="Add Contact Person"
+                        android:layout_weight="0.2"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/contactskipbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="skip"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        tools:ignore="Hardcodedtext"/>
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
 
@@ -86,11 +94,12 @@
                         android:layout_marginEnd="13dp"
                         android:layout_marginTop="6dp"
                         android:padding="10dp"
+                        android:maxLength="10"
                         android:layout_below="@+id/mob_num_txt"
                         android:background="@drawable/boarder"
                         android:hint="e.g 9390776532"
-                        android:text="9068959950"
-                        android:inputType="text"
+                        android:textSize="16sp"
+                        android:inputType="number"
                         tools:ignore="HardcodedText"
                         android:autofillHints="" />
 
@@ -118,29 +127,29 @@
                         android:layout_marginEnd="13dp"
                         android:layout_marginBottom="15dp"
                         android:padding="10dp"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                         android:autofillHints=""
                         android:background="@drawable/boarder"
                         android:hint="e.g VARUN"
+                        android:textSize="16sp"
                         android:inputType="text"
-                        android:text="akash old"
                         tools:ignore="HardcodedText" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cardlayout"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="400dp"
-                android:layout_marginBottom="29dp"
-                android:background="@drawable/buttonbackground"
-                android:padding="13dp"
-                android:text="@string/submit"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/contactssubmitbutton"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="19dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        android:background="@drawable/buttonbackground"
+        android:padding="13dp"
+        android:text="@string/submit" />
         </RelativeLayout>
 </layout>

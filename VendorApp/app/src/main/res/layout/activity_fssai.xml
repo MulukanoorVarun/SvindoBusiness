@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -25,40 +24,125 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="2dp"
                         android:layout_marginTop="10dp"
-                        android:id="@+id/bankdetails_backbutton"
+                        android:id="@+id/fssaibackbutton"
                         android:src="@drawable/backbutton"
                         tools:ignore="ContentDescription" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="10dp"
                         android:text="@string/fssai_deatils"
+                        android:layout_weight="0.2"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/fssaiskipbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="skip"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        tools:ignore="Hardcodedtext"/>
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
-                app:cardCornerRadius="10dp"
                 android:layout_marginTop="70dp"
-                android:layout_marginEnd="10dp">
+                android:background="@color/white"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="20dp"
+                tools:ignore="ExtraText">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="372dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="14dp"
+                        android:gravity="center_horizontal"
+                        android:layout_marginEnd="10dp"
+                        android:text="*please upload a focused photo of your FSSAI Certificate for faster verification"
+                        android:textColor="@color/black"
+                        tools:ignore="Hardcodedtext"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardlayout1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="80dp"
+                        android:layout_marginEnd="13dp"
+                        android:background="@color/white"
+                        app:cardBackgroundColor="@color/white"
+                        android:layout_marginBottom="10dp"
+                        app:cardCornerRadius="20dp"
+                        tools:ignore="ExtraText">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="28dp"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center_horizontal"
+                            android:layout_marginEnd="28dp"
+                            android:text="Front side photo of your FSSAI Cerificate with your clear name and photo"
+                            android:textColor="@color/black"
+                            tools:ignore="Hardcodedtext"/>
+                        <ImageView
+                            android:id="@+id/Fssaiimage"
+                            android:layout_width="300dp"
+                            android:layout_height="200dp"
+                            android:layout_marginEnd="13dp"
+                            android:layout_marginTop="10dp"
+                            android:scaleType="fitXY"
+                            android:elevation="10dp"
+                            android:background="@drawable/imageboarder"
+                            android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/tv2"
+                            tools:ignore="ContentDescription" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/camerabutton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@+id/Fssaiimage"
+                            android:layout_marginEnd="20dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="10dp"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/buttonborder"
+                            android:padding="10dp"
+                            android:text="@string/change_image"
+                            android:textColor="#F22F9333"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/baseline_photo_camera_24"/>
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
                         android:id="@+id/fssai_txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:layout_below="@+id/cardlayout1"
                         android:layout_marginStart="13dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginTop="5dp"
@@ -74,9 +158,11 @@
                         android:layout_marginEnd="13dp"
                         android:layout_marginTop="8dp"
                         android:layout_below="@+id/fssai_txt"
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
                         android:textSize="13sp"
+                        android:maxLength="19"
                         android:hint="@string/fssai_et_txt"
                         android:inputType="text"
                         android:layout_marginBottom="15dp"
@@ -84,13 +170,14 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/bankdetails_submitbutton"
+                android:id="@+id/fssaisubmitbutton"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/cardlayout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="19dp"
-                android:layout_marginTop="500dp"
+                android:layout_marginTop="301dp"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentBottom="true"
                 android:layout_marginEnd="19dp"
                 android:textColor="@color/white"
                 android:background="@drawable/buttonbackground"

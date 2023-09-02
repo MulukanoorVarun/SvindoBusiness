@@ -17,10 +17,6 @@
             android:id="@+id/backgroundimg"
             android:scaleType="fitXY"
             tools:ignore="ContentDescription" />
-
-
-
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:id="@+id/cardview"

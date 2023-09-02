@@ -28,14 +28,25 @@
                         tools:ignore="ContentDescription" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="10dp"
+                        android:layout_weight="0.2"
                         android:text="@string/bank_acc_details"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/bankaccskipbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="skip"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        tools:ignore="Hardcodedtext"/>
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
 
@@ -85,8 +96,8 @@
                         android:background="@drawable/boarder"
                         android:hint="@string/please_enter_ifsc_code"
                         android:inputType="text"
-                        android:padding="10dp"
-                        android:text="@string/sbi3478459" />
+                        android:textSize="16sp"
+                        android:padding="10dp" />
 
                     <TextView
                         android:id="@+id/bank_name_txt"
@@ -111,7 +122,8 @@
                         android:layout_below="@+id/bank_name_txt"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
-                        android:text="@string/sbi"
+                        android:textSize="16sp"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                         android:hint="@string/please_enter_bank_name"
                         android:inputType="text"
                         android:autofillHints="" />
@@ -138,10 +150,10 @@
                         android:layout_marginTop="5dp"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
-                        android:text="@string/_325346545567"
+                        android:textSize="16sp"
                         android:layout_below="@+id/acc_num_txt"
                         android:hint="@string/please_enter_account_number"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:autofillHints="" />
                     <TextView
                         android:id="@+id/re_acc_num_txt"
@@ -165,10 +177,10 @@
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
-                        android:text="@string/accountnumber"
+                        android:textSize="16sp"
                         android:layout_below="@+id/re_acc_num_txt"
                         android:hint="@string/re_enter_acc_num_txt"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:autofillHints="" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -177,12 +189,9 @@
                 android:id="@+id/bankdetails_submitbutton"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/cardlayout"
-                android:layout_marginStart="19dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginVertical="200dp"
-                android:layout_marginEnd="19dp"
-                android:layout_marginBottom="29dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
                 android:textColor="@color/white"
                 android:background="@drawable/buttonbackground"
                 android:padding="13dp"

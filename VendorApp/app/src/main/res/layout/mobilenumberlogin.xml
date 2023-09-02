@@ -6,41 +6,73 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/fortempararyimage"
+                android:src="@drawable/deliverybackgroundimage"
                 android:id="@+id/backgroundimg"
                 android:scaleType="fitXY"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"/>
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Started with svindo Business"
+                android:textStyle="bold"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="200dp"
+                android:layout_marginEnd="10dp"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:layout_alignParentEnd="true"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reach Thousands of customers in your"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/tv"
+                android:layout_marginEnd="10dp"
+                android:textSize="16sp"
+                android:textColor="#C3B9B9"
+                android:layout_alignParentEnd="true"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="City with few simple steps."
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/tv1"
+                android:layout_marginEnd="10dp"
+                android:textSize="16sp"
+                android:textColor="#C3B9B9"
+                android:layout_alignParentEnd="true"
+                tools:ignore="HardcodedText" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="15dp"
+                android:id="@+id/cardview"
                 android:layout_marginTop="310dp">
-
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/mobnum_layout">
-
                     <ImageView
                         android:id="@+id/logo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="200dp"
+                        android:layout_height="250dp"
                         android:padding="20dp"
                         android:scaleType="fitXY"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/vendorlogo"
-                        tools:ignore="ContentDescription" />
-
+                        android:src="@drawable/logo11"
+                        tools:ignore="ContentDescription"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -48,7 +80,7 @@
                         android:textStyle="bold"
                         android:id="@+id/mobilenum_txt"
                         android:layout_marginStart="15dp"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="50dp"
                         android:layout_below="@+id/logo"
                         android:textSize="18sp"
                         android:textColor="@color/black"/>
@@ -66,6 +98,7 @@
                         android:hint="@string/please_enter_mobile_number"
                         android:inputType="number"
                         android:maxEms="10"
+                        android:textSize="14sp"
                         android:maxLength="10"
                         android:padding="10dp"
                         android:scaleType="center"
@@ -80,11 +113,11 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:text="@string/continuetxt"
-                        android:textColor="@color/white"
                         android:scaleType="center"
                         android:layout_below="@id/mobile_Number_etxt"
+                        android:textColor="@color/white"
                         android:gravity="center"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="50dp"
                         android:layout_marginBottom="20dp"
 
                         android:background="@drawable/buttonbackground"/>
