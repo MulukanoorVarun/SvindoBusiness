@@ -25,6 +25,7 @@ import com.example.vendorapp.R
 import com.example.vendorapp.activity.AcceptOrder
 import com.example.vendorapp.activity.FssaiActivity
 import com.example.vendorapp.activity.MainActivity
+import com.example.vendorapp.databinding.AddonlayoutdesignBinding
 import com.example.vendorapp.databinding.ProductitemdesignBinding
 import com.example.vendorapp.fragements.CatalogueFragment
 import com.example.vendorapp.fragements.ProductsFragment
@@ -44,6 +45,9 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
 
     class ViewHolder(private var binding:ProductitemdesignBinding, private var context: Context) : RecyclerView.ViewHolder(binding.root){
         private var dialog:Dialog? = null
+        private lateinit var builder: AlertDialog.Builder
+        private lateinit var alertDialog: AlertDialog
+
         var productstatus="0"
 
         var insatantDel = "0"

@@ -98,6 +98,9 @@ class AddonFragment : Fragment() {
                     addon_price = binding.addonpriceet.text.toString().trim()
                 )
             }
+            else{
+                Toast.makeText(context, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+            }
             alertDialog.hide()
         }
     }
@@ -123,6 +126,7 @@ class AddonFragment : Fragment() {
                                 if (response.isSuccessful) {
                                     if (response.body() != null) {
                                         if (response.body()!!.error == "0") {
+                                            Toast.makeText(context,addonsresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                             AddAddonsListdetails()
                                         } else {
 
