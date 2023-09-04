@@ -459,6 +459,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="views">Views</string>
     <string name="clicks">Clicks</string>
     <string name="delete">delete</string>
+    <string name="per_click_cost">Per Click Cost:</string>
 
 
     <string-array name="services">

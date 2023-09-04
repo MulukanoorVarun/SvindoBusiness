@@ -127,8 +127,7 @@ class AcceptOrder : AppCompatActivity() {
                                         acceptorderresponse.order_details.delivery_discount
                                     acceptOrderBinding.deliveryfee.text =
                                         acceptorderresponse.order_details.porter_delivery_fee
-                                    acceptOrderBinding.itemtotal.text =
-                                        acceptorderresponse.order_details.order_amount
+                                    acceptOrderBinding.itemtotal.text = acceptorderresponse.order_details.order_amount
 
 
                                     var availability =
@@ -163,12 +162,7 @@ class AcceptOrder : AppCompatActivity() {
                                             )
                                         }
                                     }
-
-
-
-
                                     acceptOrderBinding.acceptbutton.setOnClickListener {
-
                                         if (orderstatus == "Order Placed") {
                                             orderstatus = "Order Accepted"
 //                                        showToast(orderstatus.toString())

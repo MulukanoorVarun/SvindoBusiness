@@ -353,8 +353,11 @@ class AddBannersActivity : AppCompatActivity() {
                             response.code() == 200 -> {
                                 bannersResponse = response.body()!!
                                 if (response.body() != null) {
-                                    bannersResponse = response.body()!!
                                     if (bannersResponse.error == "0") {
+
+                                        bannersBinding.viewamt.setText(bannersResponse.cost.per_view_cost)
+                                        bannersBinding.perclickcostamt.setText(bannersResponse.cost.per_click_cost)
+
                                         if (bannersResponse.banner_list.count() > 0) {
                                             bannersBinding.BannersRecyclerview.visibility = View.VISIBLE
                                             bannersBinding.noData.visibility = View.GONE
@@ -422,6 +425,12 @@ class AddBannersActivity : AppCompatActivity() {
                             //    sharedPreference.save("token", businessdetailsResponse.token);
                             showToast(addBannerResponse.message)
                         }else{
+                            showToast(addBannerResponse.message)
+                        }
+                        if(addBannerResponse.error=="1"){
+                            showToast(addBannerResponse.message)
+                        }
+                        if(addBannerResponse.error=="2"){
                             showToast(addBannerResponse.message)
                         }
                     }

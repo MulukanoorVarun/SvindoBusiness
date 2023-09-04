@@ -32,31 +32,18 @@ class ContactActivity : AppCompatActivity() {
         contactbinding = ActivityContactBinding.inflate(layoutInflater)
         setContentView(contactbinding.root)
 
-        contactbinding.contactssubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
+
+
+        contactbinding.contactssubmitbutton.setBackgroundResource(R.drawable.buttonbackground)
         contactbinding.contactssubmitbutton.setOnClickListener {
-            contactbinding.contactssubmitbutton.setBackgroundResource(R.drawable.button_loading_background);
+            contactbinding.contactssubmitbutton.setBackgroundResource(R.drawable.button_loading_background)
             contactbinding.contactssubmitbutton.setEnabled(false)
             Handler().postDelayed({
                 contactbinding.contactssubmitbutton.setEnabled(true)
                 contactbinding.contactssubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
             }, 2000)
-
-
-            contactbinding.contactskipbtn.setOnClickListener {
-                sharedPreference.clearSharedPreference()
-                val i = Intent(this@ContactActivity ,LoginActivity::class.java)
-                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                startActivity(i)
-            }
-
-
             val emergency_mobile_number = contactbinding.mobNumEtTxt.text.toString().trim()
             val emergency_contact_name = contactbinding.nameEtTxt.text.toString().trim()
-
-
-
-
             if (emergency_contact_name.isNotEmpty() && emergency_mobile_number.isNotEmpty() && emergency_mobile_number.length==10) {
                 contactdetails(
                     contactbinding.nameEtTxt.text.toString().trim(),
@@ -68,11 +55,24 @@ class ContactActivity : AppCompatActivity() {
             }
         }
 
+
+
         contactbinding.contactbackbutton.setOnClickListener {
             val intent = Intent(this, PendingDocuments::class.java)
             startActivity(intent)
         }
-    }
+
+
+
+        contactbinding.contactskipbtn.setOnClickListener{
+                val i = Intent(this@ContactActivity ,MainActivity::class.java)
+                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(i)
+            }
+
+
+        }
     private fun contactdetails(
         emergency_contact_name: String,
         emergency_mobile_number: String,

@@ -209,6 +209,13 @@ class  AccountsFragment : Fragment() {
     }
     internal fun showAlertDialog(shop_boost: String){
         builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+
+        val rootView = binding.root
+
+        // Check if the rootView already has a parent
+        val parent = rootView.parent as? ViewGroup
+        parent?.removeView(rootView)
+
         builder.setView(binding.root)
         builder.setCancelable(true)
         alertDialog = builder.create()

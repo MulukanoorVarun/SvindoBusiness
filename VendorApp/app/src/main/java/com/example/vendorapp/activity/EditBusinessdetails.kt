@@ -63,6 +63,8 @@ class EditBusinessdetails : AppCompatActivity() {
     private lateinit var spinner: Spinner
     private var imageUri: Uri? = null
     private  var file_1: File? = null
+    private  var file_2: File? = null
+
     private val cameraPermissionCode = 201
     private val storagePermissionCode = 202
     private val emailPattern = "(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
@@ -107,7 +109,7 @@ class EditBusinessdetails : AppCompatActivity() {
                     }
                     if (selected_index==5) {
                         binding.bannerImage.setImageBitmap(bitmap)
-                        filePath?.let { file_1 = compressImage(filePath, 0.5) }
+                        filePath?.let { file_2 = compressImage(filePath, 0.5) }
                     }
                     showToast("Image Selected")
                 }else{
@@ -128,7 +130,7 @@ class EditBusinessdetails : AppCompatActivity() {
 
                         if (selected_index==1) {
                             binding.Fssaiimage.setImageBitmap(bitmap)
-                            filePath?.let { file_1 = compressImage(filePath, 0.5) }
+                            filePath?.let { file_1 = compressImage(filePath, 0.5)}
                         }
                         if (selected_index==2) {
                             binding.Gstimage.setImageBitmap(bitmap)
@@ -144,7 +146,7 @@ class EditBusinessdetails : AppCompatActivity() {
                         }
                         if (selected_index==5) {
                             binding.bannerImage.setImageBitmap(bitmap)
-                            filePath?.let { file_1 = compressImage(filePath, 0.5) }
+                            filePath?.let { file_2 = compressImage(filePath, 0.5) }
                         }
                         showToast("Image Selected")
                     } catch (e: Exception) {
@@ -189,11 +191,11 @@ class EditBusinessdetails : AppCompatActivity() {
                 binding.pansubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
             }, 2000)
 
-            var panNumber=binding.panNOet.toString().trim()
+            var panNumber=binding.panNOet.text.toString().trim()
             if(panNumber.isNotEmpty()&&file_1!=null&& panNumber.length==10) {
                 uploadprofile(
                     file_1!!,
-                    panNumber=binding.panNOet.toString().trim())
+                    panNumber=binding.panNOet.text.toString().trim())
             }else {
                 Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
                 if(panNumber.length<10) {
@@ -212,6 +214,7 @@ class EditBusinessdetails : AppCompatActivity() {
                 binding.fssaisubmitbutton.setEnabled(true)
                 binding.fssaisubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
             }, 2000)
+
             var fssainum = binding.fssaiEtTxt.text.toString().trim()
             if ( fssainum.isNotEmpty()&&file_1!=null&&fssainum.length==19 && fssainum.startsWith("FSSAI")){
                 fssaidetails(
@@ -293,7 +296,7 @@ class EditBusinessdetails : AppCompatActivity() {
             val address = binding.addressEt.text.toString().trim()
             val location = binding.locationEt.text.toString().trim()
 
-            if (business_name.isNotEmpty() && contact_mob_num.isNotEmpty() && contact_mob_num.length==10 && store_email_id.isNotEmpty()&&store_email_id.matches(emailPattern.toRegex())&&address.isNotEmpty() && file_1!=null && location.isNotEmpty()){
+            if(business_name.isNotEmpty() && contact_mob_num.isNotEmpty() && contact_mob_num.length==10 && store_email_id.isNotEmpty()&&store_email_id.matches(emailPattern.toRegex())&&address.isNotEmpty() && file_1!=null && file_2!=null && location.isNotEmpty()){
                 businessdetails(
                     binding.businessnameet.text.toString().trim(),
                     binding.mobileNumEt.text.toString().trim(),
@@ -301,17 +304,34 @@ class EditBusinessdetails : AppCompatActivity() {
                     cat_id=cat_id.toString().trim(),
                     binding.addressEt.text.toString().trim(),
                     binding.locationEt.text.toString().trim(),
-                    file_1!!
+                    file_1!!,
+                    file_2!!,
                 )
             } else {
                 Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
                 if (!store_email_id.matches(emailPattern.toRegex())) {
                     binding.storeEmailIdEt.setError("Please Enter Mailid in correct format Ex:user@gmail.com")
                 }
-                if (contact_mob_num.length<10) {
+                if (contact_mob_num.length<10){
                     binding.mobileNumEt.setError("Mobile number should be 10 digits")
                 }
             }
+
+
+            businessdetails(
+                binding.businessnameet.text.toString().trim(),
+                binding.mobileNumEt.text.toString().trim(),
+                binding.storeEmailIdEt.text.toString().trim(),
+                cat_id=cat_id.toString().trim(),
+                binding.addressEt.text.toString().trim(),
+                binding.locationEt.text.toString().trim(),
+                file_1!!,
+                file_2!!,
+            )
+
+
+
+
         }
         Editbusinessdetails()
         CategoriesList()
@@ -329,10 +349,8 @@ class EditBusinessdetails : AppCompatActivity() {
                     camera()
                 }
                 else -> {
-
                 }
             }
-
         }
         val dialog = builder.create()
         dialog.show()
@@ -359,7 +377,6 @@ class EditBusinessdetails : AppCompatActivity() {
 
     private fun openGallery(){
         val intent = Intent(Intent.ACTION_GET_CONTENT)
-
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
         galleryResultLauncher.launch(intent)
@@ -652,7 +669,7 @@ class EditBusinessdetails : AppCompatActivity() {
                     response.isSuccessful -> {//status code between 200 to 299
                         fssaiResponse = response.body()!!
                         if (fssaiResponse.error=="0") {
-
+                            showToast(fssaiResponse.message)
                         } else{
                             showToast(fssaiResponse.message)
                         }
@@ -701,7 +718,7 @@ class EditBusinessdetails : AppCompatActivity() {
                     response.isSuccessful -> {//status code between 200 to 299
                         fssaiResponse = response.body()!!
                         if (fssaiResponse.error == "0") {
-
+                            showToast(fssaiResponse.message)
                         } else {
                             showToast(fssaiResponse.message)
                         }
@@ -745,7 +762,7 @@ class EditBusinessdetails : AppCompatActivity() {
                         response.isSuccessful -> {//status code between 200 to 299
                             fssaiResponse = response.body()!!
                             if (fssaiResponse.error=="0") {
-
+                                showToast(fssaiResponse.message)
                             } else{
                                 showToast(fssaiResponse.message)
                             }
@@ -786,7 +803,6 @@ class EditBusinessdetails : AppCompatActivity() {
                                         binding.businessnameet.setText(EditResponse.details.store_name)
                                         binding.mobileNumEt.setText(EditResponse.details.mobile_number)
                                         binding.storeEmailIdEt.setText(EditResponse.details.email_id)
-//                                        binding.businessCategoryEt.setText(EditResponse.details.category)
                                         binding.locationEt.setText(EditResponse.details.location)
                                         binding.panNOet.setText(EditResponse.details.pan_number)
                                         binding.fssaiEtTxt.setText(EditResponse.details.fssai_id)
@@ -829,8 +845,6 @@ class EditBusinessdetails : AppCompatActivity() {
                                         Picasso.get().load(EditResponse.details.banner).into(binding.bannerImage)
                                          image_file=EditResponse.details.image
 
-
-
                                         var deliveryStatus = EditResponse.details.free_delivery
 
                                     } else {
@@ -867,11 +881,14 @@ class EditBusinessdetails : AppCompatActivity() {
         cat_id : String,
         address : String,
         location:String,
-        file1: File
+        file1: File,
+        file2: File,
     ) {
         val loginService = ApiClient.buildService(ApiInterface::class.java)
-        val requestFile2= file1.asRequestBody("image/*".toMediaTypeOrNull())
-        val body = MultipartBody.Part.createFormData("logo", file1.name, requestFile2)
+        val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
+        val body = MultipartBody.Part.createFormData("logo", file1.name, requestFile1)
+        val requestFile2= file2.asRequestBody("image/*".toMediaTypeOrNull())
+        val body1 = MultipartBody.Part.createFormData("banner", file2.name, requestFile2)
         val business_name: RequestBody = business_name.toRequestBody("text/plain".toMediaTypeOrNull())
         val contact_mob_num: RequestBody = contact_mob_num.toRequestBody("text/plain".toMediaTypeOrNull())
         val store_email_id: RequestBody = store_email_id.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -880,9 +897,8 @@ class EditBusinessdetails : AppCompatActivity() {
         val type: RequestBody = "business_details".toRequestBody("text/plain".toMediaTypeOrNull())
         val location: RequestBody = location.toRequestBody("text/plain".toMediaTypeOrNull())
 
-
-        val requestCall = loginService.Editbusinessdetails(sharedPreference.getValueString("token"),type,business_name,contact_mob_num,store_email_id,business_category,address,location,body)
-        requestCall.enqueue(object : Callback<Verify_otp_Response> {
+        val requestCall = loginService.Editbusinessdetails(sharedPreference.getValueString("token"),type,business_name,contact_mob_num,store_email_id,business_category,address,location,body,body1)
+        requestCall.enqueue(object : Callback<Verify_otp_Response>{
             @SuppressLint("SuspiciousIndentation")
             override fun onResponse(
                 call: Call<Verify_otp_Response>,
@@ -892,7 +908,7 @@ class EditBusinessdetails : AppCompatActivity() {
                     response.isSuccessful -> {//status code between 200 to 299
                         pancradresponse= response.body()!!
                         if (pancradresponse.error=="0") {
-
+                            showToast(pancradresponse.message.toString())
                         }
                     }
                     response.code() == 401 -> {//unauthorised
@@ -909,8 +925,6 @@ class EditBusinessdetails : AppCompatActivity() {
             }
         })
     }
-
-
 }
 
 

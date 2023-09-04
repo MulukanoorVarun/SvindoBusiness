@@ -90,6 +90,7 @@ interface ApiInterface {
         @Part("address")address: RequestBody,
         @Part("location")location: RequestBody,
         @Part image: MultipartBody.Part,
+        @Part image1: MultipartBody.Part,
     ): Call<Verify_otp_Response>
 
     @FormUrlEncoded

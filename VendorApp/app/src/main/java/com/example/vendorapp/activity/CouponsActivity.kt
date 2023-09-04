@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -63,6 +64,9 @@ class CouponsActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         couponsBinding.couponsrecyclerview.layoutManager = linearLayoutManager
         couponsBinding.couponsrecyclerview.hasFixedSize()
+
+
+
         couponsBinding.addbutton.setOnClickListener {
           showAlertDialog()
         }
@@ -76,7 +80,13 @@ class CouponsActivity : AppCompatActivity() {
     internal fun showAlertDialog() {
         builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
 //        val binding = addNewCouponCodeBinding.inflate(layoutInflater)
-        builder.setView(addNewCouponCodeBinding.root)
+        val rootView = addNewCouponCodeBinding.root
+
+        // Check if the rootView already has a parent
+        val parent = rootView.parent as? ViewGroup
+        parent?.removeView(rootView) // Remo
+
+        builder.setView(rootView)
         builder.setCancelable(true)
         alertDialog = builder.create()
         alertDialog.show()
@@ -205,6 +215,7 @@ class CouponsActivity : AppCompatActivity() {
                         addcoupopnResponse = response.body()!!
                         if (addcoupopnResponse.error=="0") {
                             CouponListDeatils()
+                            showToast(addcoupopnResponse.message)
 //                            val i = Intent(this@AddNewCouponCode,CouponsActivity::class.java)
 //                            startActivity(i)
                         } else{

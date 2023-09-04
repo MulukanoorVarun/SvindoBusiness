@@ -68,7 +68,10 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
             binding.productunit.text = data.unit
             binding.productcost.text = data.sale_price
             binding.productmrp.text = data.mrp_price
-            product_id=data.id
+            binding.productstockavalability.text = data.in_stock
+            Picasso.get().load(data.image).into(binding.productImage)
+            val context = itemView.context
+            product_id = data.id
 
             binding.editicon.setOnClickListener {
                 dialog = Dialog(context)
@@ -351,9 +354,7 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
                 binding.productmrp.isVisible = true
                 binding.salepricesymbol.isVisible = true
             }
-            binding.productavalability.text = data.in_stock
-            Picasso.get().load(data.image).into(binding.productImage)
-            val context = itemView.context
+
 
             val sometextview=binding.productmrp
             sometextview.setPaintFlags(sometextview.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)

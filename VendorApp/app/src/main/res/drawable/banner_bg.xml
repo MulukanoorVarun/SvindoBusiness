@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background shape (rounded rectangle with a stroke) -->
+    <item>
+        <shape android:shape="rectangle">
+            <stroke
+                android:color="#eaf7ff"
+                android:width="3dp" />
+            <corners android:radius="10dp" />
+            <solid android:color="#eaf7ff" />
+        </shape>
+    </item>
+    <!-- Icon layer (centered within the shape) -->
+    <item
+        android:drawable="@drawable/baseline_camera_alt_24"
+        android:gravity="center|end"
+        android:end="20dp"/>
+
+</layer-list>

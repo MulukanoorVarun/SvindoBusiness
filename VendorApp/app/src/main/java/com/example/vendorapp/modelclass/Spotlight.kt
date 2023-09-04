@@ -10,5 +10,7 @@ data class Spotlight(
     val product_id: String,
     val quantity: String,
     val sale_price: String,
-    val unit: String
+    val unit: String,
+    val per_view_cost:String,
+    val per_click_cost:String
 )

@@ -35,8 +35,6 @@ class BankaccountActivity : AppCompatActivity() {
             val i = Intent(this@BankaccountActivity,ContactActivity::class.java)
             startActivity(i)
         }
-
-
         bankaccountdetailsbinding.bankdetailsBackbutton.setOnClickListener {
             val intent = Intent(this, PendingDocuments::class.java)
             startActivity(intent)

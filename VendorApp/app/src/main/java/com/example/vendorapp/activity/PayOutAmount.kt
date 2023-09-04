@@ -135,8 +135,8 @@ class PayOutAmountActivity : AppCompatActivity() {
 
 
                                         walletbinding.amount.text =walletModalres.user_data.available_amount
-                                        walletbinding.salesamount.text=walletModalres.user_data.available_amount
-                                        walletbinding.withdrawamount.text=walletModalres.user_data.available_amount
+                                        walletbinding.salesamount.text=walletModalres.user_data.credited
+                                        walletbinding.withdrawamount.text=walletModalres.user_data.debited
                                         walletbinding.submitbutton.setOnClickListener {
                                             showAlertDialog((walletModalres.user_data.available_amount).toDouble())
                                         }

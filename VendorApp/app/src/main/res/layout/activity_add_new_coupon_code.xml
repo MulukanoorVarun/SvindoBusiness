@@ -32,10 +32,11 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/addnewcoup"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
                     android:orientation="horizontal">
                 <EditText
                     android:id="@+id/couponcode"
-                    android:layout_width="150dp"
+                    android:layout_width="140dp"
                     android:layout_height="49dp"
                     android:layout_marginStart="13dp"
                     android:layout_marginEnd="13dp"
@@ -47,18 +48,19 @@
                     android:inputType="text"
                     android:textSize="13sp"
                     android:padding="10dp" />
+
                     <EditText
                         android:id="@+id/minamt"
-                        android:layout_width="150dp"
+                        android:layout_width="140dp"
                         android:layout_height="49dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginEnd="13dp"
                         android:autofillHints=""
-                        android:layout_marginTop="5dp"
                         android:background="@drawable/boarder"
                         android:hint="@string/enter_minmax"
-                        android:textSize="13sp"
                         android:inputType="number"
-                        android:padding="10dp" />
+                        android:padding="10dp"
+                        android:textSize="13sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/linearlayout2"
@@ -66,10 +68,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linearlayout"
                 android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
                 <EditText
                     android:id="@+id/maxamt"
-                    android:layout_width="150dp"
+                    android:layout_width="140dp"
                     android:layout_height="49dp"
                     android:layout_marginStart="13dp"
                     android:layout_marginEnd="13dp"
@@ -80,19 +83,20 @@
                     android:inputType="number"
                     android:textSize="13sp"
                     android:padding="10dp" />
-                <EditText
-                    android:id="@+id/dicountamt"
-                    android:layout_width="150dp"
-                    android:layout_height="49dp"
-                    android:layout_marginEnd="13dp"
-                    android:layout_marginTop="5dp"
-                    android:autofillHints=""
-                    android:background="@drawable/boarder"
-                    android:hint="@string/discount_price"
-                    android:textSize="13sp"
-                    android:inputType="number"
-                    android:padding="10dp" />
-            </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/dicountamt"
+                        android:layout_width="140dp"
+                        android:layout_height="49dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="13dp"
+                        android:autofillHints=""
+                        android:background="@drawable/boarder"
+                        android:hint="@string/discount_price"
+                        android:inputType="number"
+                        android:padding="10dp"
+                        android:textSize="13sp" />
+                </LinearLayout>
                 <EditText
                     android:id="@+id/validitydays"
                     android:layout_width="150dp"

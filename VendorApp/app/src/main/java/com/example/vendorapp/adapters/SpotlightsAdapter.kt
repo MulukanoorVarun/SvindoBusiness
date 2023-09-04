@@ -8,6 +8,7 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
@@ -116,15 +117,23 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                     is_boosted="1"
                     dialog = Dialog(context)
                     // Set custom dialog layout
-                    dialog!!.setContentView(R.layout.shopboostlayout)
+                    dialog!!.setContentView(R.layout.spotlightboostlayout)
                     // Set custom height and width
-                    dialog!!.window?.setLayout(700, 500)
+                    dialog!!.window?.setLayout(700, 600)
                     // Set transparent background
                     //    dialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                     // Show dialog
                     dialog!!.show()
                     var mrp_price = dialog!!.findViewById<EditText>(R.id.maxamtet)
                     var producteditsubmitbutton= dialog!!.findViewById<AppCompatButton>(R.id.submitbutton)
+                    var perviewcost= dialog!!.findViewById<TextView>(R.id.perviewcost)
+                    var perclickcost= dialog!!.findViewById<TextView>(R.id.perclickcost)
+                    var viewamt= dialog!!.findViewById<TextView>(R.id.viewamt)
+                    var perclickcostamt= dialog!!.findViewById<TextView>(R.id.perclickcostamt)
+
+                    viewamt.setText(data.per_view_cost)
+                    perclickcostamt.setText(data.per_click_cost)
+
                     producteditsubmitbutton.setOnClickListener {
 //                        AlertDialog.Builder(context)
 //                            .setMessage("Are you sure you want to boost?")
@@ -134,8 +143,7 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                              var amount=mrp_price.text.toString().trim()
                                 sharedPreference = SharedPreference(context)
                                 try {
-                                    val ordersService =
-                                        ApiClient.buildService(ApiInterface::class.java)
+                                    val ordersService = ApiClient.buildService(ApiInterface::class.java)
                                     val requestCall = ordersService.SpotlightBoosting(sharedPreference.getValueString("token"), data.id, is_boosted,amount)
                                     requestCall.enqueue(object : Callback<Bankdetails_Response> {
                                         override fun onResponse(

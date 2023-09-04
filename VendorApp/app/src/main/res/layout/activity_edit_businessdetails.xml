@@ -97,7 +97,8 @@
                                 android:id="@+id/banner_image"
                                 android:layout_width="match_parent"
                                 android:layout_height="150dp"
-                                android:scaleType="centerCrop"
+                                android:scaleType="fitXY"
+                                android:background="@drawable/banner_bg"
                                 tools:ignore="ContentDescription"/>
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:layout_width="140dp"
@@ -260,6 +261,7 @@
                         android:spinnerMode="dialog"
                         android:prompt="@string/prompt"
                         android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_spinner"
                         android:id="@+id/categoryspinnerview" />
                     <TextView
                         android:id="@+id/address"
