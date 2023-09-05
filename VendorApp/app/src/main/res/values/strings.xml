@@ -159,8 +159,7 @@ Front side photo of your Aadhar card with your clear name and photo
 *please upload a focused photo of your Aadhar card for faster verification
 </string>
     <string name="bank_acc_details">Add Bank Account Details</string>
-    <string name="desc_txt">
-Please tell us your account details where we will transact your earnings
+    <string name="desc_txt">Enter Product Description
 </string>
     <string name="ifsc_txt">Bank IFSC CODE</string>
     <string name="bank_name_txt">Bank Name</string>
@@ -458,7 +457,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="shop_status">Shop Status</string>
     <string name="views">Views</string>
     <string name="clicks">Clicks</string>
-    <string name="delete">delete</string>
+    <string name="Stop">Stop</string>
     <string name="per_click_cost">Per Click Cost:</string>
 
 

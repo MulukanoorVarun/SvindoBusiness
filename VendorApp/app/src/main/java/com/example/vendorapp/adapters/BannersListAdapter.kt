@@ -37,6 +37,7 @@ class BannersListAdapter (private var bannersList: List<BannerX>, private val co
     class ViewHolder(private var binding: BannerlistlayoutdesignBinding, private var context: Context?) : RecyclerView.ViewHolder(binding.root) {
         private var dialog:android.app.Dialog? = null
         lateinit var bannersResponse:BannersListModal
+        lateinit var bannerstopResponse:Verify_otp_Response
         private lateinit var sharedPreference: SharedPreference
 
         fun bind(data: BannerX) {
@@ -54,9 +55,10 @@ class BannersListAdapter (private var bannersList: List<BannerX>, private val co
                 textview2.text = data.click_count
                 dialog!!.window?.setLayout(700, 600)
 
+                dialog!!.show()
                 button.setOnClickListener {
                     AlertDialog.Builder(context)
-                        .setMessage("Are you sure you want to delete?")
+                        .setMessage("Are you sure you want to stop?")
                         .setNegativeButton(android.R.string.no, null)
                         .setPositiveButton(android.R.string.yes)
                         { _: DialogInterface, _: Int ->
@@ -72,9 +74,12 @@ class BannersListAdapter (private var bannersList: List<BannerX>, private val co
                                         try {
                                             when{
                                                 response.code() == 200 ->{
-                                                    //productStatusresponse = response.body()!!
-                                                    val intent = Intent(context, MainActivity::class.java)
-                                                    context?.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                                                    bannerstopResponse = response.body()!!
+                                                    if(bannerstopResponse.error=="0"){
+                                                        Toast.makeText(context,bannerstopResponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                                    }
+//                                                    val intent = Intent(context, MainActivity::class.java)
+//                                                    context?.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
                                                 }
                                                 response.code() == 401 -> {
                                                     //  Toast.makeText(context,getString(R.string.session_exp), Toast.LENGTH_SHORT).show()
@@ -97,8 +102,9 @@ class BannersListAdapter (private var bannersList: List<BannerX>, private val co
 
                         }
                         .create().show()
+                    dialog!!.hide()
                 }
-                dialog!!.show()
+
             }
         }
     }

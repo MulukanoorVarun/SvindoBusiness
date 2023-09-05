@@ -75,9 +75,7 @@ class CategoryFragment : Fragment() {
                                         if (categoryresponse.products.count() > 0) {
                                             categoriesbinding.newordersRequestsViewRecyclerview.visibility = View.VISIBLE
                                             adapter = context?.let { CategoryAdapter(categoryresponse.products, context = it)}!!
-                                            categoriesbinding.newordersRequestsViewRecyclerview.adapter =
-                                                adapter
-
+                                            categoriesbinding.newordersRequestsViewRecyclerview.adapter = adapter
                                         }
                                     } else {
                                      //   Toast.makeText(context,(categoryresponse.message).toString(),Toast.LENGTH_SHORT).show()

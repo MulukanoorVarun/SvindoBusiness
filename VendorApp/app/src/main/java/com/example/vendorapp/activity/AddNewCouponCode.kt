@@ -19,7 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-//
+
 //@SuppressLint("StaticFieldLeak")
 //lateinit var addNewCouponCodeBinding: ActivityAddNewCouponCodeBinding
 //class AddNewCouponCode : AppCompatActivity() {
@@ -30,15 +30,15 @@ import retrofit2.Response
 //        addNewCouponCodeBinding = ActivityAddNewCouponCodeBinding.inflate(layoutInflater)
 //        setContentView(addNewCouponCodeBinding.root)
 //
-//sharedPreference= SharedPreference(this)
+//          sharedPreference= SharedPreference(this)
 //
 //        val loginButton = findViewById<ImageView>(R.id.backbutton)
 //        loginButton.setOnClickListener { this.onBackPressed()
 //        }
-//
+
 //        addNewCouponCodeBinding.addcouponcodesubmitbutton.setOnClickListener {
-//
-//
+
+
 //            val couponCode = addNewCouponCodeBinding.couponcode.text.toString().trim()
 //            val minamount = addNewCouponCodeBinding.minamt.text.toString().trim()
 //            val maximumamount = addNewCouponCodeBinding.maxamt.text.toString().trim()
@@ -58,8 +58,8 @@ import retrofit2.Response
 //            } else {
 //                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
 //            }
-//        }
-//    }
+       // }
+   // }
 //    fun AddCouponDetails(
 //        couponCode: String,
 //        description: String,
@@ -104,8 +104,8 @@ import retrofit2.Response
 //            }
 //
 //        })
-//
-//    }
-//
+
+  //  }
+
 //
 //}

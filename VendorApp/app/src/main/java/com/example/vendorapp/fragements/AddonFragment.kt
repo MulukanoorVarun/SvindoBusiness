@@ -1,8 +1,15 @@
 package com.example.vendorapp.fragements
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,8 +17,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.deliverypartner.utils.URIPathHelper
 import com.example.vendorapp.R
 import com.example.vendorapp.activity.bankaccountdetailsbinding
 import com.example.vendorapp.adapters.AddonsListAdapter
@@ -37,6 +48,7 @@ class AddonFragment : Fragment() {
 
     private lateinit var AddonBinding: FragmentAddonBinding
     private lateinit var popupbinding: AddonpopupdesignBinding
+    private lateinit var binding: AddonlayoutdesignBinding
 
     private lateinit var sharedPreference: SharedPreference
     private lateinit var builder: AlertDialog.Builder
@@ -45,6 +57,11 @@ class AddonFragment : Fragment() {
     private lateinit var addonsListresponse: AddonsListModal
     private lateinit var adapter: AddonsListAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
+
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var galleryResultLauncher: ActivityResultLauncher<Intent>
+    private var imageUri: Uri? = null
+    private  var file_1: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,28 +77,97 @@ class AddonFragment : Fragment() {
         // Inflate the layout for this fragment
 
         sharedPreference= SharedPreference(requireContext())
-        AddonBinding = FragmentAddonBinding.inflate(inflater, container, false)
 
+        AddonBinding = FragmentAddonBinding.inflate(inflater, container, false)
         AddonBinding = FragmentAddonBinding.inflate(layoutInflater)
+
+
+        binding = AddonlayoutdesignBinding.inflate(inflater, container, false)
+        binding = AddonlayoutdesignBinding.inflate(layoutInflater)
+
         linearLayoutManager = LinearLayoutManager(context)
         AddonBinding.AddonsRecyclerview.layoutManager = linearLayoutManager
         AddonBinding.AddonsRecyclerview.hasFixedSize()
 
 
-
-
-
         AddonBinding.addonbtn.setOnClickListener {
             showAlertDialog()
         }
-        AddAddonsListdetails()
+//
+//
+//        resultLauncher =
+//            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//                if (result.resultCode == Activity.RESULT_OK) {
+//                    val uriPathHelper = URIPathHelper()
+//                    val filePath = imageUri?.let { uriPathHelper.getPath(this, it) }
+//
+//                    val bitmap = imageUri?.let { decodeUri(it) }
+//                    bannersBinding.bannerImage.setImageBitmap(bitmap)
+//                    filePath?.let { file_1 = compressImage(filePath, 0.5)}
+//                }
+//            }
+//        galleryResultLauncher =
+//            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//                if (result.resultCode == Activity.RESULT_OK) {
+//                    val data = result.data
+//                    imageUri = data!!.data
+//
+//                    val uriPathHelper = URIPathHelper()
+//                    try {
+//                        val filePath = imageUri?.let { uriPathHelper.getPath(this, it) }
+//
+//                        val bitmap = imageUri?.let { decodeUri(it) }
+//                        bannersBinding.bannerImage.setImageBitmap(bitmap)
+//
+//                        filePath?.let {
+//                            file_1 = compressImage(filePath, 0.5)
+//                        }
+//                        showToast("Image Selected")
+//                    } catch (e: Exception) {
+//                        showToast("Image Not Selected")
+//                    }
+//                }
+//            }
 
+
+        AddAddonsListdetails()
         return AddonBinding.root
     }
+
+//    private fun gallery() {
+//        if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED && Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU){
+//            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+//        }else if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_DENIED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+//            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.READ_MEDIA_IMAGES), 1)
+//        }else {
+//            openGallery()
+//        }
+//    }
+
+//    private fun openGallery() {
+//        val intent = Intent(Intent.ACTION_GET_CONTENT)
+//        intent.type = "image/*"
+//        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+//        galleryResultLauncher.launch(intent)
+//    }
+
+//    private fun decodeUri(uri: Uri): Bitmap? {
+//        val inputStream =  Context.getContentResolver().openInputStream(uri)
+//        val options = BitmapFactory.Options()
+//        options.inPreferredConfig = Bitmap.Config.RGB_565
+//        return BitmapFactory.decodeStream(inputStream, null, options)
+//    }
+
+
+
     internal fun showAlertDialog() {
         builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
-        val binding = AddonlayoutdesignBinding.inflate(layoutInflater)
-        builder.setView(binding.root)
+        val rootView = binding.root
+        // Check if the rootView already has a parent
+        val parent = rootView.parent as? ViewGroup
+        parent?.removeView(rootView) // Remo
+
+        builder.setView(rootView)
         builder.setCancelable(true)
         alertDialog = builder.create()
         alertDialog.show()
@@ -91,7 +177,7 @@ class AddonFragment : Fragment() {
             val addon_name = binding.addonnameEt.text.toString().trim()
             val addon_desc = binding.addondescEt.text.toString().trim()
             val addon_price = binding.addonpriceet.text.toString().trim()
-            if (addon_name.isNotEmpty() && addon_desc.isNotEmpty() && addon_price.isNotEmpty()) {
+            if (addon_name.isNotEmpty() && addon_price.isNotEmpty()) {
                 AddAddonsdetails(
                     addon_name = binding.addonnameEt.text.toString().trim(),
                     addon_desc = binding.addondescEt.text.toString().trim(),
@@ -101,7 +187,7 @@ class AddonFragment : Fragment() {
             else{
                 Toast.makeText(context, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
             }
-            alertDialog.hide()
+           // alertDialog.hide()
         }
     }
 
@@ -128,6 +214,7 @@ class AddonFragment : Fragment() {
                                         if (response.body()!!.error == "0") {
                                             Toast.makeText(context,addonsresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                             AddAddonsListdetails()
+                                            alertDialog.hide()
                                         } else {
 
                                         }

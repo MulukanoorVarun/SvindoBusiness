@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -60,6 +61,7 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
         var shopExchange = "0"
         var product_id=""
 
+
         private lateinit var sharedPreference: SharedPreference
         lateinit var productsresponse: ProductDeatilsResponse
         lateinit var productsEditresponse: Bankdetails_Response
@@ -92,6 +94,7 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
                 var max_quantity = dialog!!.findViewById<EditText>(R.id.quantityet)
                 var min_quantity = dialog!!.findViewById<EditText>(R.id.minquantityet)
                 var stock = dialog!!.findViewById<EditText>(R.id.stocket)
+                var stocktext = dialog!!.findViewById<TextView>(R.id.stock)
                 var generaldeliverydays = dialog!!.findViewById<EditText>(R.id.generaldeliverydays)
                 var instantswitch = dialog!!.findViewById<SwitchCompat>(R.id.insatantswitch)
                 var Selfpickupswitch = dialog!!.findViewById<SwitchCompat>(R.id.Selfpickupswitch)
@@ -213,7 +216,16 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
                                                 }
 
 
+                                                if (productsresponse.product_details.is_printable == "1") {
+                                                    stocktext.isVisible=false
+                                                    stock.isVisible=false
+                                                }else{
+                                                    stocktext.isVisible=true
+                                                    stock.isVisible=true
+                                                }
 
+
+                                                
                                                 if (productsresponse.product_details.self_pickup == "1") {
                                                     var self_pickup_enable = true
                                                     Selfpickupswitch.isChecked = self_pickup_enable

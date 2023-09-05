@@ -2,12 +2,14 @@ package com.example.vendorapp.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
+import android.app.*
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -16,10 +18,7 @@ import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -71,12 +70,62 @@ class EditBusinessdetails : AppCompatActivity() {
     var selected_index=0
     var cat_id=""
     var image_file=""
+
+    // declaring variables
+    lateinit var notificationManager: NotificationManager
+    lateinit var notificationChannel: NotificationChannel
+    lateinit var builder: Notification.Builder
+    private val channelId = "i.apps.notifications"
+    private val description = "Test notification"
+
+
+
+    @SuppressLint("RemoteViewLayout", "UnspecifiedImmutableFlag")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(this)
         binding = ActivityEditBusinessdetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        binding.status.setOnClickListener {
+            val intent = Intent(this, NotificationsShowingActivity::class.java)
+            // FLAG_UPDATE_CURRENT specifies that if a previous
+            // PendingIntent already exists, then the current one
+            // will update it with the latest intent
+            // 0 is the request code, using it later with the
+            // same method again will get back the same pending
+            // intent for future reference
+            // intent passed here is to our afterNotification class
+            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+            // RemoteViews are used to use the content of
+            // some different layout apart from the current activity layout
+            val contentView = RemoteViews(packageName, R.layout.activity_notifications_showing)
+
+            // checking if android version is greater than oreo(API 26) or not
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
+                notificationChannel.enableLights(true)
+                notificationChannel.lightColor = Color.GREEN
+                notificationChannel.enableVibration(false)
+                notificationManager.createNotificationChannel(notificationChannel)
+
+                builder = Notification.Builder(this, channelId)
+                    .setContent(contentView)
+                    .setSmallIcon(R.drawable.ic_launcher_background)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher_background))
+                    .setContentIntent(pendingIntent)
+            } else {
+
+                builder = Notification.Builder(this)
+                    .setContent(contentView)
+                    .setSmallIcon(R.drawable.ic_launcher_background)
+                    .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher_background))
+                    .setContentIntent(pendingIntent)
+            }
+            notificationManager.notify(1234, builder.build())
+        }
 
         val loginButton = findViewById<ImageView>(R.id.editbusiness_details_backbutton)
         loginButton.setOnClickListener { this.onBackPressed()
@@ -199,11 +248,10 @@ class EditBusinessdetails : AppCompatActivity() {
             }else {
                 Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
                 if(panNumber.length<10) {
-                    pancardBinding.panNOet.setError("PAN number should be of 10 characters")
+                    binding.panNOet.setError("PAN number should be of 10 characters")
                 }
             }
         }
-
 
         binding.fssaisubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
         binding.fssaisubmitbutton.setOnClickListener {
@@ -238,7 +286,6 @@ class EditBusinessdetails : AppCompatActivity() {
                 binding.gstsubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
             }, 2000)
 
-
             val gstnum = binding.gstinEtTxt.text.toString().trim()
 
             if ( gstnum.isNotEmpty()&&file_1!=null&&gstnum.length==15) {
@@ -248,6 +295,9 @@ class EditBusinessdetails : AppCompatActivity() {
                 )
             } else {
                 Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+                if (gstnum.length<15){
+                    binding.gstinEtTxt.setError("GSTIN number should be 15 characters")
+                }
             }
         }
         binding.banksubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
@@ -305,37 +355,43 @@ class EditBusinessdetails : AppCompatActivity() {
                     binding.addressEt.text.toString().trim(),
                     binding.locationEt.text.toString().trim(),
                     file_1!!,
-                    file_2!!,
+                    file_2!!
                 )
-            } else {
+
+            } else if(file_1==null && file_2==null){
+                businessdetails1(
+                    binding.businessnameet.text.toString().trim(),
+                    binding.mobileNumEt.text.toString().trim(),
+                    binding.storeEmailIdEt.text.toString().trim(),
+                    cat_id = cat_id.toString().trim(),
+                    binding.addressEt.text.toString().trim(),
+                    binding.locationEt.text.toString().trim()
+                )
+
+            } else if((business_name.isNotEmpty() && contact_mob_num.isNotEmpty() && contact_mob_num.length==10 && store_email_id.isNotEmpty()&&store_email_id.matches(emailPattern.toRegex())&&address.isNotEmpty() && location.isNotEmpty()) && (file_1!=null || file_2!=null)) {
+                businessdetails_any_one_image(
+                    binding.businessnameet.text.toString().trim(),
+                    binding.mobileNumEt.text.toString().trim(),
+                    binding.storeEmailIdEt.text.toString().trim(),
+                    cat_id = cat_id.toString().trim(),
+                    binding.addressEt.text.toString().trim(),
+                    binding.locationEt.text.toString().trim(),
+                    file_1,
+                    file_2
+                )
+            }else{
                 Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
-                if (!store_email_id.matches(emailPattern.toRegex())) {
+                if (!store_email_id.matches(emailPattern.toRegex())){
                     binding.storeEmailIdEt.setError("Please Enter Mailid in correct format Ex:user@gmail.com")
                 }
                 if (contact_mob_num.length<10){
                     binding.mobileNumEt.setError("Mobile number should be 10 digits")
                 }
             }
-
-
-            businessdetails(
-                binding.businessnameet.text.toString().trim(),
-                binding.mobileNumEt.text.toString().trim(),
-                binding.storeEmailIdEt.text.toString().trim(),
-                cat_id=cat_id.toString().trim(),
-                binding.addressEt.text.toString().trim(),
-                binding.locationEt.text.toString().trim(),
-                file_1!!,
-                file_2!!,
-            )
-
-
-
-
         }
         Editbusinessdetails()
         CategoriesList()
-}
+ }
     private fun showAlertDialog(){
         val array = arrayOf(getString(R.string.gallery), getString(R.string.camera), getString(R.string.cancel))
         val builder = AlertDialog.Builder(this)
@@ -355,7 +411,6 @@ class EditBusinessdetails : AppCompatActivity() {
         val dialog = builder.create()
         dialog.show()
     }
-
 
     private fun gallery() {
 
@@ -469,7 +524,6 @@ class EditBusinessdetails : AppCompatActivity() {
                         startActivity(intent)
                     } else if (Manifest.permission.READ_EXTERNAL_STORAGE == Manifest.permission.READ_EXTERNAL_STORAGE) {
                         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1) }
-
                 }
             }
         }
@@ -925,6 +979,123 @@ class EditBusinessdetails : AppCompatActivity() {
             }
         })
     }
+
+
+    private fun businessdetails_any_one_image(
+        business_name : String,
+        contact_mob_num: String,
+        store_email_id: String,
+        cat_id : String,
+        address : String,
+        location:String,
+        file1: File?,
+        file2: File?,
+    ) {
+        val loginService = ApiClient.buildService(ApiInterface::class.java)
+        var body:MultipartBody.Part
+
+        if(file1!=null)
+        {
+            val requestFile1= file1!!.asRequestBody("image/*".toMediaTypeOrNull())
+             body = MultipartBody.Part.createFormData("logo", file1.name, requestFile1)
+        }else{
+            val requestFile1= file2!!.asRequestBody("image/*".toMediaTypeOrNull())
+             body = MultipartBody.Part.createFormData("banner", file2.name, requestFile1)
+        }
+
+//        val requestFile2= file2.asRequestBody("image/*".toMediaTypeOrNull())
+//        val body1 = MultipartBody.Part.createFormData("banner", file2.name, requestFile2)
+        val business_name: RequestBody = business_name.toRequestBody("text/plain".toMediaTypeOrNull())
+        val contact_mob_num: RequestBody = contact_mob_num.toRequestBody("text/plain".toMediaTypeOrNull())
+        val store_email_id: RequestBody = store_email_id.toRequestBody("text/plain".toMediaTypeOrNull())
+        val business_category: RequestBody = cat_id.toRequestBody("text/plain".toMediaTypeOrNull())
+        val address: RequestBody = address.toRequestBody("text/plain".toMediaTypeOrNull())
+        val type: RequestBody = "business_details".toRequestBody("text/plain".toMediaTypeOrNull())
+        val location: RequestBody = location.toRequestBody("text/plain".toMediaTypeOrNull())
+
+        val requestCall = loginService.Editbusinessdetails_one_image(sharedPreference.getValueString("token"),type,business_name,contact_mob_num,store_email_id,business_category,address,location,body)
+        requestCall.enqueue(object : Callback<Verify_otp_Response>{
+            @SuppressLint("SuspiciousIndentation")
+            override fun onResponse(
+                call: Call<Verify_otp_Response>,
+                response: Response<Verify_otp_Response>
+            ) {
+                when {
+                    response.isSuccessful -> {//status code between 200 to 299
+                        pancradresponse= response.body()!!
+                        if (pancradresponse.error=="0") {
+                            showToast(pancradresponse.message.toString())
+                        }
+                    }
+                    response.code() == 401 -> {//unauthorised
+                        showToast(getString(R.string.session_exp))
+                    }
+                    else -> {//Application-level failure
+                        //status code in the range of 300's, 400's, and 500's
+                        showToast(getString(R.string.server_error))
+                    }
+                }
+            }
+            override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                showToast(getString(R.string.session_exp))
+            }
+        })
+    }
+
+
+    private fun businessdetails1(
+        business_name : String,
+        contact_mob_num: String,
+        store_email_id: String,
+        cat_id : String,
+        address : String,
+        location:String,
+    ) {
+        val loginService = ApiClient.buildService(ApiInterface::class.java)
+//        val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
+//        val body = MultipartBody.Part.createFormData("logo", file1.name, requestFile1)
+//        val requestFile2= file2.asRequestBody("image/*".toMediaTypeOrNull())
+//        val body1 = MultipartBody.Part.createFormData("banner", file2.name, requestFile2)
+//        val business_name: RequestBody = business_name.toRequestBody("text/plain".toMediaTypeOrNull())
+//        val contact_mob_num: RequestBody = contact_mob_num.toRequestBody("text/plain".toMediaTypeOrNull())
+//        val store_email_id: RequestBody = store_email_id.toRequestBody("text/plain".toMediaTypeOrNull())
+//        val business_category: RequestBody = cat_id.toRequestBody("text/plain".toMediaTypeOrNull())
+//        val address: RequestBody = address.toRequestBody("text/plain".toMediaTypeOrNull())
+//        val type: RequestBody = "business_details".toRequestBody("text/plain".toMediaTypeOrNull())
+//        val location: RequestBody = location.toRequestBody("text/plain".toMediaTypeOrNull())
+
+        val requestCall = loginService.Editbusinessdetails_files_null(sharedPreference.getValueString("token"),"business_details",business_name,contact_mob_num,store_email_id,cat_id,address,location)
+        requestCall.enqueue(object : Callback<Verify_otp_Response>{
+            @SuppressLint("SuspiciousIndentation")
+            override fun onResponse(
+                call: Call<Verify_otp_Response>,
+                response: Response<Verify_otp_Response>
+            ) {
+                when {
+                    response.isSuccessful -> {//status code between 200 to 299
+                        pancradresponse= response.body()!!
+                        if (pancradresponse.error=="0") {
+                            showToast(pancradresponse.message.toString())
+                        }
+                    }
+                    response.code() == 401 -> {//unauthorised
+                        showToast(getString(R.string.session_exp))
+                    }
+                    else -> {//Application-level failure
+                        //status code in the range of 300's, 400's, and 500's
+                        showToast(getString(R.string.server_error))
+                    }
+                }
+            }
+            override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                showToast(getString(R.string.session_exp))
+            }
+        })
+    }
+
+
+
+
 }
 
 

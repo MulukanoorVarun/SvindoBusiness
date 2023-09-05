@@ -101,6 +101,9 @@ class AddBannersActivity : AppCompatActivity() {
         val loginButton = findViewById<ImageView>(R.id.backbutton)
         loginButton.setOnClickListener { this.onBackPressed()
         }
+
+
+
         val Services = resources.getStringArray(R.array.redirects)
         spinner = findViewById(R.id.Bannersspinnerview)
         if (spinner != null){
@@ -129,6 +132,9 @@ class AddBannersActivity : AppCompatActivity() {
                 }
             }
         }
+
+
+
         bannersBinding.bannerssubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
         bannersBinding.bannerssubmitbutton.setOnClickListener {
             bannersBinding.bannerssubmitbutton.setBackgroundResource(R.drawable.button_loading_background);
@@ -152,6 +158,9 @@ class AddBannersActivity : AppCompatActivity() {
                 showToast("Please select All fields")
             }
         }
+
+
+
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
@@ -160,10 +169,7 @@ class AddBannersActivity : AppCompatActivity() {
 
                     val bitmap = imageUri?.let { decodeUri(it) }
                     bannersBinding.bannerImage.setImageBitmap(bitmap)
-
-                    filePath?.let {
-                        file_1 = compressImage(filePath, 0.5)
-                    }
+                    filePath?.let { file_1 = compressImage(filePath, 0.5)}
                 }
             }
         galleryResultLauncher =
@@ -198,21 +204,6 @@ class AddBannersActivity : AppCompatActivity() {
         BannersListdetails()
     }
 
-
-//    internal fun showProductDialog() {
-//        dialog = Dialog(this@AddBannersActivity)
-//        binding=ProductslistrecyclerviewlayoutBinding.inflate(layoutInflater)
-//        dialog!!.setContentView(binding.root)
-//        // Set custom height and width
-//        dialog!!.window?.setLayout(650, 800)
-//
-//        linearLayoutManager1 = LinearLayoutManager(this@AddBannersActivity)
-//        binding.productsRecyclerview.layoutManager = linearLayoutManager1
-//        binding.productsRecyclerview.hasFixedSize()
-//
-//        Productdetails() // Make sure this function p
-//        dialog!!.show()
-//    }
     private fun showAlertDialog() {
         val array = arrayOf(getString(R.string.gallery),getString(R.string.cancel))
         val builder = AlertDialog.Builder(this)
@@ -234,12 +225,6 @@ class AddBannersActivity : AppCompatActivity() {
 
 
     private fun gallery() {
-//        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
-//            showToast("Hello")
-//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
-//        }else {
-//            openGallery()
-//        }
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED && Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU){
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
         }else if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_DENIED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
@@ -286,7 +271,6 @@ class AddBannersActivity : AppCompatActivity() {
                             startActivity(intent)
                         } else if (Manifest.permission.READ_EXTERNAL_STORAGE == Manifest.permission.READ_EXTERNAL_STORAGE) {
                             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), storagePermissionCode) }
-
                     }
                 }
                 1 -> {
@@ -352,12 +336,11 @@ class AddBannersActivity : AppCompatActivity() {
                         when{
                             response.code() == 200 -> {
                                 bannersResponse = response.body()!!
+                                bannersBinding.viewamt.setText(bannersResponse.cost.per_view_cost)
+                                bannersBinding.perclickcostamt.setText(bannersResponse.cost.per_click_cost)
+
                                 if (response.body() != null) {
                                     if (bannersResponse.error == "0") {
-
-                                        bannersBinding.viewamt.setText(bannersResponse.cost.per_view_cost)
-                                        bannersBinding.perclickcostamt.setText(bannersResponse.cost.per_click_cost)
-
                                         if (bannersResponse.banner_list.count() > 0) {
                                             bannersBinding.BannersRecyclerview.visibility = View.VISIBLE
                                             bannersBinding.noData.visibility = View.GONE
@@ -372,19 +355,15 @@ class AddBannersActivity : AppCompatActivity() {
                             }
                             response.code() == 401 -> {
                                 showToast(getString(R.string.session_exp))
-
                             }
                             else -> {
                                 showToast(getString(R.string.server_error))
                             }
                         }
-
-
                     }catch (e: TimeoutException){
                         showToast(getString(R.string.time_out))
                     }
                 }
-
                 override fun onFailure(call: Call<BannersListModal>, t: Throwable) {
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
                     showToast(t.message.toString())
@@ -396,7 +375,6 @@ class AddBannersActivity : AppCompatActivity() {
             showToast(e.message.toString())
         }
     }
-
     private fun AddBanners(
         redirectType: String,
         itemId:String,

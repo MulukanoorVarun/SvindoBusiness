@@ -139,7 +139,6 @@ class SpotlightFragment : Fragment() {
                                             spotlightBinding.newordersRequestsViewRecyclerview.visibility = View.VISIBLE
                                             adapter = context?.let { SpotlightsAdapter(spotlightresponse.spotlights, context = it) }!!
                                             spotlightBinding.newordersRequestsViewRecyclerview.adapter = adapter
-
                                         } else {
                                             // Toast.makeText(context,"List is Empty", Toast.LENGTH_SHORT).show()
                                             spotlightBinding.newordersRequestsViewRecyclerview.visibility = View.GONE

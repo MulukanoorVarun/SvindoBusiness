@@ -143,7 +143,7 @@
                         android:layout_marginStart="13dp"
                         android:layout_marginTop="6dp"
                         android:layout_marginEnd="10dp"
-                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
                         android:layout_below="@+id/business_name"
                         android:background="@drawable/boarder"
                         android:padding="10dp"

@@ -93,6 +93,38 @@ interface ApiInterface {
         @Part image1: MultipartBody.Part,
     ): Call<Verify_otp_Response>
 
+
+    @Multipart
+    @NonNull
+    @POST("Home/profile_details_update")
+    fun Editbusinessdetails_one_image(
+        @Header("Sessionid")  content_type:String?,
+        @Part("type") type: RequestBody,
+        @Part("business_name") business_name: RequestBody,
+        @Part("mobile")contact_mob_num: RequestBody,
+        @Part("email")store_email_id: RequestBody,
+        @Part("category_id") category_id: RequestBody,
+        @Part("address")address: RequestBody,
+        @Part("location")location: RequestBody,
+        @Part image: MultipartBody.Part,
+    ): Call<Verify_otp_Response>
+
+
+    @FormUrlEncoded
+    @POST("Home/profile_details_update")
+    fun Editbusinessdetails_files_null(
+        @Header("Sessionid")  content_type:String?,
+        @Field("type") type: String,
+        @Field("business_name") business_name: String,
+        @Field("mobile")contact_mob_num: String,
+        @Field("email")store_email_id: String,
+        @Field("category_id") category_id: String,
+        @Field("address")address: String,
+        @Field("location")location: String,
+    ): Call<Verify_otp_Response>
+
+
+
     @FormUrlEncoded
     @POST("Home/profile_details_update")
     fun bankaccountdetails(
@@ -102,6 +134,7 @@ interface ApiInterface {
         @Field("bank_name") bank_name: String,
         @Field("account_number") account_number: String,
     ): Call<Bankdetails_Response>
+
 
 
 

@@ -67,14 +67,16 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                                             response.code() == 200 -> {
                                                 spotlightboostresponse= response.body()!!
                                                 if (spotlightboostresponse.error == "0") {
-                                                    Toast.makeText(
-                                                        context,
-                                                        spotlightboostresponse.message.toString(),
-                                                        Toast.LENGTH_SHORT
-                                                    ).show()
-                                                    val intent =
-                                                        Intent(context, MainActivity::class.java)
+                                                    Toast.makeText(context, spotlightboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                                    val intent = Intent(context, MainActivity::class.java)
                                                     context?.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                                                }
+                                                if (spotlightboostresponse.error == "1") {
+                                                    Toast.makeText(context, spotlightboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                                }
+
+                                                if (spotlightboostresponse.error == "2") {
+                                                    Toast.makeText(context, spotlightboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                                 }
                                             }
                                             response.code() == 401 -> {
@@ -119,7 +121,7 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                     // Set custom dialog layout
                     dialog!!.setContentView(R.layout.spotlightboostlayout)
                     // Set custom height and width
-                    dialog!!.window?.setLayout(700, 600)
+                    dialog!!.window?.setLayout(700, 800)
                     // Set transparent background
                     //    dialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                     // Show dialog
@@ -145,7 +147,7 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                                 try {
                                     val ordersService = ApiClient.buildService(ApiInterface::class.java)
                                     val requestCall = ordersService.SpotlightBoosting(sharedPreference.getValueString("token"), data.id, is_boosted,amount)
-                                    requestCall.enqueue(object : Callback<Bankdetails_Response> {
+                                    requestCall.enqueue(object : Callback<Bankdetails_Response>{
                                         override fun onResponse(
                                             call: Call<Bankdetails_Response>,
                                             response: Response<Bankdetails_Response>
@@ -158,6 +160,13 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                                                             Toast.makeText(context, spotlightboostresponse.message.toString (),Toast.LENGTH_SHORT).show()
                                                             val intent = Intent(context, MainActivity::class.java)
                                                             context?.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                                                            dialog!!.hide()
+                                                        }
+                                                        if (spotlightboostresponse.error == "1") {
+                                                            Toast.makeText(context, spotlightboostresponse.message.toString (),Toast.LENGTH_SHORT).show()
+                                                        }
+                                                        if (spotlightboostresponse.error == "2") {
+                                                            Toast.makeText(context, spotlightboostresponse.message.toString (),Toast.LENGTH_SHORT).show()
                                                         }
                                                     }
                                                     response.code() == 401 -> {
@@ -197,6 +206,8 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                 }
 
                 if(data.is_boosted=="1"){
+                    is_boosted="0"
+//                    Toast.makeText(context,is_boosted.toString(),Toast.LENGTH_SHORT).show()
 //                    AlertDialog.Builder(context)
 //                        .setMessage("Are you sure you want to boost?")
 //                        .setNegativeButton(android.R.string.no, null)
@@ -219,6 +230,12 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                                                         Toast.makeText(context, spotlightboostresponse.message.toString (),Toast.LENGTH_SHORT).show()
                                                         val intent = Intent(context, MainActivity::class.java)
                                                         context?.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                                                    }
+                                                    if(spotlightboostresponse.error=="1") {
+                                                        Toast.makeText(context, spotlightboostresponse.message.toString (),Toast.LENGTH_SHORT).show()
+                                                    }
+                                                    if(spotlightboostresponse.error=="2") {
+                                                        Toast.makeText(context, spotlightboostresponse.message.toString (),Toast.LENGTH_SHORT).show()
                                                     }
                                                 }
                                                 response.code() == 401 -> {

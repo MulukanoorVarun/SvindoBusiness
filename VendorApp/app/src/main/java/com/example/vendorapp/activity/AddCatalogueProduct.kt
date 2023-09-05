@@ -33,6 +33,7 @@ import java.util.concurrent.TimeoutException
 @SuppressLint("StaticFieldLeak")
 
 private lateinit var ProductBinding: ActivityAddCatalogueProductBinding
+
 class AddCatalogueProduct : AppCompatActivity() {
     private lateinit var productdetailsResponse: Bankdetails_Response
     private lateinit var cataloguelistResponse: CustomSpinAdapter
@@ -43,7 +44,7 @@ class AddCatalogueProduct : AppCompatActivity() {
     private var dialog:Dialog? = null
     private lateinit var sharedPreference: SharedPreference
     // Inside your Activity or Fragment
-    lateinit var productsarrayList: ArrayList<String>;
+    lateinit var productsarrayList: ArrayList<String>
 
     private lateinit var spinner: Spinner
     private val itemList: MutableList<Maincategory> = ArrayList()

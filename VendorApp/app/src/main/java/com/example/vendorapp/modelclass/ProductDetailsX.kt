@@ -14,5 +14,6 @@ data class ProductDetailsX(
     val `return`: String,
     val sale_price: String,
     val self_pickup: String,
-    val shop_exchange: String
+    val shop_exchange: String,
+    val is_printable:String
 )

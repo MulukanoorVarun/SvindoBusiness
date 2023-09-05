@@ -89,14 +89,6 @@ class ProductsFragment : Fragment() {
         }
         //return inflater.inflate(R.layout.instantsfragment, container, false)
 
-
-
-
-
-
-
-
-
         return productsBinding.root
 
     }

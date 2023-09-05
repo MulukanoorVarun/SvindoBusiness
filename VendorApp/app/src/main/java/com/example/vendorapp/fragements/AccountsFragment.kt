@@ -157,7 +157,6 @@ class  AccountsFragment : Fragment() {
 
 
         Accountdetails()
-
         accountbinding.cashbackswitch.setOnClickListener {
             CashbackStatus()
         }
@@ -237,7 +236,6 @@ class  AccountsFragment : Fragment() {
     fun Shopboostdeatils(
         max_amt:String,
         shop_boost:String){
-
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.ShopboostDetails(sharedPreference.getValueString("token"),shop_boost,max_amt)
@@ -252,6 +250,7 @@ class  AccountsFragment : Fragment() {
                                 shopboostresponse = response.body()!!
                                 if (shopboostresponse != null) {
                                     if (shopboostresponse.error == "0") {
+                                        Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                     }else{
 
                                     }
@@ -279,7 +278,6 @@ class  AccountsFragment : Fragment() {
                 Toast.makeText(context,e.message.toString(), Toast.LENGTH_SHORT).show()
             }
         }
-
 
     fun  Shopboostunckeckeddeatils(
         shop_boost:String){
@@ -347,6 +345,11 @@ class  AccountsFragment : Fragment() {
                                         Picasso.get().load(accountsresponse.details.image).into(accountbinding.storePic)
                                         accountbinding.availableamt.text = accountsresponse.details.available_amount
                                         accountbinding.cashbackpercent.text = accountsresponse.details.cashback_percentage
+
+                                        binding.viewamt.text= accountsresponse.shop_view_cost
+                                        binding.perclickcostamt.text= accountsresponse.shop_click_cost
+
+
 
                                         var boost_id=accountsresponse.details.is_boost
                                         if(boost_id=="0"){
@@ -593,8 +596,11 @@ class  AccountsFragment : Fragment() {
                                 if (response.isSuccessful) {
                                     if (response.body() != null) {
                                         cashbackresponse = response.body()!!
-                                        Toast.makeText(context,cashbackresponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                        if(cashbackresponse.error=="0") {
+                                            Toast.makeText(context,cashbackresponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                        }else{
 
+                                        }
                                     } else {
 
                                     }

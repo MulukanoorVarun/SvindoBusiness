@@ -78,11 +78,23 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:text="@string/note_descn_txt"
             android:textSize="11sp"
             android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/notenotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/desc_txt2"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:text="Note: Please upload 1:4 (1-height 4-width) ratio image for notification"
+            android:textSize="11sp"
+            android:textColor="@color/black"
+            tools:ignore="Hardcodedtext" />
         <RelativeLayout
             android:id="@+id/relativelayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/desc_txt2">
+            android:layout_below="@+id/notenotification">
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardclicking"
                 android:layout_width="match_parent"
@@ -98,12 +110,6 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <ImageView
-                        android:id="@+id/notificationImg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="150dp"
-                        android:scaleType="fitXY"
-                        tools:ignore="ContentDescription,TooDeepLayout" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -115,7 +121,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="#00BF63"
-                        tools:ignore="Hardcodedtext" />
+                        tools:ignore="Hardcodedtext,TooDeepLayout" />
+                    <ImageView
+                        android:id="@+id/notificationImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:scaleType="fitXY"
+                        tools:ignore="ContentDescription,TooDeepLayout" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
     </RelativeLayout>
