@@ -31,20 +31,15 @@ class AccountsAdapter(private val transaction : List<Transaction>) : RecyclerVie
                     binding.amount.setTextColor(R.color.red);
                     "- ₹${data.amount}".also { binding.amount.text = it }
                     binding.amount.setTextColor(ContextCompat.getColor(context!!, R.color.red))
-
                 }
                 if (data.transaction_type=="Credit"&&data.transaction_type!==null){
                     binding.imageview.setBackgroundResource(R.drawable.crediticon)
                     binding.amount.setTextColor(R.color.buttongreen);
                     "+ ₹${data.amount}".also { binding.amount.text = it }
                     binding.amount.setTextColor(ContextCompat.getColor(context!!, R.color.buttongreen))
-
                 }
-
-
             }
         }
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -52,16 +47,13 @@ class AccountsAdapter(private val transaction : List<Transaction>) : RecyclerVie
         val binding = TransactionsDetailsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(viewType, binding)
     }
-
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = transaction[position]
         holder.bind(data)
     }
-
     override fun getItemCount(): Int {
         return transaction.size
     }
-
 
 
 

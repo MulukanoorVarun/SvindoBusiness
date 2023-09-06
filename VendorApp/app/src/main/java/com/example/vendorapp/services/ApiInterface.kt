@@ -330,7 +330,7 @@ interface ApiInterface {
         @Part image1 : MultipartBody.Part,
         @Part image2: MultipartBody.Part,
         @Part image3 : MultipartBody.Part,
-        @Part image4: MultipartBody.Part,
+     //   @Part image4: MultipartBody.Part,
     ): Call<Bankdetails_Response>
 
 

@@ -67,7 +67,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
                         android:layout_centerHorizontal="true"
-                        android:background="@drawable/imageviewboarder"
+                        android:background="@drawable/profileviewboarder"
                         tools:ignore="ContentDescription" />
 
 <!--                    <ImageView-->

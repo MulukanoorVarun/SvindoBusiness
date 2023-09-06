@@ -18,7 +18,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.concurrent.TimeoutException
-
 class CategoryAdapter (private var productsList: List<ProductX>, private val context: Context): RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
     class ViewHolder(private var binding: CategoryitemdesignBinding, private var context: Context) : RecyclerView.ViewHolder(binding.root){
 
@@ -28,19 +27,17 @@ class CategoryAdapter (private var productsList: List<ProductX>, private val con
         private lateinit var categoryStatusresponse: VendorStatusUpadateModal
 
         @SuppressLint("SetTextI18n")
-        fun bind(data: ProductX) {
+        fun bind(data: ProductX){
             //"#${data.store_name}".also { binding.storeName.text = it }
             binding.productname.text = data.name
             binding.productquanity.text = data.count
             if(data.count!="1"){
-                binding.items.text="Items";
+                binding.items.text="Items"
             }
             //binding.instock.text = data.count
 //            ("₹"+data.net_amount).also { binding.amount.text = it }
             Picasso.get().load(data.image).into(binding.productImage)
             val context = itemView.context
-
-
 
             binding.categoryswitch.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked == true) {

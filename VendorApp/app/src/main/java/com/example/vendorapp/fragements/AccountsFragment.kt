@@ -229,7 +229,7 @@ class  AccountsFragment : Fragment() {
                     shop_boost.toString().trim()
                 )
             }
-            alertDialog.hide()
+           // alertDialog.hide()
         }
         }
 
@@ -250,6 +250,15 @@ class  AccountsFragment : Fragment() {
                                 shopboostresponse = response.body()!!
                                 if (shopboostresponse != null) {
                                     if (shopboostresponse.error == "0") {
+                                        alertDialog.hide()
+                                        Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                    }
+                                    if (shopboostresponse.error == "1") {
+                                        alertDialog.hide()
+                                        Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                    }
+                                    if (shopboostresponse.error == "2") {
+                                        alertDialog.hide()
                                         Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                     }else{
 
@@ -278,7 +287,6 @@ class  AccountsFragment : Fragment() {
                 Toast.makeText(context,e.message.toString(), Toast.LENGTH_SHORT).show()
             }
         }
-
     fun  Shopboostunckeckeddeatils(
         shop_boost:String){
         try {
@@ -296,6 +304,12 @@ class  AccountsFragment : Fragment() {
                                 shopboostresponse = response.body()!!
                                 if (shopboostresponse != null) {
                                     if (shopboostresponse.error == "0") {
+                                        Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                    }
+                                    if (shopboostresponse.error == "1") {
+                                        Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                    }
+                                    if (shopboostresponse.error == "2") {
                                         Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                     }else{
 

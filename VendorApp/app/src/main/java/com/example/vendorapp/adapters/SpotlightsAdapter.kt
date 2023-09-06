@@ -12,14 +12,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vendorapp.R
 import com.example.vendorapp.activity.MainActivity
-import com.example.vendorapp.databinding.CategoryitemdesignBinding
-import com.example.vendorapp.databinding.ProductitemdesignBinding
 import com.example.vendorapp.databinding.SpotlightitemdeisnBinding
-import com.example.vendorapp.fragements.ProductsFragment
 import com.example.vendorapp.modelclass.*
 import com.example.vendorapp.services.ApiClient
 import com.example.vendorapp.services.ApiInterface
@@ -47,6 +45,14 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
             Picasso.get().load(data.image).into(binding.productImage)
             val context = itemView.context
 
+
+            if (data.is_boosted=="1"){
+                binding.boosticon.setBackgroundResource(R.drawable.booststopicon)
+            }
+            if (data.is_boosted=="0"){
+                binding.boosticon.setBackgroundResource(R.drawable.thundericon)
+            }
+
             binding.deleteicon.setOnClickListener {
                 AlertDialog.Builder(context)
                     .setMessage("Are you sure you want to delete?")
@@ -70,6 +76,7 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                                                     Toast.makeText(context, spotlightboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                                     val intent = Intent(context, MainActivity::class.java)
                                                     context?.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+
                                                 }
                                                 if (spotlightboostresponse.error == "1") {
                                                     Toast.makeText(context, spotlightboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
@@ -156,7 +163,7 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                                                 when {
                                                     response.code() == 200 -> {
                                                         spotlightboostresponse= response.body()!!
-                                                        if (spotlightboostresponse.error == "0") {
+                                                        if (spotlightboostresponse.error == "0"){
                                                             Toast.makeText(context, spotlightboostresponse.message.toString (),Toast.LENGTH_SHORT).show()
                                                             val intent = Intent(context, MainActivity::class.java)
                                                             context?.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))

@@ -6,8 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.WindowManager
 import com.example.vendorapp.R
+import com.example.vendorapp.utils.showToast
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 @SuppressLint("CustomSplashScreen", "Registered")
@@ -20,7 +25,6 @@ class SplashActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-
         // we used the postDelayed(Runnable, time) method
         // to send a message with a delayed time.
         //Normal Handler is deprecated , so we have to change the code little bit

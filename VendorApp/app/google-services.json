@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "105007820280",
+    "project_id": "svindo-business-app",
+    "storage_bucket": "svindo-business-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105007820280:android:c176284e03277fef00fa0d",
+        "android_client_info": {
+          "package_name": "com.example.vendorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105007820280-gssvddcdu3ofqkotu9ho217nonbp2kt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5izw0r32Zz04IzmPXEfxXEVcBx0lNQ-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105007820280-gssvddcdu3ofqkotu9ho217nonbp2kt5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

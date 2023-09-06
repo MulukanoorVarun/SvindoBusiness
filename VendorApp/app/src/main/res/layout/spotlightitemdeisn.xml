@@ -21,7 +21,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageButton
+                <ImageView
                     android:id="@+id/deleteicon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -31,19 +31,15 @@
                     android:src="@drawable/delete_icon"
                     android:layout_alignParentEnd="true"
                     tools:ignore="ContentDescription" />
-                <ImageButton
+                <ImageView
                     android:id="@+id/boosticon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:layout_marginTop="12dp"
                     android:layout_below="@+id/deleteicon"
-                    android:layout_marginEnd="5dp"
-                    android:src="@drawable/thundericon"
+                    android:layout_marginEnd="8dp"
                     android:layout_alignParentEnd="true"
                     tools:ignore="ContentDescription" />
-
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardview"
                     android:layout_width="100dp"
@@ -93,8 +89,11 @@
                         android:text="Canon 5d mark iv"
                         android:textColor="@color/black"
                         android:textSize="13sp"
+                        android:lines="1"
+                        android:ellipsize="end"
                         android:textStyle="bold"
                         android:layout_marginStart="10dp"
+                        android:layout_marginEnd="30dp"
                         tools:ignore="HardcodedText" />
 
                     <LinearLayout

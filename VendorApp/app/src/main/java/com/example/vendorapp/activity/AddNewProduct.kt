@@ -118,10 +118,10 @@ class AddNewProduct : AppCompatActivity() {
             selected_index=4
             showAlertDialog()
         }
-        Binding.cardview4.setOnClickListener {
-            selected_index=5
-            showAlertDialog()
-        }
+//        Binding.cardview4.setOnClickListener {
+//            selected_index=5
+//            showAlertDialog()
+//        }
 
 
         resultLauncher =
@@ -146,10 +146,10 @@ class AddNewProduct : AppCompatActivity() {
                         Binding.imageview3.setImageBitmap(bitmap)
                         filePath?.let { file_4= compressImage(filePath, 0.5) }
                     }
-                    else if(selected_index==5) {
-                        Binding.imageview4.setImageBitmap(bitmap)
-                        filePath?.let { file_5 = compressImage(filePath, 0.5) }
-                    }
+//                    else if(selected_index==5) {
+//                        Binding.imageview4.setImageBitmap(bitmap)
+//                        filePath?.let { file_5 = compressImage(filePath, 0.5) }
+//                    }
                     showToast("Image Selected")
                 }else{
                     showToast("Image Not Selected")
@@ -181,10 +181,10 @@ class AddNewProduct : AppCompatActivity() {
                             Binding.imageview3.setImageBitmap(bitmap)
                             filePath?.let { file_4= compressImage(filePath, 0.5) }
                         }
-                        else if(selected_index==5) {
-                            Binding.imageview4.setImageBitmap(bitmap)
-                            filePath?.let { file_5 = compressImage(filePath, 0.5) }
-                        }
+//                        else if(selected_index==5) {
+//                            Binding.imageview4.setImageBitmap(bitmap)
+//                            filePath?.let { file_5 = compressImage(filePath, 0.5) }
+//                        }
                         showToast("Image Selected")
                     } catch (e: Exception) {
                         showToast("Image Not Selected")
@@ -282,8 +282,7 @@ class AddNewProduct : AppCompatActivity() {
         }
 
 
-        Binding.submitbutton.setOnClickListener{
-
+        Binding.submitbutton.setOnClickListener {
             val name = Binding.productnameet.text.toString().trim()
             val deliverydays = Binding.generaldeliverydays.text.toString().trim()
             val description = Binding.productdescriptionet.text.toString().trim()
@@ -296,32 +295,39 @@ class AddNewProduct : AppCompatActivity() {
             val modelNumber = Binding.modelnoet.text.toString().trim()
             val size = Binding.sizeet.text.toString().trim()
             val color = Binding.coloret.text.toString().trim()
-            AddNewProductDetails(
-                category_id = subcat_id.toString().trim(),
-                unit_id = ItemId.toString().trim(),
-                insatantDel = insatantDel.toString().trim(),
-                deliverydays=Binding.generaldeliverydays.text.toString().trim(),
-                GeneralDel = GeneralDel.toString().trim(),
-                self_pick = self_pick.toString().trim(),
-                COD = COD.toString().trim(),
-                Replacement = Replacement.toString().trim(),
-                Return = Return.toString().trim(),
-                shopExchange = shopExchange.toString().trim(),
-                description = Binding.productdescriptionet.text.toString().trim(),
-                mrp_price = Binding.priceet.text.toString().trim(),
-                sale_price = Binding.discountpriceet.text.toString().trim(),
-                stock = Binding.stocket.text.toString().trim(),
-                name = Binding.productnameet.text.toString().trim()+" "+Binding.brandet.text.toString().trim()+" "+Binding.modelnoet.text.toString().trim()+" "+ Binding.sizeet.text.toString().trim()+" "+Binding.coloret.text.toString().trim(),
-                quantiy = Binding.quantityet.text.toString().trim(),
-                minquantiy = Binding.minquantityet.text.toString().trim(),
-                subCategoryid = subcat_id.toString().trim(),
-                file1= file_1!!,
-                file2= file_2!!,
-                file3= file_3!!,
-                file4= file_4!!,
-                file5= file_5!!,
-
-            )
+            if (file_1 != null && file_2 != null && file_3 != null && file_4 != null) {
+                AddNewProductDetails(
+                    category_id = subcat_id.toString().trim(),
+                    unit_id = ItemId.toString().trim(),
+                    insatantDel = insatantDel.toString().trim(),
+                    deliverydays = Binding.generaldeliverydays.text.toString().trim(),
+                    GeneralDel = GeneralDel.toString().trim(),
+                    self_pick = self_pick.toString().trim(),
+                    COD = COD.toString().trim(),
+                    Replacement = Replacement.toString().trim(),
+                    Return = Return.toString().trim(),
+                    shopExchange = shopExchange.toString().trim(),
+                    description = Binding.productdescriptionet.text.toString().trim(),
+                    mrp_price = Binding.priceet.text.toString().trim(),
+                    sale_price = Binding.discountpriceet.text.toString().trim(),
+                    stock = Binding.stocket.text.toString().trim(),
+                    name = Binding.productnameet.text.toString()
+                        .trim() + " " + Binding.brandet.text.toString()
+                        .trim() + " " + Binding.modelnoet.text.toString()
+                        .trim() + " " + Binding.sizeet.text.toString()
+                        .trim() + " " + Binding.coloret.text.toString().trim(),
+                    quantiy = Binding.quantityet.text.toString().trim(),
+                    minquantiy = Binding.minquantityet.text.toString().trim(),
+                    subCategoryid = subcat_id.toString().trim(),
+                    file1 = file_1!!,
+                    file2 = file_2!!,
+                    file3 = file_3!!,
+                    file4 = file_4!!,
+                    //    file5= file_5!!
+                )
+            }else{
+                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+            }
         }
 
         MainCategoryList()
@@ -340,10 +346,8 @@ class AddNewProduct : AppCompatActivity() {
                     camera()
                 }
                 else -> {
-
                 }
             }
-
         }
         val dialog = builder.create()
         dialog.show()
@@ -751,9 +755,9 @@ class AddNewProduct : AppCompatActivity() {
         file2: File,
         file3: File,
         file4: File,
-        file5: File,
+       // file5: File,
     ) {
-           showToast(file1.toString())
+           //showToast(file1.toString())
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
 
@@ -765,8 +769,8 @@ class AddNewProduct : AppCompatActivity() {
             val body3 = MultipartBody.Part.createFormData("default_img", file3.name, requestFile3)
             val requestFile4= file4.asRequestBody("image/*".toMediaTypeOrNull())
             val body4 = MultipartBody.Part.createFormData("default_img", file4.name, requestFile4)
-            val requestFile5= file5.asRequestBody("image/*".toMediaTypeOrNull())
-            val body5 = MultipartBody.Part.createFormData("default_img", file5.name, requestFile5)
+//            val requestFile5= file5.asRequestBody("image/*".toMediaTypeOrNull())
+//            val body5 = MultipartBody.Part.createFormData("default_img", file5.name, requestFile5)
             val name: RequestBody = name.toRequestBody("text/plain".toMediaTypeOrNull())
             val description: RequestBody = description.toRequestBody("text/plain".toMediaTypeOrNull())
             val origin: RequestBody = "India".toRequestBody("text/plain".toMediaTypeOrNull())
@@ -791,8 +795,7 @@ class AddNewProduct : AppCompatActivity() {
 
 
 
-            val requestCall = ordersService.AddNewProductDetails(sharedPreference.getValueString("token"),name,description,origin,category_id,mrp_price,sale_price,quantiy,unit_id,stock,insatantDel,GeneralDel,self_pick,Return,shopExchange,deliverydays,COD,Replacement,subCategoryid,minquantiy,body1,body2,body3,body4,body5)
-
+            val requestCall = ordersService.AddNewProductDetails(sharedPreference.getValueString("token"),name,description,origin,category_id,mrp_price,sale_price,quantiy,unit_id,stock,insatantDel,GeneralDel,self_pick,Return,shopExchange,deliverydays,COD,Replacement,subCategoryid,minquantiy,body1,body2,body3,body4)
             requestCall.enqueue(object : Callback<Bankdetails_Response> {
                 override fun onResponse(
                     call: Call<Bankdetails_Response>,

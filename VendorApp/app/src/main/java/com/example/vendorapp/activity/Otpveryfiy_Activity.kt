@@ -47,16 +47,14 @@ class Otpveryfiy_Activity : AppCompatActivity() {
         }
         otpverifybinding.firstPinView.setText(otp)
 
-        otpverifybinding.vrfiyBtn.setBackgroundResource(R.drawable.buttonbackground);
+        otpverifybinding.vrfiyBtn.setBackgroundResource(R.drawable.buttonbackground)
         otpverifybinding.vrfiyBtn.setOnClickListener {
-            otpverifybinding.vrfiyBtn.setBackgroundResource(R.drawable.button_loading_background);
+            otpverifybinding.vrfiyBtn.setBackgroundResource(R.drawable.button_loading_background)
             otpverifybinding.vrfiyBtn.setEnabled(false)
             Handler().postDelayed({
                 otpverifybinding.vrfiyBtn.setEnabled(true)
-                otpverifybinding.vrfiyBtn.setBackgroundResource(R.drawable.buttonbackground);
+                otpverifybinding.vrfiyBtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
-
-
 
          //   otpverifybinding.vrfiyBtn.isEnabled = false
             if (otpverifybinding.firstPinView.text.toString().trim().isEmpty()) {
@@ -67,19 +65,13 @@ class Otpveryfiy_Activity : AppCompatActivity() {
                 showToast("OTP should be of minimum of 6 numbers")
             } else if (otpverifybinding.firstPinView.text.toString().trim().length == 6) {
                 val otp: String = otpverifybinding.firstPinView.text.toString()
-
-
                 if (mobile_number != null) {
                     verifyotp(
                         mobile_number,
                         otpverifybinding.firstPinView.text.toString().trim(),
-
-
                         )
                 }
-
             }
-
         }
         otpverifybinding.resendTxtview.setOnClickListener {
             if (mobile_number != null) {
@@ -87,7 +79,6 @@ class Otpveryfiy_Activity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun genotp(mobile_number: String) {
         val loginService = ApiClient.buildService(ApiInterface::class.java)
@@ -108,7 +99,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
 
 //                            if (genrateotpresponse.error==0)
 //                            {
-                                showToast(genrateotpresponse.otp.toString());
+                                showToast(genrateotpresponse.otp.toString())
                             showToast(genrateotpresponse.message);
 //                            }
 

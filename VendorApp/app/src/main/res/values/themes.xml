@@ -11,7 +11,6 @@
         <item name="colorOnSecondary">@color/bg_color</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
-
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>

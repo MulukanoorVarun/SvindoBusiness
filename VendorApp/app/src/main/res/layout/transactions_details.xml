@@ -14,9 +14,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageview"
             tools:ignore="ContentDescription" />
-
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,8 +22,6 @@
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/imageview"
             android:weightSum="2">
-
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -40,7 +35,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 tools:ignore="HardcodedText"
                 android:textIsSelectable="true" />
-
             <TextView
                 android:id="@+id/amount"
                 android:layout_width="0dp"
@@ -54,9 +48,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-
                 tools:ignore="HardcodedText" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -69,8 +61,6 @@
             android:layout_marginEnd="5dp"
             android:layout_toEndOf="@+id/imageview"
             android:weightSum="2">
-
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -84,7 +74,6 @@
                 android:textColor="@color/black"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 tools:ignore="HardcodedText,SmallSp" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

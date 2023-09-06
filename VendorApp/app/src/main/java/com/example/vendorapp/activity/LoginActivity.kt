@@ -13,6 +13,9 @@ import com.example.vendorapp.utils.showToast
 import com.example.vendorapp.modelclass.Mobileotp_Response
 import com.example.vendorapp.services.ApiClient
 import com.example.vendorapp.services.ApiInterface
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +27,7 @@ lateinit var mobileotpResponse: Mobileotp_Response
 private lateinit var sharedPreference: SharedPreference
 class LoginActivity : AppCompatActivity() {
 //    private lateinit var genrateotpresponse: GenrateotpResponse
+    @SuppressLint("LogConditional")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     sharedPreference = SharedPreference(this)
@@ -37,6 +41,20 @@ class LoginActivity : AppCompatActivity() {
         val responseMessage = intent.getStringExtra("response_message")
         mobileloginbinding = MobilenumberloginBinding.inflate(layoutInflater)
         setContentView(mobileloginbinding.root)
+
+
+
+    FirebaseApp.initializeApp(this)
+    FirebaseMessaging.getInstance().subscribeToTopic("all")
+    FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener {task ->
+        if (!task.isSuccessful) {
+            Log.d("TAG", "Fetching FCM registration token failed", task.exception)
+            return@OnCompleteListener
+        }
+        Log.d("TAG", "FCM registration token: ${task.result}")
+//        println("Hello Mak ${task.result}")
+//        showToast(task.result)
+    })
 
 //
 //    var sess=sharedPreference.getString("token");
