@@ -118,8 +118,6 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                 binding.productmrp.isVisible = true
                 binding.salepricesymbol.isVisible = true
             }
-
-
             binding.boosticon.setOnClickListener {
                 var is_boosted=""
                 if(data.is_boosted=="0"){
