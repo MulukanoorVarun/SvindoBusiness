@@ -198,7 +198,6 @@ class AddonFragment : Fragment() {
         }
     }
 
-
     fun AddAddonsdetails(
         addon_name:String,
         addon_desc:String,
@@ -224,7 +223,7 @@ class AddonFragment : Fragment() {
                                             AddAddonsListdetails()
                                             alertDialog.hide()
                                         } else {
-
+                                            Toast.makeText(context,addonsresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                         }
                                     }else{
 

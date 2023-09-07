@@ -74,10 +74,17 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
             binding.productunit.text = data.unit
             binding.productcost.text = data.sale_price
             binding.productmrp.text = data.mrp_price
-            binding.productstockavalability.text = data.in_stock
+            binding.productstockavalability.text = data.available_stock_count
             Picasso.get().load(data.image).into(binding.productImage)
             val context = itemView.context
             product_id = data.id
+
+            if(data.in_stock=="1"){
+               binding.productsstatusswitch.isChecked=true
+            }else{
+                binding.productsstatusswitch.isChecked =false
+            }
+
 
             binding.editicon.setOnClickListener {
                 dialog = Dialog(context)
@@ -380,7 +387,7 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
                 {
                     productstatus="1"
                 }else{
-                    productstatus="0";
+                    productstatus="0"
                 }
                 sharedPreference=SharedPreference(context)
                 try {
@@ -395,7 +402,7 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
                                 when{
                                     response.code() == 200 ->{
                                         productStatusresponse = response.body()!!
-                                        if(productStatusresponse.error=="0"){
+                                        if(productStatusresponse.error=="0") {
                                             Toast.makeText(context,productStatusresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                         }
                                     }
@@ -418,7 +425,6 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
                     Toast.makeText(context,e.message.toString(), Toast.LENGTH_SHORT).show()
                 }
                 Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
-
             }
         }
     fun ProductdetailsEdit(

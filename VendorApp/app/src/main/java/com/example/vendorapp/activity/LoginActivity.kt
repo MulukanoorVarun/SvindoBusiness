@@ -27,7 +27,6 @@ lateinit var mobileotpResponse: Mobileotp_Response
 private lateinit var sharedPreference: SharedPreference
 class LoginActivity : AppCompatActivity() {
 //    private lateinit var genrateotpresponse: GenrateotpResponse
-    @SuppressLint("LogConditional")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     sharedPreference = SharedPreference(this)
@@ -41,20 +40,6 @@ class LoginActivity : AppCompatActivity() {
         val responseMessage = intent.getStringExtra("response_message")
         mobileloginbinding = MobilenumberloginBinding.inflate(layoutInflater)
         setContentView(mobileloginbinding.root)
-
-
-
-    FirebaseApp.initializeApp(this)
-    FirebaseMessaging.getInstance().subscribeToTopic("all")
-    FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener {task ->
-        if (!task.isSuccessful) {
-            Log.d("TAG", "Fetching FCM registration token failed", task.exception)
-            return@OnCompleteListener
-        }
-        Log.d("TAG", "FCM registration token: ${task.result}")
-//        println("Hello Mak ${task.result}")
-//        showToast(task.result)
-    })
 
 //
 //    var sess=sharedPreference.getString("token");

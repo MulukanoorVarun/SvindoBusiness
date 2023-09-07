@@ -68,17 +68,17 @@ class SelfPickupFragment : Fragment() {
                 selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.buttonbackground);
             }, 2000)
 
-
-
             selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status = "all"
+            )
+
         }
-        Ordersdetails(
-            status = "all"
-        )
+
         selfPickupBinding.Pendingbtn.setOnClickListener {
             selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.button_loading_background);
             selfPickupBinding.Allbtn.setEnabled(false)
@@ -97,8 +97,6 @@ class SelfPickupFragment : Fragment() {
                 selfPickupBinding.shopexchange.setEnabled(true)
                 selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
-
-
             selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
@@ -223,8 +221,6 @@ class SelfPickupFragment : Fragment() {
                 selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
-
-
             selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
@@ -234,8 +230,6 @@ class SelfPickupFragment : Fragment() {
                 status="ShopExchange"
             )
         }
-
-
 
         //   return inflater.inflate(R.layout.instantsfragment, container, false)
         return selfPickupBinding.root

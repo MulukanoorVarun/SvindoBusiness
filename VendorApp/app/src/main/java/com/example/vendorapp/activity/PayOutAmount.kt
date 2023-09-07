@@ -101,7 +101,6 @@ class PayOutAmountActivity : AppCompatActivity() {
 //            WithDrawlDetails(
 //                amount:String
 //            )
-
 //            if (amnt.isNotEmpty()&& amnt<=Int.(amount)){
 //                WithDrawlDetails(
 //                    amount = binding.withdrawamtet.text.toString().trim()

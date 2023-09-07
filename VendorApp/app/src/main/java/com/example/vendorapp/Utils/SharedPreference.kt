@@ -2,6 +2,7 @@ package com.example.vendorapp.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.android.gms.tasks.Task
 
 class SharedPreference(context: Context) {
     private val prefNames = "kotlincodes"
@@ -52,4 +53,5 @@ class SharedPreference(context: Context) {
         editor.remove(KEY_NAME)
         editor.apply()
     }
+
 }

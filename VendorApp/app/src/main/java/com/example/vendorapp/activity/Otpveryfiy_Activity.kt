@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import com.example.vendorapp.utils.SharedPreference
 import com.example.vendorapp.utils.showToast
 import com.example.vendorapp.R
@@ -14,6 +15,10 @@ import com.example.vendorapp.modelclass.Mobileotp_Response
 import com.example.vendorapp.modelclass.Verify_otp_Response
 import com.example.vendorapp.services.ApiClient
 import com.example.vendorapp.services.ApiInterface
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessaging.getInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +32,9 @@ class Otpveryfiy_Activity : AppCompatActivity() {
     private lateinit var genrateotpresponse: Mobileotp_Response
     private lateinit var sharedPreference: SharedPreference
 
+
+    var FCM_token=""
+    @SuppressLint("LogConditional")
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(this)
@@ -35,18 +43,27 @@ class Otpveryfiy_Activity : AppCompatActivity() {
         val otp = intent.getStringExtra("otpcode")
 //        val otpCharArray = otp?.toCharArray()
 //        binding.firstPinView.setText(otp)
-
         otpverifybinding = ActivityOtpveryfiyBinding.inflate(layoutInflater)
         setContentView(otpverifybinding.root)
         otpverifybinding.editmobileNumbertxt.setText(mobile_number)
-
-
         otpverifybinding.editmobileNumbertxt.setOnClickListener {
             val i = Intent(this@Otpveryfiy_Activity, LoginActivity::class.java)
             startActivity(i)
         }
-        otpverifybinding.firstPinView.setText(otp)
 
+        FirebaseApp.initializeApp(this)
+        getInstance().subscribeToTopic("all")
+        getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.d("TAG", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            Log.d("TAG", "FCM registration token: ${task.result}")
+            FCM_token=task.result
+//        println("Hello Mak ${task.result}")
+//        showToast(task.result)
+        })
+        //otpverifybinding.firstPinView.setText(otp)
         otpverifybinding.vrfiyBtn.setBackgroundResource(R.drawable.buttonbackground)
         otpverifybinding.vrfiyBtn.setOnClickListener {
             otpverifybinding.vrfiyBtn.setBackgroundResource(R.drawable.button_loading_background)
@@ -69,6 +86,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
                     verifyotp(
                         mobile_number,
                         otpverifybinding.firstPinView.text.toString().trim(),
+                        FCM_token=FCM_token.toString().trim()
                         )
                 }
             }
@@ -80,7 +98,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
         }
     }
 
-    private fun genotp(mobile_number: String) {
+    private fun genotp(mobile_number: String){
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestCall = loginService.Gen_otp(mobile_number)
         requestCall.enqueue(object : Callback<Mobileotp_Response> {
@@ -100,7 +118,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
 //                            if (genrateotpresponse.error==0)
 //                            {
                                 showToast(genrateotpresponse.otp.toString())
-                            showToast(genrateotpresponse.message);
+                            showToast(genrateotpresponse.message)
 //                            }
 
 //                            val responseMessage = response.body()?.error
@@ -132,11 +150,10 @@ class Otpveryfiy_Activity : AppCompatActivity() {
             }
         })
     }
-    private fun verifyotp(mobile_number: String, otp: String) {
+    private fun verifyotp(mobile_number: String, otp: String ,FCM_token:String) {
         val loginService = ApiClient.buildService(ApiInterface::class.java)
-        val requestCall = loginService.Verify_otp(mobile_number, otp)
+        val requestCall = loginService.Verify_otp(mobile_number, otp,FCM_token)
         requestCall.enqueue(object : Callback<Verify_otp_Response> {
-
             //if you receive http response then this method will executed
             //your status code decide if your http response is a success or failure
             @SuppressLint("SuspiciousIndentation")
@@ -152,9 +169,8 @@ class Otpveryfiy_Activity : AppCompatActivity() {
 
                             response.body()?.let { showToast(it.message) }
                             if (verifyotpResponse != null) {
-
                                 if (response.body()!!.error == "0") {
-                                    sharedPreference.save("token", verifyotpResponse.token);
+                                    sharedPreference.save("token", verifyotpResponse.token)
                                     response.body()?.let { showToast(it.message) }
                                     val intent = Intent(this@Otpveryfiy_Activity, MainActivity::class.java)
                                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
