@@ -53,6 +53,7 @@ class AddCatalogueProduct : AppCompatActivity() {
     var unitId = ""
     var Maincat_id = ""
     var subcat_id = ""
+    var size_id = ""
 
     var insatantDel = "0"
     var self_pick = "0"
@@ -194,6 +195,7 @@ class AddCatalogueProduct : AppCompatActivity() {
             Productdetails(
                 product_id = itemId.toString().trim(),
                 unit_id = unitId.toString().trim(),
+                size_id = size_id.toString().trim(),
                 quantity = ProductBinding.quantityet.text.toString().trim(),
                 minQuantity=ProductBinding.minquantityet.text.toString().trim(),
                 insatantDel = insatantDel.toString().trim(),
@@ -254,6 +256,7 @@ class AddCatalogueProduct : AppCompatActivity() {
     fun Productdetails(
         product_id: String,
         unit_id: String,
+        size_id:String,
         delivery_days: String,
         insatantDel: String,
         GeneralDel: String,
@@ -273,7 +276,7 @@ class AddCatalogueProduct : AppCompatActivity() {
 
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
-            val requestCall = ordersService.CatProductDetails(sharedPreference.getValueString("token"), product_id, "0", mrp_price, sale_price, quantity, unit_id, stock, insatantDel, delivery_days, GeneralDel, self_pick, COD, Replacement, Return, shopExchange, ADDONData, printing, minQuantity)
+            val requestCall = ordersService.CatProductDetails(sharedPreference.getValueString("token"), product_id, "0", mrp_price, sale_price, quantity, unit_id, stock, insatantDel, delivery_days, GeneralDel, self_pick, COD, Replacement, Return, shopExchange, ADDONData, printing, minQuantity,size_id)
             requestCall.enqueue(object : Callback<Bankdetails_Response> {
                 override fun onResponse(
                     call: Call<Bankdetails_Response>,
@@ -285,9 +288,11 @@ class AddCatalogueProduct : AppCompatActivity() {
                                 productdetailsResponse = response.body()!!
                                 if (productdetailsResponse != null) {
                                     if (productdetailsResponse.error == "0") {
+                                        showToast(productdetailsResponse.message.toString())
                                         val i = Intent(this@AddCatalogueProduct, MainActivity::class.java)
                                         startActivity(i)
                                     } else {
+                                        showToast(productdetailsResponse.message.toString())
                                     }
                                 }else{
 
@@ -666,9 +671,6 @@ class AddCatalogueProduct : AppCompatActivity() {
 
                                 }
                             }
-
-
-
                             response.code() == 401 -> {
                                 showToast(getString(R.string.session_exp))
 
@@ -717,11 +719,8 @@ class AddCatalogueProduct : AppCompatActivity() {
         }
     }
 
-
-
     fun fetchItemToSubcategory(cat_id: String
     ){
-
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall =
@@ -794,6 +793,7 @@ class AddCatalogueProduct : AppCompatActivity() {
                 val selectedItem = items[position]
                 subcat_id = selectedItem.id
                 CatalougeProductList(subcat_id)
+                SizesList(subcat_id)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -801,4 +801,79 @@ class AddCatalogueProduct : AppCompatActivity() {
             }
         }
     }
+
+    fun SizesList(subcat_id:String){
+        try {
+            val ordersService = ApiClient.buildService(ApiInterface::class.java)
+            val requestCall =
+                ordersService.SubCategoryDetails(sharedPreference.getValueString("token"),subcat_id)
+            requestCall.enqueue(object : Callback<SubCategoryModal> {
+                override fun onResponse(
+                    call: Call<SubCategoryModal>,
+                    response: Response<SubCategoryModal>
+                ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    try {
+                        when {
+                            response.code() == 200 -> {
+                                //data = response.body()!!
+                                if (response.isSuccessful) {
+                                    if (response.body() != null) {
+                                        if (response.body()!!.error == "0") {
+                                            SizesSpinner(response.body()!!.sizes)
+                                        } else {
+
+                                        }
+                                    }else{
+
+                                    }
+                                }else{
+
+                                }
+                            }
+                            response.code() == 401 -> {
+                                showToast(getString(R.string.session_exp))
+
+                            }
+                            else -> {
+                                showToast(getString(R.string.server_error))
+                            }
+                        }
+                    } catch (e: TimeoutException) {
+                        showToast(getString(R.string.time_out))
+                    }
+
+                override fun onFailure(call: Call<SubCategoryModal>, t: Throwable) {
+                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    showToast(t.message.toString())
+                }
+
+            })
+        } catch (e: Exception) {
+            //dashboardBinding.progressBarLay.visibility = View.GONE
+            showToast(e.message.toString())
+        }
+    }
+    internal fun SizesSpinner(items: List<Sizes>) {
+        spinner = findViewById(R.id.Sizesspinnerview)
+
+        val adapter = SizesAdapter(this, items)
+        spinner.adapter = adapter
+
+        // Handle item selection
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = items[position]
+                size_id = selectedItem.id
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing when nothing is selected
+            }
+        }
+    }
+
 }

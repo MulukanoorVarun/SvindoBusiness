@@ -21,6 +21,30 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:elevation="5dp"
+                    android:padding="15dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="10dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/Addonimage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="fitXY"
+                            tools:ignore="ContentDescription" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
                 <ImageButton
                     android:id="@+id/deleteicon"
                     android:layout_width="wrap_content"
@@ -29,84 +53,87 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:src="@drawable/delete_icon"
-                    android:layout_alignParentEnd="true"/>
-                <TextView
-                    android:id="@+id/addonName"
+                    android:layout_alignParentEnd="true"
+                    tools:ignore="ContentDescription" />
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="10dp"
-                    tools:ignore="HardcodedText" />
+                    android:layout_toEndOf="@+id/cardview"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/addonName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Name"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
                     <TextView
                         android:id="@+id/AddonName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/addonName"
                         android:text="Canon 5d mark iv"
                         android:lines="1"
                         android:ellipsize="end"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="5dp"
                         android:textColor="@color/black"
-                        android:textSize="13sp"
-                        android:layout_marginStart="10dp"
+                        android:textSize="12sp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginEnd="13dp"
                         tools:ignore="HardcodedText" />
                 <TextView
                     android:id="@+id/addonDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/AddonName"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="5dp"
                     android:text="Description"
                     android:textColor="@color/black"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="5dp"
                     tools:ignore="HardcodedText" />
                 <TextView
                     android:id="@+id/AddonDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/addonDescription"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="5dp"
                     android:text="Canon 5d mark iv"
                     android:textColor="@color/black"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:lines="1"
                     android:ellipsize="end"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginEnd="13dp"
                     tools:ignore="HardcodedText" />
                 <TextView
                     android:id="@+id/addonPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/AddonDescription"
-                    android:text="Price"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="5dp"
                     android:textColor="@color/black"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    android:layout_marginStart="10dp"
+                    android:text="Price"
+                    android:layout_marginStart="5dp"
                     android:layout_marginBottom="10dp"
                     tools:ignore="HardcodedText" />
+                </LinearLayout>
                 <TextView
                     android:id="@+id/AddonPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/AddonDescription"
-                    android:layout_alignParentEnd="true"
                     android:layout_marginEnd="15dp"
                     android:text="123"
-                    android:layout_marginTop="6dp"
+                    android:layout_below="@+id/deleteicon"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="72dp"
                     android:textColor="@color/black"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginBottom="10dp"
                     tools:ignore="HardcodedText" />
             </RelativeLayout>

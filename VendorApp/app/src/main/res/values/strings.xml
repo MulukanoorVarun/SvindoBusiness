@@ -435,6 +435,8 @@ Front side photo of your PAN card with your clear name and photo
     <string name="stock">Stock</string>
     <string name="generaldeliveryindays">General Delivery Time Required in Days</string>
     <string name="prompt">Select Category</string>
+    <string name="sizesprompt">Select Size</string>
+    <string name="iconprompt">Select Icon</string>
     <string name="unitprompt">Select Unit</string>
     <string name="subcatprompt">Select SubCategory</string>
     <string name="serviceprompt">Select Service</string>

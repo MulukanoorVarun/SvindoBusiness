@@ -430,27 +430,39 @@
                         android:textSize="13sp"
                         tools:ignore="Hardcodedtext"
                         android:textStyle="bold" />
-                    <EditText
-                        android:id="@+id/sizeet"
+                    <androidx.appcompat.widget.AppCompatSpinner
                         android:layout_width="370dp"
-                        android:layout_height="49dp"
+                        android:layout_height="50dp"
                         android:layout_marginStart="13dp"
-                        android:layout_marginTop="6dp"
                         android:layout_marginEnd="10dp"
+                        android:spinnerMode="dialog"
+                        android:prompt="@string/sizesprompt"
                         android:layout_below="@+id/size"
-                        android:background="@drawable/boarder"
-                        android:padding="10dp"
-                        android:hint="Enter size"
-                        android:text=""
-                        android:textSize="13sp"
-                        android:inputType="text"
-                        tools:ignore="Hardcodedtext"
-                        android:autofillHints="" />
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_spinner"
+                        android:id="@+id/Sizesspinnerview"
+                        tools:ignore="HardcodedText" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/sizeet"-->
+<!--                        android:layout_width="370dp"-->
+<!--                        android:layout_height="49dp"-->
+<!--                        android:layout_marginStart="13dp"-->
+<!--                        android:layout_marginTop="6dp"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        android:layout_below="@+id/size"-->
+<!--                        android:background="@drawable/boarder"-->
+<!--                        android:padding="10dp"-->
+<!--                        android:hint="Enter size"-->
+<!--                        android:text=""-->
+<!--                        android:textSize="13sp"-->
+<!--                        android:inputType="text"-->
+<!--                        tools:ignore="Hardcodedtext"-->
+<!--                        android:autofillHints="" />-->
                     <TextView
                         android:id="@+id/color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/sizeet"
+                        android:layout_below="@+id/Sizesspinnerview"
                         android:layout_marginStart="13dp"
                         android:layout_marginTop="10dp"
                         android:text="Color"
@@ -496,11 +508,11 @@
                         android:layout_below="@+id/productname"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
-                        android:hint="@string/name_txt"
-                        android:text="@string/MenBlackshoes"
+                        android:hint="Enter Product name"
                         android:textSize="13sp"
                         android:inputType="text"
-                        android:autofillHints="" />
+                        android:autofillHints=""
+                        tools:ignore="HardcodedText" />
                     <LinearLayout
                         android:id="@+id/linearLayout1"
                         android:layout_width="match_parent"
@@ -862,7 +874,7 @@
                         android:textSize="13sp"
                         android:inputType="number"
                         android:autofillHints=""
-                        tools:ignore="Hardcodedtext"/>
+                        tools:ignore="Hardcodedtext,TooManyViews"/>
 
                     <!--                    <androidx.appcompat.widget.AppCompatButton-->
                     <!--                        android:id="@+id/updatebtn"-->

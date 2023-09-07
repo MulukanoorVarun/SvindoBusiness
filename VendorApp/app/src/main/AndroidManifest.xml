@@ -54,7 +54,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/svindobusiness"
+        android:icon="@drawable/svindobusinesslogo2"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.VendorApp"
@@ -67,7 +67,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
-
 
         <activity
             android:name=".activity.NotificationsShowingActivity"

@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,17 +27,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.deliverypartner.utils.URIPathHelper
 import com.example.vendorapp.R
 import com.example.vendorapp.activity.bankaccountdetailsbinding
+import com.example.vendorapp.adapters.AddonIconsAdapter
 import com.example.vendorapp.adapters.AddonsListAdapter
 import com.example.vendorapp.adapters.InstantAdapter
+import com.example.vendorapp.adapters.MainCategoryAdapter
 import com.example.vendorapp.databinding.*
-import com.example.vendorapp.modelclass.AccountsModal
-import com.example.vendorapp.modelclass.AddonsListModal
-import com.example.vendorapp.modelclass.Bankdetails_Response
-import com.example.vendorapp.modelclass.OrdersListModal
+import com.example.vendorapp.modelclass.*
 import com.example.vendorapp.services.ApiClient
 import com.example.vendorapp.services.ApiInterface
 import com.example.vendorapp.utils.SharedPreference
 import com.example.vendorapp.utils.showToast
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,7 +49,6 @@ import java.util.concurrent.TimeoutException
 class AddonFragment : Fragment() {
 
     private lateinit var AddonBinding: FragmentAddonBinding
-    private lateinit var popupbinding: AddonpopupdesignBinding
     private lateinit var binding: AddonlayoutdesignBinding
 
     private lateinit var sharedPreference: SharedPreference
@@ -55,6 +56,7 @@ class AddonFragment : Fragment() {
     private lateinit var alertDialog: AlertDialog
     private lateinit var addonsresponse: Bankdetails_Response
     private lateinit var addonsListresponse: AddonsListModal
+    private lateinit var addonsIconsModalresponse: AddonIconsModal
     private lateinit var adapter: AddonsListAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
@@ -63,9 +65,11 @@ class AddonFragment : Fragment() {
     private var imageUri: Uri? = null
     private  var file_1: File? = null
 
+    private lateinit var spinner: Spinner
+    var addon_id=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        popupbinding = AddonpopupdesignBinding.inflate(layoutInflater)
         sharedPreference= SharedPreference(requireContext())
     }
 
@@ -92,6 +96,7 @@ class AddonFragment : Fragment() {
 
         AddonBinding.addonbtn.setOnClickListener {
             showAlertDialog()
+            AddonIconsList()
         }
 //
 //
@@ -181,13 +186,15 @@ class AddonFragment : Fragment() {
                 AddAddonsdetails(
                     addon_name = binding.addonnameEt.text.toString().trim(),
                     addon_desc = binding.addondescEt.text.toString().trim(),
-                    addon_price = binding.addonpriceet.text.toString().trim()
+                    addon_price = binding.addonpriceet.text.toString().trim(),
+                    addon_id=addon_id.toString().trim()
                 )
             }
             else{
                 Toast.makeText(context, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
             }
            // alertDialog.hide()
+
         }
     }
 
@@ -196,10 +203,11 @@ class AddonFragment : Fragment() {
         addon_name:String,
         addon_desc:String,
         addon_price:String,
+        addon_id:String
     ){
-        try {
+        try{
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
-            val requestCall = ordersService.AddAddonsDetails(sharedPreference.getValueString("token"),addon_name,addon_desc,addon_price)
+            val requestCall = ordersService.AddAddonsDetails(sharedPreference.getValueString("token"),addon_name,addon_desc,addon_price,addon_id)
             requestCall.enqueue(object : Callback<Bankdetails_Response> {
                 override fun onResponse(
                     call: Call<Bankdetails_Response>,
@@ -207,11 +215,11 @@ class AddonFragment : Fragment() {
                 ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
                     try {
                         when {
-                            response.code() == 200 -> {
+                            response.code() == 200 ->{
                                 addonsresponse = response.body()!!
                                 if (response.isSuccessful) {
                                     if (response.body() != null) {
-                                        if (response.body()!!.error == "0") {
+                                        if (response.body()!!.error == "0"){
                                             Toast.makeText(context,addonsresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                             AddAddonsListdetails()
                                             alertDialog.hide()
@@ -309,9 +317,73 @@ class AddonFragment : Fragment() {
             //dashboardBinding.progressBarLay.visibility = View.GONE
             Toast.makeText(context,e.message.toString(),Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun AddonIconsList() {
+        try {
+            val ordersService = ApiClient.buildService(ApiInterface::class.java)
+            val requestCall = ordersService.AddonsIconsDetails(sharedPreference.getValueString("token"))
+            requestCall.enqueue(object : Callback<AddonIconsModal> {
+                override fun onResponse(
+                    call: Call<AddonIconsModal>,
+                    response: Response<AddonIconsModal>
+                ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    try {
+                        when {
+                            response.code() == 200 -> {
+                                addonsIconsModalresponse = response.body()!!
+                                if (addonsIconsModalresponse.error == "0") {
+                                        AddonIconsSpinner(response.body()!!.addons)
+                                    } else {
+
+                                    }
+                            }
+                            response.code() == 401 -> {
+                                Toast.makeText(context,getString(R.string.session_exp),Toast.LENGTH_SHORT).show()
+
+                            }
+                            else -> {
+                                Toast.makeText(context,getString(R.string.server_error),Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } catch (e: TimeoutException) {
+                        Toast.makeText(context,getString(R.string.time_out),Toast.LENGTH_SHORT).show()
+                    }
+
+                override fun onFailure(call: Call<AddonIconsModal>, t: Throwable) {
+                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    Toast.makeText(context,t.message.toString(),Toast.LENGTH_SHORT).show()
+                }
+            })
+        } catch (e: Exception) {
+            //dashboardBinding.progressBarLay.visibility = View.GONE
+            Toast.makeText(context,e.message.toString(),Toast.LENGTH_SHORT).show()
+        }
 
     }
+
+    internal fun AddonIconsSpinner(items: List<AddonXX>) {
+        spinner = binding.Addonspinnerview
+        val adapter = AddonIconsAdapter(requireContext(), items)
+        spinner.adapter = adapter
+        // Handle item selection
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = items[position]
+                addon_id = selectedItem.id
+                Picasso.get().load(selectedItem.image).into(binding.Addonimage)
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing when nothing is selected
+            }
+        }
     }
+}
 
 
 

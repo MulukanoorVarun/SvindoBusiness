@@ -269,6 +269,10 @@ interface ApiInterface {
     ): Call<SubCategoryModal>
 
 
+    @POST("Home/sub_categorires")
+    fun SizesListDetails(
+        @Header("Sessionid")  content_type:String?,
+    ): Call<SubCategoryModal>
 
 
 
@@ -296,7 +300,6 @@ interface ApiInterface {
         @Field("prices_data") prices_data: String,
         @Field("sizes_data") sizes_data: String,
         @Field("addon_data") addon_data: String,
-
     ): Call<Bankdetails_Response>
 
 
@@ -326,6 +329,7 @@ interface ApiInterface {
         @Part("is_replace") is_replace: RequestBody,
         @Part("subcategory_id") subcategory_id: RequestBody,
         @Part("min_quantity") min_quantity: RequestBody,
+        @Part("size_id") size_id: RequestBody,
         @Part image : MultipartBody.Part,
         @Part image1 : MultipartBody.Part,
         @Part image2: MultipartBody.Part,
@@ -357,6 +361,7 @@ interface ApiInterface {
         @Field("addon_data") addon_data: String,
         @Field("is_printable") is_printable: String,
         @Field("min_quanity") min_quanity: String,
+        @Field("size_id") size_id: String,
     ): Call<Bankdetails_Response>
 
 
@@ -482,7 +487,14 @@ interface ApiInterface {
         @Field("name") name: String,
         @Field("description") description: String,
         @Field("price") price: String,
+        @Field("id") id: String,
     ): Call<Bankdetails_Response>
+
+
+    @POST("Home/addon_icons")
+    fun AddonsIconsDetails(
+        @Header("Sessionid") content_type:String?,
+    ): Call<AddonIconsModal>
 
 
 

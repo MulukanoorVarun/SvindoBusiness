@@ -69,6 +69,8 @@ class AddNewProduct : AppCompatActivity() {
     var MainCatId=""
     var ItemId=""
     var subcat_id=""
+    var size_id=""
+    var size_name=""
 
     var insatantDel="0"
     var self_pick="0"
@@ -293,12 +295,12 @@ class AddNewProduct : AppCompatActivity() {
             val minquantiy = Binding.minquantityet.text.toString().trim()
             val brandName = Binding.brandet.text.toString().trim()
             val modelNumber = Binding.modelnoet.text.toString().trim()
-            val size = Binding.sizeet.text.toString().trim()
             val color = Binding.coloret.text.toString().trim()
             if (file_1 != null && file_2 != null && file_3 != null && file_4 != null) {
                 AddNewProductDetails(
                     category_id = subcat_id.toString().trim(),
                     unit_id = ItemId.toString().trim(),
+                    size_id=size_id.toString().trim(),
                     insatantDel = insatantDel.toString().trim(),
                     deliverydays = Binding.generaldeliverydays.text.toString().trim(),
                     GeneralDel = GeneralDel.toString().trim(),
@@ -311,10 +313,7 @@ class AddNewProduct : AppCompatActivity() {
                     mrp_price = Binding.priceet.text.toString().trim(),
                     sale_price = Binding.discountpriceet.text.toString().trim(),
                     stock = Binding.stocket.text.toString().trim(),
-                    name = Binding.productnameet.text.toString()
-                        .trim() + " " + Binding.brandet.text.toString()
-                        .trim() + " " + Binding.modelnoet.text.toString()
-                        .trim() + " " + Binding.sizeet.text.toString()
+                    name = Binding.productnameet.text.toString().trim() + " " + Binding.brandet.text.toString().trim() +" " + size_name.toString() + " " + Binding.modelnoet.text.toString()
                         .trim() + " " + Binding.coloret.text.toString().trim(),
                     quantiy = Binding.quantityet.text.toString().trim(),
                     minquantiy = Binding.minquantityet.text.toString().trim(),
@@ -422,7 +421,6 @@ class AddNewProduct : AppCompatActivity() {
                         startActivity(intent)
                     } else if (Manifest.permission.READ_EXTERNAL_STORAGE == Manifest.permission.READ_EXTERNAL_STORAGE) {
                         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), storagePermissionCode) }
-
                 }
             }
             1 -> {
@@ -652,7 +650,6 @@ class AddNewProduct : AppCompatActivity() {
 
     fun fetchItemToSubcategory(cat_id: String
     ){
-
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall =
@@ -724,6 +721,88 @@ class AddNewProduct : AppCompatActivity() {
             ) {
                 val selectedItem = items[position]
                 subcat_id = selectedItem.id
+                SizesList(subcat_id)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing when nothing is selected
+            }
+        }
+    }
+
+    fun SizesList(subcat_id:String){
+        try {
+            val ordersService = ApiClient.buildService(ApiInterface::class.java)
+            val requestCall =
+                ordersService.SubCategoryDetails(sharedPreference.getValueString("token"),subcat_id)
+            requestCall.enqueue(object : Callback<SubCategoryModal> {
+                override fun onResponse(
+                    call: Call<SubCategoryModal>,
+                    response: Response<SubCategoryModal>
+                ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    try {
+                        when {
+                            response.code() == 200 -> {
+                                //data = response.body()!!
+                                if (response.isSuccessful) {
+                                    if (response.body() != null) {
+                                        if (response.body()!!.error == "0") {
+                                            SizesSpinner(response.body()!!.sizes)
+                                        } else {
+
+                                        }
+                                    }else{
+
+                                    }
+                                }else{
+
+                                }
+                            }
+                            response.code() == 401 -> {
+                                showToast(getString(R.string.session_exp))
+
+                            }
+                            else -> {
+                                showToast(getString(R.string.server_error))
+                            }
+                        }
+
+
+                    } catch (e: TimeoutException) {
+                        showToast(getString(R.string.time_out))
+                    }
+
+                override fun onFailure(call: Call<SubCategoryModal>, t: Throwable) {
+                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    showToast(t.message.toString())
+                }
+
+            })
+
+
+        } catch (e: Exception) {
+            //dashboardBinding.progressBarLay.visibility = View.GONE
+            showToast(e.message.toString())
+        }
+
+    }
+    internal fun SizesSpinner(items: List<Sizes>) {
+        spinner = findViewById(R.id.Sizesspinnerview)
+
+        val adapter = SizesAdapter(this, items)
+        spinner.adapter = adapter
+
+        // Handle item selection
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = items[position]
+                size_id = selectedItem.id
+                size_name = selectedItem.size_name
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -736,6 +815,7 @@ class AddNewProduct : AppCompatActivity() {
         name:String,
         category_id:String,
         unit_id:String,
+        size_id:String,
         deliverydays: String,
         insatantDel: String,
         GeneralDel:String,
@@ -790,12 +870,9 @@ class AddNewProduct : AppCompatActivity() {
             val deliverydays: RequestBody =deliverydays.toRequestBody("text/plain".toMediaTypeOrNull())
             val minquantiy: RequestBody =minquantiy.toRequestBody("text/plain".toMediaTypeOrNull())
             val subCategoryid: RequestBody =subCategoryid.toRequestBody("text/plain".toMediaTypeOrNull())
+            val size_id: RequestBody =size_id.toRequestBody("text/plain".toMediaTypeOrNull())
 
-
-
-
-
-            val requestCall = ordersService.AddNewProductDetails(sharedPreference.getValueString("token"),name,description,origin,category_id,mrp_price,sale_price,quantiy,unit_id,stock,insatantDel,GeneralDel,self_pick,Return,shopExchange,deliverydays,COD,Replacement,subCategoryid,minquantiy,body1,body2,body3,body4)
+            val requestCall = ordersService.AddNewProductDetails(sharedPreference.getValueString("token"),name,description,origin,category_id,mrp_price,sale_price,quantiy,unit_id,stock,insatantDel,GeneralDel,self_pick,Return,shopExchange,deliverydays,COD,Replacement,subCategoryid,minquantiy,size_id,body1,body2,body3,body4)
             requestCall.enqueue(object : Callback<Bankdetails_Response> {
                 override fun onResponse(
                     call: Call<Bankdetails_Response>,
@@ -808,15 +885,12 @@ class AddNewProduct : AppCompatActivity() {
                                 if (response.isSuccessful) {
                                     if (response.body() != null) {
                                         if (response.body()!!.error == "0") {
-
-                                            // showToast(""+response.body().toString())
-//                                    response.body()?.let { showToast(it.message)}
-//                                    Response = response.body()!!
+                                            showToast(response.body()!!.message.toString())
                                     val i = Intent(this@AddNewProduct,MainActivity::class.java)
                                     startActivity(i)
 
                                         } else {
-
+                                            showToast(response.body()!!.message.toString())
                                         }
                                     }else{
 
