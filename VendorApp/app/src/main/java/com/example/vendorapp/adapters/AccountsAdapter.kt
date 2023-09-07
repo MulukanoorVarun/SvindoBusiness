@@ -24,6 +24,8 @@ class AccountsAdapter(private val transaction : List<Transaction>) : RecyclerVie
 
                 //  Picasso.get().load(data.).into(binding.storeImage)
 
+
+
                 val context = itemView.context
 
                 if (data.transaction_type=="Debit"&&data.transaction_type!==null){
