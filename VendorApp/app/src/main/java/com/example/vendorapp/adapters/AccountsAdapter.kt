@@ -17,7 +17,6 @@ class AccountsAdapter(private val transaction : List<Transaction>) : RecyclerVie
 
             @SuppressLint("ResourceAsColor")
             fun bind(data: Transaction) {
-
                 binding.description.text = data.description
                 binding.transationtyprtxt.text = data.transaction_type
                 "${data.created_datetime}".also { binding.createdDatetime.text = it }
