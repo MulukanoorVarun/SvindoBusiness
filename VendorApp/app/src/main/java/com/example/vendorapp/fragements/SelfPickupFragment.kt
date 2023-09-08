@@ -1,6 +1,7 @@
 package com.example.vendorapp.fragements
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -77,6 +78,13 @@ class SelfPickupFragment : Fragment() {
                 status = "all"
             )
 
+            selfPickupBinding.Allbtn.setTextColor(Color.WHITE)
+            selfPickupBinding.Pendingbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.pickupbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Acceptedbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.returnbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.shopexchange.setTextColor(Color.BLACK)
+
         }
 
         selfPickupBinding.Pendingbtn.setOnClickListener {
@@ -105,9 +113,15 @@ class SelfPickupFragment : Fragment() {
             Ordersdetails(
                 status="Pending"
             )
+
+            selfPickupBinding.Allbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Pendingbtn.setTextColor(Color.WHITE)
+            selfPickupBinding.pickupbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Acceptedbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.returnbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.shopexchange.setTextColor(Color.BLACK)
         }
         selfPickupBinding.Acceptedbtn.setOnClickListener {
-
             selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.button_loading_background);
             selfPickupBinding.Allbtn.setEnabled(false)
             selfPickupBinding.Pendingbtn.setEnabled(false)
@@ -136,6 +150,12 @@ class SelfPickupFragment : Fragment() {
             Ordersdetails(
                 status = "Accepted"
             )
+            selfPickupBinding.Allbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Pendingbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.pickupbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Acceptedbtn.setTextColor(Color.WHITE)
+            selfPickupBinding.returnbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.shopexchange.setTextColor(Color.BLACK)
         }
 
 
@@ -168,6 +188,12 @@ class SelfPickupFragment : Fragment() {
             Ordersdetails(
                 status="Delivered"
             )
+            selfPickupBinding.Allbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Pendingbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.pickupbtn.setTextColor(Color.WHITE)
+            selfPickupBinding.Acceptedbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.returnbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.shopexchange.setTextColor(Color.BLACK)
         }
 
 
@@ -200,6 +226,12 @@ class SelfPickupFragment : Fragment() {
             Ordersdetails(
                 status="Return"
             )
+            selfPickupBinding.Allbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Pendingbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.pickupbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Acceptedbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.returnbtn.setTextColor(Color.WHITE)
+            selfPickupBinding.shopexchange.setTextColor(Color.BLACK)
         }
 
         selfPickupBinding.shopexchange.setOnClickListener {
@@ -229,6 +261,12 @@ class SelfPickupFragment : Fragment() {
             Ordersdetails(
                 status="ShopExchange"
             )
+            selfPickupBinding.Allbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Pendingbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.pickupbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Acceptedbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.returnbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.shopexchange.setTextColor(Color.WHITE)
         }
 
         //   return inflater.inflate(R.layout.instantsfragment, container, false)

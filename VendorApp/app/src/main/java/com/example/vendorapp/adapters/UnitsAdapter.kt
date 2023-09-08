@@ -33,7 +33,6 @@ class UnitsAdapter (private val context: Context, private val itemList: List<Uni
 //        val imgView = view.findViewById<ImageView>(android.R.id.icon)
 //        Picasso.get().load(item.image).into(binding.storeImage)
 //        Glide.with(context).load(item.image).into(imgView)
-
         return view
     }
 //    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {

@@ -101,20 +101,16 @@ class AddSpotlightActivity : AppCompatActivity() {
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
                     showToast(t.message.toString())
                 }
-
             })
         } catch (e: Exception) {
             //dashboardBinding.progressBarLay.visibility = View.GONE
             showToast(e.message.toString())
         }
     }
-
     internal fun setupSpinner(items:List<Product>){
-
         spinner = findViewById(R.id.spotlightspinnerview)
         val adapter = SpotlightSpinnerAdapter(this,items)
         spinner.adapter = adapter
-
         // Handle item selection
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

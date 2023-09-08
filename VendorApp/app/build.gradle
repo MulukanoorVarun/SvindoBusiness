@@ -33,9 +33,18 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-
         dataBinding true
         viewBinding true
+    }
+
+    buildscript {
+        dependencies {
+            classpath 'com.google.gms:google-services:4.3.15'
+            classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.14.0'
+        }
+        repositories {
+            google()
+        }
     }
 }
 

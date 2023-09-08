@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vendorapp.R
 import com.example.vendorapp.adapters.AddonsListAdapter
 import com.example.vendorapp.adapters.CategoryAdapter
+import com.example.vendorapp.adapters.ProductsAdapter
 import com.example.vendorapp.databinding.FragmentCategoryBinding
 import com.example.vendorapp.modelclass.ProductCategoryModal
 import com.example.vendorapp.services.ApiClient
@@ -36,27 +37,21 @@ class CategoryFragment : Fragment() {
         sharedPreference=SharedPreference(requireContext())
         }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+        savedInstanceState: Bundle?): View? {
         sharedPreference=SharedPreference(requireContext())
         categoriesbinding = FragmentCategoryBinding.inflate(inflater, container, false)
-
         categoriesbinding = FragmentCategoryBinding.inflate(layoutInflater)
         linearLayoutManager = LinearLayoutManager(context)
         categoriesbinding.newordersRequestsViewRecyclerview.layoutManager = linearLayoutManager
         categoriesbinding.newordersRequestsViewRecyclerview.hasFixedSize()
-
         CategoriesDetails()
-
         return categoriesbinding.root
-    }
+        }
     fun CategoriesDetails() {
         try {
-            // dashboardBinding.progressBarLay.visibility = View.VISIBLE
+            //dashboardBinding.progressBarLay.visibility = View.VISIBLE
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.CategoriesDetails(sharedPreference.getValueString("token"))
             requestCall.enqueue(object : Callback<ProductCategoryModal> {
@@ -64,7 +59,6 @@ class CategoryFragment : Fragment() {
                     call: Call<ProductCategoryModal>,
                     response: Response<ProductCategoryModal>
                 ) {
-
                     //dashboardBinding.progressBarLay.visibility  = View.GONE
                     try {
                         when {
@@ -74,11 +68,12 @@ class CategoryFragment : Fragment() {
                                     if (categoryresponse.error == "0") {
                                         if (categoryresponse.products.count() > 0) {
                                             categoriesbinding.newordersRequestsViewRecyclerview.visibility = View.VISIBLE
-                                            adapter = context?.let { CategoryAdapter(categoryresponse.products, context = it)}!!
+                                            adapter = context?.let { CategoryAdapter(categoryresponse.products, it)}!!
+                                          //  adapter = context?.let { CategoryAdapter(categoryresponse.products, context = it)}!!
                                             categoriesbinding.newordersRequestsViewRecyclerview.adapter = adapter
                                         }
                                     } else {
-                                     //   Toast.makeText(context,(categoryresponse.message).toString(),Toast.LENGTH_SHORT).show()
+                                      // Toast.makeText(context,"",Toast.LENGTH_SHORT).show()
                                     }
                                 }
                             }

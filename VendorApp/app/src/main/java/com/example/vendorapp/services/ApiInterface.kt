@@ -339,7 +339,6 @@ interface ApiInterface {
     ): Call<Bankdetails_Response>
 
 
-
     @FormUrlEncoded
     @POST("Home/add_vendor_product")
     fun CatProductDetails(

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.NotificationCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vendorapp.R
@@ -82,7 +83,15 @@ class InstantsFragment : Fragment() {
             Ordersdetails(
                 status = "all"
             )
+            instantBinding.Allbtn.setTextColor(Color.WHITE)
+            instantBinding.Pendingbtn.setTextColor(Color.BLACK)
+            instantBinding.pickupbtn.setTextColor(Color.BLACK)
+            instantBinding.Acceptedbtn.setTextColor(Color.BLACK)
+            instantBinding.returnbtn.setTextColor(Color.BLACK)
+            instantBinding.shopexchangebtn.setTextColor(Color.BLACK)
         }
+
+
                 instantBinding.Pendingbtn.setOnClickListener {
                     instantBinding.Pendingbtn.setBackgroundResource(R.drawable.button_loading_background)
                     instantBinding.Allbtn.setEnabled(false)
@@ -109,6 +118,12 @@ class InstantsFragment : Fragment() {
             Ordersdetails(
                 status = "Pending"
             )
+                    instantBinding.Allbtn.setTextColor(Color.BLACK)
+                    instantBinding.Pendingbtn.setTextColor(Color.WHITE)
+                    instantBinding.pickupbtn.setTextColor(Color.BLACK)
+                    instantBinding.Acceptedbtn.setTextColor(Color.BLACK)
+                    instantBinding.returnbtn.setTextColor(Color.BLACK)
+                    instantBinding.shopexchangebtn.setTextColor(Color.BLACK)
         }
 
 
@@ -139,9 +154,16 @@ class InstantsFragment : Fragment() {
             Ordersdetails(
                 status = "Accepted"
             )
+            instantBinding.Allbtn.setTextColor(Color.BLACK)
+            instantBinding.Pendingbtn.setTextColor(Color.BLACK)
+            instantBinding.pickupbtn.setTextColor(Color.BLACK)
+            instantBinding.Acceptedbtn.setTextColor(Color.WHITE)
+            instantBinding.returnbtn.setTextColor(Color.BLACK)
+            instantBinding.shopexchangebtn.setTextColor(Color.BLACK)
         }
-            instantBinding.pickupbtn.setOnClickListener {
 
+
+            instantBinding.pickupbtn.setOnClickListener {
                 instantBinding.pickupbtn.setBackgroundResource(R.drawable.button_loading_background)
 
                 instantBinding.Allbtn.setEnabled(false)
@@ -170,6 +192,12 @@ class InstantsFragment : Fragment() {
                 Ordersdetails(
                     status="Delivered"
                 )
+                instantBinding.Allbtn.setTextColor(Color.BLACK)
+                instantBinding.Pendingbtn.setTextColor(Color.BLACK)
+                instantBinding.pickupbtn.setTextColor(Color.WHITE)
+                instantBinding.Acceptedbtn.setTextColor(Color.BLACK)
+                instantBinding.returnbtn.setTextColor(Color.BLACK)
+                instantBinding.shopexchangebtn.setTextColor(Color.BLACK)
         }
 
 
@@ -203,6 +231,12 @@ class InstantsFragment : Fragment() {
             Ordersdetails(
                 status="Return"
             )
+            instantBinding.Allbtn.setTextColor(Color.BLACK)
+            instantBinding.Pendingbtn.setTextColor(Color.BLACK)
+            instantBinding.pickupbtn.setTextColor(Color.BLACK)
+            instantBinding.Acceptedbtn.setTextColor(Color.BLACK)
+            instantBinding.returnbtn.setTextColor(Color.WHITE)
+            instantBinding.shopexchangebtn.setTextColor(Color.BLACK)
         }
 
 
@@ -234,6 +268,12 @@ class InstantsFragment : Fragment() {
             Ordersdetails(
                 status="ShopExchange"
             )
+            instantBinding.Allbtn.setTextColor(Color.BLACK)
+            instantBinding.Pendingbtn.setTextColor(Color.BLACK)
+            instantBinding.pickupbtn.setTextColor(Color.BLACK)
+            instantBinding.Acceptedbtn.setTextColor(Color.BLACK)
+            instantBinding.returnbtn.setTextColor(Color.BLACK)
+            instantBinding.shopexchangebtn.setTextColor(Color.WHITE)
         }
         return instantBinding.root
     }

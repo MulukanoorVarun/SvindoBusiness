@@ -1,6 +1,7 @@
 package com.example.vendorapp.fragements
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -64,7 +65,7 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.pickupbtn.setEnabled(false)
             generalbinding.Acceptedbtn.setEnabled(false)
             generalbinding.returnbtn.setEnabled(false)
-            generalbinding.shopexchange.setEnabled(false)
+            generalbinding.shopexchangebtn.setEnabled(false)
 
             Handler().postDelayed({
                 generalbinding.Allbtn.setEnabled(true)
@@ -72,7 +73,7 @@ class GeneralDeliveryFragment : Fragment() {
                 generalbinding.pickupbtn.setEnabled(true)
                 generalbinding.Acceptedbtn.setEnabled(true)
                 generalbinding.returnbtn.setEnabled(true)
-                generalbinding.shopexchange.setEnabled(true)
+                generalbinding.shopexchangebtn.setEnabled(true)
                 generalbinding.Allbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -82,10 +83,16 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
-            generalbinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status = "all"
             )
+            generalbinding.Allbtn.setTextColor(Color.WHITE)
+            generalbinding.Pendingbtn.setTextColor(Color.BLACK)
+            generalbinding.pickupbtn.setTextColor(Color.BLACK)
+            generalbinding.Acceptedbtn.setTextColor(Color.BLACK)
+            generalbinding.returnbtn.setTextColor(Color.BLACK)
+            generalbinding.shopexchangebtn.setTextColor(Color.BLACK)
         }
         generalbinding.Pendingbtn.setOnClickListener {
             generalbinding.Pendingbtn.setBackgroundResource(R.drawable.button_loading_background);
@@ -94,7 +101,7 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.pickupbtn.setEnabled(false)
             generalbinding.Acceptedbtn.setEnabled(false)
             generalbinding.returnbtn.setEnabled(false)
-            generalbinding.shopexchange.setEnabled(false)
+            generalbinding.shopexchangebtn.setEnabled(false)
 
             Handler().postDelayed({
                 generalbinding.Allbtn.setEnabled(true)
@@ -102,7 +109,7 @@ class GeneralDeliveryFragment : Fragment() {
                 generalbinding.pickupbtn.setEnabled(true)
                 generalbinding.Acceptedbtn.setEnabled(true)
                 generalbinding.returnbtn.setEnabled(true)
-                generalbinding.shopexchange.setEnabled(true)
+                generalbinding.shopexchangebtn.setEnabled(true)
                 generalbinding.Pendingbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -112,10 +119,17 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
-            generalbinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="Pending"
             )
+
+            generalbinding.Allbtn.setTextColor(Color.BLACK)
+            generalbinding.Pendingbtn.setTextColor(Color.WHITE)
+            generalbinding.pickupbtn.setTextColor(Color.BLACK)
+            generalbinding.Acceptedbtn.setTextColor(Color.BLACK)
+            generalbinding.returnbtn.setTextColor(Color.BLACK)
+            generalbinding.shopexchangebtn.setTextColor(Color.BLACK)
         }
         generalbinding.Acceptedbtn.setOnClickListener {
 
@@ -125,7 +139,7 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.pickupbtn.setEnabled(false)
             generalbinding.Acceptedbtn.setEnabled(false)
             generalbinding.returnbtn.setEnabled(false)
-            generalbinding.shopexchange.setEnabled(false)
+            generalbinding.shopexchangebtn.setEnabled(false)
 
             Handler().postDelayed({
                 generalbinding.Allbtn.setEnabled(true)
@@ -133,7 +147,7 @@ class GeneralDeliveryFragment : Fragment() {
                 generalbinding.pickupbtn.setEnabled(true)
                 generalbinding.Acceptedbtn.setEnabled(true)
                 generalbinding.returnbtn.setEnabled(true)
-                generalbinding.shopexchange.setEnabled(true)
+                generalbinding.shopexchangebtn.setEnabled(true)
                 generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -143,10 +157,16 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
-            generalbinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status = "Accepted"
             )
+            generalbinding.Allbtn.setTextColor(Color.BLACK)
+            generalbinding.Pendingbtn.setTextColor(Color.BLACK)
+            generalbinding.pickupbtn.setTextColor(Color.BLACK)
+            generalbinding.Acceptedbtn.setTextColor(Color.WHITE)
+            generalbinding.returnbtn.setTextColor(Color.BLACK)
+            generalbinding.shopexchangebtn.setTextColor(Color.BLACK)
         }
 
 
@@ -157,7 +177,7 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.pickupbtn.setEnabled(false)
             generalbinding.Acceptedbtn.setEnabled(false)
             generalbinding.returnbtn.setEnabled(false)
-            generalbinding.shopexchange.setEnabled(false)
+            generalbinding.shopexchangebtn.setEnabled(false)
 
             Handler().postDelayed({
                 generalbinding.Allbtn.setEnabled(true)
@@ -165,7 +185,7 @@ class GeneralDeliveryFragment : Fragment() {
                 generalbinding.pickupbtn.setEnabled(true)
                 generalbinding.Acceptedbtn.setEnabled(true)
                 generalbinding.returnbtn.setEnabled(true)
-                generalbinding.shopexchange.setEnabled(true)
+                generalbinding.shopexchangebtn.setEnabled(true)
                 generalbinding.pickupbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -175,10 +195,16 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
-            generalbinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="Delivered"
             )
+            generalbinding.Allbtn.setTextColor(Color.BLACK)
+            generalbinding.Pendingbtn.setTextColor(Color.BLACK)
+            generalbinding.pickupbtn.setTextColor(Color.WHITE)
+            generalbinding.Acceptedbtn.setTextColor(Color.BLACK)
+            generalbinding.returnbtn.setTextColor(Color.BLACK)
+            generalbinding.shopexchangebtn.setTextColor(Color.BLACK)
         }
 
         generalbinding.returnbtn.setOnClickListener {
@@ -188,7 +214,7 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.pickupbtn.setEnabled(false)
             generalbinding.Acceptedbtn.setEnabled(false)
             generalbinding.returnbtn.setEnabled(false)
-            generalbinding.shopexchange.setEnabled(false)
+            generalbinding.shopexchangebtn.setEnabled(false)
 
             Handler().postDelayed({
                 generalbinding.Allbtn.setEnabled(true)
@@ -196,7 +222,7 @@ class GeneralDeliveryFragment : Fragment() {
                 generalbinding.pickupbtn.setEnabled(true)
                 generalbinding.Acceptedbtn.setEnabled(true)
                 generalbinding.returnbtn.setEnabled(true)
-                generalbinding.shopexchange.setEnabled(true)
+                generalbinding.shopexchangebtn.setEnabled(true)
                 generalbinding.returnbtn.setBackgroundResource(R.drawable.buttonbackground)
             },2000)
 
@@ -206,21 +232,27 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
-            generalbinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="Return"
             )
+            generalbinding.Allbtn.setTextColor(Color.BLACK)
+            generalbinding.Pendingbtn.setTextColor(Color.BLACK)
+            generalbinding.pickupbtn.setTextColor(Color.BLACK)
+            generalbinding.Acceptedbtn.setTextColor(Color.BLACK)
+            generalbinding.returnbtn.setTextColor(Color.WHITE)
+            generalbinding.shopexchangebtn.setTextColor(Color.BLACK)
         }
 
 
-        generalbinding.shopexchange.setOnClickListener {
-            generalbinding.shopexchange.setBackgroundResource(R.drawable.button_loading_background);
+        generalbinding.shopexchangebtn.setOnClickListener {
+            generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.button_loading_background);
             generalbinding.Allbtn.setEnabled(false)
             generalbinding.Pendingbtn.setEnabled(false)
             generalbinding.pickupbtn.setEnabled(false)
             generalbinding.Acceptedbtn.setEnabled(false)
             generalbinding.returnbtn.setEnabled(false)
-            generalbinding.shopexchange.setEnabled(false)
+            generalbinding.shopexchangebtn.setEnabled(false)
 
             Handler().postDelayed({
                 generalbinding.Allbtn.setEnabled(true)
@@ -228,8 +260,8 @@ class GeneralDeliveryFragment : Fragment() {
                 generalbinding.pickupbtn.setEnabled(true)
                 generalbinding.Acceptedbtn.setEnabled(true)
                 generalbinding.returnbtn.setEnabled(true)
-                generalbinding.shopexchange.setEnabled(true)
-                generalbinding.shopexchange.setBackgroundResource(R.drawable.buttonbackground)
+                generalbinding.shopexchangebtn.setEnabled(true)
+                generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.buttonbackground)
             },2000)
 
 
@@ -242,6 +274,12 @@ class GeneralDeliveryFragment : Fragment() {
             Ordersdetails(
                 status="ShopExchange"
             )
+            generalbinding.Allbtn.setTextColor(Color.BLACK)
+            generalbinding.Pendingbtn.setTextColor(Color.BLACK)
+            generalbinding.pickupbtn.setTextColor(Color.BLACK)
+            generalbinding.Acceptedbtn.setTextColor(Color.BLACK)
+            generalbinding.returnbtn.setTextColor(Color.BLACK)
+            generalbinding.shopexchangebtn.setTextColor(Color.WHITE)
         }
 
         //   return inflater.inflate(R.layout.instantsfragment, container, false)

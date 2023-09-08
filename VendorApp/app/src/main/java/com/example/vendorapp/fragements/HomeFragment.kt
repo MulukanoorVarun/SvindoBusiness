@@ -1,19 +1,13 @@
 package com.example.vendorapp.fragements
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.Activity.RESULT_OK
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vendorapp.R
 import com.example.vendorapp.adapters.BannersAdapter
@@ -27,7 +21,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.concurrent.TimeoutException
-import kotlin.system.exitProcess
+
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var dashboardBinding: FragmentHomeBinding
@@ -45,14 +39,11 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(requireContext())
+        dashboardBinding = FragmentHomeBinding.inflate(layoutInflater)
         }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dashboardBinding = FragmentHomeBinding.inflate(inflater, container, false)
         dashboardBinding = FragmentHomeBinding.inflate(layoutInflater)
-
 
         linearLayoutManager = LinearLayoutManager(context)
         dashboardBinding.newordersRequestsViewRecyclerview.layoutManager = linearLayoutManager
@@ -71,34 +62,9 @@ class HomeFragment : Fragment() {
 //                    shop_status = shopstatus.toString().trim(),
 //                )
 //        }
-
         dashboarddetails()
-
         return dashboardBinding.root
-
-        // Inflate the layout for this fragment
-       // return inflater.inflate(R.layout.fragment_home2, container, false)
     }
-//    @Deprecated("Deprecated in Java")
-//    @Override fun onBackPressed() {
-//        val intent = Intent()
-//        intent.putExtra("EXIT", true)
-//        AlertDialog.Builder(requireContext())
-//            .setTitle("Really Exit?")
-//            .setMessage("Are you sure you want to exit?")
-//            .setNegativeButton(android.R.string.no, null)
-//            .setPositiveButton(
-//                android.R.string.yes
-//            )
-//            { arg0, arg1 ->   requireActivity().setResult(Activity.RESULT_OK, intent)
-////                val i = Intent(this@BusinessdetailsActivity, SplashActivity::class.java)
-////                startActivity(i)
-//                //moveTaskToBack(true);
-//                exitProcess(-1)
-//            }.create().show()
-//    }
-
-
 
     fun dashboarddetails() {
         try {
@@ -109,13 +75,12 @@ class HomeFragment : Fragment() {
                     call: Call<DashboardResponseModal>,
                     response: Response<DashboardResponseModal>
                 ) {
-                    //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    dashboardBinding.progressBarLay.progressBar.visibility=View.INVISIBLE
+                //    dashboardBinding.progressBarLay.visibility= View.GONE
                     try {
                         when{
                             response.code() == 200 ->{
-
                                 dashboardResponse = response.body()!!
-
                                     if(dashboardResponse !=null) {
                                         if (dashboardResponse.error == "0") {
                                             dashboardBinding.deliveredorderTxt.text =
@@ -182,15 +147,16 @@ class HomeFragment : Fragment() {
                     }
                 }
                 override fun onFailure(call: Call<DashboardResponseModal>, t: Throwable){
-                    //dashboardBinding.progressBarLay.visibility  = View.GONE
+                  //  dashboardBinding.progressBarLay.visibility  = View.GONE
                     Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
                 }
             })
         }catch (e: Exception){
-            //dashboardBinding.progressBarLay.visibility = View.GONE
+          //  dashboardBinding.progressBarLay.visibility= View.GONE
             Toast.makeText(context,e.message.toString(), Toast.LENGTH_SHORT).show()
         }
     }
+
     fun ShopStatusDetail(
         shop_status:String,
     ) {

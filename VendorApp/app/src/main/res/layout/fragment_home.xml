@@ -7,6 +7,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white">
+            <include
+                android:id="@+id/progressBarLay"
+                layout="@layout/progressbarlayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="60dp"
+                android:layout_gravity="center"
+                android:visibility="visible" />
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/app_bar"
                 android:layout_width="match_parent"
@@ -44,6 +54,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -273,10 +284,7 @@
                 android:layout_marginTop="10dp"
                 android:id="@+id/pendingorderstxt"
                 android:layout_below="@id/horizontalrv"
-                android:layout_marginStart="15dp"
-
-                />
-
+                android:layout_marginStart="15dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/newordersRequestsViewRecyclerview"
@@ -285,7 +293,6 @@
                 android:layout_below="@+id/pendingorderstxt"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"/>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -294,20 +301,11 @@
                 android:visibility="gone"
                 android:textColor="@color/black"
                 android:textSize="16sp"/>
-<!--            <include-->
-<!--                android:id="@+id/progressBarLay"-->
-<!--                layout="@layout/progressbarlayout"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_below="@+id/neworderstxt"-->
-<!--                android:layout_marginStart="10dp"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:layout_marginTop="60dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:visibility="gone" />-->
+
 
 
         </RelativeLayout>
+
     </ScrollView>
         </RelativeLayout>
 </layout>

@@ -1,6 +1,7 @@
 package com.example.vendorapp.fragements
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -95,6 +96,7 @@ class ProductsFragment : Fragment() {
 
     fun Productdetails() {
         try {
+            //productsBinding.progressBarLay.visibility= View.VISIBLE
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.ProductDetails(sharedPreference.getValueString("token"))
             requestCall.enqueue(object : Callback<ProductsModal> {
@@ -111,8 +113,8 @@ class ProductsFragment : Fragment() {
                                         if (productsresponse.products.count() > 0) {
                                             productsBinding.newordersRequestsViewRecyclerview.visibility = View.VISIBLE
                                             productsBinding.noData.visibility = View.GONE
-                                            //adapter = ProductsAdapter(productsresponse.products,context!!)
-                                            adapter = context?.let { ProductsAdapter(productsresponse.products, context = it)}!!
+                                            adapter = ProductsAdapter(productsresponse.products,context!!)
+                                            //adapter = context?.let { ProductsAdapter(productsresponse.products, context = it)}!!
                                             productsBinding.newordersRequestsViewRecyclerview.adapter = adapter
                                         }
                                         else{

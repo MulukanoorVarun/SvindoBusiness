@@ -729,7 +729,6 @@ class AddNewProduct : AppCompatActivity() {
             }
         }
     }
-
     fun SizesList(subcat_id:String){
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
@@ -766,8 +765,6 @@ class AddNewProduct : AppCompatActivity() {
                                 showToast(getString(R.string.server_error))
                             }
                         }
-
-
                     } catch (e: TimeoutException) {
                         showToast(getString(R.string.time_out))
                     }
@@ -776,7 +773,6 @@ class AddNewProduct : AppCompatActivity() {
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
                     showToast(t.message.toString())
                 }
-
             })
 
 
@@ -810,7 +806,6 @@ class AddNewProduct : AppCompatActivity() {
             }
         }
     }
-
     fun AddNewProductDetails(
         name:String,
         category_id:String,
@@ -840,15 +835,14 @@ class AddNewProduct : AppCompatActivity() {
            //showToast(file1.toString())
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
-
             val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
             val body1 = MultipartBody.Part.createFormData("default_img", file1.name, requestFile1)
             val requestFile2= file2.asRequestBody("image/*".toMediaTypeOrNull())
-            val body2 = MultipartBody.Part.createFormData("default_img", file2.name, requestFile2)
+            val body2 = MultipartBody.Part.createFormData("default_img1", file2.name, requestFile2)
             val requestFile3= file3.asRequestBody("image/*".toMediaTypeOrNull())
-            val body3 = MultipartBody.Part.createFormData("default_img", file3.name, requestFile3)
+            val body3 = MultipartBody.Part.createFormData("default_img2", file3.name, requestFile3)
             val requestFile4= file4.asRequestBody("image/*".toMediaTypeOrNull())
-            val body4 = MultipartBody.Part.createFormData("default_img", file4.name, requestFile4)
+            val body4 = MultipartBody.Part.createFormData("default_img3", file4.name, requestFile4)
 //            val requestFile5= file5.asRequestBody("image/*".toMediaTypeOrNull())
 //            val body5 = MultipartBody.Part.createFormData("default_img", file5.name, requestFile5)
             val name: RequestBody = name.toRequestBody("text/plain".toMediaTypeOrNull())

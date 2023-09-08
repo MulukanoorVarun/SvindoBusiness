@@ -68,7 +68,7 @@
                         android:layout_marginStart="13dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="10dp"
-                        android:text="Note: Please upload 1:4 (1-height 4-width) ratio image for banner"
+                        android:text="Note: Please upload 1:4 (1-height 4-width) pixels ratio image for banner"
                         android:textSize="11sp"
                         android:textColor="@color/black"
                         tools:ignore="Hardcodedtext" />

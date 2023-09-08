@@ -150,7 +150,6 @@ class AcceptOrder : AppCompatActivity() {
                                     }
                                     if (orderstatus == "Order Accepted") {
                                         acceptOrderBinding.acceptbutton.text = "Ship Order"
-
                                     }
 
                                     acceptOrderBinding.rejectbutton.setOnClickListener {
@@ -162,6 +161,7 @@ class AcceptOrder : AppCompatActivity() {
                                             )
                                         }
                                     }
+
                                     acceptOrderBinding.acceptbutton.setOnClickListener {
                                         if (orderstatus == "Order Placed") {
                                             orderstatus = "Order Accepted"
@@ -253,6 +253,7 @@ class AcceptOrder : AppCompatActivity() {
                             response.code() == 200 -> {
                                 orderstatusresponse = response.body()!!
                                 if (orderstatusresponse.error == "0") {
+                                    showToast(orderstatusresponse.message.toString())
                                     Acceptorder(order_id)
                                 }
                             }

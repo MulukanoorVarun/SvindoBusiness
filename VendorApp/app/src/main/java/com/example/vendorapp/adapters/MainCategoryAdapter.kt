@@ -12,10 +12,8 @@ import com.example.vendorapp.modelclass.Unititem
 
 class MainCategoryAdapter (private val context: Context, private val itemList: List<MaincategoryX>) : BaseAdapter() {
     override fun getCount(): Int {
-
         return itemList.size
     }
-
     override fun getItem(position: Int): Any {
         return itemList[position]
     }

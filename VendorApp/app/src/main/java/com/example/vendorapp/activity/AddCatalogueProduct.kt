@@ -17,6 +17,7 @@ import com.example.vendorapp.R
 import com.example.vendorapp.adapters.*
 import com.example.vendorapp.databinding.ActivityAddCatalogueProductBinding
 import com.example.vendorapp.databinding.SpinneritemdesignBinding
+import com.example.vendorapp.databinding.SpinneritemlayoutBinding
 import com.example.vendorapp.modelclass.*
 import com.example.vendorapp.services.ApiClient
 import com.example.vendorapp.services.ApiInterface
@@ -192,6 +193,7 @@ class AddCatalogueProduct : AppCompatActivity() {
             val minQuantity=ProductBinding.minquantityet.text.toString().trim()
             val gson = Gson()
             val AddonDataJson: String = gson.toJson(ADDONData)
+
             Productdetails(
                 product_id = itemId.toString().trim(),
                 unit_id = unitId.toString().trim(),
@@ -273,7 +275,6 @@ class AddCatalogueProduct : AppCompatActivity() {
         printing: String,
         minQuantity:String,
     ) {
-
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.CatProductDetails(sharedPreference.getValueString("token"), product_id, "0", mrp_price, sale_price, quantity, unit_id, stock, insatantDel, delivery_days, GeneralDel, self_pick, COD, Replacement, Return, shopExchange, ADDONData, printing, minQuantity,size_id)
@@ -319,7 +320,6 @@ class AddCatalogueProduct : AppCompatActivity() {
             showToast(e.message.toString())
         }
     }
-
     fun CatalougeProductList(category_id:String) {
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
@@ -533,7 +533,7 @@ class AddCatalogueProduct : AppCompatActivity() {
 
     internal fun setSpinner(items: List<Unititem>) {
         spinner = findViewById(R.id.spinner1)
-
+        var binding=SpinneritemlayoutBinding.inflate(layoutInflater)
         val adapter = UnitsAdapter(this, items)
         spinner.adapter = adapter
 
@@ -547,12 +547,9 @@ class AddCatalogueProduct : AppCompatActivity() {
             ) {
                 val selectedItem = items[position]
                 unitId = selectedItem.id
-                showToast(unitId.toString())
-
                 //  fetchItemDetailsCal(itemId)
                 // Do something with the selected item (e.g., display its ID or name)
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // Do nothing when nothing is selected
             }
@@ -615,7 +612,6 @@ class AddCatalogueProduct : AppCompatActivity() {
         spinner.adapter = adapter
         spinner.setSelection(0,false)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -628,18 +624,10 @@ class AddCatalogueProduct : AppCompatActivity() {
                 Addons_show.add(selectedItem.price)
                 var AddonObj = AddonsData(id = selectedItem.id)
                 ADDONData.add(AddonObj)
-               // showToast(getString(R.string.session_exp))
-//                var adapter: ArrayAdapter<String?> = ArrayAdapter<String?>(
-//                    this@AddCatalogueProduct,
-//                    android.R.layout.simple_spinner_item,
-//                    Addons_show as List<String>
-//                )
+
                 val customAdapter = CustomAdapter(this@AddCatalogueProduct,Addons_show)
                 ProductBinding.Addonslistview.adapter = customAdapter
 
-
-                // on below line we are setting adapter for our list view.
-//                ProductBinding.Addonslistview.adapter = customAdapter
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // Do nothing when nothing is selected

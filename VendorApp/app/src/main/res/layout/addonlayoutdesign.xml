@@ -41,6 +41,7 @@
             android:autofillHints=""
             android:background="@drawable/boarder"
             android:hint="Enter Name"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
             android:inputType="text"
             android:textSize="13sp"
             android:padding="10dp"
