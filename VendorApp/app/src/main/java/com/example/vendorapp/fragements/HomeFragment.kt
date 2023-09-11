@@ -75,7 +75,7 @@ class HomeFragment : Fragment() {
                     call: Call<DashboardResponseModal>,
                     response: Response<DashboardResponseModal>
                 ) {
-                    dashboardBinding.progressBarLay.progressBar.visibility=View.INVISIBLE
+                   // dashboardBinding.progressBarLay.progressBar.visibility=View.INVISIBLE
                 //    dashboardBinding.progressBarLay.visibility= View.GONE
                     try {
                         when{
