@@ -114,7 +114,7 @@ class AddBannersActivity : AppCompatActivity() {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long){
                     val selectedItem = Services[position]
                     BannerItem= selectedItem
-                    showToast(BannerItem)
+                  //  showToast(BannerItem)
                     if(BannerItem=="Products")
                     {
                         bannersBinding.cardview.isVisible=true
@@ -403,7 +403,7 @@ class AddBannersActivity : AppCompatActivity() {
                             //    sharedPreference.save("token", businessdetailsResponse.token);
                             showToast(addBannerResponse.message)
                         }else{
-                            showToast(addBannerResponse.message)
+                          //  showToast(addBannerResponse.message)
                         }
                         if(addBannerResponse.error=="1"){
                             showToast(addBannerResponse.message)
@@ -459,7 +459,7 @@ class AddBannersActivity : AppCompatActivity() {
 //                                            adapter1 = ProductsListAdapter(productsresponse.products,applicationContext)
 //                                            binding.productsRecyclerview.adapter = adapter1
                                     } else {
-                                        showToast("List is Empty")
+                                       // showToast("List is Empty")
                                         binding.productsRecyclerview.visibility = View.GONE
                                     }
                                 }
@@ -559,8 +559,5 @@ class AddBannersActivity : AppCompatActivity() {
                 dialog!!.dismiss()
             }
         }
-
-
-
 
 }

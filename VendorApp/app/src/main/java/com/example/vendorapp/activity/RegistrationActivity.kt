@@ -14,14 +14,5 @@ class RegistrationActivity : AppCompatActivity() {
         douctmentverifybinding = DouctmentVerificationScreenBinding.inflate(layoutInflater)
         setContentView(douctmentverifybinding.root)
 
-
-
-
-
-
-
-
-
-
     }
 }

@@ -87,10 +87,11 @@ class BankaccountActivity : AppCompatActivity() {
                     response.isSuccessful -> {//status code between 200 to 299
                         bankdetailsResponse = response.body()!!
                         if (bankdetailsResponse.error=="0") {
+                            showToast(bankdetailsResponse.message)
                             val i = Intent(this@BankaccountActivity,ContactActivity::class.java)
                             startActivity(i)
                         } else{
-                            showToast(bankdetailsResponse.message)
+                            //showToast(bankdetailsResponse.message)
                         }
                     }
                     response.code() == 401 -> {//unauthorised

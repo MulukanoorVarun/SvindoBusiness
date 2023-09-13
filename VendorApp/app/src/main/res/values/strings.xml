@@ -452,7 +452,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="_0">Rs.0</string>
     <string name="account_status">Account Status:</string>
     <string name="verified">Verified</string>
-    <string name="select_course">Select Course</string>
+    <string name="select_course">Select Item</string>
     <string name="search">Search product</string>
     <string name="search_for_product">Search For Product</string>
     <string name="subsidy_on_their_delivery_charges">%  subsidy on their </string>

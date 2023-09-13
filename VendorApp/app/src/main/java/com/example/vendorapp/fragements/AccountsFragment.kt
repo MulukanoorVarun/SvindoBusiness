@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment
 import com.example.vendorapp.R
 import com.example.vendorapp.activity.*
 import com.example.vendorapp.databinding.FragmentAccountsBinding
+import com.example.vendorapp.databinding.ReportspopuplayoutBinding
 import com.example.vendorapp.databinding.ShopboostlayoutBinding
 import com.example.vendorapp.databinding.WithdrawamountlayoutBinding
 import com.example.vendorapp.modelclass.AccountsModal
@@ -42,6 +43,7 @@ import java.util.concurrent.TimeoutException
 private lateinit var accountbinding: FragmentAccountsBinding
 class  AccountsFragment : Fragment() {
     private lateinit var binding: ShopboostlayoutBinding
+    private lateinit var reportbinding:ReportspopuplayoutBinding
     private lateinit var sharedPreference: SharedPreference
     lateinit var accountsresponse: AccountsModal
     lateinit var cashbackresponse: CashbackStatusModal
@@ -57,6 +59,7 @@ class  AccountsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(requireContext())
         accountbinding = FragmentAccountsBinding.inflate(layoutInflater)
+        reportbinding=ReportspopuplayoutBinding.inflate(layoutInflater)
     }
 
     override fun onCreateView(
@@ -219,6 +222,7 @@ class  AccountsFragment : Fragment() {
         builder.setCancelable(true)
         alertDialog = builder.create()
         alertDialog.show()
+        accountbinding.shopboostsswitch.isChecked=false
         alertDialog.setCanceledOnTouchOutside(false)
 
         binding.submitbutton.setOnClickListener {
@@ -229,9 +233,36 @@ class  AccountsFragment : Fragment() {
                     shop_boost.toString().trim()
                 )
             }
-           // alertDialog.hide()
+            alertDialog.hide()
         }
         }
+
+
+    fun showreportsdialog(){
+        builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+
+        val rootView = reportbinding.root
+        // Check if the rootView already has a parent
+        val parent = rootView.parent as? ViewGroup
+        parent?.removeView(rootView)
+
+        builder.setView(reportbinding.root)
+        builder.setCancelable(true)
+        alertDialog = builder.create()
+        alertDialog.show()
+        alertDialog.setCanceledOnTouchOutside(false)
+
+        reportbinding.submitbutton.setOnClickListener {
+            val startDate=reportbinding.startdateEt.text.toString().trim()
+            val EndDate=reportbinding.enddateEt.text.toString().trim()
+            var reportsurl= accountsresponse.report
+            reportsurl=reportsurl+"?"+"startdate=startDate"+"&"+"enddate=EndDate"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(reportsurl.trim()))
+            startActivity(intent)
+            alertDialog.hide()
+        }
+
+    }
 
     fun Shopboostdeatils(
         max_amt:String,
@@ -255,10 +286,12 @@ class  AccountsFragment : Fragment() {
                                     }
                                     if (shopboostresponse.error == "1") {
                                         alertDialog.hide()
+                                       // accountbinding.shopboostsswitch.isChecked=false
                                         Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                     }
                                     if (shopboostresponse.error == "2") {
                                         alertDialog.hide()
+                                       // accountbinding.shopboostsswitch.isChecked=false
                                         Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                     }else{
 
@@ -384,11 +417,10 @@ class  AccountsFragment : Fragment() {
                                         }
 
                                         accountbinding.reports.setOnClickListener {
-                                            var reportsurl= accountsresponse.report
+                                            showreportsdialog()
 
-                                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(reportsurl.trim()))
-                                            startActivity(intent)
                                         }
+
 
                                         var deliveryStatus = accountsresponse.details.free_delivery
                                         if (deliveryStatus == "enable") {

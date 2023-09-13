@@ -358,7 +358,7 @@ sharedPreference=SharedPreference(this)
                         //    sharedPreference.save("token", businessdetailsResponse.token);
                             showToast(addResponse.message)
                         }else{
-                            showToast(addResponse.message)
+                         //   showToast(addResponse.message)
                         }
                     }
                     response.code() == 401 -> {//unauthorised

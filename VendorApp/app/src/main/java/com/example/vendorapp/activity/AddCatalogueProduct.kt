@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vendorapp.R
 import com.example.vendorapp.adapters.*
 import com.example.vendorapp.databinding.ActivityAddCatalogueProductBinding
@@ -39,16 +40,20 @@ class AddCatalogueProduct : AppCompatActivity() {
     private lateinit var productdetailsResponse: Bankdetails_Response
     private lateinit var cataloguelistResponse: CustomSpinAdapter
     private lateinit var unitslistResponse: UnitModal
+    private lateinit var addondata: AddonsListModal
     private lateinit var maincategoryResponse: MainCategoryModal
     private lateinit var builder: AlertDialog.Builder
     private lateinit var alertDialog: AlertDialog
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var adapter:AdonsRecyclerviewadapter
     private var dialog:Dialog? = null
     private lateinit var sharedPreference: SharedPreference
     // Inside your Activity or Fragment
     lateinit var productsarrayList: ArrayList<String>
+    lateinit var addondsarrayList: ArrayList<String>
 
     private lateinit var spinner: Spinner
-    private val itemList: MutableList<Maincategory> = ArrayList()
+    private var itemList: MutableList<String> =  mutableListOf()
 
     var itemId = ""
     var unitId = ""
@@ -75,9 +80,15 @@ class AddCatalogueProduct : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         productsarrayList = ArrayList()
+        addondsarrayList = ArrayList()
         setContentView(R.layout.activity_add_catalogue_product)
         ProductBinding = ActivityAddCatalogueProductBinding.inflate(layoutInflater)
         setContentView(ProductBinding.root)
+
+//        linearLayoutManager = LinearLayoutManager(this)
+//        ProductBinding.AddonsRecyclerView.layoutManager = linearLayoutManager
+//        ProductBinding.AddonsRecyclerView.hasFixedSize()
+
 
         sharedPreference = SharedPreference(this)
         val loginButton = findViewById<ImageView>(R.id.business_details_backbutton)
@@ -87,66 +98,69 @@ class AddCatalogueProduct : AppCompatActivity() {
         ProductBinding.Selfpickupswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
                 self_pick = "1";
-                showToast(self_pick)
+             //   showToast(self_pick)
             } else {
                 self_pick = "0";
-                showToast(self_pick)
+               // showToast(self_pick)
             }
         }
         ProductBinding.insatantswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
                 insatantDel = "1";
-                showToast(insatantDel)
+              //  showToast(insatantDel)
             } else {
                 insatantDel = "0";
-                showToast(insatantDel)
+                //showToast(insatantDel)
             }
         }
         ProductBinding.generaldeliveryswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
                 GeneralDel = "1";
-                showToast(GeneralDel)
+              //  showToast(GeneralDel)
             } else {
                 GeneralDel = "0";
-                showToast(GeneralDel)
+              //  showToast(GeneralDel)
             }
         }
         ProductBinding.returnswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
                 Return = "1";
-                showToast(Return)
+              //  showToast(Return)
             } else {
                 Return = "0";
-                showToast(Return)
+               // showToast(Return)
             }
         }
         ProductBinding.codswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
                 COD = "1";
-                showToast(COD)
+               // showToast(COD)
             } else {
                 COD = "0";
-                showToast(COD)
+             //   showToast(COD)
             }
         }
         ProductBinding.replacementswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
                 Replacement = "1";
-                showToast(Replacement)
+               // showToast(Replacement)
             } else {
                 Replacement = "0";
-                showToast(Replacement)
+                //showToast(Replacement)
             }
         }
         ProductBinding.shopexchangeswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
                 shopExchange = "1";
-                showToast(shopExchange)
+               // showToast(shopExchange)
             } else {
                 shopExchange = "0";
-                showToast(shopExchange)
+              //  showToast(shopExchange)
             }
         }
+
+        ProductBinding.Addonslistview.setScrollContainer(false)
+        ProductBinding.Addonslistview.setVerticalScrollBarEnabled(false)
 
         ProductBinding.printingswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
@@ -156,14 +170,14 @@ class AddCatalogueProduct : AppCompatActivity() {
                 ProductBinding.priceet.isEnabled = false
                 ProductBinding.spinner1.isEnabled = false
                 ProductBinding.stocket.isEnabled = false
-                showToast(is_printing)
+               // showToast(is_printing)
             } else {
                 is_printing = "0"
                 ProductBinding.discountprice.text="Sale Price";
                 ProductBinding.priceet.isEnabled = true
                 ProductBinding.spinner1.isEnabled = true
                 ProductBinding.stocket.isEnabled = true
-                showToast(is_printing)
+              //  showToast(is_printing)
             }
         }
 
@@ -183,7 +197,6 @@ class AddCatalogueProduct : AppCompatActivity() {
                 ProductBinding.submitbutton.setEnabled(true)
                 ProductBinding.submitbutton.setBackgroundResource(R.drawable.buttonbackground);
             }, 2000)
-
 
             val deliverydays = ProductBinding.generaldeliverydays.text.toString().trim()
             val mrp_price = ProductBinding.priceet.text.toString().trim()
@@ -212,9 +225,49 @@ class AddCatalogueProduct : AppCompatActivity() {
                 mrp_price = ProductBinding.priceet.text.toString().trim(),
                 sale_price = ProductBinding.discountpriceet.text.toString().trim(),
                 stock = ProductBinding.stocket.text.toString().trim(),
-                ADDONData = AddonDataJson.toString().trim()
+                ADDONData =AddonDataJson.toString().trim()
             )
         }
+
+//        ProductBinding.addbtn.setOnClickListener {
+//            dialog = Dialog(this@AddCatalogueProduct)
+//
+//            // Set custom dialog layout
+//            dialog!!.setContentView(R.layout.searchablespinnerlayout)
+//
+//            // Set custom height and width
+//            dialog!!.window?.setLayout(800, 800)
+//
+//            // Set transparent background
+//            dialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//
+//            // Show dialog
+//            dialog!!.show()
+//            // Initialize variables from dialog
+//            val editText = dialog!!.findViewById<EditText>(R.id.edit_text)
+//            val listView = dialog!!.findViewById<ListView>(R.id.list_view)
+//           // AddonsList()
+//            val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+//                this@AddCatalogueProduct,
+//                android.R.layout.simple_list_item_1, items
+//            )
+//            // Set adapter
+//            listView.adapter = adapter
+//
+//            editText.addTextChangedListener(object : TextWatcher {
+//                override fun beforeTextChanged(
+//                    s: CharSequence?,
+//                    start: Int,
+//                    count: Int,
+//                    after: Int
+//                ) {
+//                }
+//                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                    adapter.filter.filter(s)
+//                }
+//                override fun afterTextChanged(s: Editable?) {}
+//            })
+//        }
 
         Unitsdetails()
         AddonsList()
@@ -293,7 +346,7 @@ class AddCatalogueProduct : AppCompatActivity() {
                                         val i = Intent(this@AddCatalogueProduct, MainActivity::class.java)
                                         startActivity(i)
                                     } else {
-                                        showToast(productdetailsResponse.message.toString())
+                                       // showToast(productdetailsResponse.message.toString())
                                     }
                                 }else{
 
@@ -370,15 +423,13 @@ class AddCatalogueProduct : AppCompatActivity() {
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
                     showToast(t.message.toString())
                 }
-
             })
-
-
         } catch (e: Exception) {
             //dashboardBinding.progressBarLay.visibility = View.GONE
             showToast(e.message.toString())
         }
     }
+
 
     internal fun setupSpinner(items:ArrayList<String>) {
         val textview = findViewById<TextView>(R.id.testView)
@@ -441,7 +492,7 @@ class AddCatalogueProduct : AppCompatActivity() {
                     {
                         itemId=i.id
                         Picasso.get().load(i.image).into(imageview)
-                        showToast(itemId.toString())
+                       // showToast(itemId.toString())
                     }
                 }
                 dialog!!.dismiss()
@@ -569,19 +620,28 @@ class AddCatalogueProduct : AppCompatActivity() {
                     try {
                         when {
                             response.code() == 200 -> {
-                                //data = response.body()!!
+                                 addondata = response.body()!!
                                 if (response.isSuccessful) {
-                                    if (response.body() != null) {
-                                        if (response.body()!!.error == "0") {
-                                            AddonsSpinner(response.body()!!.add_on_list)
+                                    if (addondata.error == "0") {
+//                                            AddonsSpinner(response.body()!!.add_on_list)
+//                                        } else {
+//                                          //  showToast("Data is Empty")
+//                                        }
+
+                                        addondsarrayList = ArrayList()
+                                        if (addondata.add_on_list.size > 0) {
+                                            for (i in addondata.add_on_list){
+                                                addondsarrayList!!.add(i.name)
+                                            }
+                                            AddonsSpinner(addondsarrayList!!)
                                         } else {
-                                            showToast("Data is Empty")
+
                                         }
                                     } else {
-                                        showToast("Sorry we are unable to catuch data...")
+                                        // showToast("Sorry we are unable to catuch data...")
                                     }
-                                    // Set up the Spinner with the custom adapter
-                                } else {
+                                }else{
+
                                 }
                             }
                             response.code() == 401 -> {
@@ -606,34 +666,116 @@ class AddCatalogueProduct : AppCompatActivity() {
             showToast(e.message.toString())
         }
     }
-    internal fun AddonsSpinner(items: List<AddOn>) {
-        spinner = findViewById(R.id.addonsspinnerview)
-        val adapter = AddonsListSpinnerAdapter(this, items)
-        spinner.adapter = adapter
-        spinner.setSelection(0,false)
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val selectedItem = items[position]
-                Addons_show.add(selectedItem.name)
-                Addons_show.add(selectedItem.description)
-                Addons_show.add(selectedItem.price)
-                var AddonObj = AddonsData(id = selectedItem.id)
+
+    internal fun AddonsSpinner(items:ArrayList<String>) {
+        var Listview = findViewById<ListView>(R.id.Addonslistview)
+
+        ProductBinding.Addaddon.setOnClickListener {
+            // Initialize dialog
+            dialog = Dialog(this@AddCatalogueProduct)
+
+            // Set custom dialog layout
+            dialog!!.setContentView(R.layout.searchablespinnerlayout)
+
+            // Set custom height and width
+            dialog!!.window?.setLayout(800, 800)
+
+            // Set transparent background
+            dialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            // Show dialog
+            dialog!!.show()
+            // Initialize variables from dialog
+            val editText = dialog!!.findViewById<EditText>(R.id.edit_text)
+            val listView = dialog!!.findViewById<ListView>(R.id.list_view)
+
+            // Initialize custom adapter
+//            val customAdapter = CustomProductsSoinnerAdapter(items, this)
+            val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+                this@AddCatalogueProduct,
+                android.R.layout.simple_list_item_1,
+                items
+            )
+            // Set adapter
+            listView.adapter = adapter
+
+            editText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    adapter.filter.filter(s)
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
+            listView.setOnItemClickListener { parent, view, position, id ->
+               var selectedItem=adapter.getItem(position).toString()
+
+                var AddonObj = AddonsData(id.toString())
                 ADDONData.add(AddonObj)
-
-                val customAdapter = CustomAdapter(this@AddCatalogueProduct,Addons_show)
-                ProductBinding.Addonslistview.adapter = customAdapter
-
+                itemList.add(selectedItem)
+                val selectedItemsAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,itemList)
+                Listview.adapter = selectedItemsAdapter
+                selectedItemsAdapter.notifyDataSetChanged()
+                dialog!!.dismiss()
             }
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Do nothing when nothing is selected
-            }
+//            Listview.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+//                override fun onItemSelected(
+//                    parent: AdapterView<*>?,
+//                    view: View?,
+//                    position: Int,
+//                    id: Long
+//                ) {
+//                      val selectedItem = items[position]
+//                    Addons_show.add(selectedItem.name)
+//                    Addons_show.add(selectedItem.description)
+//                    Addons_show.add(selectedItem.price)
+//                    var AddonObj = AddonsData(id = selectedItem.id)
+//                    ADDONData.add(AddonObj)
+//
+//                    val customAdapter = CustomAdapter(this@AddCatalogueProduct, Addons_show)
+//                    ProductBinding.Addonslistview.adapter = customAdapter
+//                }
+//
+//                override fun onNothingSelected(parent: AdapterView<*>?) {
+//                    // Do nothing when nothing is selected
+//                }
+//            }
         }
     }
+//       // spinner = findViewById(R.id.addonsspinnerview)
+//        val adapter = AddonsListSpinnerAdapter(this, items)
+//        spinner.adapter = adapter
+//        spinner.setSelection(0,false)
+//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                val selectedItem = items[position]
+//                Addons_show.add(selectedItem.name)
+//                Addons_show.add(selectedItem.description)
+//                Addons_show.add(selectedItem.price)
+//                var AddonObj = AddonsData(id = selectedItem.id)
+//                ADDONData.add(AddonObj)
+//
+//                val customAdapter = CustomAdapter(this@AddCatalogueProduct,Addons_show)
+//                ProductBinding.Addonslistview.adapter = customAdapter
+//
+//            }
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//                // Do nothing when nothing is selected
+//            }
+//        }
+
 
     fun MainCategoryList() {
         try {
@@ -682,7 +824,6 @@ class AddCatalogueProduct : AppCompatActivity() {
         }
 
     }
-
     internal fun MaincategorySpinner(items: List<MaincategoryX>) {
         spinner = findViewById(R.id.Mainspinnerview)
         val binding = SpinneritemdesignBinding.inflate(layoutInflater)

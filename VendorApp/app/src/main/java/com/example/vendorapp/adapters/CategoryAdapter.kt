@@ -43,11 +43,11 @@ class CategoryAdapter (private var productsList: List<ProductX>, private val con
                 if (isChecked == true) {
                     categorystatus = "1"
 
-                    Toast.makeText(context, categorystatus, Toast.LENGTH_SHORT).show()
+                 //   Toast.makeText(context, categorystatus, Toast.LENGTH_SHORT).show()
                 } else {
                     categorystatus = "0";
 
-                    Toast.makeText(context, categorystatus, Toast.LENGTH_SHORT).show()
+                  //  Toast.makeText(context, categorystatus, Toast.LENGTH_SHORT).show()
                 }
 
                 sharedPreference=SharedPreference(context)

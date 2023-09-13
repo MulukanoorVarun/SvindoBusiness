@@ -65,8 +65,6 @@ class CouponsActivity : AppCompatActivity() {
         couponsBinding.couponsrecyclerview.layoutManager = linearLayoutManager
         couponsBinding.couponsrecyclerview.hasFixedSize()
 
-
-
         couponsBinding.addbutton.setOnClickListener {
           showAlertDialog()
         }
@@ -142,21 +140,18 @@ class CouponsActivity : AppCompatActivity() {
                                 if (response.body() != null) {
                                     if (response.body()!!.error == "0") {
                                         if (couponresponse.list.isNotEmpty()) {
-                                            couponsBinding.couponsrecyclerview.visibility =
-                                                View.VISIBLE
+                                            couponsBinding.couponsrecyclerview.visibility = View.VISIBLE
                                             couponsBinding.noData.visibility = View.GONE
                                             adapter = CouponListAdapter(couponresponse.list, applicationContext)
                                             couponsBinding.couponsrecyclerview.adapter = adapter
                                         }
                                         else {
-                                            couponsBinding.couponsrecyclerview.visibility =
-                                                View.GONE
+                                            couponsBinding.couponsrecyclerview.visibility = View.GONE
                                             couponsBinding.noData.visibility = View.VISIBLE
 
                                         }
                                     }
                                 }
-
                             }
                             response.code() == 401 -> {
                                 showToast(getString(R.string.session_exp))
@@ -177,10 +172,7 @@ class CouponsActivity : AppCompatActivity() {
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
                     showToast(t.message.toString())
                 }
-
             })
-
-
         }catch (e: Exception){
             //dashboardBinding.progressBarLay.visibility = View.GONE
             showToast(e.message.toString())
@@ -217,7 +209,7 @@ class CouponsActivity : AppCompatActivity() {
 //                            val i = Intent(this@AddNewCouponCode,CouponsActivity::class.java)
 //                            startActivity(i)
                         } else{
-                            showToast(addcoupopnResponse.message)
+                            //howToast(addcoupopnResponse.message)
                         }
                     }
                     response.code() == 401 -> {//unauthorised

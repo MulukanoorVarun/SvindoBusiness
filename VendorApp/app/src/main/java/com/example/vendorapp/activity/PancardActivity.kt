@@ -356,7 +356,7 @@ class PancardActivity : AppCompatActivity() {
                                         showToast(pancradresponse.message)
                                     }
                                     else -> {
-                                        showToast(pancradresponse.message)
+                                      //  showToast(pancradresponse.message)
                                     }
                                 }
                             }

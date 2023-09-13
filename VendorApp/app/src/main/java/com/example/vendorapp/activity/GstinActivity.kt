@@ -372,10 +372,11 @@ class GstinActivity : AppCompatActivity(){
                     response.isSuccessful -> {//status code between 200 to 299
                         gstinResponse = response.body()!!
                         if (gstinResponse.error=="0") {
+                            showToast(gstinResponse.message)
                             val i = Intent(this@GstinActivity,PancardActivity::class.java)
                             startActivity(i)
                         } else{
-                            showToast(gstinResponse.message)
+                           // showToast(gstinResponse.message)
                         }
                     }
                     response.code() == 401 -> {//unauthorised

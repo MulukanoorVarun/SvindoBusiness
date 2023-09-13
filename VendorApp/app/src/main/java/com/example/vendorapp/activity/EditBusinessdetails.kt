@@ -673,7 +673,7 @@ class EditBusinessdetails : AppCompatActivity() {
                                     showToast(pancradresponse.message)
                                 }
                                 else -> {
-                                    showToast(pancradresponse.message)
+                                   // showToast(pancradresponse.message)
                                 }
                             }
                         }
@@ -725,7 +725,7 @@ class EditBusinessdetails : AppCompatActivity() {
                         if (fssaiResponse.error=="0") {
                             showToast(fssaiResponse.message)
                         } else{
-                            showToast(fssaiResponse.message)
+                           // showToast(fssaiResponse.message)
                         }
                     }
                     response.code() == 401 -> {//unauthorised
@@ -774,7 +774,7 @@ class EditBusinessdetails : AppCompatActivity() {
                         if (fssaiResponse.error == "0") {
                             showToast(fssaiResponse.message)
                         } else {
-                            showToast(fssaiResponse.message)
+                           // showToast(fssaiResponse.message)
                         }
                     }
                     response.code() == 401 -> {//unauthorised
@@ -818,7 +818,7 @@ class EditBusinessdetails : AppCompatActivity() {
                             if (fssaiResponse.error=="0") {
                                 showToast(fssaiResponse.message)
                             } else{
-                                showToast(fssaiResponse.message)
+                              //  showToast(fssaiResponse.message)
                             }
                         }
                         response.code() == 401 -> {//unauthorised

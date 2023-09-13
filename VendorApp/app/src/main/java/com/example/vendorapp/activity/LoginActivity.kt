@@ -88,8 +88,8 @@ class LoginActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                                     val genrateotpresponse = response.body()?.error
                                     response.body()
-                                        ?.let { showToast(it.otp.toString());
-                                            showToast(it.message); }
+                                        ?.let {// showToast(it.otp.toString())
+                                            showToast(it.message) }
                                     val i = Intent(this@LoginActivity, Otpveryfiy_Activity::class.java)
                                     //   i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                       //                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -98,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
                                         "TextBox",
                                         mobileloginbinding.mobileNumberEtxt.text.toString()
                                     );
-                                    response.body()?.let { i.putExtra("otpcode", it.otp) };
+                                    response.body()?.let { i.putExtra("otpcode", it.otp) }
                                     startActivity(i)
                                 }
                         Log.d("TAG", "onResponse: " + (response.body()?.otp))

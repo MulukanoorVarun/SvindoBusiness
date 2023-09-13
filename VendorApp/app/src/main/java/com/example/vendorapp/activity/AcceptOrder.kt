@@ -47,7 +47,7 @@ class AcceptOrder : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val order_id = intent.getStringExtra("order_id")
-        showToast(order_id.toString())
+      //  showToast(order_id.toString())
 
         super.onCreate(savedInstanceState)
         acceptOrderBinding = ActivityAcceptOrderBinding.inflate(layoutInflater)
@@ -197,8 +197,7 @@ class AcceptOrder : AppCompatActivity() {
                                             OrderAddons(item.id);
                                         }
                                     } else {
-                                        acceptOrderBinding.acceptorderrecyclerview.visibility =
-                                            View.GONE
+                                        acceptOrderBinding.acceptorderrecyclerview.visibility = View.GONE
                                         // acceptOrderBinding.noData.visibility = View.VISIBLE
 
                                     }
@@ -298,7 +297,6 @@ class AcceptOrder : AppCompatActivity() {
                     try {
                         when {
                             response.code() == 200 -> {
-
                                 addonsresponse = response.body()!!
                                 if (addonsresponse.error=="0")
                                 {

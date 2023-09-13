@@ -291,7 +291,7 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
 
 
                                             } else {
-                                                Toast.makeText(context, productsresponse.message, Toast.LENGTH_SHORT).show()
+                                               // Toast.makeText(context, productsresponse.message, Toast.LENGTH_SHORT).show()
                                             }
                                         }
                                     }

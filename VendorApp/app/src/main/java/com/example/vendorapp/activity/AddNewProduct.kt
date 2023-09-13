@@ -124,8 +124,6 @@ class AddNewProduct : AppCompatActivity() {
 //            selected_index=5
 //            showAlertDialog()
 //        }
-
-
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
@@ -198,70 +196,70 @@ class AddNewProduct : AppCompatActivity() {
             if (isChecked==true)
             {
                 self_pick="1";
-                showToast(self_pick)
+            //    showToast(self_pick)
             }else{
                 self_pick="0";
-                showToast(self_pick)
+             //   showToast(self_pick)
             }
         }
         Binding.insatantswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked==true)
             {
                 insatantDel="1";
-                showToast(insatantDel)
+            //    showToast(insatantDel)
             }else{
                 insatantDel="0";
-                showToast(insatantDel)
+             //   showToast(insatantDel)
             }
         }
         Binding.generaldeliveryswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked==true)
             {
                 GeneralDel="1"
-                showToast(GeneralDel)
+              //  showToast(GeneralDel)
             }else{
                 GeneralDel="0"
-                showToast(GeneralDel)
+               // showToast(GeneralDel)
             }
         }
         Binding.returnswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked==true)
             {
                 Return="1"
-                showToast(Return)
+              //  showToast(Return)
             }else{
                 Return="0"
-                showToast(Return)
+                //showToast(Return)
             }
         }
         Binding.codswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked==true)
             {
                 COD="1";
-                showToast(COD)
+             ///   showToast(COD)
             }else{
                 COD="0";
-                showToast(COD)
+               // showToast(COD)
             }
         }
         Binding.replacementswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked==true)
             {
                 Replacement="1";
-                showToast(Replacement)
+              //  showToast(Replacement)
             }else{
                 Replacement="0";
-                showToast(Replacement)
+               // showToast(Replacement)
             }
         }
         Binding.shopexchangeswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked==true)
             {
                 shopExchange="1";
-                showToast(shopExchange)
+              //  showToast(shopExchange)
             }else{
                 shopExchange="0";
-                showToast(shopExchange)
+                //showToast(shopExchange)
             }
         }
 
@@ -272,14 +270,14 @@ class AddNewProduct : AppCompatActivity() {
                 Binding.priceet.isEnabled = false
                 Binding.spinner1.isEnabled = false
                 Binding.stocket.isEnabled = false
-                showToast(is_printing)
+               // showToast(is_printing)
             } else {
                 is_printing ="0"
                 Binding.discountprice.text="Sale Price"
                 Binding.priceet.isEnabled = true
                 Binding.spinner1.isEnabled = true
                 Binding.stocket.isEnabled = true
-                showToast(is_printing)
+            //    showToast(is_printing)
             }
         }
 
@@ -533,7 +531,6 @@ class AddNewProduct : AppCompatActivity() {
 
     }
 
-
     internal fun setupSpinner(items: List<Unititem>) {
         spinner = findViewById(R.id.spinner1)
 
@@ -550,7 +547,7 @@ class AddNewProduct : AppCompatActivity() {
             ) {
                 val selectedItem = items[position]
                  var ItemId = selectedItem.id
-                showToast(ItemId.toString())
+            //    showToast(ItemId.toString())
 
                 //  fetchItemDetailsCal(itemId)
                 // Do something with the selected item (e.g., display its ID or name)
@@ -636,7 +633,7 @@ class AddNewProduct : AppCompatActivity() {
                 val selectedItem = items[position]
                 // addItemToSpinner(selectedItem)
                 MainCatId = selectedItem.id
-                showToast(MainCatId.toString())
+              //  showToast(MainCatId.toString())
 
                 fetchItemToSubcategory(MainCatId)
                 // Do something with the selected item (e.g., display its ID or name)
@@ -884,7 +881,7 @@ class AddNewProduct : AppCompatActivity() {
                                     startActivity(i)
 
                                         } else {
-                                            showToast(response.body()!!.message.toString())
+                                           // showToast(response.body()!!.message.toString())
                                         }
                                     }else{
 

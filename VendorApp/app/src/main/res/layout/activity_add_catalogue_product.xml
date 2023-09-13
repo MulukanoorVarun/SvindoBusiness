@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
             <!-- Place other views and layouts here as needed -->
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -16,7 +16,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:ignore="UseCompoundDrawables">
-
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -25,7 +24,6 @@
                         android:id="@+id/business_details_backbutton"
                         android:src="@drawable/backbutton"
                         tools:ignore="ContentDescription" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -44,7 +42,8 @@
         android:layout_below="@+id/toolbar">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            tools:ignore="ScrollViewSize">
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addbtn"
                 android:layout_width="wrap_content"
@@ -718,8 +717,7 @@
                             android:id="@+id/shopexchangeswitch"
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
-                            android:layout_marginTop="5dp"
-                            />
+                            android:layout_marginTop="5dp"/>
                     </LinearLayout>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -728,14 +726,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cardlayout1"
-                android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 app:cardCornerRadius="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
                     <TextView
                         android:id="@+id/colors"
                         android:layout_width="wrap_content"
@@ -747,44 +745,45 @@
                         android:textSize="14sp"
                         android:textStyle="bold"
                         tools:ignore="Hardcodedtext"/>
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:layout_width="370dp"
-                        android:layout_height="100dp"
-                        android:layout_marginStart="13dp"
-                        android:layout_below="@+id/colors"
-                        android:spinnerMode="dialog"
-                        android:prompt="@string/addonprompt"
-                        android:background="@drawable/bg_spinner"
-                        android:layout_marginTop="8dp"
-                        android:id="@+id/addonsspinnerview" />
-                    <LinearLayout
-                        android:id="@+id/Linear"
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/Addaddon"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:layout_below="@+id/addonsspinnerview"
-                        android:orientation="horizontal">
-<!--                        <androidx.recyclerview.widget.RecyclerView-->
-<!--                            android:id="@+id/AddonsRecyclerview"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginStart="5dp"-->
-<!--                            android:layout_marginTop="5dp"/>-->
+                        android:layout_height="30dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/buttonbackground"
+                        android:text="@string/add"
+                        android:textSize="11sp"
+                        android:textColor="@color/white"
+                        tools:ignore="RelativeOverlap"/>
+<!--                    <androidx.appcompat.widget.AppCompatSpinner-->
+<!--                        android:layout_width="370dp"-->
+<!--                        android:layout_height="100dp"-->
+<!--                        android:layout_marginStart="13dp"-->
+<!--                        android:layout_below="@+id/colors"-->
+<!--                        android:spinnerMode="dialog"-->
+<!--                        android:prompt="@string/addonprompt"-->
+<!--                        android:background="@drawable/bg_spinner"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:id="@+id/addonsspinnerview"/>-->
+
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/AddonsRecyclerView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/Addaddon"-->
+<!--                        tools:ignore="NestedScrolling" />-->
                         <ListView
                             android:id="@+id/Addonslistview"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            tools:ignore="NestedScrolling"/>
-                        <!--                <ListView-->
-                        <!--                    android:id="@+id/color_code_list"-->
-                        <!--                    android:layout_width="match_parent"-->
-                        <!--                    android:layout_height="wrap_content"-->
-                        <!--                    android:layout_weight="1"/>-->
-                    </LinearLayout>
+                            android:layout_below="@+id/Addaddon"
+                            tools:ignore="NestedScrolling" />
                 </RelativeLayout>
-
             </androidx.cardview.widget.CardView>
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/submitbutton"
                 android:layout_width="300dp"

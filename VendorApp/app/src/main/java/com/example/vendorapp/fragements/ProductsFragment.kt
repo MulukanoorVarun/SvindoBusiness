@@ -66,10 +66,10 @@ class ProductsFragment : Fragment() {
             if (isChecked==true)
             {
                 productstatus="1";
-                Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
+               // Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
             }else{
                 productstatus="0";
-                Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
+              //  Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
             }
 
 //            ProductStatusDetail(

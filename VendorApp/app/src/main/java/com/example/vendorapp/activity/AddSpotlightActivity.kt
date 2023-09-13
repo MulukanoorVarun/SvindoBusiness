@@ -155,7 +155,7 @@ class AddSpotlightActivity : AppCompatActivity() {
                                     showToast(spotlightResponse.message)
                                 }
                                 else {
-                                   showToast(spotlightResponse.message)
+                                //   showToast(spotlightResponse.message)
                                 }
                             }
                             response.code() == 401 -> {

@@ -355,7 +355,7 @@ class FssaiActivity : AppCompatActivity() {
                             startActivity(i)
 
                         } else{
-                            showToast(fssaiResponse.message)
+                           // showToast(fssaiResponse.message)
                         }
                     }
                     response.code() == 401 -> {//unauthorised

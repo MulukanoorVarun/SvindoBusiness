@@ -115,11 +115,11 @@ class Otpveryfiy_Activity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             genrateotpresponse = response.body()!!
 
-//                            if (genrateotpresponse.error==0)
-//                            {
-                                showToast(genrateotpresponse.otp.toString())
-                            showToast(genrateotpresponse.message)
-//                            }
+                           if (genrateotpresponse.error==0)
+                         {
+//                                showToast(genrateotpresponse.otp.toString())
+//                            showToast(genrateotpresponse.message)
+                           }
 
 //                            val responseMessage = response.body()?.error
 //                            println(responseMessage);

@@ -223,7 +223,7 @@ class AddonFragment : Fragment() {
                                             AddAddonsListdetails()
                                             alertDialog.hide()
                                         } else {
-                                            Toast.makeText(context,addonsresponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                         //   Toast.makeText(context,addonsresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                         }
                                     }else{
 
@@ -283,7 +283,7 @@ class AddonFragment : Fragment() {
                                         AddonBinding.AddonsRecyclerview.adapter = adapter
                                     }
                                     }else{
-                                        Toast.makeText(context,(addonsListresponse.message).toString(),Toast.LENGTH_SHORT).show()
+                                      //  Toast.makeText(context,(addonsListresponse.message).toString(),Toast.LENGTH_SHORT).show()
                                     }
 
                                 }

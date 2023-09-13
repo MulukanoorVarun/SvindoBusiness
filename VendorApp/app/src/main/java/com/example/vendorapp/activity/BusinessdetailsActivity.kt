@@ -106,7 +106,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                     val selectedItem = Services[position]
                      sericeitem= selectedItem
-                    showToast(sericeitem)
+                //    showToast(sericeitem)
 
                 }
                 override fun onNothingSelected(parent: AdapterView<*>) {

@@ -75,7 +75,7 @@ class HomeFragment : Fragment() {
                     call: Call<DashboardResponseModal>,
                     response: Response<DashboardResponseModal>
                 ) {
-                    dashboardBinding.progressBarLay.progressBar.visibility=View.INVISIBLE
+                 //   dashboardBinding.progressBarLay.progressBar.visibility=View.INVISIBLE
                 //    dashboardBinding.progressBarLay.visibility= View.GONE
                     try {
                         when{
@@ -83,18 +83,14 @@ class HomeFragment : Fragment() {
                                 dashboardResponse = response.body()!!
                                     if(dashboardResponse !=null) {
                                         if (dashboardResponse.error == "0") {
-                                            dashboardBinding.deliveredorderTxt.text =
-                                                dashboardResponse.counts.delivered_order_count
-                                            dashboardBinding.pendingorderTxt.text =
-                                                dashboardResponse.counts.pending_order_count
-                                            dashboardBinding.returnorderTxt.text =
-                                                dashboardResponse.counts.return_order_count
-                                            dashboardBinding.totalsaletxt.text =
-                                                dashboardResponse.counts.totalsales_order_count
+                                            dashboardBinding.deliveredorderTxt.text = dashboardResponse.counts.delivered_order_count
+                                            dashboardBinding.pendingorderTxt.text = dashboardResponse.counts.pending_order_count
+                                            dashboardBinding.returnorderTxt.text = dashboardResponse.counts.return_order_count
+                                            dashboardBinding.totalsaletxt.text = dashboardResponse.counts.totalsales_order_count
                                             dashboardBinding.textview1.text = dashboardResponse.counts.store_details.store_name
 
                                             dashboardBinding.shopstatusswitch.setOnClickListener() {
-                                                if (dashboardResponse.counts.store_details.open_status == "Open") {
+                                                if (dashboardResponse.counts.store_details.open_status == "Open"){
                                                     shopstatus = "Closed"
                                                     ShopStatusDetail(
                                                         shop_status = shopstatus.toString().trim(),
@@ -156,7 +152,6 @@ class HomeFragment : Fragment() {
             Toast.makeText(context,e.message.toString(), Toast.LENGTH_SHORT).show()
         }
     }
-
     fun ShopStatusDetail(
         shop_status:String,
     ) {

@@ -144,7 +144,7 @@ class PayOutAmountActivity : AppCompatActivity() {
 //                                        accountbinding.noData.visibility = View.VISIBLE
                                 }
                                 }else{
-                                    showToast(walletModalres.message.toString())
+                                   // showToast(walletModalres.message.toString())
                                 }
                             }
                             response.code() == 401 -> {

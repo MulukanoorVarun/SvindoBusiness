@@ -126,7 +126,7 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                     // Set custom dialog layout
                     dialog!!.setContentView(R.layout.spotlightboostlayout)
                     // Set custom height and width
-                    dialog!!.window?.setLayout(700, 600)
+                    dialog!!.window?.setLayout(700, 700)
                     // Set transparent background
                     //    dialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                     // Show dialog

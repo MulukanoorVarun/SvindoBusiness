@@ -92,20 +92,20 @@ class AddPrintingProduct : AppCompatActivity() {
             if (isChecked==true)
             {
                 self_pick="1";
-                showToast(self_pick)
+               // showToast(self_pick)
             }else{
                 self_pick="0";
-                showToast(self_pick)
+              //  showToast(self_pick)
             }
         }
         PrintingProductBinding.insatantswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked==true)
             {
                 insatantDel="1";
-                showToast(insatantDel)
+              //  showToast(insatantDel)
             }else{
                 insatantDel="0";
-                showToast(insatantDel)
+               // showToast(insatantDel)
             }
         }
         PrintingProductBinding.generaldeliveryswitch.setOnCheckedChangeListener { _, isChecked ->
