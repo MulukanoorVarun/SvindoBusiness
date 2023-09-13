@@ -724,8 +724,6 @@ class AddCatalogueProduct : AppCompatActivity() {
                 Listview.adapter = selectedItemsAdapter
                 selectedItemsAdapter.notifyDataSetChanged()
                 dialog!!.dismiss()
-
-
             }
 //            Listview.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
 //                override fun onItemSelected(

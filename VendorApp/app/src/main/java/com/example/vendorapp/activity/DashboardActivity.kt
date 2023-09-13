@@ -67,7 +67,6 @@ class DashboardActivity : AppCompatActivity() {
                else -> false
            }
        }
-
        linearLayoutManager = LinearLayoutManager(this)
        dashboardBinding.newOrdersRequestsViewRecyclerview.layoutManager = linearLayoutManager
        dashboardBinding.newOrdersRequestsViewRecyclerview.hasFixedSize()
