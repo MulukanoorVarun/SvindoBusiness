@@ -63,7 +63,6 @@ class DashboardActivity : AppCompatActivity() {
                    startActivity(intent)
                    false
                }
-
                else -> false
            }
        }
