@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
 
-    private const val baseUrl = "https://webgrid.in/projects/svindo/api/business_partner/"
+    private const val baseUrl = "https://webgrid.in/projects/svindo/api/business_partner/" //new
 
     //to print the logs
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -38,8 +38,4 @@ object ApiClient {
     fun <T> buildService(serviceType: Class<T>): T {
         return retrofit.create(serviceType)
     }
-
-
-
-
 }
