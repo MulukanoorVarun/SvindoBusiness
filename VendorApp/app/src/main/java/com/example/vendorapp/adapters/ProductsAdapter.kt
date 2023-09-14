@@ -368,10 +368,9 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
              //   Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
             }
 
-            if( data.mrp_price=="0"){
+            if(data.mrp_price=="0"){
                 binding.productmrp.isVisible = false
                 binding.salepricesymbol.isVisible = false
-
             }
             else{
                 binding.productmrp.isVisible = true
@@ -424,7 +423,7 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
                 }catch (e: Exception){
                     Toast.makeText(context,e.message.toString(), Toast.LENGTH_SHORT).show()
                 }
-                Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
+               // Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
             }
         }
     fun ProductdetailsEdit(

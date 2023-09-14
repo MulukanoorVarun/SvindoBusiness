@@ -62,20 +62,20 @@ class ProductsFragment : Fragment() {
 
 
 
-        binding.productsstatusswitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked==true)
-            {
-                productstatus="1";
-               // Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
-            }else{
-                productstatus="0";
-              //  Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
-            }
+//        binding.productsstatusswitch.setOnCheckedChangeListener { _, isChecked ->
+//            if (isChecked==true)
+//            {
+//                productstatus="1";
+//               // Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
+//            }else{
+//                productstatus="0";
+//              //  Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
+//            }
 
 //            ProductStatusDetail(
 //                product_status=productstatus.toString().trim(),
 //            )
-        }
+
         Productdetails()
         productsBinding.addproductbutton.setBackgroundResource(R.drawable.buttonbackground);
         productsBinding.addproductbutton.setOnClickListener {

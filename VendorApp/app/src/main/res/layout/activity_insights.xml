@@ -167,14 +167,6 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/no_oflikes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/recieved_likes"
-                    android:textColor="@color/black"
-                    android:textSize="13sp" />
             </LinearLayout>
             <!--        <HorizontalScrollView-->
             <!--            android:id="@+id/horizontal_scrollview"-->

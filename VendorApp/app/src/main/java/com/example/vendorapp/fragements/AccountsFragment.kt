@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -195,12 +196,19 @@ class  AccountsFragment : Fragment() {
 //            binding.submitbutton.setOnClickListener {
 //            showAlertDialog()
 //        }
+//
+//        accountbinding.shopboostsswitch.setOnClickListener {
+//            if(accountbinding.shopboostsswitch.isChecked)
+//            {
+//                accountbinding.shopboostsswitch.isChecked=false
+////                showAlertDialog(shop_boost.toString())
+//            }
+//        }
         accountbinding.shopboostsswitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked == true) {
+            if (isChecked == true){
                 shop_boost=1
                 showAlertDialog(shop_boost.toString())
-            }
-            if (isChecked == false){
+            }else{
                 shop_boost=0
                 Shopboostunckeckeddeatils(
                     shop_boost= shop_boost.toString().trim(),
@@ -211,20 +219,18 @@ class  AccountsFragment : Fragment() {
     }
     internal fun showAlertDialog(shop_boost: String){
         builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
-
         val rootView = binding.root
-
         // Check if the rootView already has a parent
         val parent = rootView.parent as? ViewGroup
         parent?.removeView(rootView)
-
         builder.setView(binding.root)
         builder.setCancelable(true)
+        builder.setOnCancelListener(DialogInterface.OnCancelListener {
+            accountbinding.shopboostsswitch.isChecked=false
+        })
         alertDialog = builder.create()
         alertDialog.show()
-        accountbinding.shopboostsswitch.isChecked=false
         alertDialog.setCanceledOnTouchOutside(false)
-
         binding.submitbutton.setOnClickListener {
             val max_amt=binding.maxamtet.text.toString().trim()
             if(max_amt.isNotEmpty()) {
@@ -240,19 +246,17 @@ class  AccountsFragment : Fragment() {
 
     fun showreportsdialog(){
         builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
-
         val rootView = reportbinding.root
         // Check if the rootView already has a parent
         val parent = rootView.parent as? ViewGroup
         parent?.removeView(rootView)
-
         builder.setView(reportbinding.root)
         builder.setCancelable(true)
         alertDialog = builder.create()
         alertDialog.show()
         alertDialog.setCanceledOnTouchOutside(false)
 
-        reportbinding.submitbutton.setOnClickListener {
+        reportbinding.submitbutton.setOnClickListener{
             val startDate=reportbinding.startdateEt.text.toString().trim()
             val EndDate=reportbinding.enddateEt.text.toString().trim()
             var reportsurl= accountsresponse.report
@@ -261,9 +265,7 @@ class  AccountsFragment : Fragment() {
             startActivity(intent)
             alertDialog.hide()
         }
-
     }
-
     fun Shopboostdeatils(
         max_amt:String,
         shop_boost:String){
@@ -281,17 +283,19 @@ class  AccountsFragment : Fragment() {
                                 shopboostresponse = response.body()!!
                                 if (shopboostresponse != null) {
                                     if (shopboostresponse.error == "0") {
+                                      //  Accountdetails()
                                         alertDialog.hide()
+//                                        accountbinding.shopboostsswitch.isChecked=true;
                                         Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                     }
                                     if (shopboostresponse.error == "1") {
                                         alertDialog.hide()
-                                       // accountbinding.shopboostsswitch.isChecked=false
+                                        accountbinding.shopboostsswitch.isChecked=false
                                         Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                     }
                                     if (shopboostresponse.error == "2") {
                                         alertDialog.hide()
-                                       // accountbinding.shopboostsswitch.isChecked=false
+                                        accountbinding.shopboostsswitch.isChecked=false
                                         Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                     }else{
 
@@ -418,7 +422,6 @@ class  AccountsFragment : Fragment() {
 
                                         accountbinding.reports.setOnClickListener {
                                             showreportsdialog()
-
                                         }
 
 

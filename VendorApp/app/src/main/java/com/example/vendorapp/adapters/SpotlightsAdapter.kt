@@ -317,7 +317,7 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                 }catch (e: Exception){
                     Toast.makeText(context,e.message.toString(), Toast.LENGTH_SHORT).show()
                 }
-                Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
+               // Toast.makeText(context,productstatus, Toast.LENGTH_SHORT).show()
 
             }
         }

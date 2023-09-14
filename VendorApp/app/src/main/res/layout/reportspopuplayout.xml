@@ -42,7 +42,7 @@
             android:layout_below="@+id/startdateEt"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
-            android:text="Start Date"
+            android:text="End Date"
             android:textSize="14sp"
             android:textColor="@color/black"
             android:textStyle="bold"
