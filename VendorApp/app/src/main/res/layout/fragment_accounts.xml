@@ -276,7 +276,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="Note:If u Enable this its visible as shop permanently closed to customer"
+                        android:text="Note:  Enabling this button will hide your shop from the svindo customer App."
                         android:layout_below="@+id/shopstatusLayout"
                         android:textColor="@color/black"
                         android:textSize="9sp"

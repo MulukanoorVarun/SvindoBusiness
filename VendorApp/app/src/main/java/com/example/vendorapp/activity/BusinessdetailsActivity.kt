@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -77,6 +78,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
     var subzone_id=""
 
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(this)
@@ -167,54 +169,46 @@ class BusinessdetailsActivity : AppCompatActivity() {
             }, 2000)
 
 
-//            if (businessdetailsBinding.mobileNumEt.text.toString().trim().isEmpty()) {
-//                businessdetailsBinding.mobileNumEt.requestFocus()
-//                businessdetailsBinding.mobileNumEt.error = "Enter Mobilenumber"
-//            } else if (businessdetailsBinding.mobileNumEt.toString().trim().length < 10){
-//                businessdetailsBinding.mobileNumEt.requestFocus()
-//                showToast("Mobile number should be of minimum of 10 numbers")
-//            } else {
-//                 contact_mob_num = businessdetailsBinding.mobileNumEt.text.toString().trim()
-//            }
-
-
-//            if (businessdetailsBinding.storeEmailIdEt.text.toString().trim().isNotEmpty()&& Patterns.EMAIL_ADDRESS.matcher(businessdetailsBinding.storeEmailIdEt.text.toString().trim()).matches()) {
-//                store_email_id = businessdetailsBinding.storeEmailIdEt.text.toString().trim()
-//                Toast.makeText(this, "Email Verified !", Toast.LENGTH_SHORT).show()
-//            } else {
-//                Toast.makeText(this, "Enter valid Email address !", Toast.LENGTH_SHORT).show()
-//            }
 
 
             val business_name = businessdetailsBinding.businessNameEt.text.toString().trim()
             val address = businessdetailsBinding.addressEt.text.toString().trim()
             val contact_mob_num = businessdetailsBinding.mobileNumEt.text.toString().trim()
             val store_email_id = businessdetailsBinding.storeEmailIdEt.text.toString().trim()
+            if(businessdetailsBinding.checkBox.isChecked) {
+                if (business_name.isNotEmpty() && address.isNotEmpty() && contact_mob_num.length == 10 && contact_mob_num.isNotEmpty() && store_email_id.isNotEmpty() && store_email_id.matches(
+                        emailPattern.toRegex()
+                    ) && address.isNotEmpty() && file_1 != null
+                ) {
+                    businessdetails(
+                        businessdetailsBinding.nameet.text.toString().trim(),
+                        businessdetailsBinding.businessNameEt.text.toString().trim(),
+                        contact_mob_num.toString().trim(),
+                        sharedPreference.getValueString("mobile_number").toString(),
+                        store_email_id.toString().trim(),
+                        business_category = cat_id.toString().trim(),
+                        businessdetailsBinding.addressEt.text.toString().trim(),
+                        sericeitem.toString().trim(),
+                        subzone_id.toString().trim(),
+                        file_1!!
+                    )
+                } else {
+                    Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+                    if (!store_email_id.matches(emailPattern.toRegex())) {
+                        businessdetailsBinding.storeEmailIdEt.setError("Please Enter Mailid in correct format Ex:user@gmail.com")
+                    }
 
-            if (business_name.isNotEmpty() && address.isNotEmpty() && contact_mob_num.length == 10 && contact_mob_num.isNotEmpty() && store_email_id.isNotEmpty() && store_email_id.matches(emailPattern.toRegex()) && address.isNotEmpty() && file_1 != null) {
-                businessdetails(
-                    businessdetailsBinding.nameet.text.toString().trim(),
-                    businessdetailsBinding.businessNameEt.text.toString().trim(),
-                    contact_mob_num.toString().trim(),
-                    sharedPreference.getValueString("mobile_number").toString(),
-                    store_email_id.toString().trim(),
-                    business_category = cat_id.toString().trim(),
-                    businessdetailsBinding.addressEt.text.toString().trim(),
-                    sericeitem.toString().trim(),
-                    subzone_id.toString().trim(),
-                    file_1!!
-                )
-            } else {
-                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
-                if (!store_email_id.matches(emailPattern.toRegex())) {
-                    businessdetailsBinding.storeEmailIdEt.setError("Please Enter Mailid in correct format Ex:user@gmail.com")
-                }
-
-                if (contact_mob_num.length < 10) {
-                    businessdetailsBinding.mobileNumEt.setError("Mobile number should be 10 digits")
+                    if (contact_mob_num.length < 10) {
+                        businessdetailsBinding.mobileNumEt.setError("Mobile number should be 10 digits")
+                    }
                 }
             }
+            else{
+                businessdetailsBinding.checkBox.text= "Please Accept this!"
+                businessdetailsBinding.checkBox.setTextColor(Color.parseColor("#FF0000"))
+            }
         }
+
         CategoriesList()
         ZonesList()
 
