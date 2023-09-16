@@ -49,6 +49,8 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.concurrent.TimeoutException
 import kotlin.system.exitProcess
+import androidx.core.text.HtmlCompat
+
 
 
 @SuppressLint("StaticFieldLeak")
@@ -154,6 +156,17 @@ class BusinessdetailsActivity : AppCompatActivity() {
                 }
             }
 
+        businessdetailsBinding.checkBoxText.setOnClickListener {
+            var termsurl="https://webgrid.in/projects/svindo/web/Webcontroller/terms"
+            if (!termsurl.startsWith("http://") && !termsurl.startsWith("https://")) {
+                termsurl = "http://$termsurl"
+            }
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(termsurl))
+            startActivity(browserIntent)
+        }
+        val htmltext="By proceeding, you agree to our <b>Terms & Conditions</b> and <b>Privacy Policy</b>."
+        businessdetailsBinding.checkBoxText.text = HtmlCompat.fromHtml(htmltext, HtmlCompat.FROM_HTML_MODE_LEGACY)
+
 
 
 //        businessdetailsBinding.businessDetailsBackbutton.setOnClickListener {
@@ -175,23 +188,29 @@ class BusinessdetailsActivity : AppCompatActivity() {
             val address = businessdetailsBinding.addressEt.text.toString().trim()
             val contact_mob_num = businessdetailsBinding.mobileNumEt.text.toString().trim()
             val store_email_id = businessdetailsBinding.storeEmailIdEt.text.toString().trim()
-            if(businessdetailsBinding.checkBox.isChecked) {
-                if (business_name.isNotEmpty() && address.isNotEmpty() && contact_mob_num.length == 10 && contact_mob_num.isNotEmpty() && store_email_id.isNotEmpty() && store_email_id.matches(
-                        emailPattern.toRegex()
-                    ) && address.isNotEmpty() && file_1 != null
-                ) {
-                    businessdetails(
-                        businessdetailsBinding.nameet.text.toString().trim(),
-                        businessdetailsBinding.businessNameEt.text.toString().trim(),
-                        contact_mob_num.toString().trim(),
-                        sharedPreference.getValueString("mobile_number").toString(),
-                        store_email_id.toString().trim(),
-                        business_category = cat_id.toString().trim(),
-                        businessdetailsBinding.addressEt.text.toString().trim(),
-                        sericeitem.toString().trim(),
-                        subzone_id.toString().trim(),
-                        file_1!!
-                    )
+       //     if(businessdetailsBinding.checkBox.isChecked) {
+                if (business_name.isNotEmpty() && address.isNotEmpty() && contact_mob_num.length == 10 && contact_mob_num.isNotEmpty() && store_email_id.isNotEmpty() && store_email_id.matches(emailPattern.toRegex()) && address.isNotEmpty() && file_1 != null) {
+                    if(businessdetailsBinding.checkBox.isChecked) {
+                        businessdetails(
+                            businessdetailsBinding.nameet.text.toString().trim(),
+                            businessdetailsBinding.businessNameEt.text.toString().trim(),
+                            contact_mob_num.toString().trim(),
+                            sharedPreference.getValueString("mobile_number").toString(),
+                            store_email_id.toString().trim(),
+                            business_category = cat_id.toString().trim(),
+                            businessdetailsBinding.addressEt.text.toString().trim(),
+                            sericeitem.toString().trim(),
+                            subzone_id.toString().trim(),
+                            file_1!!
+                        )
+                    }else{
+                        businessdetailsBinding.checkBoxText.text="Please Accept it!"
+                        businessdetailsBinding.checkBoxText.setTextColor(Color.parseColor("#FF0000"))
+                        Handler().postDelayed({
+                            businessdetailsBinding.checkBoxText.text= HtmlCompat.fromHtml(htmltext, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                            businessdetailsBinding.checkBoxText.setTextColor(Color.parseColor("#000000"))
+                        }, 3000)
+                    }
                 } else {
                     Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
                     if (!store_email_id.matches(emailPattern.toRegex())) {
@@ -202,11 +221,15 @@ class BusinessdetailsActivity : AppCompatActivity() {
                         businessdetailsBinding.mobileNumEt.setError("Mobile number should be 10 digits")
                     }
                 }
-            }
-            else{
-                businessdetailsBinding.checkBox.text= "Please Accept this!"
-                businessdetailsBinding.checkBox.setTextColor(Color.parseColor("#FF0000"))
-            }
+         //   }
+//            else{
+//                businessdetailsBinding.checkBox.text="Please Accept it!"
+//                businessdetailsBinding.checkBox.setTextColor(Color.parseColor("#FF0000"))
+//                Handler().postDelayed({
+//                businessdetailsBinding.checkBox.text="By proceeding, you agree to our Terms & Conditions and Privacy Policy."
+//                businessdetailsBinding.checkBox.setTextColor(Color.parseColor("#000000"))
+//                }, 3000)
+         //   }
         }
 
         CategoriesList()
@@ -719,6 +742,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
 
 
 }
+
 
 
 

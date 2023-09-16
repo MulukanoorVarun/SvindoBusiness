@@ -333,9 +333,19 @@
                 android:layout_below="@id/cardlayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="By proceeding, you agree to our Terms &amp; Conditions and Privacy Policy."
                 android:layout_marginStart="10dp"
                 android:textSize="11sp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/check_box_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/check_box"
+                android:layout_below="@+id/cardlayout"
+                android:text="By proceeding, you agree to our Terms &amp; Conditions and Privacy Policy."
+                android:textSize="11sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="13dp"
                 tools:ignore="HardcodedText" />
 
 

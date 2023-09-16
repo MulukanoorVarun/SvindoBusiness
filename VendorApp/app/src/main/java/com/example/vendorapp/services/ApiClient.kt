@@ -26,7 +26,6 @@ object ApiClient {
     private var gson: Gson = GsonBuilder()
         .setLenient()
         .create()
-
     //create retrofit builder
     private val builder = Retrofit.Builder()
         .baseUrl(baseUrl)

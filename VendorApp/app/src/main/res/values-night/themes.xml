@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.VendorApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryVariant">@color/blue</item>
+        <item name="colorPrimary">#00bf63</item>
+        <item name="colorPrimaryVariant">#00bf63</item>
         <item name="colorOnPrimary">@color/bg_color</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
