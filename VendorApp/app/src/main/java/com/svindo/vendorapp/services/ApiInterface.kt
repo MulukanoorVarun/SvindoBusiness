@@ -84,6 +84,7 @@ interface ApiInterface {
     fun Editbusinessdetails(
         @Header("Sessionid")  content_type:String?,
         @Part("type") type: RequestBody,
+        @Part("name") name: RequestBody,
         @Part("business_name") business_name: RequestBody,
         @Part("mobile")contact_mob_num: RequestBody,
         @Part("email")store_email_id: RequestBody,
@@ -101,6 +102,7 @@ interface ApiInterface {
     fun Editbusinessdetails_one_image(
         @Header("Sessionid")  content_type:String?,
         @Part("type") type: RequestBody,
+        @Part("name") name: RequestBody,
         @Part("business_name") business_name: RequestBody,
         @Part("mobile")contact_mob_num: RequestBody,
         @Part("email")store_email_id: RequestBody,
@@ -116,6 +118,7 @@ interface ApiInterface {
     fun Editbusinessdetails_files_null(
         @Header("Sessionid")  content_type:String?,
         @Field("type") type: String,
+        @Field("name") name: String,
         @Field("business_name") business_name: String,
         @Field("mobile")contact_mob_num: String,
         @Field("email")store_email_id: String,

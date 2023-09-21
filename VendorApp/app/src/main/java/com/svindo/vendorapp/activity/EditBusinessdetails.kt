@@ -340,14 +340,16 @@ class EditBusinessdetails : AppCompatActivity() {
              //showToast(image_file.toString())
 
             val business_name = binding.businessnameet.text.toString().trim()
+            val name = binding.businessnameet.text.toString().trim()
             val contact_mob_num = binding.mobileNumEt.text.toString().trim()
             val store_email_id = binding.storeEmailIdEt.text.toString().trim()
 //            val bus_category = binding.businessCategoryEt.text.toString().trim()
             val address = binding.addressEt.text.toString().trim()
             val location = binding.locationEt.text.toString().trim()
 
-            if(business_name.isNotEmpty() && contact_mob_num.isNotEmpty() && contact_mob_num.length==10 && store_email_id.isNotEmpty()&&store_email_id.matches(emailPattern.toRegex())&&address.isNotEmpty() && file_1!=null && file_2!=null && location.isNotEmpty()){
+            if(name.isNotEmpty() && business_name.isNotEmpty() && contact_mob_num.isNotEmpty() && contact_mob_num.length==10 && store_email_id.isNotEmpty()&&store_email_id.matches(emailPattern.toRegex())&&address.isNotEmpty() && file_1!=null && file_2!=null && location.isNotEmpty()){
                 businessdetails(
+                    binding.nameet.text.toString().trim(),
                     binding.businessnameet.text.toString().trim(),
                     binding.mobileNumEt.text.toString().trim(),
                     binding.storeEmailIdEt.text.toString().trim(),
@@ -360,6 +362,7 @@ class EditBusinessdetails : AppCompatActivity() {
 
             } else if(file_1==null && file_2==null){
                 businessdetails1(
+                    binding.nameet.text.toString().trim(),
                     binding.businessnameet.text.toString().trim(),
                     binding.mobileNumEt.text.toString().trim(),
                     binding.storeEmailIdEt.text.toString().trim(),
@@ -368,8 +371,9 @@ class EditBusinessdetails : AppCompatActivity() {
                     binding.locationEt.text.toString().trim()
                 )
 
-            } else if((business_name.isNotEmpty() && contact_mob_num.isNotEmpty() && contact_mob_num.length==10 && store_email_id.isNotEmpty()&&store_email_id.matches(emailPattern.toRegex())&&address.isNotEmpty() && location.isNotEmpty()) && (file_1!=null || file_2!=null)) {
+            } else if((name.isNotEmpty() && business_name.isNotEmpty() && contact_mob_num.isNotEmpty() && contact_mob_num.length==10 && store_email_id.isNotEmpty()&&store_email_id.matches(emailPattern.toRegex())&&address.isNotEmpty() && location.isNotEmpty()) && (file_1!=null || file_2!=null)) {
                 businessdetails_any_one_image(
+                    binding.nameet.text.toString().trim(),
                     binding.businessnameet.text.toString().trim(),
                     binding.mobileNumEt.text.toString().trim(),
                     binding.storeEmailIdEt.text.toString().trim(),
@@ -836,14 +840,14 @@ class EditBusinessdetails : AppCompatActivity() {
                 }
 
             })
-
         }
+
     fun Editbusinessdetails(){
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall =
                 ordersService.BusinessDetails(sharedPreference.getValueString("token"))
-            requestCall.enqueue(object : Callback<EditBusinessDetailsModal>{
+            requestCall.enqueue(object : Callback<EditBusinessDetailsModal> {
                 override fun onResponse(
                     call: Call<EditBusinessDetailsModal>,
                     response: Response<EditBusinessDetailsModal>
@@ -867,6 +871,7 @@ class EditBusinessdetails : AppCompatActivity() {
                                         binding.bankNameEtTxt.setText(EditResponse.details.bank_name)
                                         binding.reAccNumEtTxt.setText(EditResponse.details.account_number)
                                         binding.verifiedstatus.setText(EditResponse.details.status)
+                                        binding.nameet.setText(EditResponse.details.name)
 
                                         if(EditResponse.details.status=="Verified"){
                                             binding.mobileNumEt.isEnabled=false
@@ -929,6 +934,7 @@ class EditBusinessdetails : AppCompatActivity() {
         }
     }
     private fun businessdetails(
+        name:String,
         business_name : String,
         contact_mob_num: String,
         store_email_id: String,
@@ -944,6 +950,7 @@ class EditBusinessdetails : AppCompatActivity() {
         val requestFile2= file2.asRequestBody("image/*".toMediaTypeOrNull())
         val body1 = MultipartBody.Part.createFormData("banner", file2.name, requestFile2)
         val business_name: RequestBody = business_name.toRequestBody("text/plain".toMediaTypeOrNull())
+        val name: RequestBody = name.toRequestBody("text/plain".toMediaTypeOrNull())
         val contact_mob_num: RequestBody = contact_mob_num.toRequestBody("text/plain".toMediaTypeOrNull())
         val store_email_id: RequestBody = store_email_id.toRequestBody("text/plain".toMediaTypeOrNull())
         val business_category: RequestBody = cat_id.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -951,7 +958,7 @@ class EditBusinessdetails : AppCompatActivity() {
         val type: RequestBody = "business_details".toRequestBody("text/plain".toMediaTypeOrNull())
         val location: RequestBody = location.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val requestCall = loginService.Editbusinessdetails(sharedPreference.getValueString("token"),type,business_name,contact_mob_num,store_email_id,business_category,address,location,body,body1)
+        val requestCall = loginService.Editbusinessdetails(sharedPreference.getValueString("token"),type,name,business_name,contact_mob_num,store_email_id,business_category,address,location,body,body1)
         requestCall.enqueue(object : Callback<Verify_otp_Response>{
             @SuppressLint("SuspiciousIndentation")
             override fun onResponse(
@@ -982,6 +989,7 @@ class EditBusinessdetails : AppCompatActivity() {
 
 
     private fun businessdetails_any_one_image(
+        name:String,
         business_name : String,
         contact_mob_num: String,
         store_email_id: String,
@@ -1006,6 +1014,7 @@ class EditBusinessdetails : AppCompatActivity() {
 //        val requestFile2= file2.asRequestBody("image/*".toMediaTypeOrNull())
 //        val body1 = MultipartBody.Part.createFormData("banner", file2.name, requestFile2)
         val business_name: RequestBody = business_name.toRequestBody("text/plain".toMediaTypeOrNull())
+        val name: RequestBody = name.toRequestBody("text/plain".toMediaTypeOrNull())
         val contact_mob_num: RequestBody = contact_mob_num.toRequestBody("text/plain".toMediaTypeOrNull())
         val store_email_id: RequestBody = store_email_id.toRequestBody("text/plain".toMediaTypeOrNull())
         val business_category: RequestBody = cat_id.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -1013,7 +1022,7 @@ class EditBusinessdetails : AppCompatActivity() {
         val type: RequestBody = "business_details".toRequestBody("text/plain".toMediaTypeOrNull())
         val location: RequestBody = location.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val requestCall = loginService.Editbusinessdetails_one_image(sharedPreference.getValueString("token"),type,business_name,contact_mob_num,store_email_id,business_category,address,location,body)
+        val requestCall = loginService.Editbusinessdetails_one_image(sharedPreference.getValueString("token"),type,name,business_name,contact_mob_num,store_email_id,business_category,address,location,body)
         requestCall.enqueue(object : Callback<Verify_otp_Response>{
             @SuppressLint("SuspiciousIndentation")
             override fun onResponse(
@@ -1044,6 +1053,7 @@ class EditBusinessdetails : AppCompatActivity() {
 
 
     private fun businessdetails1(
+        name: String,
         business_name : String,
         contact_mob_num: String,
         store_email_id: String,
@@ -1064,7 +1074,7 @@ class EditBusinessdetails : AppCompatActivity() {
 //        val type: RequestBody = "business_details".toRequestBody("text/plain".toMediaTypeOrNull())
 //        val location: RequestBody = location.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val requestCall = loginService.Editbusinessdetails_files_null(sharedPreference.getValueString("token"),"business_details",business_name,contact_mob_num,store_email_id,cat_id,address,location)
+        val requestCall = loginService.Editbusinessdetails_files_null(sharedPreference.getValueString("token"),"business_details",name,business_name,contact_mob_num,store_email_id,cat_id,address,location)
         requestCall.enqueue(object : Callback<Verify_otp_Response>{
             @SuppressLint("SuspiciousIndentation")
             override fun onResponse(

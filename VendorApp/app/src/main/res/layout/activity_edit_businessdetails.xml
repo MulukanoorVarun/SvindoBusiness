@@ -143,15 +143,44 @@
                         android:textSize="12sp"
                         />
                     <TextView
-                        android:id="@+id/businessname"
+                        android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="13dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginTop="25dp"
-                        android:text="@string/business_name"
+                        android:text="@string/name"
                         android:textSize="16sp"
                         android:layout_below="@+id/change_photo"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/nameet"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="13dp"
+                        android:layout_marginTop="6dp"
+                        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                        android:layout_below="@+id/name"
+                        android:background="@drawable/boarder"
+                        android:padding="10dp"
+                        android:hint="Enter Name"
+                        android:textSize="14sp"
+                        android:inputType="text"
+                        android:autofillHints=""
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:id="@+id/businessname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/business_name"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/nameet"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -189,6 +218,7 @@
                         android:layout_height="49dp"
                         android:layout_marginStart="13dp"
                         android:layout_marginEnd="13dp"
+                        android:layout_marginTop="6dp"
                         android:layout_below="@+id/mobile_num"
                         android:background="@drawable/boarder"
                         android:padding="10dp"

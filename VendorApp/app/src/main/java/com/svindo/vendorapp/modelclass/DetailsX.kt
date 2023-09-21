@@ -21,5 +21,6 @@ data class DetailsX(
     val bank_name:String,
     val status:String,
     val account_number:String,
-    val banner:String
+    val banner:String,
+    val name:String
 )
