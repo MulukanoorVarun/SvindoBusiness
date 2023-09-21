@@ -98,6 +98,7 @@ class ContactActivity : AppCompatActivity() {
 //                            intent.putExtra("KEY_EXTRA", key)
                              i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
                             startActivity(i)
                         }
                     }

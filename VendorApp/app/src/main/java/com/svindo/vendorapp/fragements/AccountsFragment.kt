@@ -151,9 +151,7 @@ class  AccountsFragment : Fragment() {
 
 
         Accountdetails()
-        accountbinding.cashbackswitch.setOnClickListener {
             CashbackStatus()
-        }
 
         accountbinding.locationsswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
