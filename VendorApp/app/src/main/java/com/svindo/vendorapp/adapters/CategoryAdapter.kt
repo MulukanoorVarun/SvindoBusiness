@@ -38,6 +38,13 @@ class CategoryAdapter (private var productsList: List<ProductX>, private val con
             Picasso.get().load(data.image).into(binding.productImage)
             val context = itemView.context
 
+
+            if(data.in_stock=="0"){
+                binding.categoryswitch.isChecked= false
+            }else{
+                binding.categoryswitch.isChecked = true
+            }
+
             binding.categoryswitch.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked == true) {
                     categorystatus = "1"
@@ -49,14 +56,11 @@ class CategoryAdapter (private var productsList: List<ProductX>, private val con
                   //  Toast.makeText(context, categorystatus, Toast.LENGTH_SHORT).show()
                 }
 
+
                 sharedPreference=SharedPreference(context)
                 try {
                     val ordersService = ApiClient.buildService(ApiInterface::class.java)
-                    val requestCall = ordersService.StatusDetails(sharedPreference.getValueString("token"),
-                        "product",
-                        data.id,
-                        categorystatus
-                    )
+                    val requestCall = ordersService.CategoryStatusDetails(sharedPreference.getValueString("token"), "category", data.id, categorystatus)
                     requestCall.enqueue(object : Callback<VendorStatusUpadateModal> {
                         override fun onResponse(
                             call: Call<VendorStatusUpadateModal>,
@@ -66,7 +70,7 @@ class CategoryAdapter (private var productsList: List<ProductX>, private val con
                                 when {
                                     response.code() == 200 -> {
                                         categoryStatusresponse = response.body()!!
-                                        if(categoryStatusresponse.error=="0"){
+                                        if(categoryStatusresponse.error=="0") {
                                             Toast.makeText(context,categoryStatusresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                         }
                                     }
@@ -81,7 +85,6 @@ class CategoryAdapter (private var productsList: List<ProductX>, private val con
                                 //Toast.makeText(context,getString(R.string.time_out), Toast.LENGTH_SHORT).show()
                             }
                         }
-
                         override fun onFailure(call: Call<VendorStatusUpadateModal>, t: Throwable) {
                             Toast.makeText(context, t.message.toString(), Toast.LENGTH_SHORT).show()
                         }
@@ -89,9 +92,7 @@ class CategoryAdapter (private var productsList: List<ProductX>, private val con
                 } catch (e: Exception) {
                     Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
                 }
-
             }
-
         }
 
     }

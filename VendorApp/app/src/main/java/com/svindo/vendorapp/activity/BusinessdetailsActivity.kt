@@ -79,7 +79,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
     var subzone_id=""
 
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(this)

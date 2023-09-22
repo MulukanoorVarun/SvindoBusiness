@@ -310,13 +310,15 @@ class EditBusinessdetails : AppCompatActivity() {
             }, 2000)
 
             val ifsc_code = binding.ifscEtTxt.text.toString().trim()
+            val name = binding.accHolderNameEt.text.toString().trim()
             val bank_name = binding.bankNameEtTxt.text.toString().trim()
             val account_number = binding.accNumEtTxt.text.toString().trim()
             val accountreenternum = binding.reAccNumEtTxt.text.toString().trim()
 
-            if (ifsc_code.isNotEmpty() && bank_name.isNotEmpty() && account_number.isNotEmpty() && accountreenternum.isNotEmpty()) {
+            if (ifsc_code.isNotEmpty() && bank_name.isNotEmpty() && account_number.isNotEmpty() && accountreenternum.isNotEmpty() && name.isNotEmpty()) {
                 bankaccountdetails(
                     binding.bankNameEtTxt.text.toString().trim(),
+                    binding.accHolderNameEt.text.toString().trim(),
                     binding.ifscEtTxt.text.toString().trim(),
                     binding.accNumEtTxt.text.toString().trim(),
                 )
@@ -803,13 +805,12 @@ class EditBusinessdetails : AppCompatActivity() {
 
         private fun bankaccountdetails(
             bank_name: String,
+            name: String,
             ifsc_code: String,
             account_number: String,
-
             ) {
-
             val loginService = ApiClient.buildService(ApiInterface::class.java)
-            val requestCall = loginService.bankaccountdetails(sharedPreference.getValueString("token"),"bank_account",ifsc_code,bank_name,account_number)
+            val requestCall = loginService.bankaccountdetails(sharedPreference.getValueString("token"),"bank_account",name,ifsc_code,bank_name,account_number)
             requestCall.enqueue(object : Callback<Bankdetails_Response> {
                 @SuppressLint("SuspiciousIndentation")
                 override fun onResponse(

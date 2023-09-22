@@ -50,12 +50,14 @@ class BankaccountActivity : AppCompatActivity() {
 
 
             val ifsc_code = bankaccountdetailsbinding.ifscEtTxt.text.toString().trim()
+            val name = bankaccountdetailsbinding.accHolderNameEt.text.toString().trim()
             val bank_name = bankaccountdetailsbinding.bankNameEtTxt.text.toString().trim()
             val account_number = bankaccountdetailsbinding.accNumEtTxt.text.toString().trim()
             val accountreenternum = bankaccountdetailsbinding.reAccNumEtTxt.text.toString().trim()
 
-            if (ifsc_code.isNotEmpty() && bank_name.isNotEmpty() && account_number.isNotEmpty() && accountreenternum.isNotEmpty()) {
+            if (ifsc_code.isNotEmpty() && bank_name.isNotEmpty() && account_number.isNotEmpty() && accountreenternum.isNotEmpty() && name.isNotEmpty()) {
                 bankaccountdetails(
+                    bankaccountdetailsbinding.accHolderNameEt.text.toString().trim(),
                     bankaccountdetailsbinding.bankNameEtTxt.text.toString().trim(),
                     bankaccountdetailsbinding.ifscEtTxt.text.toString().trim(),
                     bankaccountdetailsbinding.accNumEtTxt.text.toString().trim(),
@@ -68,6 +70,7 @@ class BankaccountActivity : AppCompatActivity() {
 
 
     private fun bankaccountdetails(
+        name:String,
         bank_name: String,
         ifsc_code: String,
         account_number: String,
@@ -75,7 +78,7 @@ class BankaccountActivity : AppCompatActivity() {
         ) {
 
         val loginService = ApiClient.buildService(ApiInterface::class.java)
-        val requestCall = loginService.bankaccountdetails(sharedPreference.getValueString("token"),"bank_account",ifsc_code,bank_name,account_number)
+        val requestCall = loginService.bankaccountdetails(sharedPreference.getValueString("token"),"bank_account",name,ifsc_code,bank_name,account_number)
         requestCall.enqueue(object : Callback<Bankdetails_Response> {
             @SuppressLint("SuspiciousIndentation")
             override fun onResponse(

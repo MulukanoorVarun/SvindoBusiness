@@ -134,6 +134,7 @@ interface ApiInterface {
     fun bankaccountdetails(
        @Header("Sessionid") content_type: String?,
         @Field("type") type: String,
+        @Field("account_hold_name") account_hold_name: String,
         @Field("ifsc") ifsc: String,
         @Field("bank_name") bank_name: String,
         @Field("account_number") account_number: String,
@@ -409,6 +410,17 @@ interface ApiInterface {
         @Field("product_id") product_id: String,
         @Field("value") value: String,
     ): Call<VendorStatusUpadateModal>
+
+
+    @FormUrlEncoded
+    @POST("Home/vendor_status_update")
+    fun CategoryStatusDetails(
+        @Header("Sessionid")  content_type:String?,
+        @Field("type") type: String,
+        @Field("category_id") category_id: String,
+        @Field("value") value: String,
+    ): Call<VendorStatusUpadateModal>
+
 
     @FormUrlEncoded
     @POST("Home/product_delete")
