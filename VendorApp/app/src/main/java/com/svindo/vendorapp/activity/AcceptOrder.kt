@@ -125,6 +125,7 @@ class AcceptOrder : AppCompatActivity() {
                                     acceptOrderBinding.deliveryfee.text =
                                         acceptorderresponse.order_details.porter_delivery_fee
                                     acceptOrderBinding.itemtotal.text = acceptorderresponse.order_details.order_amount
+                                    acceptOrderBinding.deliverytype.text = acceptorderresponse.order_details.delivery_type
 
 
                                     var availability =

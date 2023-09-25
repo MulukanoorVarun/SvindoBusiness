@@ -165,17 +165,17 @@ class AddCatalogueProduct : AppCompatActivity() {
         ProductBinding.printingswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
                 is_printing = "1"
-                ProductBinding.discountprice.text="Price per piece";
+                ProductBinding.discountprice.text="Price per piece"
 
                 ProductBinding.priceet.isEnabled = false
-                ProductBinding.spinner1.isEnabled = false
+               // ProductBinding.unitsspinner.isEnabled = false
                 ProductBinding.stocket.isEnabled = false
                // showToast(is_printing)
             } else {
                 is_printing = "0"
-                ProductBinding.discountprice.text="Sale Price";
+                ProductBinding.discountprice.text="Sale Price"
                 ProductBinding.priceet.isEnabled = true
-                ProductBinding.spinner1.isEnabled = true
+             //   ProductBinding.unitsspinner.isEnabled = true
                 ProductBinding.stocket.isEnabled = true
               //  showToast(is_printing)
             }
@@ -583,7 +583,7 @@ class AddCatalogueProduct : AppCompatActivity() {
     }
 
     internal fun setSpinner(items: List<Unititem>) {
-        spinner = findViewById(R.id.spinner1)
+        spinner = findViewById(R.id.unitsspinner)
         var binding=SpinneritemlayoutBinding.inflate(layoutInflater)
         val adapter = UnitsAdapter(this, items)
         spinner.adapter = adapter

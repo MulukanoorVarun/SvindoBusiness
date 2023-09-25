@@ -27,14 +27,11 @@ import com.svindo.vendorapp.utils.showToast
 //import kotlin.coroutines.jvm.internal.CompletedContinuation.context
 
 @SuppressLint("StaticFieldLeak")
-lateinit var  walletbinding:ActivityPayOutAmountBinding
-
-@SuppressLint("StaticFieldLeak")
-lateinit var walletModalres: WalletModal
-lateinit var adapter: AccountsAdapter
-private lateinit var sharedPreference: SharedPreference
-
 class PayOutAmountActivity : AppCompatActivity() {
+    lateinit var  walletbinding:ActivityPayOutAmountBinding
+    lateinit var walletModalres: WalletModal
+    lateinit var adapter: AccountsAdapter
+    private lateinit var sharedPreference: SharedPreference
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var builder: AlertDialog.Builder
     private lateinit var alertDialog: AlertDialog

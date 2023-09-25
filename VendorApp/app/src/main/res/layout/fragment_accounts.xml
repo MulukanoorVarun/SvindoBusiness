@@ -15,7 +15,6 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -581,10 +580,40 @@
 
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/linear"
+                        android:id="@+id/add_wallet_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/linear1"
+                        android:weightSum="2"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/payoutamounticon" />
+
+                        <TextView
+                            android:id="@+id/addwallet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="Ad Wallet"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText,UseCompatTextViewDrawableXml" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/add_wallet_layout"
                         android:weightSum="2"
                         android:layout_marginTop="15dp"
                         android:orientation="horizontal">

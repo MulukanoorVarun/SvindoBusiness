@@ -45,6 +45,16 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
             val context = itemView.context
 
 
+
+
+            if(data.is_visible=="1"){
+                binding.productsstatusswitch.isChecked=true
+
+            } else{
+                binding.productsstatusswitch.isChecked=false
+            }
+
+
             if (data.is_boosted=="1"){
                 binding.boosticon.setBackgroundResource(R.drawable.booststopicon)
             }

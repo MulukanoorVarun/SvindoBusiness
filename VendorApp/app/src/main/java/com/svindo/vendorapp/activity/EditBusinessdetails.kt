@@ -801,8 +801,6 @@ class EditBusinessdetails : AppCompatActivity() {
         })
     }
 
-
-
         private fun bankaccountdetails(
             bank_name: String,
             name: String,
@@ -873,6 +871,7 @@ class EditBusinessdetails : AppCompatActivity() {
                                         binding.reAccNumEtTxt.setText(EditResponse.details.account_number)
                                         binding.verifiedstatus.setText(EditResponse.details.status)
                                         binding.nameet.setText(EditResponse.details.name)
+                                        binding.accHolderNameEt.setText(EditResponse.details.bank_hold_name)
 
                                         if(EditResponse.details.status=="Verified"){
                                             binding.mobileNumEt.isEnabled=false
@@ -895,6 +894,8 @@ class EditBusinessdetails : AppCompatActivity() {
                                             binding.reAccNumEtTxt.isEnabled=false
                                             binding.banksubmitbutton.isEnabled=false
                                             binding.note.isVisible=false
+                                            binding.accHolderNameEt.isVisible=false
+
                                         }
 
 //                                        binding.storemail.text = EditResponse.details.email_id
@@ -1074,9 +1075,8 @@ class EditBusinessdetails : AppCompatActivity() {
 //        val address: RequestBody = address.toRequestBody("text/plain".toMediaTypeOrNull())
 //        val type: RequestBody = "business_details".toRequestBody("text/plain".toMediaTypeOrNull())
 //        val location: RequestBody = location.toRequestBody("text/plain".toMediaTypeOrNull())
-
         val requestCall = loginService.Editbusinessdetails_files_null(sharedPreference.getValueString("token"),"business_details",name,business_name,contact_mob_num,store_email_id,cat_id,address,location)
-        requestCall.enqueue(object : Callback<Verify_otp_Response>{
+        requestCall.enqueue(object : Callback<Verify_otp_Response> {
             @SuppressLint("SuspiciousIndentation")
             override fun onResponse(
                 call: Call<Verify_otp_Response>,

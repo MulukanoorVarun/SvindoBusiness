@@ -103,12 +103,10 @@ class SpotlightFragment : Fragment() {
                     call: Call<SpotligtsModal>,
                     response: Response<SpotligtsModal>
                 ) {
-
                     //dashboardBinding.progressBarLay.visibility  = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
-
                                 spotlightresponse = response.body()!!
                                 // print(instantResponse)
                                 if (spotlightresponse!= null) {

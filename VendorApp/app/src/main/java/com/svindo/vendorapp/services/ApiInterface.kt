@@ -35,6 +35,15 @@ interface ApiInterface {
         @Header("Sessionid") content_type:String?,
     ): Call<WalletModal>
 
+
+    @POST("Home/ad_wallet")
+    fun AdWalletDetails(
+        @Header("Sessionid") content_type:String?,
+    ): Call<WalletModal>
+
+
+
+
     @FormUrlEncoded
     @POST("Home/vendor_withdraw_request")
     fun WithDrawlAmount(

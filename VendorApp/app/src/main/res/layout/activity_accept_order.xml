@@ -24,7 +24,7 @@
                 <ImageView
 
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="10dp"
                     android:id="@+id/acceptbackbutton"
@@ -32,12 +32,21 @@
                     tools:ignore="ContentDescription" />
 
                 <TextView
-                    android:id="@+id/orderno"
-                    android:layout_width="match_parent"
+                    android:id="@+id/ordertxt"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/order_no_txt"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/orderno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -72,6 +81,7 @@
                 android:text="@string/pending"
                 android:textColor="@color/red"
                 android:textSize="12sp" />
+
         </LinearLayout>
     <androidx.cardview.widget.CardView
         android:id="@+id/cardlayout"
@@ -100,8 +110,7 @@
                 android:layout_weight="1"
                 android:text="@string/delivery_type"
                 android:textColor="@color/black"
-                android:textSize="13sp"
-                />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/deliverytype"
@@ -110,7 +119,7 @@
                 android:layout_marginStart="105dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:text="@string/instant_txt"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="13sp"
                 android:textStyle="bold"/>
@@ -180,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
-                android:text="12345"
+                android:text="0"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/black"
                 android:textSize="13sp"
@@ -294,7 +303,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="12345"
+                android:text="0"
                 android:textAlignment="viewEnd"
                 tools:ignore="HardcodedText"
                 android:textColor="@color/black"
@@ -334,7 +343,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="12345"
+                android:text="0"
                 android:textAlignment="viewEnd"
                 tools:ignore="HardcodedText"
                 android:textColor="@color/black"
@@ -374,7 +383,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="12345"
+                android:text="0"
                 android:textAlignment="viewEnd"
                 tools:ignore="HardcodedText"
                 android:textColor="@color/black"
@@ -424,7 +433,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
-                android:text="12345"
+                android:text="0"
                 android:textAlignment="viewEnd"
                 tools:ignore="Hardcodedtext"
                 android:textColor="@color/black"
@@ -518,7 +527,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/cust_name"
+                android:text=""
                 android:layout_below="@+id/name_txt"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
@@ -561,7 +570,7 @@
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
-                android:text="@string/address_text"
+                android:text=""
                 android:layout_below="@+id/address"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
@@ -603,29 +612,39 @@
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="#BFBEBE" />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/view4"
-                    android:layout_marginStart="13dp"
-                    android:layout_marginTop="5dp"
+
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_below="@+id/view4"-->
+<!--                    android:layout_marginStart="13dp"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:id="@+id/deliveryboyimg"-->
+<!--                    tools:ignore="ContentDescription" />-->
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:id="@+id/deliveryboyimg"
-                    android:src="@drawable/deliveryboy_img"
+                    android:layout_below="@+id/view4"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="13dp"
+                    android:background="@drawable/profileviewboarder"
                     tools:ignore="ContentDescription" />
+
                 <LinearLayout
                     android:id="@+id/linearlayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_toEndOf="@+id/deliveryboyimg"
                     android:layout_below="@+id/deliveryboydetails"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="13dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/name_text"
+                        android:text=""
                         android:drawablePadding="5dp"
                         android:textColor="@color/black"
                         android:textSize="13sp"
@@ -636,9 +655,8 @@
                         android:id="@+id/contactnumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="13dp"
                         android:layout_marginTop="5dp"
-                        android:text="@string/contact_num"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="13sp"
                         android:textStyle="bold"/>

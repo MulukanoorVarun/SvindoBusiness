@@ -121,6 +121,13 @@ class  AccountsFragment : Fragment() {
             getActivity()?.startActivity(intent)
         }
 
+
+        accountbinding.addwallet.setOnClickListener {
+            val intent = Intent(getActivity(), AdWalletActivity::class.java)
+            getActivity()?.startActivity(intent)
+        }
+
+
         accountbinding.privacyPolicy.setOnClickListener {
             var url="https://webgrid.in/projects/svindo/web/Webcontroller/privacypolicy"
             if (!url.startsWith("http://") && !url.startsWith("https://")) {
@@ -254,6 +261,8 @@ class  AccountsFragment : Fragment() {
             alertDialog.hide()
         }
     }
+
+
     fun Shopboostdeatils(
         max_amt:String,
         shop_boost:String){
@@ -448,8 +457,6 @@ class  AccountsFragment : Fragment() {
                                         }else{
 
                                         }
-
-
 
 
                                     } else {

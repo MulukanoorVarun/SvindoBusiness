@@ -326,7 +326,7 @@
                             android:background="@drawable/bg_spinner"
                             android:layout_marginTop="-8dp"
                             android:prompt="@string/unitprompt"
-                            android:id="@+id/spinner1"
+                            android:id="@+id/unitsspinner"
                             tools:ignore="NegativeMargin" />
                         <EditText
                             android:id="@+id/stocket"

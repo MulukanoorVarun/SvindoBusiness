@@ -262,14 +262,14 @@ class AddNewProduct : AppCompatActivity() {
                 is_printing ="1"
                 Binding.discountprice.text="Price per piece"
                 Binding.priceet.isEnabled = false
-                Binding.spinner1.isEnabled = false
+               // Binding.unitsspinner.isEnabled = false
                 Binding.stocket.isEnabled = false
                // showToast(is_printing)
             } else {
                 is_printing ="0"
                 Binding.discountprice.text="Sale Price"
                 Binding.priceet.isEnabled = true
-                Binding.spinner1.isEnabled = true
+                //Binding.unitsspinner.isEnabled = true
                 Binding.stocket.isEnabled = true
             //    showToast(is_printing)
             }
@@ -526,7 +526,7 @@ class AddNewProduct : AppCompatActivity() {
     }
 
     internal fun setupSpinner(items: List<Unititem>) {
-        spinner = findViewById(R.id.spinner1)
+        spinner = findViewById(R.id.unitsspinner)
 
         val adapter = UnitsAdapter(this, items)
         spinner.adapter = adapter

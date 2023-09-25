@@ -41,15 +41,12 @@ class FirebaseService : FirebaseMessagingService() {
         super.onMessageReceived(message)
 //        d("TAG", "onMessageReceived: ${message.data}")
 
-
         showNotification(message.data)
 
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    fun showNotification(
-        data: MutableMap<String, String>
-    ) {
+    fun showNotification(data: MutableMap<String, String>) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel()
         }

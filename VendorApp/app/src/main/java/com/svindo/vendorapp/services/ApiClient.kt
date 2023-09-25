@@ -10,11 +10,10 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
 
-    private const val baseUrl = "https://svindo.com/api/business_partner/" //new
+    private const val baseUrl = "https://svindo.com/api/business_partner/"//new
 
     //to print the logs
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-
     //create OkHttp Client
     private val okHttp = OkHttpClient.Builder()
         .callTimeout(180, TimeUnit.SECONDS)//by default it is 10 sec for network operations

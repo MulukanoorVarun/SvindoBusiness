@@ -17,6 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.concurrent.TimeoutException
+
 class CategoryAdapter (private var productsList: List<ProductX>, private val context: Context): RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
     class ViewHolder(private var binding: CategoryitemdesignBinding, private var context: Context) : RecyclerView.ViewHolder(binding.root){
 
@@ -51,12 +52,10 @@ class CategoryAdapter (private var productsList: List<ProductX>, private val con
 
                  //   Toast.makeText(context, categorystatus, Toast.LENGTH_SHORT).show()
                 } else {
-                    categorystatus = "0";
+                    categorystatus = "0"
 
                   //  Toast.makeText(context, categorystatus, Toast.LENGTH_SHORT).show()
                 }
-
-
                 sharedPreference=SharedPreference(context)
                 try {
                     val ordersService = ApiClient.buildService(ApiInterface::class.java)

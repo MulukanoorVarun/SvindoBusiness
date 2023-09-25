@@ -344,7 +344,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="location_txt">Location</string>
     <string name="location_et_txt">Add location</string>
     <string name="edit_business_details">Edit Business Details</string>
-    <string name="order_no_txt">Order #22154</string>
+    <string name="order_no_txt">Order #</string>
     <string name="week_dropdown">1 week</string>
     <string name="instant_txt">Instant</string>
     <string name="general_delivery">General Delivery</string>
