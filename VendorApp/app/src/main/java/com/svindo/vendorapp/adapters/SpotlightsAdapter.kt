@@ -1,10 +1,12 @@
 package com.svindo.vendorapp.adapters
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
@@ -34,6 +36,7 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
         private lateinit var spotlightboostresponse: Bankdetails_Response
         private lateinit var spotlightStatusresponse: VendorStatusUpadateModal
         private lateinit var sharedPreference: SharedPreference
+        @SuppressLint("LogConditional")
         fun bind(data: Spotlight) {
             //"#${data.store_name}".also { binding.storeName.text = it }
             binding.productname.text = data.name
@@ -288,8 +291,10 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
                 {
                     productstatus="1"
                 }else{
-                    productstatus="0";
+                    productstatus="0"
                 }
+              //  Toast.makeText(context,productstatus.toString(), Toast.LENGTH_SHORT).show()
+               // Log.d("status",productstatus.toString())
 
                 sharedPreference=SharedPreference(context)
                 try {
