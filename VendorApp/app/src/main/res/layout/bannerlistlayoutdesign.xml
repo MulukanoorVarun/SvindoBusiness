@@ -21,12 +21,11 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                 <ImageView
                     android:id="@+id/BannerImage"
                     android:layout_width="wrap_content"
-                    android:layout_height="180dp"
-                    android:scaleType="centerCrop"
+                    android:layout_height="150dp"
+                    android:scaleType="fitXY"
                     tools:ignore="ContentDescription" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

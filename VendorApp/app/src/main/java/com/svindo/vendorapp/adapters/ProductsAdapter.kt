@@ -57,6 +57,7 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
         lateinit var productStatusresponse: VendorStatusUpadateModal
 
 
+        @SuppressLint("SetTextI18n")
         fun bind(data: Product) {
             binding.productname.text = data.name
             binding.productquanity.text = data.quantity
@@ -87,6 +88,7 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
                 dialog!!.show()
                 var mrp_price = dialog!!.findViewById<EditText>(R.id.priceet)
                 var sale_price = dialog!!.findViewById<EditText>(R.id.discountpriceet)
+                var discountprice= dialog!!.findViewById<TextView>(R.id.discountprice)
                 var max_quantity = dialog!!.findViewById<EditText>(R.id.quantityet)
                 var min_quantity = dialog!!.findViewById<EditText>(R.id.minquantityet)
                 var stock = dialog!!.findViewById<EditText>(R.id.stocket)
@@ -100,6 +102,16 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
                 var replacementswitch = dialog!!.findViewById<SwitchCompat>(R.id.replacementswitch)
                 var shopexchangeswitch = dialog!!.findViewById<SwitchCompat>(R.id.shopexchangeswitch)
                 var producteditsubmitbutton= dialog!!.findViewById<AppCompatButton>(R.id.producteditsubmitbutton)
+
+
+                if(data.is_printable=="1"){
+                    mrp_price.isEnabled=false
+                   discountprice.text="Price per piece"
+                }else{
+                    mrp_price.isEnabled=true
+                    sale_price.setText("Sale Price")
+                }
+
 
                 Selfpickupswitch.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked == true) {

@@ -63,6 +63,8 @@ class InstantsFragment : Fragment() {
             instantBinding.Acceptedbtn.setEnabled(false)
             instantBinding.returnbtn.setEnabled(false)
             instantBinding.shopexchangebtn.setEnabled(false)
+            instantBinding.cancelorders.setEnabled(false)
+            instantBinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 instantBinding.Allbtn.setEnabled(true)
@@ -71,6 +73,8 @@ class InstantsFragment : Fragment() {
                 instantBinding.Acceptedbtn.setEnabled(true)
                 instantBinding.returnbtn.setEnabled(true)
                 instantBinding.shopexchangebtn.setEnabled(true)
+                instantBinding.cancelorders.setEnabled(true)
+                instantBinding.delivered.setEnabled(true)
                 instantBinding.Allbtn.setBackgroundResource(R.drawable.buttonbackground)
                // instantBinding.Allbtn.setTextColor(Color.WHITE)
             }, 2000)
@@ -79,6 +83,8 @@ class InstantsFragment : Fragment() {
             instantBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
             instantBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
             instantBinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status = "all"
             )
@@ -88,6 +94,8 @@ class InstantsFragment : Fragment() {
             instantBinding.Acceptedbtn.setTextColor(Color.BLACK)
             instantBinding.returnbtn.setTextColor(Color.BLACK)
             instantBinding.shopexchangebtn.setTextColor(Color.BLACK)
+            instantBinding.cancelorders.setTextColor(Color.BLACK)
+            instantBinding.delivered.setTextColor(Color.BLACK)
         }
 
 
@@ -99,6 +107,8 @@ class InstantsFragment : Fragment() {
                     instantBinding.Acceptedbtn.setEnabled(false)
                     instantBinding.returnbtn.setEnabled(false)
                     instantBinding.shopexchangebtn.setEnabled(false)
+                    instantBinding.cancelorders.setEnabled(false)
+                    instantBinding.delivered.setEnabled(false)
                     Handler().postDelayed({
                         instantBinding.Allbtn.setEnabled(true)
                         instantBinding.Pendingbtn.setEnabled(true)
@@ -106,6 +116,8 @@ class InstantsFragment : Fragment() {
                         instantBinding.Acceptedbtn.setEnabled(true)
                         instantBinding.returnbtn.setEnabled(true)
                         instantBinding.shopexchangebtn.setEnabled(true)
+                        instantBinding.cancelorders.setEnabled(true)
+                        instantBinding.delivered.setEnabled(true)
                         instantBinding.Pendingbtn.setBackgroundResource(R.drawable.buttonbackground)
                       //  instantBinding.Pendingbtn.setTextColor(Color.WHITE)
                     }, 2000)
@@ -114,6 +126,8 @@ class InstantsFragment : Fragment() {
                     instantBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
                     instantBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
                     instantBinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
+                    instantBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+                    instantBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status = "Pending"
             )
@@ -123,6 +137,8 @@ class InstantsFragment : Fragment() {
                     instantBinding.Acceptedbtn.setTextColor(Color.BLACK)
                     instantBinding.returnbtn.setTextColor(Color.BLACK)
                     instantBinding.shopexchangebtn.setTextColor(Color.BLACK)
+                    instantBinding.cancelorders.setTextColor(Color.BLACK)
+                    instantBinding.delivered.setTextColor(Color.BLACK)
         }
 
 
@@ -134,6 +150,8 @@ class InstantsFragment : Fragment() {
             instantBinding.Acceptedbtn.setEnabled(false)
             instantBinding.returnbtn.setEnabled(false)
             instantBinding.shopexchangebtn.setEnabled(false)
+            instantBinding.cancelorders.setEnabled(false)
+            instantBinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 instantBinding.Allbtn.setEnabled(true)
@@ -142,6 +160,8 @@ class InstantsFragment : Fragment() {
                 instantBinding.Acceptedbtn.setEnabled(true)
                 instantBinding.returnbtn.setEnabled(true)
                 instantBinding.shopexchangebtn.setEnabled(true)
+                instantBinding.cancelorders.setEnabled(true)
+                instantBinding.delivered.setEnabled(true)
                 instantBinding.Acceptedbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -150,6 +170,8 @@ class InstantsFragment : Fragment() {
             instantBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             instantBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
             instantBinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status = "Accepted"
             )
@@ -159,6 +181,8 @@ class InstantsFragment : Fragment() {
             instantBinding.Acceptedbtn.setTextColor(Color.WHITE)
             instantBinding.returnbtn.setTextColor(Color.BLACK)
             instantBinding.shopexchangebtn.setTextColor(Color.BLACK)
+            instantBinding.cancelorders.setTextColor(Color.BLACK)
+            instantBinding.delivered.setTextColor(Color.BLACK)
         }
 
 
@@ -171,6 +195,8 @@ class InstantsFragment : Fragment() {
                 instantBinding.Acceptedbtn.setEnabled(false)
                 instantBinding.returnbtn.setEnabled(false)
                 instantBinding.shopexchangebtn.setEnabled(false)
+                instantBinding.cancelorders.setEnabled(false)
+                instantBinding.delivered.setEnabled(false)
 
 
                 Handler().postDelayed({
@@ -180,6 +206,8 @@ class InstantsFragment : Fragment() {
                     instantBinding.Acceptedbtn.setEnabled(true)
                     instantBinding.returnbtn.setEnabled(true)
                     instantBinding.shopexchangebtn.setEnabled(true)
+                    instantBinding.cancelorders.setEnabled(true)
+                    instantBinding.delivered.setEnabled(true)
                    instantBinding.pickupbtn.setBackgroundResource(R.drawable.buttonbackground)
                 }, 2000)
 
@@ -188,6 +216,8 @@ class InstantsFragment : Fragment() {
                     instantBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
                     instantBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
                     instantBinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
+                    instantBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+                    instantBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
                 Ordersdetails(
                     status="Delivered"
                 )
@@ -197,19 +227,21 @@ class InstantsFragment : Fragment() {
                 instantBinding.Acceptedbtn.setTextColor(Color.BLACK)
                 instantBinding.returnbtn.setTextColor(Color.BLACK)
                 instantBinding.shopexchangebtn.setTextColor(Color.BLACK)
+                instantBinding.cancelorders.setTextColor(Color.BLACK)
+                instantBinding.delivered.setTextColor(Color.BLACK)
         }
 
 
         instantBinding.returnbtn.setOnClickListener {
-
             instantBinding.returnbtn.setBackgroundResource(R.drawable.button_loading_background)
-
             instantBinding.Allbtn.setEnabled(false)
             instantBinding.Pendingbtn.setEnabled(false)
             instantBinding.pickupbtn.setEnabled(false)
             instantBinding.Acceptedbtn.setEnabled(false)
             instantBinding.returnbtn.setEnabled(false)
             instantBinding.shopexchangebtn.setEnabled(false)
+            instantBinding.cancelorders.setEnabled(false)
+            instantBinding.delivered.setEnabled(false)
 
 
             Handler().postDelayed({
@@ -219,6 +251,8 @@ class InstantsFragment : Fragment() {
                 instantBinding.Acceptedbtn.setEnabled(true)
                 instantBinding.returnbtn.setEnabled(true)
                 instantBinding.shopexchangebtn.setEnabled(true)
+                instantBinding.cancelorders.setEnabled(true)
+                instantBinding.delivered.setEnabled(true)
                 instantBinding.returnbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -227,6 +261,8 @@ class InstantsFragment : Fragment() {
             instantBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             instantBinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
             instantBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="Return"
             )
@@ -236,6 +272,8 @@ class InstantsFragment : Fragment() {
             instantBinding.Acceptedbtn.setTextColor(Color.BLACK)
             instantBinding.returnbtn.setTextColor(Color.WHITE)
             instantBinding.shopexchangebtn.setTextColor(Color.BLACK)
+            instantBinding.cancelorders.setTextColor(Color.BLACK)
+            instantBinding.delivered.setTextColor(Color.BLACK)
         }
 
 
@@ -249,6 +287,8 @@ class InstantsFragment : Fragment() {
             instantBinding.Acceptedbtn.setEnabled(false)
             instantBinding.returnbtn.setEnabled(false)
             instantBinding.shopexchangebtn.setEnabled(false)
+            instantBinding.cancelorders.setEnabled(false)
+            instantBinding.delivered.setEnabled(false)
             Handler().postDelayed({
                 instantBinding.Allbtn.setEnabled(true)
                 instantBinding.Pendingbtn.setEnabled(true)
@@ -256,6 +296,8 @@ class InstantsFragment : Fragment() {
                 instantBinding.Acceptedbtn.setEnabled(true)
                 instantBinding.returnbtn.setEnabled(true)
                 instantBinding.shopexchangebtn.setEnabled(true)
+                instantBinding.cancelorders.setEnabled(true)
+                instantBinding.delivered.setEnabled(true)
                 instantBinding.shopexchangebtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -264,6 +306,8 @@ class InstantsFragment : Fragment() {
             instantBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             instantBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
             instantBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="ShopExchange"
             )
@@ -273,6 +317,96 @@ class InstantsFragment : Fragment() {
             instantBinding.Acceptedbtn.setTextColor(Color.BLACK)
             instantBinding.returnbtn.setTextColor(Color.BLACK)
             instantBinding.shopexchangebtn.setTextColor(Color.WHITE)
+            instantBinding.cancelorders.setTextColor(Color.BLACK)
+            instantBinding.delivered.setTextColor(Color.BLACK)
+        }
+
+        instantBinding.cancelorders.setOnClickListener {
+
+            instantBinding.cancelorders.setBackgroundResource(R.drawable.button_loading_background)
+
+            instantBinding.Allbtn.setEnabled(false)
+            instantBinding.Pendingbtn.setEnabled(false)
+            instantBinding.pickupbtn.setEnabled(false)
+            instantBinding.Acceptedbtn.setEnabled(false)
+            instantBinding.returnbtn.setEnabled(false)
+            instantBinding.shopexchangebtn.setEnabled(false)
+            instantBinding.cancelorders.setEnabled(false)
+            instantBinding.delivered.setEnabled(false)
+            Handler().postDelayed({
+                instantBinding.Allbtn.setEnabled(true)
+                instantBinding.Pendingbtn.setEnabled(true)
+                instantBinding.pickupbtn.setEnabled(true)
+                instantBinding.Acceptedbtn.setEnabled(true)
+                instantBinding.returnbtn.setEnabled(true)
+                instantBinding.shopexchangebtn.setEnabled(true)
+                instantBinding.cancelorders.setEnabled(true)
+                instantBinding.delivered.setEnabled(true)
+                instantBinding.cancelorders.setBackgroundResource(R.drawable.buttonbackground)
+            }, 2000)
+
+            instantBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="Cancelled"
+            )
+            instantBinding.Allbtn.setTextColor(Color.BLACK)
+            instantBinding.Pendingbtn.setTextColor(Color.BLACK)
+            instantBinding.pickupbtn.setTextColor(Color.BLACK)
+            instantBinding.Acceptedbtn.setTextColor(Color.BLACK)
+            instantBinding.returnbtn.setTextColor(Color.BLACK)
+            instantBinding.shopexchangebtn.setTextColor(Color.BLACK)
+            instantBinding.cancelorders.setTextColor(Color.WHITE)
+            instantBinding.delivered.setTextColor(Color.BLACK)
+        }
+
+        instantBinding.delivered.setOnClickListener {
+
+            instantBinding.delivered.setBackgroundResource(R.drawable.button_loading_background)
+
+            instantBinding.Allbtn.setEnabled(false)
+            instantBinding.Pendingbtn.setEnabled(false)
+            instantBinding.pickupbtn.setEnabled(false)
+            instantBinding.Acceptedbtn.setEnabled(false)
+            instantBinding.returnbtn.setEnabled(false)
+            instantBinding.shopexchangebtn.setEnabled(false)
+            instantBinding.cancelorders.setEnabled(false)
+            instantBinding.delivered.setEnabled(false)
+            Handler().postDelayed({
+                instantBinding.Allbtn.setEnabled(true)
+                instantBinding.Pendingbtn.setEnabled(true)
+                instantBinding.pickupbtn.setEnabled(true)
+                instantBinding.Acceptedbtn.setEnabled(true)
+                instantBinding.returnbtn.setEnabled(true)
+                instantBinding.shopexchangebtn.setEnabled(true)
+                instantBinding.cancelorders.setEnabled(true)
+                instantBinding.delivered.setEnabled(true)
+                instantBinding.delivered.setBackgroundResource(R.drawable.buttonbackground)
+            }, 2000)
+
+            instantBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
+            instantBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="Delivered"
+            )
+            instantBinding.Allbtn.setTextColor(Color.BLACK)
+            instantBinding.Pendingbtn.setTextColor(Color.BLACK)
+            instantBinding.pickupbtn.setTextColor(Color.BLACK)
+            instantBinding.Acceptedbtn.setTextColor(Color.BLACK)
+            instantBinding.returnbtn.setTextColor(Color.BLACK)
+            instantBinding.shopexchangebtn.setTextColor(Color.BLACK)
+            instantBinding.cancelorders.setTextColor(Color.BLACK)
+            instantBinding.delivered.setTextColor(Color.WHITE)
         }
         return instantBinding.root
     }

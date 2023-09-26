@@ -64,7 +64,7 @@ class BannersListAdapter (private var bannersList: List<BannerX>, private val co
                                             when{
                                                 response.code() == 200 ->{
                                                     bannerstopResponse = response.body()!!
-                                                    if(bannerstopResponse.error=="0"){
+                                                    if(bannerstopResponse.error=="0") {
                                                         Toast.makeText(context,bannerstopResponse.message.toString(), Toast.LENGTH_SHORT).show()
                                                     }
 //                                                    val intent = Intent(context, MainActivity::class.java)

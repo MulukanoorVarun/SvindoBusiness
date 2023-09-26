@@ -108,7 +108,7 @@ class ProductsFragment : Fragment() {
                                 productsresponse = response.body()!!
                                     if (productsresponse.error == "0") {
                                         if (productsresponse!= null) {
-                                        if (productsresponse.products.count() > 0) {
+                                        if (productsresponse.products.count() > 0){
                                             productsBinding.newordersRequestsViewRecyclerview.visibility = View.VISIBLE
                                             productsBinding.noData.visibility = View.GONE
                                             adapter = ProductsAdapter(productsresponse.products,context!!)

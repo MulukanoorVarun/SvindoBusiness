@@ -66,6 +66,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setEnabled(false)
             generalbinding.returnbtn.setEnabled(false)
             generalbinding.shopexchangebtn.setEnabled(false)
+            generalbinding.cancelorders.setEnabled(false)
+            generalbinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 generalbinding.Allbtn.setEnabled(true)
@@ -74,6 +76,8 @@ class GeneralDeliveryFragment : Fragment() {
                 generalbinding.Acceptedbtn.setEnabled(true)
                 generalbinding.returnbtn.setEnabled(true)
                 generalbinding.shopexchangebtn.setEnabled(true)
+                generalbinding.cancelorders.setEnabled(true)
+                generalbinding.delivered.setEnabled(true)
                 generalbinding.Allbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -83,6 +87,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status = "all"
@@ -93,6 +99,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setTextColor(Color.BLACK)
             generalbinding.returnbtn.setTextColor(Color.BLACK)
             generalbinding.shopexchangebtn.setTextColor(Color.BLACK)
+            generalbinding.cancelorders.setTextColor(Color.BLACK)
+            generalbinding.delivered.setTextColor(Color.BLACK)
         }
         generalbinding.Pendingbtn.setOnClickListener {
             generalbinding.Pendingbtn.setBackgroundResource(R.drawable.button_loading_background);
@@ -102,6 +110,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setEnabled(false)
             generalbinding.returnbtn.setEnabled(false)
             generalbinding.shopexchangebtn.setEnabled(false)
+            generalbinding.cancelorders.setEnabled(false)
+            generalbinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 generalbinding.Allbtn.setEnabled(true)
@@ -110,6 +120,8 @@ class GeneralDeliveryFragment : Fragment() {
                 generalbinding.Acceptedbtn.setEnabled(true)
                 generalbinding.returnbtn.setEnabled(true)
                 generalbinding.shopexchangebtn.setEnabled(true)
+                generalbinding.cancelorders.setEnabled(true)
+                generalbinding.delivered.setEnabled(true)
                 generalbinding.Pendingbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -120,6 +132,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="Pending"
             )
@@ -130,6 +144,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setTextColor(Color.BLACK)
             generalbinding.returnbtn.setTextColor(Color.BLACK)
             generalbinding.shopexchangebtn.setTextColor(Color.BLACK)
+            generalbinding.cancelorders.setTextColor(Color.BLACK)
+            generalbinding.delivered.setTextColor(Color.BLACK)
         }
         generalbinding.Acceptedbtn.setOnClickListener {
 
@@ -140,6 +156,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setEnabled(false)
             generalbinding.returnbtn.setEnabled(false)
             generalbinding.shopexchangebtn.setEnabled(false)
+            generalbinding.cancelorders.setEnabled(false)
+            generalbinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 generalbinding.Allbtn.setEnabled(true)
@@ -148,6 +166,8 @@ class GeneralDeliveryFragment : Fragment() {
                 generalbinding.Acceptedbtn.setEnabled(true)
                 generalbinding.returnbtn.setEnabled(true)
                 generalbinding.shopexchangebtn.setEnabled(true)
+                generalbinding.cancelorders.setEnabled(true)
+                generalbinding.delivered.setEnabled(true)
                 generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -158,6 +178,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status = "Accepted"
             )
@@ -167,6 +189,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setTextColor(Color.WHITE)
             generalbinding.returnbtn.setTextColor(Color.BLACK)
             generalbinding.shopexchangebtn.setTextColor(Color.BLACK)
+            generalbinding.cancelorders.setTextColor(Color.BLACK)
+            generalbinding.delivered.setTextColor(Color.BLACK)
         }
 
 
@@ -178,6 +202,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setEnabled(false)
             generalbinding.returnbtn.setEnabled(false)
             generalbinding.shopexchangebtn.setEnabled(false)
+            generalbinding.cancelorders.setEnabled(false)
+            generalbinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 generalbinding.Allbtn.setEnabled(true)
@@ -186,6 +212,8 @@ class GeneralDeliveryFragment : Fragment() {
                 generalbinding.Acceptedbtn.setEnabled(true)
                 generalbinding.returnbtn.setEnabled(true)
                 generalbinding.shopexchangebtn.setEnabled(true)
+                generalbinding.cancelorders.setEnabled(true)
+                generalbinding.delivered.setEnabled(true)
                 generalbinding.pickupbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -196,6 +224,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="Delivered"
             )
@@ -205,6 +235,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setTextColor(Color.BLACK)
             generalbinding.returnbtn.setTextColor(Color.BLACK)
             generalbinding.shopexchangebtn.setTextColor(Color.BLACK)
+            generalbinding.cancelorders.setTextColor(Color.BLACK)
+            generalbinding.delivered.setTextColor(Color.BLACK)
         }
 
         generalbinding.returnbtn.setOnClickListener {
@@ -215,6 +247,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setEnabled(false)
             generalbinding.returnbtn.setEnabled(false)
             generalbinding.shopexchangebtn.setEnabled(false)
+            generalbinding.cancelorders.setEnabled(false)
+            generalbinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 generalbinding.Allbtn.setEnabled(true)
@@ -223,6 +257,8 @@ class GeneralDeliveryFragment : Fragment() {
                 generalbinding.Acceptedbtn.setEnabled(true)
                 generalbinding.returnbtn.setEnabled(true)
                 generalbinding.shopexchangebtn.setEnabled(true)
+                generalbinding.cancelorders.setEnabled(true)
+                generalbinding.delivered.setEnabled(true)
                 generalbinding.returnbtn.setBackgroundResource(R.drawable.buttonbackground)
             },2000)
 
@@ -233,6 +269,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="Return"
             )
@@ -242,6 +280,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setTextColor(Color.BLACK)
             generalbinding.returnbtn.setTextColor(Color.WHITE)
             generalbinding.shopexchangebtn.setTextColor(Color.BLACK)
+            generalbinding.cancelorders.setTextColor(Color.BLACK)
+            generalbinding.delivered.setTextColor(Color.BLACK)
         }
 
 
@@ -253,6 +293,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setEnabled(false)
             generalbinding.returnbtn.setEnabled(false)
             generalbinding.shopexchangebtn.setEnabled(false)
+            generalbinding.cancelorders.setEnabled(false)
+            generalbinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 generalbinding.Allbtn.setEnabled(true)
@@ -261,6 +303,8 @@ class GeneralDeliveryFragment : Fragment() {
                 generalbinding.Acceptedbtn.setEnabled(true)
                 generalbinding.returnbtn.setEnabled(true)
                 generalbinding.shopexchangebtn.setEnabled(true)
+                generalbinding.cancelorders.setEnabled(true)
+                generalbinding.delivered.setEnabled(true)
                 generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.buttonbackground)
             },2000)
 
@@ -271,6 +315,8 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="ShopExchange"
             )
@@ -280,6 +326,100 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.Acceptedbtn.setTextColor(Color.BLACK)
             generalbinding.returnbtn.setTextColor(Color.BLACK)
             generalbinding.shopexchangebtn.setTextColor(Color.WHITE)
+            generalbinding.cancelorders.setTextColor(Color.BLACK)
+            generalbinding.delivered.setTextColor(Color.BLACK)
+        }
+
+
+        generalbinding.cancelorders.setOnClickListener {
+            generalbinding.cancelorders.setBackgroundResource(R.drawable.button_loading_background);
+            generalbinding.Allbtn.setEnabled(false)
+            generalbinding.Pendingbtn.setEnabled(false)
+            generalbinding.pickupbtn.setEnabled(false)
+            generalbinding.Acceptedbtn.setEnabled(false)
+            generalbinding.returnbtn.setEnabled(false)
+            generalbinding.shopexchangebtn.setEnabled(false)
+            generalbinding.cancelorders.setEnabled(false)
+            generalbinding.delivered.setEnabled(false)
+
+            Handler().postDelayed({
+                generalbinding.Allbtn.setEnabled(true)
+                generalbinding.Pendingbtn.setEnabled(true)
+                generalbinding.pickupbtn.setEnabled(true)
+                generalbinding.Acceptedbtn.setEnabled(true)
+                generalbinding.returnbtn.setEnabled(true)
+                generalbinding.shopexchangebtn.setEnabled(true)
+                generalbinding.cancelorders.setEnabled(true)
+                generalbinding.delivered.setEnabled(true)
+                generalbinding.cancelorders.setBackgroundResource(R.drawable.buttonbackground)
+            },2000)
+
+
+
+            generalbinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="Cancelled"
+            )
+            generalbinding.Allbtn.setTextColor(Color.BLACK)
+            generalbinding.Pendingbtn.setTextColor(Color.BLACK)
+            generalbinding.pickupbtn.setTextColor(Color.BLACK)
+            generalbinding.Acceptedbtn.setTextColor(Color.BLACK)
+            generalbinding.returnbtn.setTextColor(Color.BLACK)
+            generalbinding.shopexchangebtn.setTextColor(Color.BLACK)
+            generalbinding.cancelorders.setTextColor(Color.WHITE)
+            generalbinding.delivered.setTextColor(Color.BLACK)
+        }
+
+
+        generalbinding.delivered.setOnClickListener {
+            generalbinding.delivered.setBackgroundResource(R.drawable.button_loading_background);
+            generalbinding.Allbtn.setEnabled(false)
+            generalbinding.Pendingbtn.setEnabled(false)
+            generalbinding.pickupbtn.setEnabled(false)
+            generalbinding.Acceptedbtn.setEnabled(false)
+            generalbinding.returnbtn.setEnabled(false)
+            generalbinding.shopexchangebtn.setEnabled(false)
+            generalbinding.cancelorders.setEnabled(false)
+            generalbinding.delivered.setEnabled(false)
+
+            Handler().postDelayed({
+                generalbinding.Allbtn.setEnabled(true)
+                generalbinding.Pendingbtn.setEnabled(true)
+                generalbinding.pickupbtn.setEnabled(true)
+                generalbinding.Acceptedbtn.setEnabled(true)
+                generalbinding.returnbtn.setEnabled(true)
+                generalbinding.shopexchangebtn.setEnabled(true)
+                generalbinding.cancelorders.setEnabled(true)
+                generalbinding.delivered.setEnabled(true)
+                generalbinding.delivered.setBackgroundResource(R.drawable.buttonbackground)
+            },2000)
+
+
+
+            generalbinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.shopexchangebtn.setBackgroundResource(R.drawable.pending_btn_background)
+            generalbinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="Delivered"
+            )
+            generalbinding.Allbtn.setTextColor(Color.BLACK)
+            generalbinding.Pendingbtn.setTextColor(Color.BLACK)
+            generalbinding.pickupbtn.setTextColor(Color.BLACK)
+            generalbinding.Acceptedbtn.setTextColor(Color.BLACK)
+            generalbinding.returnbtn.setTextColor(Color.BLACK)
+            generalbinding.shopexchangebtn.setTextColor(Color.BLACK)
+            generalbinding.cancelorders.setTextColor(Color.BLACK)
+            generalbinding.delivered.setTextColor(Color.WHITE)
         }
 
         //   return inflater.inflate(R.layout.instantsfragment, container, false)

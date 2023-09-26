@@ -67,7 +67,6 @@ class AddBannersActivity : AppCompatActivity() {
     lateinit var addBannerResponse:Verify_otp_Response
     lateinit var productsresponse: ProductsModal
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var linearLayoutManager1: LinearLayoutManager
     private lateinit var adapter: BannersListAdapter
     private lateinit var adapter1: ProductsListAdapter
 
@@ -106,7 +105,7 @@ class AddBannersActivity : AppCompatActivity() {
         val Services = resources.getStringArray(R.array.redirects)
         spinner = findViewById(R.id.Bannersspinnerview)
         if (spinner != null){
-            val adapter =  ServicesAdapter(this, R.layout.spinneritemlayout, Services)
+            val adapter =  ServicesAdapter(this,R.layout.spinneritemlayout, Services)
             spinner.adapter = adapter
 
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -132,15 +131,19 @@ class AddBannersActivity : AppCompatActivity() {
             }
         }
 
+        bannersBinding.refreshicon.setOnClickListener {
+            BannersListdetails()
+        }
 
 
-        bannersBinding.bannerssubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
+
+        bannersBinding.bannerssubmitbutton.setBackgroundResource(R.drawable.buttonbackground)
         bannersBinding.bannerssubmitbutton.setOnClickListener {
-            bannersBinding.bannerssubmitbutton.setBackgroundResource(R.drawable.button_loading_background);
+            bannersBinding.bannerssubmitbutton.setBackgroundResource(R.drawable.button_loading_background)
             bannersBinding.bannerssubmitbutton.setEnabled(false)
             Handler().postDelayed({
                 bannersBinding.bannerssubmitbutton.setEnabled(true)
-                bannersBinding.bannerssubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
+                bannersBinding.bannerssubmitbutton.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
             var redirectType=BannerItem.toString().trim()
@@ -349,6 +352,9 @@ class AddBannersActivity : AppCompatActivity() {
                                             bannersBinding.BannersRecyclerview.visibility = View.GONE
                                             bannersBinding.noData.visibility = View.VISIBLE
                                         }
+                                    }else{
+                                        bannersBinding.BannersRecyclerview.visibility = View.GONE
+                                        bannersBinding.noData.visibility = View.VISIBLE
                                     }
                                 }
                             }

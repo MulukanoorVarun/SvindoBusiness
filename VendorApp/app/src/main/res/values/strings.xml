@@ -316,9 +316,8 @@ Front side photo of your PAN card with your clear name and photo
     <string name="note_desc_et_txt">Enter notification Description</string>
     <string name="notification_list">Notifications List</string>
     <string name="account">Account</string>
-    <string name="withdrwal">withdrwal</string>
     <string name="transaction_details">Transaction Details</string>
-    <string name="Withdrawal_Amount_txt">Withdrawal Amount</string>
+    <string name="Withdrawal_Amount_txt">Withdrawn Amount</string>
     <string name="today_sales_amt_txt">Today Sales Amount</string>
     <string name="item_total">Item Total</string>
     <string name="admin_commission">Admin Commission</string>
@@ -462,6 +461,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="clicks">Clicks</string>
     <string name="Stop">Stop</string>
     <string name="per_click_cost">Per Click Cost:</string>
+    <string name="cancel_orders">Cancel Orders</string>
 
 
     <string-array name="services">

@@ -179,7 +179,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/Withdrawal_Amount_txt"
                                 android:textColor="@color/white"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"/>
 
                             <TextView
                                 android:id="@+id/withdrawamount"
@@ -207,9 +207,10 @@
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/buttonbackground"
                         android:padding="10dp"
-                        android:text="@string/withdrwal"
+                        android:text="Withdrawn"
                         android:textSize="12sp"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        tools:ignore="HardcodedText" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView

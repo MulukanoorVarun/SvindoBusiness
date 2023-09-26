@@ -200,10 +200,11 @@ class  AccountsFragment : Fragment() {
 //            }
 //        }
         accountbinding.shopboostsswitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked == true){
+            if(isChecked == true){
                 shop_boost=1
                 showAlertDialog(shop_boost.toString())
-            }else{
+            }
+            if(isChecked == false){
                 shop_boost=0
                 Shopboostunckeckeddeatils(
                     shop_boost= shop_boost.toString().trim(),
@@ -234,7 +235,7 @@ class  AccountsFragment : Fragment() {
                     shop_boost.toString().trim()
                 )
             }
-            alertDialog.hide()
+           // alertDialog.hide()
         }
         }
 
@@ -255,7 +256,8 @@ class  AccountsFragment : Fragment() {
             val startDate=reportbinding.startdateEt.text.toString().trim()
             val EndDate=reportbinding.enddateEt.text.toString().trim()
             var reportsurl= accountsresponse.report
-            reportsurl=reportsurl+"?"+"startdate=startDate"+"&"+"enddate=EndDate"
+            reportsurl=reportsurl+"?"+"startdate="+startDate+"&"+"enddate="+EndDate
+          //  Toast.makeText(context,reportsurl, Toast.LENGTH_SHORT).show()
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(reportsurl.trim()))
             startActivity(intent)
             alertDialog.hide()

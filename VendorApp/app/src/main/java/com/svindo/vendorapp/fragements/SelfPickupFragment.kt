@@ -58,6 +58,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Acceptedbtn.setEnabled(false)
             selfPickupBinding.returnbtn.setEnabled(false)
             selfPickupBinding.shopexchange.setEnabled(false)
+            selfPickupBinding.cancelorders.setEnabled(false)
+            selfPickupBinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 selfPickupBinding.Allbtn.setEnabled(true)
@@ -66,6 +68,8 @@ class SelfPickupFragment : Fragment() {
                 selfPickupBinding.Acceptedbtn.setEnabled(true)
                 selfPickupBinding.returnbtn.setEnabled(true)
                 selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.cancelorders.setEnabled(true)
+                selfPickupBinding.delivered.setEnabled(true)
                 selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.buttonbackground);
             }, 2000)
 
@@ -74,6 +78,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status = "all"
             )
@@ -84,6 +90,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Acceptedbtn.setTextColor(Color.BLACK)
             selfPickupBinding.returnbtn.setTextColor(Color.BLACK)
             selfPickupBinding.shopexchange.setTextColor(Color.BLACK)
+            selfPickupBinding.cancelorders.setTextColor(Color.BLACK)
+            selfPickupBinding.delivered.setTextColor(Color.BLACK)
 
         }
 
@@ -95,6 +103,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Acceptedbtn.setEnabled(false)
             selfPickupBinding.returnbtn.setEnabled(false)
             selfPickupBinding.shopexchange.setEnabled(false)
+            selfPickupBinding.cancelorders.setEnabled(false)
+            selfPickupBinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 selfPickupBinding.Allbtn.setEnabled(true)
@@ -103,6 +113,8 @@ class SelfPickupFragment : Fragment() {
                 selfPickupBinding.Acceptedbtn.setEnabled(true)
                 selfPickupBinding.returnbtn.setEnabled(true)
                 selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.cancelorders.setEnabled(true)
+                selfPickupBinding.delivered.setEnabled(true)
                 selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
             selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
@@ -110,6 +122,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="Pending"
             )
@@ -120,6 +134,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Acceptedbtn.setTextColor(Color.BLACK)
             selfPickupBinding.returnbtn.setTextColor(Color.BLACK)
             selfPickupBinding.shopexchange.setTextColor(Color.BLACK)
+            selfPickupBinding.cancelorders.setTextColor(Color.BLACK)
+            selfPickupBinding.delivered.setTextColor(Color.BLACK)
         }
         selfPickupBinding.Acceptedbtn.setOnClickListener {
             selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.button_loading_background);
@@ -129,6 +145,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Acceptedbtn.setEnabled(false)
             selfPickupBinding.returnbtn.setEnabled(false)
             selfPickupBinding.shopexchange.setEnabled(false)
+            selfPickupBinding.cancelorders.setEnabled(false)
+            selfPickupBinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 selfPickupBinding.Allbtn.setEnabled(true)
@@ -137,6 +155,8 @@ class SelfPickupFragment : Fragment() {
                 selfPickupBinding.Acceptedbtn.setEnabled(true)
                 selfPickupBinding.returnbtn.setEnabled(true)
                 selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.cancelorders.setEnabled(true)
+                selfPickupBinding.delivered.setEnabled(true)
                 selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -147,6 +167,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status = "Accepted"
             )
@@ -156,6 +178,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Acceptedbtn.setTextColor(Color.WHITE)
             selfPickupBinding.returnbtn.setTextColor(Color.BLACK)
             selfPickupBinding.shopexchange.setTextColor(Color.BLACK)
+            selfPickupBinding.cancelorders.setTextColor(Color.BLACK)
+            selfPickupBinding.delivered.setTextColor(Color.BLACK)
         }
 
 
@@ -167,6 +191,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Acceptedbtn.setEnabled(false)
             selfPickupBinding.returnbtn.setEnabled(false)
             selfPickupBinding.shopexchange.setEnabled(false)
+            selfPickupBinding.cancelorders.setEnabled(false)
+            selfPickupBinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 selfPickupBinding.Allbtn.setEnabled(true)
@@ -175,6 +201,8 @@ class SelfPickupFragment : Fragment() {
                 selfPickupBinding.Acceptedbtn.setEnabled(true)
                 selfPickupBinding.shopexchange.setEnabled(true)
                 selfPickupBinding.returnbtn.setEnabled(true)
+                selfPickupBinding.cancelorders.setEnabled(true)
+                selfPickupBinding.delivered.setEnabled(true)
                 selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -185,6 +213,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="Delivered"
             )
@@ -194,6 +224,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Acceptedbtn.setTextColor(Color.BLACK)
             selfPickupBinding.returnbtn.setTextColor(Color.BLACK)
             selfPickupBinding.shopexchange.setTextColor(Color.BLACK)
+            selfPickupBinding.cancelorders.setTextColor(Color.BLACK)
+            selfPickupBinding.delivered.setTextColor(Color.BLACK)
         }
 
 
@@ -205,6 +237,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Acceptedbtn.setEnabled(false)
             selfPickupBinding.returnbtn.setEnabled(false)
             selfPickupBinding.shopexchange.setEnabled(false)
+            selfPickupBinding.cancelorders.setEnabled(false)
+            selfPickupBinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 selfPickupBinding.Allbtn.setEnabled(true)
@@ -213,6 +247,8 @@ class SelfPickupFragment : Fragment() {
                 selfPickupBinding.Acceptedbtn.setEnabled(true)
                 selfPickupBinding.returnbtn.setEnabled(true)
                 selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.cancelorders.setEnabled(true)
+                selfPickupBinding.delivered.setEnabled(true)
                 selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.buttonbackground);
             }, 2000)
 
@@ -223,6 +259,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="Return"
             )
@@ -232,6 +270,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Acceptedbtn.setTextColor(Color.BLACK)
             selfPickupBinding.returnbtn.setTextColor(Color.WHITE)
             selfPickupBinding.shopexchange.setTextColor(Color.BLACK)
+            selfPickupBinding.cancelorders.setTextColor(Color.BLACK)
+            selfPickupBinding.delivered.setTextColor(Color.BLACK)
         }
 
         selfPickupBinding.shopexchange.setOnClickListener {
@@ -242,6 +282,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Acceptedbtn.setEnabled(false)
             selfPickupBinding.returnbtn.setEnabled(false)
             selfPickupBinding.shopexchange.setEnabled(false)
+            selfPickupBinding.cancelorders.setEnabled(false)
+            selfPickupBinding.delivered.setEnabled(false)
 
             Handler().postDelayed({
                 selfPickupBinding.Allbtn.setEnabled(true)
@@ -250,6 +292,8 @@ class SelfPickupFragment : Fragment() {
                 selfPickupBinding.Acceptedbtn.setEnabled(true)
                 selfPickupBinding.returnbtn.setEnabled(true)
                 selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.cancelorders.setEnabled(true)
+                selfPickupBinding.delivered.setEnabled(true)
                 selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
 
@@ -258,6 +302,8 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
                 status="ShopExchange"
             )
@@ -267,7 +313,98 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.Acceptedbtn.setTextColor(Color.BLACK)
             selfPickupBinding.returnbtn.setTextColor(Color.BLACK)
             selfPickupBinding.shopexchange.setTextColor(Color.WHITE)
+            selfPickupBinding.cancelorders.setTextColor(Color.BLACK)
+            selfPickupBinding.delivered.setTextColor(Color.BLACK)
         }
+
+
+        selfPickupBinding.cancelorders.setOnClickListener {
+            selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.button_loading_background)
+            selfPickupBinding.Allbtn.setEnabled(false)
+            selfPickupBinding.Pendingbtn.setEnabled(false)
+            selfPickupBinding.pickupbtn.setEnabled(false)
+            selfPickupBinding.Acceptedbtn.setEnabled(false)
+            selfPickupBinding.returnbtn.setEnabled(false)
+            selfPickupBinding.shopexchange.setEnabled(false)
+            selfPickupBinding.cancelorders.setEnabled(false)
+            selfPickupBinding.delivered.setEnabled(false)
+
+            Handler().postDelayed({
+                selfPickupBinding.Allbtn.setEnabled(true)
+                selfPickupBinding.Pendingbtn.setEnabled(true)
+                selfPickupBinding.pickupbtn.setEnabled(true)
+                selfPickupBinding.Acceptedbtn.setEnabled(true)
+                selfPickupBinding.returnbtn.setEnabled(true)
+                selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.cancelorders.setEnabled(true)
+                selfPickupBinding.delivered.setEnabled(true)
+                selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.buttonbackground)
+            }, 2000)
+
+            selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="Cancelled"
+            )
+            selfPickupBinding.Allbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Pendingbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.pickupbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Acceptedbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.returnbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.shopexchange.setTextColor(Color.BLACK)
+            selfPickupBinding.cancelorders.setTextColor(Color.WHITE)
+            selfPickupBinding.delivered.setTextColor(Color.BLACK)
+        }
+
+
+        selfPickupBinding.delivered.setOnClickListener {
+            selfPickupBinding.delivered.setBackgroundResource(R.drawable.button_loading_background)
+            selfPickupBinding.Allbtn.setEnabled(false)
+            selfPickupBinding.Pendingbtn.setEnabled(false)
+            selfPickupBinding.pickupbtn.setEnabled(false)
+            selfPickupBinding.Acceptedbtn.setEnabled(false)
+            selfPickupBinding.returnbtn.setEnabled(false)
+            selfPickupBinding.shopexchange.setEnabled(false)
+            selfPickupBinding.cancelorders.setEnabled(false)
+            selfPickupBinding.delivered.setEnabled(false)
+
+            Handler().postDelayed({
+                selfPickupBinding.Allbtn.setEnabled(true)
+                selfPickupBinding.Pendingbtn.setEnabled(true)
+                selfPickupBinding.pickupbtn.setEnabled(true)
+                selfPickupBinding.Acceptedbtn.setEnabled(true)
+                selfPickupBinding.returnbtn.setEnabled(true)
+                selfPickupBinding.shopexchange.setEnabled(true)
+                selfPickupBinding.cancelorders.setEnabled(true)
+                selfPickupBinding.delivered.setEnabled(true)
+                selfPickupBinding.delivered.setBackgroundResource(R.drawable.buttonbackground)
+            }, 2000)
+
+            selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.pickupbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.shopexchange.setBackgroundResource(R.drawable.pending_btn_background)
+            selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
+            Ordersdetails(
+                status="Delivered"
+            )
+            selfPickupBinding.Allbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Pendingbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.pickupbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.Acceptedbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.returnbtn.setTextColor(Color.BLACK)
+            selfPickupBinding.shopexchange.setTextColor(Color.BLACK)
+            selfPickupBinding.cancelorders.setTextColor(Color.BLACK)
+            selfPickupBinding.delivered.setTextColor(Color.WHITE)
+        }
+
 
         //   return inflater.inflate(R.layout.instantsfragment, container, false)
         return selfPickupBinding.root

@@ -9,5 +9,6 @@ data class Product(
     val quantity: String,
     val sale_price: String,
     val unit: String,
-    val available_stock_count:String
+    val available_stock_count:String,
+    val is_printable:String
 )
