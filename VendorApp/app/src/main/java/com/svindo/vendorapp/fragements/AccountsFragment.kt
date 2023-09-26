@@ -239,7 +239,6 @@ class  AccountsFragment : Fragment() {
         }
         }
 
-
     fun showreportsdialog(){
         builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
         val rootView = reportbinding.root
@@ -263,7 +262,6 @@ class  AccountsFragment : Fragment() {
             alertDialog.hide()
         }
     }
-
 
     fun Shopboostdeatils(
         max_amt:String,
