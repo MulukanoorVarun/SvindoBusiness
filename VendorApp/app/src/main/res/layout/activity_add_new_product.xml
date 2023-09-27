@@ -87,8 +87,8 @@
                             android:layout_height="wrap_content">
                             <ImageView
                                 android:id="@+id/imageview"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:scaleType="fitXY"
                                 tools:ignore="ContentDescription" />
                             <TextView
@@ -155,8 +155,8 @@
                                 tools:ignore="TooDeepLayout">
                                 <ImageView
                                     android:id="@+id/imageview1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
                                     android:scaleType="fitXY"
                                     tools:ignore="ContentDescription" />
                                 <TextView
@@ -191,8 +191,8 @@
                                 tools:ignore="TooDeepLayout">
                                 <ImageView
                                     android:id="@+id/imageview2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
                                     android:scaleType="fitXY"
                                     tools:ignore="ContentDescription" />
                                 <TextView
@@ -227,8 +227,8 @@
                                 tools:ignore="TooDeepLayout">
                                 <ImageView
                                     android:id="@+id/imageview3"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
                                     android:scaleType="fitXY"
                                     tools:ignore="ContentDescription" />
                                 <TextView

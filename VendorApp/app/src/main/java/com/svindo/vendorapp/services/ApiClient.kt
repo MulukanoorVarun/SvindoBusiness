@@ -9,9 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiClient {
-
-    private const val baseUrl = "https://svindo.com/api/business_partner/"//new
-
+    private const val baseUrl = "https://webgrid.in/projects/svindo/api/business_partner/"//new
     //to print the logs
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     //create OkHttp Client
