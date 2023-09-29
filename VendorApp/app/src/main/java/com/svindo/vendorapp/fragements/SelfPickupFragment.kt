@@ -256,8 +256,6 @@ class SelfPickupFragment : Fragment() {
                 selfPickupBinding.returnbtn.setBackgroundResource(R.drawable.buttonbackground);
             }, 2000)
 
-
-
             selfPickupBinding.Acceptedbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.Allbtn.setBackgroundResource(R.drawable.pending_btn_background)
