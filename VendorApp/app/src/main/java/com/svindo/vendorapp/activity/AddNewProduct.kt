@@ -712,7 +712,7 @@ class AddNewProduct : AppCompatActivity() {
             ) {
                 val selectedItem = items[position]
                 subcat_id = selectedItem.id
-                SizesList(subcat_id)
+               // SizesList(subcat_id)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -720,83 +720,83 @@ class AddNewProduct : AppCompatActivity() {
             }
         }
     }
-    fun SizesList(subcat_id:String){
-        try {
-            val ordersService = ApiClient.buildService(ApiInterface::class.java)
-            val requestCall =
-                ordersService.SubCategoryDetails(sharedPreference.getValueString("token"),subcat_id)
-            requestCall.enqueue(object : Callback<SubCategoryModal> {
-                override fun onResponse(
-                    call: Call<SubCategoryModal>,
-                    response: Response<SubCategoryModal>
-                ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
-                    try {
-                        when {
-                            response.code() == 200 -> {
-                                //data = response.body()!!
-                                if (response.isSuccessful) {
-                                    if (response.body() != null) {
-                                        if (response.body()!!.error == "0") {
-                                            SizesSpinner(response.body()!!.sizes)
-                                        } else {
-
-                                        }
-                                    }else{
-
-                                    }
-                                }else{
-
-                                }
-                            }
-                            response.code() == 401 -> {
-                                showToast(getString(R.string.session_exp))
-
-                            }
-                            else -> {
-                                showToast(getString(R.string.server_error))
-                            }
-                        }
-                    } catch (e: TimeoutException) {
-                        showToast(getString(R.string.time_out))
-                    }
-
-                override fun onFailure(call: Call<SubCategoryModal>, t: Throwable) {
-                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
-                    showToast(t.message.toString())
-                }
-            })
-
-
-        } catch (e: Exception) {
-            //dashboardBinding.progressBarLay.visibility = View.GONE
-            showToast(e.message.toString())
-        }
-
-    }
-    internal fun SizesSpinner(items: List<Sizes>) {
-        spinner = findViewById(R.id.Sizesspinnerview)
-
-        val adapter = SizesAdapter(this, items)
-        spinner.adapter = adapter
-
-        // Handle item selection
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val selectedItem = items[position]
-                size_id = selectedItem.id
-                size_name = selectedItem.size_name
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Do nothing when nothing is selected
-            }
-        }
-    }
+//    fun SizesList(subcat_id:String){
+//        try {
+//            val ordersService = ApiClient.buildService(ApiInterface::class.java)
+//            val requestCall =
+//                ordersService.SubCategoryDetails(sharedPreference.getValueString("token"),subcat_id)
+//            requestCall.enqueue(object : Callback<SubCategoryModal> {
+//                override fun onResponse(
+//                    call: Call<SubCategoryModal>,
+//                    response: Response<SubCategoryModal>
+//                ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
+//                    try {
+//                        when {
+//                            response.code() == 200 -> {
+//                                //data = response.body()!!
+//                                if (response.isSuccessful) {
+//                                    if (response.body() != null) {
+//                                        if (response.body()!!.error == "0") {
+//                                            SizesSpinner(response.body()!!.sizes)
+//                                        } else {
+//
+//                                        }
+//                                    }else{
+//
+//                                    }
+//                                }else{
+//
+//                                }
+//                            }
+//                            response.code() == 401 -> {
+//                                showToast(getString(R.string.session_exp))
+//
+//                            }
+//                            else -> {
+//                                showToast(getString(R.string.server_error))
+//                            }
+//                        }
+//                    } catch (e: TimeoutException) {
+//                        showToast(getString(R.string.time_out))
+//                    }
+//
+//                override fun onFailure(call: Call<SubCategoryModal>, t: Throwable) {
+//                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+//                    showToast(t.message.toString())
+//                }
+//            })
+//
+//
+//        } catch (e: Exception) {
+//            //dashboardBinding.progressBarLay.visibility = View.GONE
+//            showToast(e.message.toString())
+//        }
+//
+//    }
+//    internal fun SizesSpinner(items: List<Sizes>) {
+//        spinner = findViewById(R.id.Sizesspinnerview)
+//
+//        val adapter = SizesAdapter(this, items)
+//        spinner.adapter = adapter
+//
+//        // Handle item selection
+//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                val selectedItem = items[position]
+//                size_id = selectedItem.id
+//                size_name = selectedItem.size_name
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//                // Do nothing when nothing is selected
+//            }
+//        }
+//    }
     fun AddNewProductDetails(
         name:String,
         category_id:String,

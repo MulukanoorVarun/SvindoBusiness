@@ -15,7 +15,7 @@ class BannersAdapter (private var bannersList: List<BannerXXX>, private val cont
 
         fun bind(data: BannerXXX) {
 
-            Picasso.get().load(data.banner_image).into(binding.bannerImage)
+            Picasso.get().load(data.image).into(binding.bannerImage)
             val context = itemView.context
 
             binding.cardclicking.setOnClickListener {

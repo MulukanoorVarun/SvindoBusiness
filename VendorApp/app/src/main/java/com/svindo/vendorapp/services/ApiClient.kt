@@ -7,7 +7,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-
 object ApiClient {
     private const val baseUrl = "https://webgrid.in/projects/svindo/api/business_partner/"//new
     //to print the logs

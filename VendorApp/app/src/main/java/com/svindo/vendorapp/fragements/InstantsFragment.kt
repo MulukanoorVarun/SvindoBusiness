@@ -98,7 +98,9 @@ class InstantsFragment : Fragment() {
             instantBinding.delivered.setTextColor(Color.BLACK)
         }
 
-
+        Ordersdetails(
+            status = "all"
+        )
                 instantBinding.Pendingbtn.setOnClickListener {
                     instantBinding.Pendingbtn.setBackgroundResource(R.drawable.button_loading_background)
                     instantBinding.Allbtn.setEnabled(false)
@@ -219,7 +221,7 @@ class InstantsFragment : Fragment() {
                     instantBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
                     instantBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
                 Ordersdetails(
-                    status="Delivered"
+                    status="Store Pickedup"
                 )
                 instantBinding.Allbtn.setTextColor(Color.BLACK)
                 instantBinding.Pendingbtn.setTextColor(Color.BLACK)

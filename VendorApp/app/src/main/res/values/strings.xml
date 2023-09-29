@@ -318,7 +318,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="account">Account</string>
     <string name="transaction_details">Transaction Details</string>
     <string name="Withdrawal_Amount_txt">Withdrawn Amount</string>
-    <string name="today_sales_amt_txt">Today Sales Amount</string>
+    <string name="today_sales_amt_txt">Total Sales Amount</string>
     <string name="item_total">Item Total</string>
     <string name="admin_commission">Admin Commission</string>
     <string name="net_amt">Net Amount</string>

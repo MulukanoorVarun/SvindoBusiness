@@ -161,7 +161,8 @@ class AcceptOrder : AppCompatActivity() {
                                     }
 
                                     acceptOrderBinding.acceptbutton.setOnClickListener {
-                                        if (orderstatus == "Order Placed") {
+
+                                        if (orderstatus == "Order Placed"){
                                             orderstatus = "Order Accepted"
 //                                        showToast(orderstatus.toString())
                                             OrderStatus(
@@ -169,9 +170,7 @@ class AcceptOrder : AppCompatActivity() {
                                                 order_id = order_id.toString()
                                             )
                                         } else if (orderstatus == "Order Accepted") {
-
                                             acceptOrderBinding.acceptbutton.text = "Ship Order"
-
                                             orderstatus = "Store Pickedup"
 //                                        showToast(orderstatus.toString())
                                             OrderStatus(

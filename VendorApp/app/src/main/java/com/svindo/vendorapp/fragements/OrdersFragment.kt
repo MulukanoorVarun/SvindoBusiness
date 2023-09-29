@@ -52,6 +52,20 @@ class OrdersFragment : Fragment(){
         val adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
 
+
+//        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+//            override fun onPageScrolled(
+//                position: Int,
+//                positionOffset: Float,
+//                positionOffsetPixels: Int
+//            ) {
+//                // Prevent swiping by resetting the current item to its original position
+//                viewPager.currentItem = 0 // Change this to the desired fixed page index
+//            }
+//        })
+        viewPager.isUserInputEnabled = false
+
+
         TabLayoutMediator(binding.tabs,binding.viewPager ) { tab, position ->
             tab.setCustomView(R.layout.custom_tab_layout) // Set custom layout for each tab
             val tabView = tab.customView as LinearLayout
@@ -65,6 +79,12 @@ class OrdersFragment : Fragment(){
         val layoutParams = tabView.layoutParams as ViewGroup.MarginLayoutParams
         layoutParams.width = resources.getDimensionPixelSize(R.dimen.custom_tab_width) // Set the desired width in pixels or any other dimension
         tabView.layoutParams = layoutParams
+
+            tabView.setOnClickListener {
+                // Handle tab click here
+                // You can perform actions like changing the current item in the ViewPager2
+                viewPager.currentItem = position
+            }
     }.attach()
     }
     }

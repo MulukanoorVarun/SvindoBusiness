@@ -102,6 +102,11 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.cancelorders.setTextColor(Color.BLACK)
             generalbinding.delivered.setTextColor(Color.BLACK)
         }
+
+        Ordersdetails(
+            status = "all"
+        )
+
         generalbinding.Pendingbtn.setOnClickListener {
             generalbinding.Pendingbtn.setBackgroundResource(R.drawable.button_loading_background);
             generalbinding.Allbtn.setEnabled(false)
@@ -227,7 +232,7 @@ class GeneralDeliveryFragment : Fragment() {
             generalbinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
             generalbinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
-                status="Delivered"
+                status="Store Pickedup"
             )
             generalbinding.Allbtn.setTextColor(Color.BLACK)
             generalbinding.Pendingbtn.setTextColor(Color.BLACK)

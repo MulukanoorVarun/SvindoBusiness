@@ -95,6 +95,10 @@ class SelfPickupFragment : Fragment() {
 
         }
 
+        Ordersdetails(
+            status = "all"
+        )
+
         selfPickupBinding.Pendingbtn.setOnClickListener {
             selfPickupBinding.Pendingbtn.setBackgroundResource(R.drawable.button_loading_background);
             selfPickupBinding.Allbtn.setEnabled(false)
@@ -216,7 +220,7 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
-                status="Delivered"
+                status="Store Pickedup"
             )
             selfPickupBinding.Allbtn.setTextColor(Color.BLACK)
             selfPickupBinding.Pendingbtn.setTextColor(Color.BLACK)

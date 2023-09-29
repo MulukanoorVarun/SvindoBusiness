@@ -12,7 +12,6 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.provider.MediaStore
@@ -22,11 +21,13 @@ import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import androidx.exifinterface.media.ExifInterface
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.squareup.picasso.Picasso
 import com.svindo.deliverypartner.utils.URIPathHelper
 import com.svindo.vendorapp.R
 import com.svindo.vendorapp.adapters.SpinnerItemsAdapter
@@ -37,7 +38,6 @@ import com.svindo.vendorapp.services.ApiInterface
 import com.svindo.vendorapp.utils.SharedPreference
 import com.svindo.vendorapp.utils.getFileSizeInMB
 import com.svindo.vendorapp.utils.showToast
-import com.squareup.picasso.Picasso
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -49,10 +49,14 @@ import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 import java.util.concurrent.TimeoutException
-
-class EditBusinessdetails : AppCompatActivity() {
-
-    private lateinit var binding:ActivityEditBusinessdetailsBinding
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
+class EditBusinessdetails : AppCompatActivity(), OnMapReadyCallback {
+    private lateinit var binding: ActivityEditBusinessdetailsBinding
     private lateinit var pancradresponse: Verify_otp_Response
     private lateinit var fssaiResponse: Bankdetails_Response
     private lateinit var EditResponse: EditBusinessDetailsModal
@@ -64,6 +68,9 @@ class EditBusinessdetails : AppCompatActivity() {
     private  var file_1: File? = null
     private  var file_2: File? = null
 
+    private lateinit var mMap: GoogleMap
+    private var marker: Marker? = null
+
     private val cameraPermissionCode = 201
     private val storagePermissionCode = 202
     private val emailPattern = "(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
@@ -71,61 +78,16 @@ class EditBusinessdetails : AppCompatActivity() {
     var cat_id=""
     var image_file=""
 
-    // declaring variables
-    lateinit var notificationManager: NotificationManager
-    lateinit var notificationChannel: NotificationChannel
-    lateinit var builder: Notification.Builder
-    private val channelId = "i.apps.notifications"
-    private val description = "Test notification"
-
-
-
     @SuppressLint("RemoteViewLayout", "UnspecifiedImmutableFlag")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(this)
         binding = ActivityEditBusinessdetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        binding.status.setOnClickListener {
-            val intent = Intent(this, NotificationsShowingActivity::class.java)
-            // FLAG_UPDATE_CURRENT specifies that if a previous
-            // PendingIntent already exists, then the current one
-            // will update it with the latest intent
-            // 0 is the request code, using it later with the
-            // same method again will get back the same pending
-            // intent for future reference
-            // intent passed here is to our afterNotification class
-            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-            // RemoteViews are used to use the content of
-            // some different layout apart from the current activity layout
-            val contentView = RemoteViews(packageName, R.layout.activity_notifications_showing)
-
-            // checking if android version is greater than oreo(API 26) or not
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
-                notificationChannel.enableLights(true)
-                notificationChannel.lightColor = Color.GREEN
-                notificationChannel.enableVibration(false)
-                notificationManager.createNotificationChannel(notificationChannel)
-
-                builder = Notification.Builder(this, channelId)
-                    .setContent(contentView)
-                    .setSmallIcon(R.drawable.ic_launcher_background)
-                    .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher_background))
-                    .setContentIntent(pendingIntent)
-            } else {
-
-                builder = Notification.Builder(this)
-                    .setContent(contentView)
-                    .setSmallIcon(R.drawable.ic_launcher_background)
-                    .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher_background))
-                    .setContentIntent(pendingIntent)
-            }
-            notificationManager.notify(1234, builder.build())
-        }
+//        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+//        mapFragment.getMapAsync(this)
 
         val loginButton = findViewById<ImageView>(R.id.editbusiness_details_backbutton)
         loginButton.setOnClickListener { this.onBackPressed()
@@ -203,6 +165,11 @@ class EditBusinessdetails : AppCompatActivity() {
                     }
                 }
             }
+
+
+//        val url = "https://www.google.com/maps/search/?api=1&query=$address"
+//        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+//        startActivity(intent)
 
 
         binding.pancamerabutton.setOnClickListener {
@@ -324,6 +291,28 @@ class EditBusinessdetails : AppCompatActivity() {
                 )
             } else {
                 Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+        binding.contactsubmitbutton.setBackgroundResource(R.drawable.buttonbackground)
+        binding.contactsubmitbutton.setOnClickListener {
+            binding.contactsubmitbutton.setBackgroundResource(R.drawable.button_loading_background)
+            binding.contactsubmitbutton.setEnabled(false)
+            Handler().postDelayed({
+                binding.contactsubmitbutton.setEnabled(true)
+                binding.contactsubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
+            }, 2000)
+            val emergency_mobile_number = binding.mobNumEtTxt.text.toString().trim()
+            val emergency_contact_name = binding.nameEtTxt.text.toString().trim()
+            if (emergency_contact_name.isNotEmpty() && emergency_mobile_number.isNotEmpty() && emergency_mobile_number.length==10) {
+                contactdetails(
+                    binding.nameEtTxt.text.toString().trim(),
+                    binding.mobNumEtTxt.text.toString().trim(),
+                )
+            } else {
+                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+                binding.mobNumEtTxt.setError("Mobile number should be of 10 digits")
             }
         }
 
@@ -894,7 +883,7 @@ class EditBusinessdetails : AppCompatActivity() {
                                             binding.reAccNumEtTxt.isEnabled=false
                                             binding.banksubmitbutton.isEnabled=false
                                             binding.note.isVisible=false
-                                            binding.accHolderNameEt.isVisible=false
+                                            binding.accHolderNameEt.isEnabled=false
 
                                         }
 
@@ -1105,7 +1094,74 @@ class EditBusinessdetails : AppCompatActivity() {
     }
 
 
+    private fun contactdetails(
+        emergency_contact_name: String,
+        emergency_mobile_number: String,
+    ) {
+//        showToast(emergency_mobile_number)
+//        showToast(emergency_contact_name)
+        val loginService = ApiClient.buildService(ApiInterface::class.java)
+        val requestCall = loginService.contactdetails(sharedPreference.getValueString("token"),"contact",emergency_contact_name, emergency_mobile_number)
+        requestCall.enqueue(object : Callback<Bankdetails_Response> {
+            //if you receive http response then this method will executed
+            //your status code decide if your http response is a success or failure
+            @SuppressLint("SuspiciousIndentation")
+            override fun onResponse(
+                call: Call<Bankdetails_Response>,
+                response: Response<Bankdetails_Response>
+            ) {
+                when {
+                    response.isSuccessful -> {//status code between 200 to 299
+                        contactResponse = response.body()!!
+                        if (contactResponse.error=="0") {
+                            response.body()?.let { showToast(it.message)}
+                        }
+                    }
+                    response.code() == 401 -> {//unauthorised
+                        showToast(getString(R.string.session_exp))
+                    }
+                    else -> {//Application-level failure
+                        //status code in the range of 300's, 400's, and 500's
+                        showToast(getString(R.string.server_error))
+                    }
+                }
+            }
+            override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
+                showToast(getString(R.string.session_exp))
+            }
 
+        })
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        // Add a marker at an initial location
+        val initialLocation = LatLng(0.0, 0.0)
+        marker = mMap.addMarker(MarkerOptions().position(initialLocation).title("Marker"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(initialLocation))
+
+        // Set up a marker drag listener
+        marker?.isDraggable = true
+        mMap.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
+            override fun onMarkerDrag(p0: Marker) {
+                val updatedLocation = p0?.position
+                if (updatedLocation != null) {
+                    val latitude = updatedLocation.latitude
+                    val longitude = updatedLocation.longitude
+                    // Do something with the updated location (e.g., display it)
+                    // latitude and longitude now contain the new location
+                }
+
+            }
+
+            override fun onMarkerDragEnd(p0: Marker) {
+            }
+
+            override fun onMarkerDragStart(p0: Marker) {
+            }
+        })
+    }
 
 }
 
