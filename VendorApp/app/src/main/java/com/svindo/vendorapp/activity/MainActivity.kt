@@ -23,9 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         loadFragment(HomeFragment())
-
         bottomNavigationView = findViewById(R.id.bottomnavigation) as BottomNavigationView
      bottomNavigationView.setOnItemSelectedListener {
        //  binding.bottomnavigation.setBackgroundResource(R.drawable.button_loading_background);

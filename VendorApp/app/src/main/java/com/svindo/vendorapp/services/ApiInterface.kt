@@ -542,6 +542,7 @@ interface ApiInterface {
         @Part("redirect_type")redirect_type: RequestBody,
         @Part("product_id")product_id: RequestBody,
         @Part("max_amount")max_amount: RequestBody,
+        @Part("banner_name")banner_name: RequestBody,
         @Part image: MultipartBody.Part
     ): Call<Verify_otp_Response>
 

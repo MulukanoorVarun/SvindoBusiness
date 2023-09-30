@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
         dashboardBinding.newordersRequestsViewRecyclerview.layoutManager = linearLayoutManager
         dashboardBinding.newordersRequestsViewRecyclerview.hasFixedSize()
        // dashboardBinding.newordersRequestsViewRecyclerview.setNestedScrollingEnabled(false)
+        var session_id=sharedPreference.getValueString("session")
 
 
         linearLayoutManager1 = LinearLayoutManager(context)

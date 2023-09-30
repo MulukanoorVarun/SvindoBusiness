@@ -92,10 +92,11 @@
                         android:layout_marginEnd="13dp"
                         android:autofillHints=""
                         android:background="@drawable/boarder"
-                        android:hint="@string/discount_price"
+                        android:hint="Discount price"
                         android:inputType="number"
                         android:padding="10dp"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
                 <EditText
                     android:id="@+id/validitydays"

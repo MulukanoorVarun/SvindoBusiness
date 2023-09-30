@@ -55,10 +55,6 @@ class CouponsActivity : AppCompatActivity() {
         loginButton.setOnClickListener { this.onBackPressed()
         }
 
-
-
-
-
         linearLayoutManager = LinearLayoutManager(this)
         couponsBinding.couponsrecyclerview.layoutManager = linearLayoutManager
         couponsBinding.couponsrecyclerview.hasFixedSize()

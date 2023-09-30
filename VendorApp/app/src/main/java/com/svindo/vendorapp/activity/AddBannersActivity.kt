@@ -148,12 +148,14 @@ class AddBannersActivity : AppCompatActivity() {
 
             var redirectType=BannerItem.toString().trim()
             var max_amt=bannersBinding.maxamtet.text.toString().trim()
+            var banner_name=bannersBinding.bannernameet.text.toString().trim()
 
-            if(redirectType.isNotEmpty()&& file_1!=null && max_amt.isNotEmpty()) {
+            if(redirectType.isNotEmpty()&& file_1!=null && max_amt.isNotEmpty() && banner_name.isNotEmpty()) {
                 AddBanners(
                     redirectType = BannerItem.toString().trim(),
                     itemId=itemId.toString().trim(),
                     max_amt=bannersBinding.maxamtet.text.toString().trim(),
+                    banner_name=bannersBinding.bannernameet.text.toString().trim(),
                     file_1!!
                 )
             }else{
@@ -384,6 +386,7 @@ class AddBannersActivity : AppCompatActivity() {
         redirectType: String,
         itemId:String,
         max_amt:String,
+        banner_name:String,
         file1: File
     ) {
         val loginService = ApiClient.buildService(ApiInterface::class.java)
@@ -392,8 +395,9 @@ class AddBannersActivity : AppCompatActivity() {
         val RedirectType: RequestBody = redirectType.toRequestBody("text/plain".toMediaTypeOrNull())
         val itemId: RequestBody = itemId.toRequestBody("text/plain".toMediaTypeOrNull())
         val max_amt: RequestBody = max_amt.toRequestBody("text/plain".toMediaTypeOrNull())
+        val banner_name: RequestBody = banner_name.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val requestCall = loginService.AddBanners(sharedPreference.getValueString("token"),RedirectType,itemId,max_amt,body)
+        val requestCall = loginService.AddBanners(sharedPreference.getValueString("token"),RedirectType,itemId,max_amt,banner_name,body)
         requestCall.enqueue(object : Callback<Verify_otp_Response> {
             @SuppressLint("SuspiciousIndentation")
             override fun onResponse(

@@ -55,7 +55,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-class EditBusinessdetails : AppCompatActivity(), OnMapReadyCallback {
+class EditBusinessdetails : AppCompatActivity(){
     private lateinit var binding: ActivityEditBusinessdetailsBinding
     private lateinit var pancradresponse: Verify_otp_Response
     private lateinit var fssaiResponse: Bankdetails_Response
@@ -68,8 +68,8 @@ class EditBusinessdetails : AppCompatActivity(), OnMapReadyCallback {
     private  var file_1: File? = null
     private  var file_2: File? = null
 
-    private lateinit var mMap: GoogleMap
-    private var marker: Marker? = null
+//    private lateinit var mMap: GoogleMap
+//    private var marker: Marker? = null
 
     private val cameraPermissionCode = 201
     private val storagePermissionCode = 202
@@ -92,6 +92,11 @@ class EditBusinessdetails : AppCompatActivity(), OnMapReadyCallback {
         val loginButton = findViewById<ImageView>(R.id.editbusiness_details_backbutton)
         loginButton.setOnClickListener { this.onBackPressed()
         }
+
+//        binding.locationEt.setOnClickListener {
+//            val intent = Intent(this, GoogleMapsActivity::class.java)
+//            startActivity(intent)
+//        }
 
 
         resultLauncher =
@@ -861,6 +866,8 @@ class EditBusinessdetails : AppCompatActivity(), OnMapReadyCallback {
                                         binding.verifiedstatus.setText(EditResponse.details.status)
                                         binding.nameet.setText(EditResponse.details.name)
                                         binding.accHolderNameEt.setText(EditResponse.details.bank_hold_name)
+                                        binding.nameEtTxt.setText(EditResponse.details.contact_person_name)
+                                        binding.mobNumEtTxt.setText(EditResponse.details.contact_number)
 
                                         if(EditResponse.details.status=="Verified"){
                                             binding.mobileNumEt.isEnabled=false
@@ -884,7 +891,9 @@ class EditBusinessdetails : AppCompatActivity(), OnMapReadyCallback {
                                             binding.banksubmitbutton.isEnabled=false
                                             binding.note.isVisible=false
                                             binding.accHolderNameEt.isEnabled=false
-
+                                            binding.nameEtTxt.isEnabled=false
+                                            binding.mobNumEtTxt.isEnabled=false
+                                            binding.contactsubmitbutton.isEnabled=false
                                         }
 
 //                                        binding.storemail.text = EditResponse.details.email_id
@@ -1092,8 +1101,6 @@ class EditBusinessdetails : AppCompatActivity(), OnMapReadyCallback {
             }
         })
     }
-
-
     private fun contactdetails(
         emergency_contact_name: String,
         emergency_mobile_number: String,
@@ -1129,39 +1136,38 @@ class EditBusinessdetails : AppCompatActivity(), OnMapReadyCallback {
             override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
                 showToast(getString(R.string.session_exp))
             }
-
         })
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-
-        // Add a marker at an initial location
-        val initialLocation = LatLng(0.0, 0.0)
-        marker = mMap.addMarker(MarkerOptions().position(initialLocation).title("Marker"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(initialLocation))
-
-        // Set up a marker drag listener
-        marker?.isDraggable = true
-        mMap.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
-            override fun onMarkerDrag(p0: Marker) {
-                val updatedLocation = p0?.position
-                if (updatedLocation != null) {
-                    val latitude = updatedLocation.latitude
-                    val longitude = updatedLocation.longitude
-                    // Do something with the updated location (e.g., display it)
-                    // latitude and longitude now contain the new location
-                }
-
-            }
-
-            override fun onMarkerDragEnd(p0: Marker) {
-            }
-
-            override fun onMarkerDragStart(p0: Marker) {
-            }
-        })
-    }
+//    override fun onMapReady(googleMap: GoogleMap) {
+//        mMap = googleMap
+//
+//        // Add a marker at an initial location
+//        val initialLocation = LatLng(0.0, 0.0)
+//        marker = mMap.addMarker(MarkerOptions().position(initialLocation).title("Marker"))
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(initialLocation))
+//
+//        // Set up a marker drag listener
+//        marker?.isDraggable = true
+//        mMap.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
+//            override fun onMarkerDrag(p0: Marker) {
+//                val updatedLocation = p0?.position
+//                if (updatedLocation != null) {
+//                    val latitude = updatedLocation.latitude
+//                    val longitude = updatedLocation.longitude
+//                    // Do something with the updated location (e.g., display it)
+//                    // latitude and longitude now contain the new location
+//                }
+//
+//            }
+//
+//            override fun onMarkerDragEnd(p0: Marker) {
+//            }
+//
+//            override fun onMarkerDragStart(p0: Marker) {
+//            }
+//        })
+//    }
 
 }
 

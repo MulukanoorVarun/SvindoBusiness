@@ -13,8 +13,8 @@
     <uses-permission
         android:name="com.google.android.gms.permission.AD_ID"
         tools:node="remove" />
-     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission-group.READ_MEDIA_VISUAL" /> <!-- <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> -->
@@ -61,13 +61,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VendorApp"
         tools:targetApi="31">
-        <activity
-            android:name=".activity.AdWalletActivity"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/svindobusiness" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAA2ukvrb1kWQZ2dttsNIMynLJqVCYYrhw" />
         <!--
  Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more.
@@ -78,6 +79,14 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/notification_id" />
+
+
+        <activity
+            android:name=".activity.GoogleMapsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AdWalletActivity"
+            android:exported="false" />
 
         <activity
             android:name=".activity.NotificationsShowingActivity"

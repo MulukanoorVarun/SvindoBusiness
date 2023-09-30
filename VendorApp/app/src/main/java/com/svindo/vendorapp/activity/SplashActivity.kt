@@ -8,13 +8,19 @@ import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
 import com.svindo.vendorapp.R
+import com.svindo.vendorapp.utils.SharedPreference
+import com.svindo.vendorapp.utils.showToast
 
 
 @SuppressLint("CustomSplashScreen", "Registered")
 class SplashActivity : AppCompatActivity() {
+    private lateinit var sharedPreference: SharedPreference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        sharedPreference = SharedPreference(this)
+
+      //  sharedPreference.save("mobile_no","9390776532")
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,

@@ -649,7 +649,6 @@ class BusinessdetailsActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun businessdetails(
         name: String,
         business_name : String,

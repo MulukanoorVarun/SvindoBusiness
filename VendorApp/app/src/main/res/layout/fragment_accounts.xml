@@ -602,7 +602,7 @@
                             android:layout_marginTop="6dp"
                             android:layout_marginStart="10dp"
                             android:layout_weight="1"
-                            android:text="Ad Wallet"
+                            android:text="Ad Transactions"
                             android:textColor="@color/black"
                             android:textSize="13sp"
                             android:textStyle="bold"

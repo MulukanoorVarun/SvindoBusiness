@@ -89,6 +89,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
                 }
             }
         }
+
         otpverifybinding.resendTxtview.setOnClickListener {
             if (mobile_number != null) {
                 genotp(mobile_number)
@@ -176,7 +177,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
                                     startActivity(intent)
 
                                 } else if (response.body()!!.error == "2") {
-                                    sharedPreference.save("mobile_number", (mobile_number).toString())
+                                    sharedPreference.save("mobile_number",mobile_number)
                                     val intent = Intent(this@Otpveryfiy_Activity, BusinessdetailsActivity::class.java)
                                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
