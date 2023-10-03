@@ -81,7 +81,7 @@
                     android:background="@drawable/boarder"
                     android:hint="@string/maxamt"
                     android:inputType="number"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:padding="10dp" />
 
                     <EditText
@@ -92,7 +92,7 @@
                         android:layout_marginEnd="13dp"
                         android:autofillHints=""
                         android:background="@drawable/boarder"
-                        android:hint="Discount price"
+                        android:hint="Discount Percentage"
                         android:inputType="number"
                         android:padding="10dp"
                         android:textSize="13sp"

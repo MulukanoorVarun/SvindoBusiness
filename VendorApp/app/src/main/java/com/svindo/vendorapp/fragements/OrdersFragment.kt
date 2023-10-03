@@ -46,6 +46,7 @@ class OrdersFragment : Fragment(){
     }
 
 
+    @SuppressLint("SuspiciousIndentation")
     private fun setupViewPager(view: View) {
         val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
         val tabs: TabLayout = view.findViewById(R.id.tabs)

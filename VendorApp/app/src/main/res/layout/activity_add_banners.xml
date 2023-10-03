@@ -102,7 +102,7 @@
                                 tools:ignore="Hardcodedtext"/>
                         <ImageView
                             android:id="@+id/banner_image"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="150dp"
                             android:scaleType="fitXY"
                             tools:ignore="ContentDescription"/>

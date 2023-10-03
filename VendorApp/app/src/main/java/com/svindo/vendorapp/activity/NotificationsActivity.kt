@@ -27,6 +27,7 @@ import com.svindo.deliverypartner.utils.URIPathHelper
 import com.svindo.vendorapp.R
 import com.svindo.vendorapp.adapters.NotificationAdapter
 import com.svindo.vendorapp.databinding.ActivityNotificationsBinding
+import com.svindo.vendorapp.fragements.AccountsFragment
 import com.svindo.vendorapp.modelclass.NotificationModal
 import com.svindo.vendorapp.modelclass.Verify_otp_Response
 import com.svindo.vendorapp.services.ApiClient
@@ -355,10 +356,10 @@ sharedPreference=SharedPreference(this)
                         addResponse= response.body()!!
                         if (addResponse.error=="0") {
                             notificationdetails()
-                        //    sharedPreference.save("token", businessdetailsResponse.token);
-                            showToast(addResponse.message)
-                        }else{
-                         //   showToast(addResponse.message)
+                            showToast(addResponse.message.toString())
+                        }
+                        if(addResponse.error=="1"){
+                           showToast(addResponse.message)
                         }
                     }
                     response.code() == 401 -> {//unauthorised

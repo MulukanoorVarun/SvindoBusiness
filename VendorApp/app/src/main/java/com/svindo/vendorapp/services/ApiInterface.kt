@@ -26,10 +26,6 @@ interface ApiInterface {
     ): Call<Verify_otp_Response>
 
 
-
-
-
-
     @POST("Home/wallet")
     fun WalletDetailsInterface(
         @Header("Sessionid") content_type:String?,
@@ -251,17 +247,17 @@ interface ApiInterface {
 
 
 
-    @POST("https://webgrid.in/projects/svindo/Common_controller/get_location_zone")
+    @POST("https://svindo.com/Common_controller/get_location_zone")
     fun Zones(
     ): Call<ZonesModalClass>
 
-    @POST("https://webgrid.in/projects/svindo/Common_controller/main_categories")
+    @POST("https://svindo.com/Common_controller/main_categories")
     fun  session_freecategoriesListforReg(
      //   @Header("Sessionid")  content_type:String?,
     ): Call<CustomSpinAdapter>
 
     @FormUrlEncoded
-    @POST("https://webgrid.in/projects/svindo/Common_controller/get_location_zone")
+    @POST("https://svindo.com/Common_controller/get_location_zone")
     fun SubZones(
         @Field("id") id: String,
     ): Call<ZonesModalClass>
@@ -344,6 +340,8 @@ interface ApiInterface {
         @Part("subcategory_id") subcategory_id: RequestBody,
         @Part("min_quantity") min_quantity: RequestBody,
         @Part("size_id") size_id: RequestBody,
+        @Part("is_printable") is_printable: RequestBody,
+        @Part("hsn_code") hsn_code: RequestBody,
         @Part image : MultipartBody.Part,
         @Part image1 : MultipartBody.Part,
         @Part image2: MultipartBody.Part,

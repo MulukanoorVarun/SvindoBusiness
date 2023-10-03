@@ -131,7 +131,7 @@ class InstantsFragment : Fragment() {
                     instantBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
                     instantBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
-                status = "Pending"
+                status = "Order Placed"
             )
                     instantBinding.Allbtn.setTextColor(Color.BLACK)
                     instantBinding.Pendingbtn.setTextColor(Color.WHITE)
@@ -175,7 +175,7 @@ class InstantsFragment : Fragment() {
             instantBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
             instantBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
-                status = "Accepted"
+                status = "Order Accepted"
             )
             instantBinding.Allbtn.setTextColor(Color.BLACK)
             instantBinding.Pendingbtn.setTextColor(Color.BLACK)
@@ -266,7 +266,7 @@ class InstantsFragment : Fragment() {
             instantBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
             instantBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
-                status="Return"
+                status="Returned"
             )
             instantBinding.Allbtn.setTextColor(Color.BLACK)
             instantBinding.Pendingbtn.setTextColor(Color.BLACK)
@@ -311,7 +311,7 @@ class InstantsFragment : Fragment() {
             instantBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
             instantBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
-                status="ShopExchange"
+                status="Exchanged"
             )
             instantBinding.Allbtn.setTextColor(Color.BLACK)
             instantBinding.Pendingbtn.setTextColor(Color.BLACK)

@@ -288,12 +288,14 @@ class AddNewProduct : AppCompatActivity() {
             val brandName = Binding.brandet.text.toString().trim()
             val modelNumber = Binding.modelnoet.text.toString().trim()
             val color = Binding.coloret.text.toString().trim()
+            val gst_code = Binding.gstinet.text.toString().trim()
             if (file_1 != null && file_2 != null && file_3 != null && file_4 != null) {
                 AddNewProductDetails(
                     category_id = subcat_id.toString().trim(),
                     unit_id = ItemId.toString().trim(),
-                    size_id=size_id.toString().trim(),
+                //    size_id=size_id.toString().trim(),
                     insatantDel = insatantDel.toString().trim(),
+                    is_printing = is_printing.toString().trim(),
                     deliverydays = Binding.generaldeliverydays.text.toString().trim(),
                     GeneralDel = GeneralDel.toString().trim(),
                     self_pick = self_pick.toString().trim(),
@@ -310,6 +312,7 @@ class AddNewProduct : AppCompatActivity() {
                     quantiy = Binding.quantityet.text.toString().trim(),
                     minquantiy = Binding.minquantityet.text.toString().trim(),
                     subCategoryid = subcat_id.toString().trim(),
+                    hsn_code = Binding.gstinet.text.toString().trim(),
                     file1 = file_1!!,
                     file2 = file_2!!,
                     file3 = file_3!!,
@@ -797,11 +800,11 @@ class AddNewProduct : AppCompatActivity() {
 //            }
 //        }
 //    }
+
     fun AddNewProductDetails(
         name:String,
         category_id:String,
         unit_id:String,
-        size_id:String,
         deliverydays: String,
         insatantDel: String,
         GeneralDel:String,
@@ -817,6 +820,8 @@ class AddNewProduct : AppCompatActivity() {
         quantiy:String,
         minquantiy:String,
         subCategoryid:String,
+        is_printing:String,
+        hsn_code:String,
         file1: File,
         file2: File,
         file3: File,
@@ -855,9 +860,11 @@ class AddNewProduct : AppCompatActivity() {
             val deliverydays: RequestBody =deliverydays.toRequestBody("text/plain".toMediaTypeOrNull())
             val minquantiy: RequestBody =minquantiy.toRequestBody("text/plain".toMediaTypeOrNull())
             val subCategoryid: RequestBody =subCategoryid.toRequestBody("text/plain".toMediaTypeOrNull())
-            val size_id: RequestBody =size_id.toRequestBody("text/plain".toMediaTypeOrNull())
+            val size_id: RequestBody ="0".toRequestBody("text/plain".toMediaTypeOrNull())
+            val is_printing: RequestBody =is_printing.toRequestBody("text/plain".toMediaTypeOrNull())
+            val hsn_code: RequestBody =hsn_code.toRequestBody("text/plain".toMediaTypeOrNull())
 
-            val requestCall = ordersService.AddNewProductDetails(sharedPreference.getValueString("token"),name,description,origin,category_id,mrp_price,sale_price,quantiy,unit_id,stock,insatantDel,GeneralDel,self_pick,Return,shopExchange,deliverydays,COD,Replacement,subCategoryid,minquantiy,size_id,body1,body2,body3,body4)
+            val requestCall = ordersService.AddNewProductDetails(sharedPreference.getValueString("token"),name,description,origin,category_id,mrp_price,sale_price,quantiy,unit_id,stock,insatantDel,GeneralDel,self_pick,Return,shopExchange,deliverydays,COD,Replacement,subCategoryid,minquantiy,size_id,is_printing,hsn_code,body1,body2,body3,body4)
             requestCall.enqueue(object : Callback<Bankdetails_Response> {
                 override fun onResponse(
                     call: Call<Bankdetails_Response>,

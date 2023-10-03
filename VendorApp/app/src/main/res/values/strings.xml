@@ -428,7 +428,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="addnewcouponcode">Add New Coupon Code</string>
     <string name="enter_coupon_code">Enter the coupon code</string>
     <string name="enter_minmax">Enter Min amount</string>
-    <string name="maxamt">Enter max amount</string>
+    <string name="maxamt">Max Discount amount</string>
     <string name="enter_desc">Enter description</string>
     <string name="validity">Enter validity days</string>
     <string name="stock">Stock</string>

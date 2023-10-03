@@ -129,7 +129,7 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
-                status="Pending"
+                status="Order Placed"
             )
 
             selfPickupBinding.Allbtn.setTextColor(Color.BLACK)
@@ -174,7 +174,7 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
-                status = "Accepted"
+                status = "Order Accepted"
             )
             selfPickupBinding.Allbtn.setTextColor(Color.BLACK)
             selfPickupBinding.Pendingbtn.setTextColor(Color.BLACK)
@@ -264,7 +264,7 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
-                status="Return"
+                status="Returned"
             )
             selfPickupBinding.Allbtn.setTextColor(Color.BLACK)
             selfPickupBinding.Pendingbtn.setTextColor(Color.BLACK)
@@ -307,7 +307,7 @@ class SelfPickupFragment : Fragment() {
             selfPickupBinding.cancelorders.setBackgroundResource(R.drawable.pending_btn_background)
             selfPickupBinding.delivered.setBackgroundResource(R.drawable.pending_btn_background)
             Ordersdetails(
-                status="ShopExchange"
+                status="Exchanged"
             )
             selfPickupBinding.Allbtn.setTextColor(Color.BLACK)
             selfPickupBinding.Pendingbtn.setTextColor(Color.BLACK)
