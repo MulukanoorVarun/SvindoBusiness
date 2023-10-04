@@ -10,7 +10,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
@@ -19,6 +18,7 @@ import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.exifinterface.media.ExifInterface
@@ -32,6 +32,7 @@ import com.svindo.vendorapp.services.ApiInterface
 import com.svindo.vendorapp.utils.SharedPreference
 import com.svindo.vendorapp.utils.getFileSizeInMB
 import com.svindo.vendorapp.utils.showToast
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -55,7 +56,6 @@ class AddNewProduct : AppCompatActivity() {
     private  var file_2: File? = null
     private  var file_3: File? = null
     private  var file_4: File? = null
-    private  var file_5: File? = null
 
     private lateinit var spinner: Spinner
     private lateinit var spinneritem: Spinner
@@ -289,7 +289,8 @@ class AddNewProduct : AppCompatActivity() {
             val modelNumber = Binding.modelnoet.text.toString().trim()
             val color = Binding.coloret.text.toString().trim()
             val gst_code = Binding.gstinet.text.toString().trim()
-            if (file_1 != null && file_2 != null && file_3 != null && file_4 != null) {
+
+        //    if (file_1 != null && file_2 != null && file_3 != null && file_4 != null) {
                 AddNewProductDetails(
                     category_id = subcat_id.toString().trim(),
                     unit_id = ItemId.toString().trim(),
@@ -316,17 +317,18 @@ class AddNewProduct : AppCompatActivity() {
                     file1 = file_1!!,
                     file2 = file_2!!,
                     file3 = file_3!!,
-                    file4 = file_4!!,
+                    file4 = file_4!!
                     //    file5= file_5!!
                 )
-            }else{
-                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
-            }
+//            }else{
+//                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+//            }
         }
 
         MainCategoryList()
         Unitsdetails()
     }
+
     private fun showAlertDialog() {
         val array = arrayOf(getString(R.string.gallery),getString(R.string.cancel))
         val builder = AlertDialog.Builder(this)
@@ -831,16 +833,39 @@ class AddNewProduct : AppCompatActivity() {
            //showToast(file1.toString())
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
+
             val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
             val body1 = MultipartBody.Part.createFormData("default_img", file1.name, requestFile1)
+
             val requestFile2= file2.asRequestBody("image/*".toMediaTypeOrNull())
             val body2 = MultipartBody.Part.createFormData("default_img1", file2.name, requestFile2)
+
             val requestFile3= file3.asRequestBody("image/*".toMediaTypeOrNull())
             val body3 = MultipartBody.Part.createFormData("default_img2", file3.name, requestFile3)
+
             val requestFile4= file4.asRequestBody("image/*".toMediaTypeOrNull())
             val body4 = MultipartBody.Part.createFormData("default_img3", file4.name, requestFile4)
-//            val requestFile5= file5.asRequestBody("image/*".toMediaTypeOrNull())
-//            val body5 = MultipartBody.Part.createFormData("default_img", file5.name, requestFile5)
+
+
+//            val emptyRequestBody: RequestBody = "".toRequestBody("text/plain".toMediaTypeOrNull())
+//            val emptyFilePart: MultipartBody.Part = MultipartBody.Part.createFormData("empty_file", "", emptyRequestBody)
+
+//            val requestFile2 = file2?.let {
+//                val request = it.asRequestBody("image/*".toMediaTypeOrNull())
+//                MultipartBody.Part.createFormData("default_img1", it.name, request)
+//            } ?: emptyFilePart
+
+//            val requestFile3 = file3?.let {
+//                val request = it.asRequestBody("image/*".toMediaTypeOrNull())
+//                MultipartBody.Part.createFormData("default_img2", it.name, request)
+//            } ?: emptyFilePart
+
+//            val requestFile4 = file4?.let {
+//                val request = it.asRequestBody("image/*".toMediaTypeOrNull())
+//                MultipartBody.Part.createFormData("default_img3", it.name, request)
+//            } ?: emptyFilePart
+
+
             val name: RequestBody = name.toRequestBody("text/plain".toMediaTypeOrNull())
             val description: RequestBody = description.toRequestBody("text/plain".toMediaTypeOrNull())
             val origin: RequestBody = "India".toRequestBody("text/plain".toMediaTypeOrNull())

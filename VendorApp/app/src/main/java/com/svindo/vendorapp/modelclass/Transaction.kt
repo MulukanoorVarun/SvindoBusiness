@@ -6,5 +6,5 @@ data class Transaction(
     val description: String,
     val id: String,
     val ref_type: String,
-    val transaction_type: String
+    val transaction_type: String,
 )

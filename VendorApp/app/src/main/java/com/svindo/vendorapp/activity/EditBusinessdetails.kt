@@ -6,17 +6,23 @@ import android.app.*
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
+import android.util.Log
 import android.view.View
+import android.webkit.PermissionRequest
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,6 +32,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.exifinterface.media.ExifInterface
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.squareup.picasso.Picasso
 import com.svindo.deliverypartner.utils.URIPathHelper
@@ -55,7 +63,14 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-class EditBusinessdetails : AppCompatActivity(){
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import java.util.*
+import kotlin.collections.HashMap
+
+class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private lateinit var binding: ActivityEditBusinessdetailsBinding
     private lateinit var pancradresponse: Verify_otp_Response
     private lateinit var fssaiResponse: Bankdetails_Response
@@ -67,6 +82,22 @@ class EditBusinessdetails : AppCompatActivity(){
     private var imageUri: Uri? = null
     private  var file_1: File? = null
     private  var file_2: File? = null
+
+
+    private lateinit var mMap: GoogleMap
+    private var fusedLocationClient: FusedLocationProviderClient?=null
+    private lateinit var lastLocation: Location
+    private lateinit var locationCallback: LocationCallback
+    private lateinit var locationRequest: LocationRequest
+    private var locationUpdateState = false
+    private var marker: Marker? = null
+
+    var myaddress=""
+
+    companion object {
+        const val LOCATION_PERMISSION_REQUEST_CODE = 1
+        const val REQUEST_CHECK_SETTINGS = 2
+    }
 
 //    private lateinit var mMap: GoogleMap
 //    private var marker: Marker? = null
@@ -84,6 +115,34 @@ class EditBusinessdetails : AppCompatActivity(){
         sharedPreference = SharedPreference(this)
         binding = ActivityEditBusinessdetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+//        binding.locationEt.setOnClickListener {
+//            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(
+//                    this,
+//                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+//                    1000
+//                )
+//            }else{
+//                getLocation()
+//            }
+//        }
+
+//        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+//        mapFragment.getMapAsync(this)
+
+//        locationCallback = object : LocationCallback() {
+//            override fun onLocationResult(p0: LocationResult) {
+//                super.onLocationResult(p0)
+//                lastLocation = p0.lastLocation!!
+//                placeMarkerOnMap(LatLng(lastLocation.latitude, lastLocation.longitude))
+//            }
+//        }
+//
+//        createLocationRequest()
+
 
 
 //        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
@@ -392,6 +451,288 @@ class EditBusinessdetails : AppCompatActivity(){
         Editbusinessdetails()
         CategoriesList()
  }
+
+//    private fun checkValidations() {
+//        if (binding.locationEt.text.toString().trim().isEmpty()) {
+//            binding.locationEt.error = "Enter Location"
+//        } else {
+//            if(gpsStatus()) {
+//                requestPermissions()
+//            }else{
+//                showGPSDialog()
+//            }
+//
+//        }
+//    }
+//    private fun gpsStatus(): Boolean {
+//        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+//    }
+//    private fun showGPSDialog() {
+//        locationRequest = LocationRequest()
+//        locationRequest.interval = 5000
+//        locationRequest.fastestInterval = 1000
+//        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+//
+//        val builder = LocationSettingsRequest.Builder()
+//            .addLocationRequest(locationRequest)
+//
+//        // 4
+//        val client = LocationServices.getSettingsClient(this)
+//        val task = client.checkLocationSettings(builder.build())
+//
+//        // 5
+//        task.addOnSuccessListener {
+//            /*locationUpdateState = true
+//            startLocationUpdates()*/
+//        }
+//        task.addOnFailureListener { e ->
+//            if (e is ResolvableApiException) {
+//                // Location settings are not satisfied, but this can be fixed
+//                // by showing the user a dialog.
+//                try {
+//                    // Show the dialog by calling startResolutionForResult(),
+//                    // and check the result in onActivityResult().
+//                    e.startResolutionForResult(
+//                        this,
+//                        REQUEST_CHECK_SETTINGS
+//                    )
+//                } catch (sendEx: IntentSender.SendIntentException) {
+//                    // Ignore the error.
+//                }
+//            }
+//        }
+//    }
+//
+//    @SuppressLint("LogConditional")
+//    internal fun placeMarkerOnMap(location: LatLng) {
+//        val markerOptions = MarkerOptions().position(location)
+//        /* markerOptions.icon(
+//             BitmapDescriptorFactory.fromBitmap(
+//             BitmapFactory.decodeResource(resources, R.mipmap.ic_user_location)))*/
+//        /* val titleStr = getAddress(location)  // add these two lines
+//         markerOptions.title(titleStr)*/
+//        //marker.remove()
+//        marker?.remove()
+//        marker = mMap.addMarker(markerOptions)
+//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 20f))
+//        Log.d("TAG", "placeMarkerOnMap: $marker")
+//    }
+//
+//    override fun onMapReady(googleMap: GoogleMap) {
+//        mMap = googleMap
+//        /*mMap.uiSettings.isZoomControlsEnabled = true
+//        mMap.setOnMarkerClickListener(this)
+//        // Add a marker in Sydney and move the camera
+//        val sydney = LatLng(-34.0, 151.0)
+//        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12.0f))*/
+//        setUpMap()
+//
+//    }
+//
+//    private fun setUpMap() {
+//        if (ActivityCompat.checkSelfPermission(
+//                this,
+//                android.Manifest.permission.ACCESS_FINE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED
+//        ) {
+//            ActivityCompat.requestPermissions(
+//                this,
+//                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+//                LOCATION_PERMISSION_REQUEST_CODE
+//            )
+//            return
+//        }
+//        mMap.isMyLocationEnabled = true
+//
+//        /*fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+//            // Got last known location. In some rare situations this can be null.
+//            Log.d("TAG", "setUpMap1: $location")
+//            if (location != null) {
+//                lastLocation = location
+//                val currentLatLng = LatLng(location.latitude, location.longitude)
+//                placeMarkerOnMap(currentLatLng)
+//
+//            }
+//        }*/
+//    }
+//
+//
+//
+//    private fun createLocationRequest() {
+//        locationRequest = LocationRequest()
+//        locationRequest.interval = 10000
+//        locationRequest.fastestInterval = 5000
+//        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+//
+//        val builder = LocationSettingsRequest.Builder()
+//            .addLocationRequest(locationRequest)
+//
+//        // 4
+//        val client = LocationServices.getSettingsClient(this)
+//        val task = client.checkLocationSettings(builder.build())
+//
+//        // 5
+//        task.addOnSuccessListener {
+//            locationUpdateState = true
+//            startLocationUpdates()
+//        }
+//        task.addOnFailureListener { e ->
+//            if (e is ResolvableApiException) {
+//                // Location settings are not satisfied, but this can be fixed
+//                // by showing the user a dialog.
+//                try {
+//                    // Show the dialog by calling startResolutionForResult(),
+//                    // and check the result in onActivityResult().
+//                    e.startResolutionForResult(
+//                        this,
+//                        REQUEST_CHECK_SETTINGS
+//                    )
+//                } catch (sendEx: IntentSender.SendIntentException) {
+//                    // Ignore the error.
+//                }
+//            }
+//        }
+//    }
+//    private fun requestPermissions() {
+//        // below line is use to request permission in the current activity.
+//        // this method is use to handle error in runtime permissions
+//        Dexter.withActivity(this)
+//            // below line is use to request the number of permissions which are required in our app.
+//            .withPermissions(Manifest.permission.CAMERA,)
+//            // after adding permissions we are calling an with listener method.
+//            .withListener(object : MultiplePermissionsListener {
+//                override fun onPermissionsChecked(multiplePermissionsReport: MultiplePermissionsReport) {
+//                    // this method is called when all permissions are granted
+//                    // check for permanent denial of any permission
+//                    if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied) {
+//                        // permission is denied permanently, we will show user a dialog message.
+//                        showSettingsDialog()
+//                    }
+//                }
+//
+////                override fun onPermissionRationaleShouldBeShown(
+////                    p0: MutableList<com.karumi.dexter.listener.PermissionRequest>?,
+////                    p1: PermissionToken?
+////                ) {
+////
+////                }
+//
+//                override fun onPermissionRationaleShouldBeShown(
+//                    p0: MutableList<com.karumi.dexter.listener.PermissionRequest>?,
+//                    permissionToken: PermissionToken?
+//                ) {
+//                    // this method is called when user grants some permission and denies some of them.
+//                    permissionToken!!.continuePermissionRequest()
+//                }
+//            }).withErrorListener {
+//                // we are displaying a toast message for error message.
+//                Toast.makeText(applicationContext, "Error occurred! ", Toast.LENGTH_SHORT).show()
+//            }
+//            // below line is use to run the permissions on same thread and to check the permissions
+//            .onSameThread().check()
+//    }
+//
+//    internal fun showSettingsDialog() {
+//        // we are displaying an alert dialog for permissions
+//        val builder = AlertDialog.Builder(this@EditBusinessdetails)
+//
+//        // below line is the title for our alert dialog.
+//        builder.setTitle("Need Permissions")
+//
+//        // below line is our message for our dialog
+//        builder.setMessage("${getString(R.string.app_name)} needs permission to use this feature. You can grant them in app settings.")
+//        builder.setPositiveButton("GOTO SETTINGS") { dialog, _ ->
+//            // this method is called on click on positive button and on clicking shit button
+//            // we are redirecting our user from our app to the settings page of our app.
+//            dialog.cancel()
+//            // below is the intent from which we are redirecting our user.
+//
+//            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+//            val uri = Uri.fromParts("package", packageName, null)
+//            intent.data = uri
+//            startActivity(intent)
+//        }
+//        builder.setNegativeButton("Cancel") { dialog, _ ->
+//            // this method is called when user click on negative button.
+//            dialog.cancel()
+//        }
+//        // below line is used to display our dialog
+//        builder.show()
+//    }
+//
+//
+//    override fun onMarkerClick(p0: Marker): Boolean = false
+//
+//    private fun startLocationUpdates() {
+//        //1
+//        if (ActivityCompat.checkSelfPermission(
+//                this,
+//                android.Manifest.permission.ACCESS_FINE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED
+//        ) {
+//            ActivityCompat.requestPermissions(
+//                this,
+//                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+//                LOCATION_PERMISSION_REQUEST_CODE
+//            )
+//            return
+//        }
+//        //2
+//        fusedLocationClient!!.requestLocationUpdates(
+//            locationRequest,
+//            locationCallback,
+//            null /* Looper */
+//        )
+//    }
+//
+//    @Deprecated("Deprecated in Java")
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == REQUEST_CHECK_SETTINGS) {
+//            if (resultCode == Activity.RESULT_OK) {
+//                locationUpdateState = true
+//                startLocationUpdates()
+//            }
+//        }
+//    }
+   @SuppressLint("SetTextI18n")
+   private fun getLocation(){
+    if (ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
+
+        return
+    }
+    fusedLocationClient?.lastLocation?.addOnSuccessListener { location : Location? ->
+        if(location!=null){
+            getAddress(location.latitude,location.longitude)
+            binding.locationEt.setText(location.latitude.toString()+location.longitude.toString())
+        }
+    }
+   }
+
+
+    private fun getAddress(lat:Double,lon:Double): String? {
+        try {
+            val geocoder= Geocoder(this, Locale.getDefault())
+            val addresses=geocoder.getFromLocation(lat,lon,1)
+            if(addresses!=null){
+                myaddress=addresses[0].getAddressLine(0)
+            }
+        }catch (e:Exception){
+
+        }
+        return myaddress
+    }
+
+
     private fun showAlertDialog(){
         val array = arrayOf(getString(R.string.gallery), getString(R.string.camera), getString(R.string.cancel))
         val builder = AlertDialog.Builder(this)
@@ -506,6 +847,7 @@ class EditBusinessdetails : AppCompatActivity(){
             }
             1 -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocation()
                     if ((ContextCompat.checkSelfPermission(
                             this,
                             Manifest.permission.READ_EXTERNAL_STORAGE
@@ -525,6 +867,7 @@ class EditBusinessdetails : AppCompatActivity(){
                     } else if (Manifest.permission.READ_EXTERNAL_STORAGE == Manifest.permission.READ_EXTERNAL_STORAGE) {
                         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1) }
                 }
+
             }
         }
     }

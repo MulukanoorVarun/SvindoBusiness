@@ -279,6 +279,34 @@
                         android:inputType="text"
                         android:autofillHints="" />
                     <TextView
+                        android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="6dp"
+                        android:text="Location"
+                        android:textSize="16sp"
+                        android:layout_below="@+id/address_et"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                    <EditText
+                        android:id="@+id/location_et"
+                        android:layout_width="369dp"
+                        android:layout_height="49dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_below="@+id/location"
+                        android:background="@drawable/boarder"
+                        android:drawableEnd="@drawable/location_n"
+                        android:padding="10dp"
+                        android:text=""
+                        android:textSize="13sp"
+                        android:inputType="text"
+                        android:autofillHints="" />
+                    <TextView
                         android:id="@+id/Zones"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -287,7 +315,7 @@
                         android:layout_marginTop="6dp"
                         android:text="Zones"
                         android:textSize="16sp"
-                        android:layout_below="@+id/address_et"
+                        android:layout_below="@+id/location_et"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         tools:ignore="Hardcodedtext"/>

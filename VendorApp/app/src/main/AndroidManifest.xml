@@ -85,6 +85,13 @@
         <activity
             android:name=".activity.GoogleMapsActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".activity.LocationPermission"
+            android:exported="false" />
+        <activity
+            android:name=".activity.TurnOnGPS"
+            android:exported="false" />
         <activity
             android:name=".activity.AdWalletActivity"
             android:exported="false" />
@@ -209,7 +216,14 @@
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service> <!-- <service -->
+        </service>
+
+        <service
+            android:name=".services.LocationService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+        <!-- <service -->
         <!-- android:name=".MyFirebaseMessagingService" -->
         <!-- android:exported="false"> -->
         <!-- <intent-filter> -->

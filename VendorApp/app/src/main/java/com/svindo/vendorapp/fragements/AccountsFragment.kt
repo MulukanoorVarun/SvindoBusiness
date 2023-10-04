@@ -79,10 +79,10 @@ class  AccountsFragment : Fragment() {
             getActivity()?.startActivity(intent)
         }
 
-//        accountbinding.storePic.setOnClickListener {
-//            val intent = Intent(getActivity(), GoogleMapsActivity::class.java)
-//            getActivity()?.startActivity(intent)
-//        }
+        accountbinding.storePic.setOnClickListener {
+            val intent = Intent(getActivity(), GoogleMapsActivity::class.java)
+            getActivity()?.startActivity(intent)
+        }
 
         accountbinding.insights.setOnClickListener {
             val intent = Intent(getActivity(), InsightsActivity::class.java)

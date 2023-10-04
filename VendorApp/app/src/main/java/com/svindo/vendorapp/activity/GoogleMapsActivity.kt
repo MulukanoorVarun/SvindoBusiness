@@ -58,11 +58,13 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             if(location != null) {
                 this.currentLocation=location
                 Log.d("curlocation",currentLocation.toString())
-                val mapFragment = supportFragmentManager.findFragmentById(id.mapFragment) as SupportMapFragment
+                val mapFragment = supportFragmentManager.findFragmentById(id.mapfragment) as SupportMapFragment
                  mapFragment.getMapAsync(this)
             }
         }
     }
+
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

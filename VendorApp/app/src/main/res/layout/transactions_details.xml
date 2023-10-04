@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/linearlayout1"
             android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="5dp"
             android:layout_toEndOf="@+id/imageview"
             android:weightSum="2">
             <TextView
@@ -29,10 +29,9 @@
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:text="Welcome Cash back"
-                android:layout_marginTop="2dp"
                 android:id="@+id/transationtyprtxt"
                 android:textColor="@color/black"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+               android:textSize="12sp"
                 tools:ignore="HardcodedText"
                 android:textIsSelectable="true" />
             <TextView
@@ -42,7 +41,7 @@
                 android:textAlignment="viewEnd"
                 android:background="@android:color/transparent"
                 android:text="+₹65.00"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:textColor="@color/buttongreen"
                 android:textSize="14sp"
@@ -61,14 +60,14 @@
             android:layout_marginEnd="5dp"
             android:layout_toEndOf="@+id/imageview"
             android:weightSum="2">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:text="welcome cash back"
                 android:ellipsize="end"
-                android:maxLines="1"
                 android:id="@+id/description"
                 android:textSize="10sp"
                 android:textColor="@color/black"
@@ -78,13 +77,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="12:55 AM"
-                android:layout_weight="1"
+                android:layout_weight="0.8"
                 android:textAlignment="viewEnd"
-                android:layout_marginEnd="15dp"
+                android:layout_marginEnd="5dp"
                 android:id="@+id/created_datetime"
                 android:textSize="10sp"
                 tools:ignore="HardcodedText,SmallSp,Suspicious0dp" />
-
         </LinearLayout>
     </RelativeLayout>
 

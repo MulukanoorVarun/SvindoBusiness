@@ -94,5 +94,6 @@ dependencies {
     // Places Android API
     implementation 'com.google.android.libraries.places:places:3.2.0'
 
-
+    implementation 'com.karumi:dexter:6.2.2'
 }
+apply plugin: 'com.google.gms.google-services'

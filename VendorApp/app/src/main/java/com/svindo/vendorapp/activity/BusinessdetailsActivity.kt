@@ -9,6 +9,8 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.location.Geocoder
+import android.location.Location
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -49,7 +51,10 @@ import java.io.FileOutputStream
 import java.util.concurrent.TimeoutException
 import kotlin.system.exitProcess
 import androidx.core.text.HtmlCompat
-
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 @SuppressLint("StaticFieldLeak")
@@ -67,6 +72,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
     private lateinit var spinner: Spinner
     private val itemList: MutableList<Maincategory> = ArrayList()
 
+    private var fusedLocationClient: FusedLocationProviderClient?=null
 
     private val cameraPermissionCode = 201
     val storagePermissionCode = 202
@@ -77,6 +83,8 @@ class BusinessdetailsActivity : AppCompatActivity() {
     var sericeitem=""
     var Zone_id=""
     var subzone_id=""
+    var myaddress=""
+    var cityname=""
 
 
     @SuppressLint("SetTextI18n", "SuspiciousIndentation")
@@ -92,6 +100,21 @@ class BusinessdetailsActivity : AppCompatActivity() {
         businessdetailsBinding.changePhoto.setOnClickListener {
             showAlertDialog()
         }
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        businessdetailsBinding.locationEt.setOnClickListener {
+            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    1000
+                )
+            }else{
+                getLocation()
+            }
+        }
+
 
         val loginButton = findViewById<ImageView>(R.id.business_details_backbutton)
         loginButton.setOnClickListener { this.onBackPressed()
@@ -185,14 +208,16 @@ class BusinessdetailsActivity : AppCompatActivity() {
 
             val business_name = businessdetailsBinding.businessNameEt.text.toString().trim()
             val address = businessdetailsBinding.addressEt.text.toString().trim()
+            val location = businessdetailsBinding.locationEt.text.toString().trim()
             val contact_mob_num = businessdetailsBinding.mobileNumEt.text.toString().trim()
             val store_email_id = businessdetailsBinding.storeEmailIdEt.text.toString().trim()
        //     if(businessdetailsBinding.checkBox.isChecked) {
-                if (business_name.isNotEmpty() && address.isNotEmpty() && contact_mob_num.length == 10 && contact_mob_num.isNotEmpty() && store_email_id.isNotEmpty() && store_email_id.matches(emailPattern.toRegex()) && address.isNotEmpty() && file_1 != null) {
+                if (business_name.isNotEmpty() && address.isNotEmpty() && location.isNotEmpty() && contact_mob_num.length == 10 && contact_mob_num.isNotEmpty() && store_email_id.isNotEmpty() && store_email_id.matches(emailPattern.toRegex()) && address.isNotEmpty() && file_1 != null) {
                     if(businessdetailsBinding.checkBox.isChecked) {
                         businessdetails(
                             businessdetailsBinding.nameet.text.toString().trim(),
                             businessdetailsBinding.businessNameEt.text.toString().trim(),
+                            businessdetailsBinding.locationEt.text.toString().trim(),
                             contact_mob_num.toString().trim(),
                             sharedPreference.getValueString("mobile_number").toString(),
                             store_email_id.toString().trim(),
@@ -234,6 +259,39 @@ class BusinessdetailsActivity : AppCompatActivity() {
         CategoriesList()
         ZonesList()
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun getLocation(){
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        fusedLocationClient?.lastLocation?.addOnSuccessListener { location : Location? ->
+            if(location!=null){
+                getAddress(location.latitude,location.longitude)
+                businessdetailsBinding.locationEt.setText(location.latitude.toString()+" "+location.longitude.toString())
+            }
+        }
+    }
+
+    private fun getAddress(lat:Double,lon:Double){
+        try {
+            val geocoder= Geocoder(this, Locale.getDefault())
+            val addresses=geocoder.getFromLocation(lat,lon,1)
+            if(addresses!=null){
+                myaddress=addresses[0].getAddressLine(0)
+                cityname=addresses[0].locality
+            }
+        }catch (e:Exception){
+
+        }
     }
 
     @Deprecated("Deprecated in Java")
@@ -373,6 +431,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
             }
             1 -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocation()
                     if ((ContextCompat.checkSelfPermission(
                             this,
                             Manifest.permission.READ_EXTERNAL_STORAGE
@@ -652,6 +711,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
     private fun businessdetails(
         name: String,
         business_name : String,
+        location : String,
         contact_mob_num: String,
         login_num:String,
         store_email_id: String,
@@ -672,10 +732,10 @@ class BusinessdetailsActivity : AppCompatActivity() {
         val business_category: RequestBody = business_category.toRequestBody("text/plain".toMediaTypeOrNull())
         val address: RequestBody = address.toRequestBody("text/plain".toMediaTypeOrNull())
         val type: RequestBody ="business_details".toRequestBody("text/plain".toMediaTypeOrNull())
-        val loc: RequestBody ="17.439793598348952, 78.43828890255993".toRequestBody("text/plain".toMediaTypeOrNull())
+        val location: RequestBody =location.toRequestBody("text/plain".toMediaTypeOrNull())
         val serviceitem: RequestBody=serviceitem.toRequestBody("text/plain".toMediaTypeOrNull())
         val subzone_id: RequestBody=subzone_id.toRequestBody("text/plain".toMediaTypeOrNull())
-        val requestCall = loginService.businessdetails(type,business_name,login_num,store_email_id,business_category,address,loc,name,subzone_id,body,serviceitem,contact_mob_num)
+        val requestCall = loginService.businessdetails(type,business_name,login_num,store_email_id,business_category,address,location,name,subzone_id,body,serviceitem,contact_mob_num)
         requestCall.enqueue(object : Callback<Verify_otp_Response> {
             @SuppressLint("SuspiciousIndentation")
             override fun onResponse(

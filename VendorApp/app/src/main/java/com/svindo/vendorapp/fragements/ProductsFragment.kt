@@ -1,12 +1,16 @@
 package com.svindo.vendorapp.fragements
 
 
+import android.annotation.SuppressLint
+import android.app.ActionBar
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,11 +41,13 @@ class ProductsFragment : Fragment() {
 
     var productstatus="0"
 
+
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         sharedPreference=SharedPreference(requireContext())
         }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,13 +57,10 @@ class ProductsFragment : Fragment() {
         binding=ProductitemdesignBinding.inflate(inflater, container, false)
 
       //  val Product_id=intent.getStringExtra("product_id")
-
-
         productsBinding = FragmentProductsBinding.inflate(layoutInflater)
         linearLayoutManager = LinearLayoutManager(context)
         productsBinding.newordersRequestsViewRecyclerview.layoutManager = linearLayoutManager
         productsBinding.newordersRequestsViewRecyclerview.hasFixedSize()
-
 
 
 //        binding.productsstatusswitch.setOnCheckedChangeListener { _, isChecked ->
