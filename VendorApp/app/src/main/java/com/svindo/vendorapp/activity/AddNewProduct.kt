@@ -313,11 +313,11 @@ class AddNewProduct : AppCompatActivity() {
                     quantiy = Binding.quantityet.text.toString().trim(),
                     minquantiy = Binding.minquantityet.text.toString().trim(),
                     subCategoryid = subcat_id.toString().trim(),
-                    hsn_code = Binding.gstinet.text.toString().trim(),
-                    file1 = file_1!!,
-                    file2 = file_2!!,
-                    file3 = file_3!!,
-                    file4 = file_4!!
+                    hsn_code = Binding.gstinet.text.toString().trim()
+//                    file1 = file_1!!,
+//                    file2 = file_2!!
+//                    file3 = file_3!!,
+//                    file4 = file_4!!
                     //    file5= file_5!!
                 )
 //            }else{
@@ -824,28 +824,45 @@ class AddNewProduct : AppCompatActivity() {
         subCategoryid:String,
         is_printing:String,
         hsn_code:String,
-        file1: File,
-        file2: File,
-        file3: File,
-        file4: File,
+//        file1: File,
+//        file2: File,
+//        file3: File,
+//        file4: File,
        // file5: File,
     ) {
            //showToast(file1.toString())
         try {
+
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
-
-            val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
-            val body1 = MultipartBody.Part.createFormData("default_img", file1.name, requestFile1)
-
-            val requestFile2= file2.asRequestBody("image/*".toMediaTypeOrNull())
-            val body2 = MultipartBody.Part.createFormData("default_img1", file2.name, requestFile2)
-
-            val requestFile3= file3.asRequestBody("image/*".toMediaTypeOrNull())
-            val body3 = MultipartBody.Part.createFormData("default_img2", file3.name, requestFile3)
-
-            val requestFile4= file4.asRequestBody("image/*".toMediaTypeOrNull())
-            val body4 = MultipartBody.Part.createFormData("default_img3", file4.name, requestFile4)
-
+            println("error 1");
+            val emptyRequestBody: RequestBody = "".toRequestBody("text/plain".toMediaTypeOrNull())
+            val emptyFilePart: MultipartBody.Part = MultipartBody.Part.createFormData("empty_file", "", emptyRequestBody)
+            var body1:MultipartBody.Part=emptyFilePart;
+            if(file_1!=null)
+            {
+                val requestFile1= file_1!!.asRequestBody("image/*".toMediaTypeOrNull())
+                body1= MultipartBody.Part.createFormData("default_img", file_1!!.name, requestFile1)
+            }
+            println("error 2");
+            var body2:MultipartBody.Part=emptyFilePart;
+            if(file_2!=null) {
+                val requestFile2= file_2!!.asRequestBody("image/*".toMediaTypeOrNull())
+                body2 = MultipartBody.Part.createFormData("default_img1", file_2!!.name, requestFile2)
+            }
+            println("error 3");
+            var body3:MultipartBody.Part=emptyFilePart;
+            if(file_3!=null) {
+                val requestFile3 = file_3!!.asRequestBody("image/*".toMediaTypeOrNull())
+                body3 = MultipartBody.Part.createFormData("default_img2", file_3!!.name, requestFile3)
+            }
+            println("error 4");
+            var body4:MultipartBody.Part=emptyFilePart;
+            if(file_4!=null) {
+                val requestFile4 = file_4!!.asRequestBody("image/*".toMediaTypeOrNull())
+                 body4 =
+                    MultipartBody.Part.createFormData("default_img3", file_4!!.name, requestFile4)
+            }
+            println("error 5");
 
 //            val emptyRequestBody: RequestBody = "".toRequestBody("text/plain".toMediaTypeOrNull())
 //            val emptyFilePart: MultipartBody.Part = MultipartBody.Part.createFormData("empty_file", "", emptyRequestBody)

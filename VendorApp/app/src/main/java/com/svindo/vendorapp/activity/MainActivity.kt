@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.home -> {
                     bottomNavigationView.menu.findItem(R.id.home).isEnabled = false
                     loadFragment(HomeFragment())
+
                     bottomNavigationView.menu.findItem(R.id.orders).isEnabled = true
                     bottomNavigationView.menu.findItem(R.id.catalogue).isEnabled = true
                     bottomNavigationView.menu.findItem(R.id.account).isEnabled = true
