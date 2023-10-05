@@ -67,6 +67,7 @@ class HomeFragment : Fragment() {
     }
 
     fun dashboarddetails() {
+        dashboardBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.Dashboarddetails(sharedPreference.getValueString("token"))
@@ -75,8 +76,7 @@ class HomeFragment : Fragment() {
                     call: Call<DashboardResponseModal>,
                     response: Response<DashboardResponseModal>
                 ) {
-                 //   dashboardBinding.progressBarLay.progressBar.visibility=View.INVISIBLE
-                //    dashboardBinding.progressBarLay.visibility= View.GONE
+                    dashboardBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when{
                             response.code() == 200 ->{
@@ -143,7 +143,7 @@ class HomeFragment : Fragment() {
                     }
                 }
                 override fun onFailure(call: Call<DashboardResponseModal>, t: Throwable){
-                  //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    dashboardBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
                 }
             })

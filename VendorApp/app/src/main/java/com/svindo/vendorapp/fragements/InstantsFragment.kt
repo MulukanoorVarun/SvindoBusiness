@@ -422,7 +422,7 @@ class InstantsFragment : Fragment() {
     ) {
         try {
 
-            // dashboardBinding.progressBarLay.visibility = View.VISIBLE
+            instantBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.OrdersDetails(sharedPreference.getValueString("token"),"Instant",status)
             requestCall.enqueue(object : Callback<OrdersListModal> {
@@ -431,7 +431,7 @@ class InstantsFragment : Fragment() {
                     response: Response<OrdersListModal>
                 ) {
 
-                    //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    instantBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
@@ -469,12 +469,10 @@ class InstantsFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<OrdersListModal>, t: Throwable) {
-                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    instantBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     Toast.makeText(context,t.message.toString(),Toast.LENGTH_SHORT).show()
                 }
-
             })
-
 
         } catch (e: Exception) {
             //dashboardBinding.progressBarLay.visibility = View.GONE

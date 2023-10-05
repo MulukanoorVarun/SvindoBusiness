@@ -54,12 +54,11 @@ class LoginActivity : AppCompatActivity() {
         mobileloginbinding.submit.setEnabled(false)
         Handler().postDelayed({
             mobileloginbinding.submit.setEnabled(true)
-            mobileloginbinding.submit.setBackgroundResource(R.drawable.buttonbackground);
+            mobileloginbinding.submit.setBackgroundResource(R.drawable.buttonbackground)
         }, 2000)
         if (mobileloginbinding.mobileNumberEtxt.text.toString() == "9390776532") {
             sharedPreference.save("token","1d9c1ce0e1c645c4bf02c47b99a90f7863d7562854713add0a30eaf88f7329fd6d15ecca4fb0d4400a035472ee6488bc29f7")
 //            val intent = Intent(this, HomeFragment::class.java)
-//
 //            startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -94,17 +93,18 @@ class LoginActivity : AppCompatActivity() {
                     response.isSuccessful -> {//status code between 200 to 299
 
                         if (response.isSuccessful) {
-                                    val genrateotpresponse = response.body()?.error
-                                    response.body()?.let {// showToast(it.otp.toString())
-                                            showToast(it.message) }
-                                    val i = Intent(this@LoginActivity, Otpveryfiy_Activity::class.java)
-                                    //   i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                      //                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                            // i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                                    i.putExtra("TextBox", mobileloginbinding.mobileNumberEtxt.text.toString())
-                                    response.body()?.let { i.putExtra("otpcode", it.otp)}
-                                    startActivity(i)
-                                }
+                            val genrateotpresponse = response.body()!!
+                            response.body()?.let { showToast(it.message) }
+                            if (genrateotpresponse.error == 0) {
+                                val i = Intent(this@LoginActivity, Otpveryfiy_Activity::class.java)
+                                i.putExtra(
+                                    "TextBox",
+                                    mobileloginbinding.mobileNumberEtxt.text.toString()
+                                )
+                                response.body()?.let { i.putExtra("otpcode", it.otp) }
+                                startActivity(i)
+                            }
+                        }
                         Log.d("TAG", "onResponse: " + (response.body()?.otp))
                         mobileotpResponse = response.body()!!
                     }

@@ -83,7 +83,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
     var sericeitem=""
     var Zone_id=""
     var subzone_id=""
-    var myaddress=""
+    var location=""
     var cityname=""
 
 
@@ -96,24 +96,32 @@ class BusinessdetailsActivity : AppCompatActivity() {
         gstinBinding = ActivityGstinBinding.inflate(layoutInflater)
         setContentView(businessdetailsBinding.root)
 
+        location=sharedPreference.getValueString("latlong").toString()
+        businessdetailsBinding.locationEt.setText(location)
 
         businessdetailsBinding.changePhoto.setOnClickListener {
             showAlertDialog()
         }
 
+        businessdetailsBinding.locationEt.setOnClickListener {
+            val i = Intent(this@BusinessdetailsActivity, GoogleMapsActivity::class.java)
+            startActivity(i)
+        }
+
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        businessdetailsBinding.locationEt.setOnClickListener {
-            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                    1000
-                )
-            }else{
-                getLocation()
-            }
-        }
+//        businessdetailsBinding.locationEt.setOnClickListener {
+//            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(
+//                    this,
+//                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+//                    1000
+//                )
+//            }else{
+//                getLocation()
+//            }
+//        }
 
 
         val loginButton = findViewById<ImageView>(R.id.business_details_backbutton)
@@ -261,38 +269,38 @@ class BusinessdetailsActivity : AppCompatActivity() {
 
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun getLocation(){
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
-        }
-        fusedLocationClient?.lastLocation?.addOnSuccessListener { location : Location? ->
-            if(location!=null){
-                getAddress(location.latitude,location.longitude)
-                businessdetailsBinding.locationEt.setText(location.latitude.toString()+" "+location.longitude.toString())
-            }
-        }
-    }
+//    @SuppressLint("SetTextI18n")
+//    private fun getLocation(){
+//        if (ActivityCompat.checkSelfPermission(
+//                this,
+//                Manifest.permission.ACCESS_FINE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+//                this,
+//                Manifest.permission.ACCESS_COARSE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED
+//        ) {
+//            return
+//        }
+//        fusedLocationClient?.lastLocation?.addOnSuccessListener { location : Location? ->
+//            if(location!=null){
+//                getAddress(location.latitude,location.longitude)
+//                businessdetailsBinding.locationEt.setText(location.latitude.toString()+" "+location.longitude.toString())
+//            }
+//        }
+//    }
 
-    private fun getAddress(lat:Double,lon:Double){
-        try {
-            val geocoder= Geocoder(this, Locale.getDefault())
-            val addresses=geocoder.getFromLocation(lat,lon,1)
-            if(addresses!=null){
-                myaddress=addresses[0].getAddressLine(0)
-                cityname=addresses[0].locality
-            }
-        }catch (e:Exception){
-
-        }
-    }
+//    private fun getAddress(lat:Double,lon:Double){
+//        try {
+//            val geocoder= Geocoder(this, Locale.getDefault())
+//            val addresses=geocoder.getFromLocation(lat,lon,1)
+//            if(addresses!=null){
+//                myaddress=addresses[0].getAddressLine(0)
+//                cityname=addresses[0].locality
+//            }
+//        }catch (e:Exception){
+//
+//        }
+//    }
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
@@ -431,7 +439,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
             }
             1 -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getLocation()
+                    //getLocation()
                     if ((ContextCompat.checkSelfPermission(
                             this,
                             Manifest.permission.READ_EXTERNAL_STORAGE

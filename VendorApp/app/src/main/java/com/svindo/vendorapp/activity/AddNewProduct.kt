@@ -84,7 +84,7 @@ class AddNewProduct : AppCompatActivity() {
     private val cameraPermissionCode = 201
     private val storagePermissionCode = 202
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Binding = ActivityAddNewProductBinding.inflate(layoutInflater)

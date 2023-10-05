@@ -37,6 +37,7 @@ class SpotlightSpinnerAdapter (private val context: Context, private val itemLis
 
         val item = itemList[position]
         val textView = view.findViewById<TextView>(R.id.spinnertext)
+        val textView1 = view.findViewById<TextView>(R.id.pricetxt)
         val imageView = view.findViewById<ImageView>(R.id.productimage)
 //        val textView1 = view.findViewById<TextView>(R.id.productquanity)
 //        val textView2 = view.findViewById<TextView>(R.id.productunit)
@@ -44,6 +45,7 @@ class SpotlightSpinnerAdapter (private val context: Context, private val itemLis
 //        val textView4 = view.findViewById<TextView>(R.id.productmrp)
 //        val textView5 = view.findViewById<TextView>(R.id.productavalability)
         textView.text = item.name
+        textView1.text = item.sale_price
 //        textView1.text = item.quantity
 //        textView2.text = item.unit
 //        textView3.text = item.sale_price

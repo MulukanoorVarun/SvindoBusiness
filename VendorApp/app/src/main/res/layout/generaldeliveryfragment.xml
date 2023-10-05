@@ -115,6 +115,16 @@
                 android:layout_centerHorizontal="true"
                 android:id="@+id/newordersRequestsViewRecyclerview"
                 android:layout_below="@+id/horizontal_scrollview" />
+        <include
+            android:id="@+id/progressBarLay"
+            layout="@layout/progressbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 <!--        </androidx.cardview.widget.CardView>-->
     </RelativeLayout>
 </layout>

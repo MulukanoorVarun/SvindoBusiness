@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.svindo.vendorapp.R
@@ -30,45 +31,53 @@ class MainActivity : AppCompatActivity() {
 //         bottomNavigationView.isVisible=false
 //         bottomNavigationView.isEnabled = false;
 //         bottomNavigationView.
+         bottomNavigationView.menu.findItem(R.id.orders).isEnabled = false
+         bottomNavigationView.menu.findItem(R.id.catalogue).isEnabled = false
+         bottomNavigationView.menu.findItem(R.id.account).isEnabled = false
+         bottomNavigationView.menu.findItem(R.id.account).isEnabled = false
             when (it.itemId){
                 R.id.home -> {
                     bottomNavigationView.menu.findItem(R.id.home).isEnabled = false
                     loadFragment(HomeFragment())
-
-                    bottomNavigationView.menu.findItem(R.id.orders).isEnabled = true
-                    bottomNavigationView.menu.findItem(R.id.catalogue).isEnabled = true
-                    bottomNavigationView.menu.findItem(R.id.account).isEnabled = true
+                    Handler().postDelayed({
+                        bottomNavigationView.menu.findItem(R.id.orders).isEnabled = true
+                        bottomNavigationView.menu.findItem(R.id.catalogue).isEnabled = true
+                        bottomNavigationView.menu.findItem(R.id.account).isEnabled = true
+                    }, 1000)
                     true
                 }
                 R.id.orders -> {
-                    loadFragment(OrdersFragment())
                     bottomNavigationView.menu.findItem(R.id.orders).isEnabled = false
-
+                    loadFragment(OrdersFragment())
+                    Handler().postDelayed({
                     bottomNavigationView.menu.findItem(R.id.home).isEnabled = true
                     bottomNavigationView.menu.findItem(R.id.catalogue).isEnabled = true
                     bottomNavigationView.menu.findItem(R.id.account).isEnabled = true
+                    }, 1000)
 
                     true
                 }
 
                 R.id.catalogue -> {
-                    loadFragment(CatalogueFragment())
                     bottomNavigationView.menu.findItem(R.id.catalogue).isEnabled = false
-
+                    loadFragment(CatalogueFragment())
+                    Handler().postDelayed({
                     bottomNavigationView.menu.findItem(R.id.home).isEnabled = true
                     bottomNavigationView.menu.findItem(R.id.orders).isEnabled = true
                     bottomNavigationView.menu.findItem(R.id.account).isEnabled = true
+                    }, 1000)
 
                     true
                 }
 
                 R.id.account -> {
-                    loadFragment(AccountsFragment())
                     bottomNavigationView.menu.findItem(R.id.account).isEnabled = false
-
+                    loadFragment(AccountsFragment())
+                    Handler().postDelayed({
                     bottomNavigationView.menu.findItem(R.id.home).isEnabled = true
                     bottomNavigationView.menu.findItem(R.id.orders).isEnabled = true
                     bottomNavigationView.menu.findItem(R.id.catalogue).isEnabled = true
+                    }, 1000)
                     true
                 }
                 else -> {

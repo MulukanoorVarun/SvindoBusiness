@@ -49,7 +49,7 @@ class CategoryFragment : Fragment() {
         }
     fun CategoriesDetails() {
         try {
-            //dashboardBinding.progressBarLay.visibility = View.VISIBLE
+            categoriesbinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.CategoriesDetails(sharedPreference.getValueString("token"))
             requestCall.enqueue(object : Callback<ProductCategoryModal> {
@@ -57,7 +57,7 @@ class CategoryFragment : Fragment() {
                     call: Call<ProductCategoryModal>,
                     response: Response<ProductCategoryModal>
                 ) {
-                    //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    categoriesbinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
@@ -100,7 +100,7 @@ class CategoryFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<ProductCategoryModal>, t: Throwable) {
-                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    categoriesbinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
                 }
 

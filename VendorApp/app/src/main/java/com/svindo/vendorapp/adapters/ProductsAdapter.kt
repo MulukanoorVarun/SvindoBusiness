@@ -107,12 +107,14 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
                 if(data.is_printable=="1"){
                     mrp_price.isEnabled=false
                    discountprice.text="Price per piece"
+                    max_quantity.isEnabled=false
+                    min_quantity.isEnabled=false
                 }else{
                     mrp_price.isEnabled=true
                     sale_price.setText("Sale Price")
+                    max_quantity.isEnabled=true
+                    min_quantity.isEnabled=true
                 }
-
-
                 Selfpickupswitch.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked == true) {
                         self_pick = "1";

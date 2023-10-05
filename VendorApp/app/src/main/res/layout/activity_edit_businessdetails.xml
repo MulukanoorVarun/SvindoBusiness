@@ -80,7 +80,7 @@
                 android:text="Note: Only verified shops will be visible in the svindo customer App. Please contact svindo customer support for verification if not verified."
                 android:textSize="11sp"
                 android:textColor="@color/black"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"/>
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardlayout"
                 android:layout_width="match_parent"

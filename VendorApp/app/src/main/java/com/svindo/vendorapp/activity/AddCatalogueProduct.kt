@@ -170,6 +170,9 @@ class AddCatalogueProduct : AppCompatActivity() {
                 ProductBinding.priceet.isEnabled = false
                // ProductBinding.unitsspinner.isEnabled = false
                 ProductBinding.stocket.isEnabled = false
+                ProductBinding.quantityet.isEnabled = true
+                ProductBinding.minquantityet.isEnabled = true
+
                // showToast(is_printing)
             } else {
                 is_printing = "0"
@@ -177,6 +180,9 @@ class AddCatalogueProduct : AppCompatActivity() {
                 ProductBinding.priceet.isEnabled = true
              //   ProductBinding.unitsspinner.isEnabled = true
                 ProductBinding.stocket.isEnabled = true
+                ProductBinding.quantityet.isEnabled = false
+                ProductBinding.minquantityet.isEnabled = false
+
               //  showToast(is_printing)
             }
         }
@@ -714,6 +720,7 @@ class AddCatalogueProduct : AppCompatActivity() {
 
                 override fun afterTextChanged(s: Editable?) {}
             })
+
             listView.setOnItemClickListener { parent, view, position, id ->
                var selectedItem=adapter.getItem(position).toString()
 
@@ -724,6 +731,14 @@ class AddCatalogueProduct : AppCompatActivity() {
                 Listview.adapter = selectedItemsAdapter
                 selectedItemsAdapter.notifyDataSetChanged()
                 dialog!!.dismiss()
+
+                Listview.setOnItemClickListener { _, _, position, _ ->
+                    // Remove the selected item from the list
+                    itemList.removeAt(position)
+
+                    // Notify the adapter that the data set has changed
+                    selectedItemsAdapter.notifyDataSetChanged()
+                }
             }
 //            Listview.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
 //                override fun onItemSelected(

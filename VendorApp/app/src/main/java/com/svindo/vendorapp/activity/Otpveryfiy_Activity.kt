@@ -119,16 +119,6 @@ class Otpveryfiy_Activity : AppCompatActivity() {
 //                                showToast(genrateotpresponse.otp.toString())
 //                            showToast(genrateotpresponse.message)
                            }
-
-//                            val responseMessage = response.body()?.error
-//                            println(responseMessage);
-
-//                            otpverifybinding.firstPinView.text=null
-
-//                            val i = Intent(this@MainActivity, OTPscreen::class.java)
-//                            i.putExtra("TextBox", com.example.deliverypartner.binding.mobileNumberEtxt.text.toString());
-//                            response.body()?.let { i.putExtra("otpcode", it.otp) };
-//                            startActivity(i)
                         }
 //                        Log.d("TAG", "onResponse: " + (response.body()?.otp))
                     }

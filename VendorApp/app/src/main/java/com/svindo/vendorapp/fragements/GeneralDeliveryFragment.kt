@@ -434,7 +434,7 @@ class GeneralDeliveryFragment : Fragment() {
         status:String,
     ) {
         try {
-            // dashboardBinding.progressBarLay.visibility = View.VISIBLE
+            generalbinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.OrdersDetails(sharedPreference.getValueString("token"),"Genral",status)
             requestCall.enqueue(object : Callback<OrdersListModal> {
@@ -442,8 +442,7 @@ class GeneralDeliveryFragment : Fragment() {
                     call: Call<OrdersListModal>,
                     response: Response<OrdersListModal>
                 ) {
-
-                    //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    generalbinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
@@ -497,7 +496,7 @@ class GeneralDeliveryFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<OrdersListModal>, t: Throwable) {
-                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    generalbinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
                 }
 

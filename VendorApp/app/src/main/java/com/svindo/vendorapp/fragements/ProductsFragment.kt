@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.TranslateAnimation
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -42,6 +43,7 @@ class ProductsFragment : Fragment() {
     var productstatus="0"
 
 
+
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         sharedPreference=SharedPreference(requireContext())
@@ -61,6 +63,7 @@ class ProductsFragment : Fragment() {
         linearLayoutManager = LinearLayoutManager(context)
         productsBinding.newordersRequestsViewRecyclerview.layoutManager = linearLayoutManager
         productsBinding.newordersRequestsViewRecyclerview.hasFixedSize()
+
 
 
 //        binding.productsstatusswitch.setOnCheckedChangeListener { _, isChecked ->
@@ -97,58 +100,73 @@ class ProductsFragment : Fragment() {
 
     fun Productdetails() {
         try {
-            //productsBinding.progressBarLay.visibility= View.VISIBLE
+            productsBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.ProductDetails(sharedPreference.getValueString("token"))
             requestCall.enqueue(object : Callback<ProductsModal> {
                 override fun onResponse(
                     call: Call<ProductsModal>,
                     response: Response<ProductsModal>
-                ) =
+                ) {
+                    productsBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
                                 productsresponse = response.body()!!
-                                    if (productsresponse.error == "0") {
-                                        if (productsresponse!= null) {
-                                        if (productsresponse.products.count() > 0){
-                                            productsBinding.newordersRequestsViewRecyclerview.visibility = View.VISIBLE
+                                if (productsresponse.error == "0") {
+                                    if (productsresponse != null) {
+                                        if (productsresponse.products.count() > 0) {
+                                            productsBinding.newordersRequestsViewRecyclerview.visibility =
+                                                View.VISIBLE
                                             productsBinding.noData.visibility = View.GONE
-                                            adapter = ProductsAdapter(productsresponse.products,context!!)
+                                            adapter = ProductsAdapter(
+                                                productsresponse.products,
+                                                context!!
+                                            )
                                             //adapter = context?.let { ProductsAdapter(productsresponse.products, context = it)}!!
-                                            productsBinding.newordersRequestsViewRecyclerview.adapter = adapter
-                                        }
-                                        else{
+                                            productsBinding.newordersRequestsViewRecyclerview.adapter =
+                                                adapter
+                                        } else {
                                         }
                                     } else {
-                                        Toast.makeText(context,"List is Empty", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(context, "List is Empty", Toast.LENGTH_SHORT)
+                                            .show()
                                         productsBinding.newordersRequestsViewRecyclerview.visibility =
                                             View.GONE
                                         productsBinding.noData.visibility = View.VISIBLE
                                     }
 
-                                }
-                                else{
+                                } else {
 
                                 }
                             }
 
                             response.code() == 401 -> {
-                                Toast.makeText(context,getString(R.string.session_exp), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    getString(R.string.session_exp),
+                                    Toast.LENGTH_SHORT
+                                ).show()
 
                             }
 
                             else -> {
-                                Toast.makeText(context,getString(R.string.server_error), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    getString(R.string.server_error),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
 
 
                     } catch (e: TimeoutException) {
-                        Toast.makeText(context,getString(R.string.time_out), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.time_out), Toast.LENGTH_SHORT)
+                            .show()
                     }
+                }
                 override fun onFailure(call: Call<ProductsModal>, t: Throwable) {
-                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    productsBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
                 }
             })

@@ -247,6 +247,7 @@ class AddonFragment : Fragment() {
 
     fun AddAddonsListdetails()
     {
+        AddonBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.AddAddonsListDetails(sharedPreference.getValueString("token"))
@@ -255,6 +256,7 @@ class AddonFragment : Fragment() {
                     call: Call<AddonsListModal>,
                     response: Response<AddonsListModal>
                 ) {
+                    AddonBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
@@ -290,7 +292,7 @@ class AddonFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<AddonsListModal>, t: Throwable) {
-                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    AddonBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     Toast.makeText(context,t.message.toString(),Toast.LENGTH_SHORT).show()
                 }
 

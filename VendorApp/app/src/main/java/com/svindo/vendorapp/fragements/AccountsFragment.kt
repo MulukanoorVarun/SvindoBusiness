@@ -79,10 +79,10 @@ class  AccountsFragment : Fragment() {
             getActivity()?.startActivity(intent)
         }
 
-        accountbinding.storePic.setOnClickListener {
-            val intent = Intent(getActivity(), GoogleMapsActivity::class.java)
-            getActivity()?.startActivity(intent)
-        }
+//        accountbinding.storePic.setOnClickListener {
+//            val intent = Intent(getActivity(), GoogleMapsActivity::class.java)
+//            getActivity()?.startActivity(intent)
+//        }
 
         accountbinding.insights.setOnClickListener {
             val intent = Intent(getActivity(), InsightsActivity::class.java)
@@ -377,7 +377,9 @@ class  AccountsFragment : Fragment() {
             Toast.makeText(context,e.message.toString(), Toast.LENGTH_SHORT).show()
         }
     }
+
     fun Accountdetails(){
+        accountbinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall =
@@ -386,39 +388,46 @@ class  AccountsFragment : Fragment() {
                 override fun onResponse(
                     call: Call<AccountsModal>,
                     response: Response<AccountsModal>
-                ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
+                ) {
+                    accountbinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
                                 if (response.body() != null) {
                                     accountsresponse = response.body()!!
                                     if (accountsresponse.error == "0") {
-                                        accountbinding.storname.text = accountsresponse.details.store_name
-                                        accountbinding.storemail.text = accountsresponse.details.email_id
-                                        Picasso.get().load(accountsresponse.details.image).into(accountbinding.storePic)
-                                        accountbinding.availableamt.text = accountsresponse.details.available_amount
-                                        accountbinding.cashbackpercent.text = accountsresponse.details.cashback_percentage
+                                        accountbinding.storname.text =
+                                            accountsresponse.details.store_name
+                                        accountbinding.storemail.text =
+                                            accountsresponse.details.email_id
+                                        Picasso.get().load(accountsresponse.details.image)
+                                            .into(accountbinding.storePic)
+                                        accountbinding.availableamt.text =
+                                            accountsresponse.details.available_amount
+                                        accountbinding.cashbackpercent.text =
+                                            accountsresponse.details.cashback_percentage
 
-                                        binding.viewamt.text= accountsresponse.shop_view_cost
-                                        binding.perclickcostamt.text= accountsresponse.shop_click_cost
+                                        binding.viewamt.text = accountsresponse.shop_view_cost
+                                        binding.perclickcostamt.text =
+                                            accountsresponse.shop_click_cost
 
 
-
-                                        var boost_id=accountsresponse.details.is_boost
-                                        if(boost_id=="0"){
-                                            val unchecked=false
-                                            accountbinding.shopboostsswitch.isChecked=unchecked
-                                        }else{
-                                            val checked=true
-                                            accountbinding.shopboostsswitch.isChecked=checked
+                                        var boost_id = accountsresponse.details.is_boost
+                                        if (boost_id == "0") {
+                                            val unchecked = false
+                                            accountbinding.shopboostsswitch.isChecked = unchecked
+                                        } else {
+                                            val checked = true
+                                            accountbinding.shopboostsswitch.isChecked = checked
                                             alertDialog.hide()
                                         }
 
 
                                         accountbinding.qrdownload.setOnClickListener {
-                                            var qrurl= accountsresponse.qr_link
+                                            var qrurl = accountsresponse.qr_link
 
-                                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(qrurl.trim()))
+                                            val intent =
+                                                Intent(Intent.ACTION_VIEW, Uri.parse(qrurl.trim()))
                                             startActivity(intent)
                                         }
 
@@ -437,29 +446,28 @@ class  AccountsFragment : Fragment() {
                                         } else {
                                         }
 
-                                        var locationStatus=accountsresponse.details.is_location_visible
+                                        var locationStatus =
+                                            accountsresponse.details.is_location_visible
 
-                                        if(locationStatus=="Open"){
-                                            val enable=true
-                                            accountbinding.locationsswitch.isChecked=enable
-                                        } else if(locationStatus=="Closed"){
-                                            val disable=false
-                                            accountbinding.locationsswitch.isChecked=disable
-                                        }else{
+                                        if (locationStatus == "Open") {
+                                            val enable = true
+                                            accountbinding.locationsswitch.isChecked = enable
+                                        } else if (locationStatus == "Closed") {
+                                            val disable = false
+                                            accountbinding.locationsswitch.isChecked = disable
+                                        } else {
 
                                         }
 
 
-
-
-                                        var shopStatus=accountsresponse.details.open_status
-                                        if(shopStatus=="Permanently Closed"){
-                                            val enable=true
-                                            accountbinding.shopstatusswitch.isChecked=enable
-                                        } else if(shopStatus=="Open"){
-                                            val disable=false
-                                            accountbinding.shopstatusswitch.isChecked=disable
-                                        }else{
+                                        var shopStatus = accountsresponse.details.open_status
+                                        if (shopStatus == "Permanently Closed") {
+                                            val enable = true
+                                            accountbinding.shopstatusswitch.isChecked = enable
+                                        } else if (shopStatus == "Open") {
+                                            val disable = false
+                                            accountbinding.shopstatusswitch.isChecked = disable
+                                        } else {
 
                                         }
 
@@ -467,22 +475,32 @@ class  AccountsFragment : Fragment() {
                                     } else {
 
                                     }
-                                }else{
+                                } else {
 
                                 }
                             }
                             response.code() == 401 -> {
-                                Toast.makeText(context,getString(R.string.session_exp), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    getString(R.string.session_exp),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                             else -> {
-                                Toast.makeText(context,getString(R.string.server_error), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    getString(R.string.server_error),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     } catch (e: TimeoutException) {
-                        Toast.makeText(context,getString(R.string.time_out), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.time_out), Toast.LENGTH_SHORT)
+                            .show()
                     }
+                }
                     override fun onFailure(call: Call<AccountsModal>, t: Throwable) {
-                //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                        accountbinding.progressBarLay.progressBarLayout.visibility = View.GONE
                 Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
             }
         })

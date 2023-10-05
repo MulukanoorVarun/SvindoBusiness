@@ -415,7 +415,7 @@ class SelfPickupFragment : Fragment() {
         status:String,
     ) {
         try {
-            // dashboardBinding.progressBarLay.visibility = View.VISIBLE
+            selfPickupBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.OrdersDetails(sharedPreference.getValueString("token"),"Self Pickup",status)
             requestCall.enqueue(object : Callback<OrdersListModal> {
@@ -424,7 +424,7 @@ class SelfPickupFragment : Fragment() {
                     response: Response<OrdersListModal>
                 ) {
 
-                    //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    selfPickupBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
@@ -478,13 +478,10 @@ class SelfPickupFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<OrdersListModal>, t: Throwable) {
-                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    selfPickupBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
                 }
-
             })
-
-
         } catch (e: Exception) {
             //dashboardBinding.progressBarLay.visibility = View.GONE
             Toast.makeText(context,e.message.toString(), Toast.LENGTH_SHORT).show()

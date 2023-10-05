@@ -42,8 +42,8 @@ class SpotlightFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference= SharedPreference(requireContext())
-
         }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -95,6 +95,7 @@ class SpotlightFragment : Fragment() {
 //    }
 
     fun Spotlightdetails() {
+        spotlightBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.SpotlightDetails(sharedPreference.getValueString("token"))
@@ -103,7 +104,7 @@ class SpotlightFragment : Fragment() {
                     call: Call<SpotligtsModal>,
                     response: Response<SpotligtsModal>
                 ) {
-                    //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    spotlightBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
@@ -143,6 +144,7 @@ class SpotlightFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<SpotligtsModal>, t: Throwable) {
+                    spotlightBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
                 }
 

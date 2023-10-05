@@ -13,11 +13,19 @@ android {
         applicationId "com.svindo.vendorapp"
         minSdk 24
         targetSdk 34
-        versionCode 3
+        versionCode 4
         versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
 
+    signingConfigs {
+        release {
+            keyAlias 'svindobusiness'
+            keyPassword 'svindo'
+            storeFile file('/home/mahesh/Documents/varun m/svindobusiness.jks')
+            storePassword 'svindo'
+        }
     }
 
     buildTypes {
