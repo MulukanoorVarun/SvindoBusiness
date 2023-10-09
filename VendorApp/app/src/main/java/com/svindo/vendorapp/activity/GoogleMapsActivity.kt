@@ -47,7 +47,7 @@ import com.svindo.vendorapp.utils.SharedPreference
 import java.io.IOException
 import java.util.*
 
-class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener,GoogleMap.OnCameraIdleListener {
+class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener,GoogleMap.OnCameraIdleListener{
     private lateinit var mapsBinding: ActivityGoogleMapsBinding
     private lateinit var mMap: GoogleMap
     private var fusedLocationClient: FusedLocationProviderClient? = null
@@ -125,8 +125,8 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
 
         // 5
         task.addOnSuccessListener {
-            /*locationUpdateState = true
-            startLocationUpdates()*/
+            locationUpdateState = true
+            startLocationUpdates()
         }
         task.addOnFailureListener { e ->
             if (e is ResolvableApiException) {
@@ -152,7 +152,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
             fusedLocationClient!!.lastLocation.addOnSuccessListener { location: Location? ->
                     location?.let {
                         val latLng = LatLng(it.latitude, it.longitude)
-                        val markerOptions = MarkerOptions().position(latLng).title("My Location")
+                        val markerOptions = MarkerOptions().position(latLng).title("My Location").draggable(true)
                         marker = mMap.addMarker(markerOptions)
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20f)) // Zoom level can be adjusted
                     }
@@ -373,8 +373,8 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
             )
             return
         }
-        //2
-        //fusedLocationClient!!.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */)
+
+       // fusedLocationClient!!.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */)
     }
 
     @Deprecated("Deprecated in Java")
