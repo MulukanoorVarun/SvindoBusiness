@@ -75,7 +75,7 @@
                         android:id="@+id/productquanity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="12sp"
                         android:layout_marginStart="10dp"
@@ -87,7 +87,6 @@
                         android:text="piece"
                         android:textColor="@color/black"
                         android:textSize="12sp"
-                        android:layout_marginStart="10dp"
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
                 <LinearLayout

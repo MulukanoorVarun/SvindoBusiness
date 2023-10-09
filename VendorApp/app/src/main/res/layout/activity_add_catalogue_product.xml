@@ -36,6 +36,16 @@
                         tools:ignore="Hardcodedtext"/>
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
+        <include
+            android:id="@+id/progressBarLay"
+            layout="@layout/progressbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            android:visibility="gone" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -405,10 +415,10 @@
                         android:autofillHints=""
                         android:layout_weight="1"
                         android:background="@drawable/boarder"
-                        android:hint="Enter Quantity"
+                        android:hint="Enter Max Quantity"
                         android:inputType="number"
                         android:padding="10dp"
-                        android:text="1"
+                        android:text=""
                         android:textSize="13sp"
                         tools:ignore="Hardcodedtext"/>
                     <EditText
@@ -419,7 +429,8 @@
                         android:layout_marginTop="6dp"
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/boarder"
-                        android:text="1"
+                        android:text=""
+                        android:hint="Enter Min Quantity"
                         android:layout_weight="1"
                         android:inputType="number"
                         android:padding="10dp"

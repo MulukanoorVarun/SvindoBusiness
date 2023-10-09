@@ -124,19 +124,19 @@ class AddCatalogueProduct : AppCompatActivity() {
         }
         ProductBinding.returnswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
-                Return = "1";
+                Return = "1"
               //  showToast(Return)
             } else {
-                Return = "0";
+                Return = "0"
                // showToast(Return)
             }
         }
         ProductBinding.codswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
-                COD = "1";
+                COD = "1"
                // showToast(COD)
             } else {
-                COD = "0";
+                COD = "0"
              //   showToast(COD)
             }
         }
@@ -172,9 +172,11 @@ class AddCatalogueProduct : AppCompatActivity() {
                 ProductBinding.stocket.isEnabled = false
                 ProductBinding.quantityet.isEnabled = true
                 ProductBinding.minquantityet.isEnabled = true
+                ProductBinding.Addaddon.isEnabled = true
 
                // showToast(is_printing)
-            } else {
+            }
+            else if(isChecked == false){
                 is_printing = "0"
                 ProductBinding.discountprice.text="Sale Price"
                 ProductBinding.priceet.isEnabled = true
@@ -182,9 +184,19 @@ class AddCatalogueProduct : AppCompatActivity() {
                 ProductBinding.stocket.isEnabled = true
                 ProductBinding.quantityet.isEnabled = false
                 ProductBinding.minquantityet.isEnabled = false
-
+                ProductBinding.Addaddon.isEnabled = false
               //  showToast(is_printing)
             }
+        }
+
+        if( ProductBinding.printingswitch.isChecked==false){
+            ProductBinding.quantityet.isEnabled = false
+            ProductBinding.minquantityet.isEnabled = false
+            ProductBinding.Addaddon.isEnabled = false
+        }else{
+            ProductBinding.quantityet.isEnabled = true
+            ProductBinding.minquantityet.isEnabled = true
+            ProductBinding.Addaddon.isEnabled = true
         }
 
         ProductBinding.addbtn.setOnClickListener {
@@ -210,6 +222,7 @@ class AddCatalogueProduct : AppCompatActivity() {
             val stock = ProductBinding.stocket.text.toString().trim()
             val quantity = ProductBinding.quantityet.text.toString().trim()
             val minQuantity=ProductBinding.minquantityet.text.toString().trim()
+
             val gson = Gson()
             val AddonDataJson: String = gson.toJson(ADDONData)
 
@@ -334,6 +347,7 @@ class AddCatalogueProduct : AppCompatActivity() {
         printing: String,
         minQuantity:String,
     ) {
+        ProductBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.CatProductDetails(sharedPreference.getValueString("token"), product_id, "0", mrp_price, sale_price, quantity, unit_id, stock, insatantDel, delivery_days, GeneralDel, self_pick, COD, Replacement, Return, shopExchange, ADDONData, printing, minQuantity,size_id)
@@ -341,36 +355,41 @@ class AddCatalogueProduct : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<Bankdetails_Response>,
                     response: Response<Bankdetails_Response>
-                ) =
-                    try {
-                        when {
-                            response.code() == 200 -> {
-                                productdetailsResponse = response.body()!!
-                                if (productdetailsResponse != null) {
-                                    if (productdetailsResponse.error == "0") {
-                                        showToast(productdetailsResponse.message.toString())
-                                        val i = Intent(this@AddCatalogueProduct, MainActivity::class.java)
-                                        startActivity(i)
-                                    } else {
-                                       // showToast(productdetailsResponse.message.toString())
-                                    }
-                                }else{
-
+                ) {
+                    ProductBinding.progressBarLay.progressBarLayout.visibility = View.GONE
+                try
+                {
+                    when {
+                        response.code() == 200 -> {
+                            productdetailsResponse = response.body()!!
+                            if (productdetailsResponse != null) {
+                                if (productdetailsResponse.error == "0") {
+                                    showToast(productdetailsResponse.message.toString())
+                                    val i =
+                                        Intent(this@AddCatalogueProduct, MainActivity::class.java)
+                                    startActivity(i)
+                                } else {
+                                    // showToast(productdetailsResponse.message.toString())
                                 }
-                            }
-                            response.code() == 401 -> {
-                                showToast(getString(R.string.session_exp))
-                            }
-                            else -> {
-                                showToast(getString(R.string.server_error))
+                            } else {
+
                             }
                         }
-                    } catch (e: TimeoutException) {
-                        showToast(getString(R.string.time_out))
+                        response.code() == 401 -> {
+                            showToast(getString(R.string.session_exp))
+                        }
+                        else -> {
+                            showToast(getString(R.string.server_error))
+                        }
                     }
+                } catch (e: TimeoutException)
+                {
+                    showToast(getString(R.string.time_out))
+                }
+            }
 
                 override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
-                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    ProductBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     showToast(t.message.toString())
                 }
             })

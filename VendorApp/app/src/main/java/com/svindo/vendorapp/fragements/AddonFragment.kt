@@ -189,6 +189,7 @@ class AddonFragment : Fragment() {
         addon_price:String,
         addon_id:String
     ){
+        AddonBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try{
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.AddAddonsDetails(sharedPreference.getValueString("token"),addon_name,addon_desc,addon_price,addon_id)
@@ -196,44 +197,58 @@ class AddonFragment : Fragment() {
                 override fun onResponse(
                     call: Call<Bankdetails_Response>,
                     response: Response<Bankdetails_Response>
-                ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
+                ) {
+                    AddonBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when {
-                            response.code() == 200 ->{
+                            response.code() == 200 -> {
                                 addonsresponse = response.body()!!
                                 if (response.isSuccessful) {
                                     if (response.body() != null) {
-                                        if (response.body()!!.error == "0"){
-                                            Toast.makeText(context,addonsresponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                        if (response.body()!!.error == "0") {
+                                            Toast.makeText(
+                                                context,
+                                                addonsresponse.message.toString(),
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                             AddAddonsListdetails()
                                             alertDialog.hide()
                                         } else {
-                                         //   Toast.makeText(context,addonsresponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                            //   Toast.makeText(context,addonsresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                         }
-                                    }else{
+                                    } else {
 
                                     }
-                                }else{
+                                } else {
 
                                 }
                             }
                             response.code() == 401 -> {
-                                Toast.makeText(context,getString(R.string.session_exp), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    getString(R.string.session_exp),
+                                    Toast.LENGTH_SHORT
+                                ).show()
 
                             }
 
                             else -> {
-                                Toast.makeText(context,getString(R.string.server_error), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    getString(R.string.server_error),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
 
 
                     } catch (e: TimeoutException) {
-                        Toast.makeText(context,getString(R.string.time_out), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.time_out), Toast.LENGTH_SHORT)
+                            .show()
                     }
-
+                }
                 override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
-                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    AddonBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
                 }
 

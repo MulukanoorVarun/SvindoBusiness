@@ -46,6 +46,7 @@ class AddSpotlightActivity : AppCompatActivity() {
         ProductsList()
     }
     fun ProductsList(){
+        addspotlightBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall =
@@ -54,11 +55,11 @@ class AddSpotlightActivity : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<ProductsModal>,
                     response: Response<ProductsModal>
-                ) =//dashboardBinding.progressBarLay.visibility  = View.GONE
+                ) {
+                    addspotlightBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
-
                                 if (response.isSuccessful) {
                                     if (response.body() != null) {
                                         if (response.body()!!.error == "0") {
@@ -67,16 +68,14 @@ class AddSpotlightActivity : AppCompatActivity() {
                                         } else {
 
                                         }
-                                    }else{
+                                    } else {
 
                                     }
-                                }else{
+                                } else {
 
                                 }
-
                             }
                             response.code() == 401 -> {
-
                                 showToast(getString(R.string.session_exp))
 
                             }
@@ -84,14 +83,13 @@ class AddSpotlightActivity : AppCompatActivity() {
                                 showToast(getString(R.string.server_error))
                             }
                         }
-
-
                     } catch (e: TimeoutException) {
                         showToast(getString(R.string.time_out))
                     }
+                }
 
                 override fun onFailure(call: Call<ProductsModal>, t: Throwable) {
-                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    addspotlightBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     showToast(t.message.toString())
                 }
             })

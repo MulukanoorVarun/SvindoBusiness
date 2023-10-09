@@ -12,11 +12,11 @@
                 android:layout_width="match_parent"
                 android:background="@drawable/rounded_corners_background"
                 android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:ignore="UseCompoundDrawables">
-
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -36,9 +36,21 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
+
+        <include
+            android:id="@+id/progressBarLay"
+            layout="@layout/progressbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            android:visibility="gone" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/scrollView"
         android:layout_below="@+id/toolbar">
 
         <RelativeLayout
@@ -677,9 +689,9 @@
                             android:layout_weight="1"
                             android:autofillHints=""
                             android:inputType="number"
-                            android:text="1"
+                            android:text=""
                             android:background="@drawable/boarder"
-                            android:hint="Enter Price"
+                            android:hint="Enter max quantity"
                             android:padding="10dp"
                             android:textSize="13sp"
                             tools:ignore="Hardcodedtext"/>
@@ -694,14 +706,13 @@
                             android:background="@drawable/boarder"
                             android:padding="10dp"
                             android:layout_weight="1"
-                            android:hint="Enter price"
+                            android:hint="Enter min quantity"
                             android:textSize="13sp"
-                            android:text="1"
+                            android:text=""
                             android:inputType="number"
                             android:autofillHints=""
                             tools:ignore="Hardcodedtext"/>
                     </LinearLayout>
-
                     <TextView
                         android:id="@+id/gstin"
                         android:layout_width="wrap_content"
@@ -745,19 +756,23 @@
                         android:textStyle="bold" />
                     <EditText
                         android:id="@+id/productdescriptionet"
-                        android:layout_width="355dp"
-                        android:layout_height="100dp"
+                        android:layout_width="370dp"
+                        android:layout_height="150dp"
                         android:layout_marginStart="13dp"
                         android:layout_marginTop="6dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
+                        android:nestedScrollingEnabled="true"
+                        android:scrollbars="vertical"
                         android:layout_below="@+id/productdescription"
                         android:background="@drawable/boarder"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
+                        android:paddingTop="10dp"
                         android:hint="@string/desc_txt"
-                        android:textSize="12sp"
-                        android:inputType="text"
+                        android:textSize="15sp"
+                        android:gravity="start"
+                        android:inputType="textMultiLine"
                         android:autofillHints="" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

@@ -36,6 +36,16 @@
                     tools:ignore="Hardcodedtext"/>
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
+        <include
+            android:id="@+id/progressBarLay"
+            layout="@layout/progressbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardclicking"

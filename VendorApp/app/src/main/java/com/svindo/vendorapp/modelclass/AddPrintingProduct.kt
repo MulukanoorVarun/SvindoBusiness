@@ -31,6 +31,4 @@ data class SizesData(
     val size_from: String,
     val size_to: String
 )
-data class AddonsData(
-    val id: String,
-)
+data class AddonsData(val id: String, )

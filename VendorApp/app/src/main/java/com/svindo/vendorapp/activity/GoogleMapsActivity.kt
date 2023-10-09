@@ -24,6 +24,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -62,12 +63,12 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
         const val REQUEST_CHECK_SETTINGS = 2
     }
     var address=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mapsBinding=ActivityGoogleMapsBinding.inflate(layoutInflater)
         sharedPreference = SharedPreference(this)
         setContentView(mapsBinding.root)
-
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         // fetchLocation()
@@ -78,15 +79,19 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
             override fun onLocationResult(p0: LocationResult){
                 super.onLocationResult(p0)
                 lastLocation = p0.lastLocation!!
-             //   placeMarkerOnMap(LatLng(lastLocation.latitude, lastLocation.longitude))
-
-//                val newLatLng = LatLng(lastLocation.latitude, lastLocation.longitude)
-//                moveMarker(newLatLng)
+                placeMarkerOnMap(LatLng(lastLocation.latitude, lastLocation.longitude))
             }
-        }
-
+            }
         createLocationRequest()
-        placeMarkerAtCurrentLocation()
+    }
+
+    internal fun placeMarkerOnMap(location: LatLng) {
+        val markerOptions = MarkerOptions().position(location)
+        marker?.remove()
+        marker = mMap.addMarker(markerOptions)
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 20f))
+      //  Log.d("TAG", "placeMarkerOnMap: $marker")
+
     }
 
     private fun checkValidations() {
@@ -161,10 +166,6 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
         }
     }
 
-//    internal fun moveMarker(newLatLng: LatLng) {
-//        marker?.position = newLatLng
-//        mMap.animateCamera(CameraUpdateFactory.newLatLng(newLatLng))
-//    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -172,8 +173,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
         mMap.setOnCameraIdleListener(this)
         setUpMap()
 
-//        val defaultLatLng = LatLng(17.439793598348952, 78.43828890255993)
-//        createMarker(defaultLatLng)
+        placeMarkerAtCurrentLocation()
     }
 
 //    private fun createMarker(latLng: LatLng) {
@@ -188,7 +188,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
         updateMarkerPosition(cameraPosition)
     }
 
-    private fun updateMarkerPosition(latLng: LatLng) {
+    internal fun updateMarkerPosition(latLng: LatLng) {
       //  marker?.position = latLng
         if (marker == null) {
             // Create a new marker if it doesn't exist
@@ -242,30 +242,21 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
     }
 
     private fun setUpMap() {
-        if (ActivityCompat.checkSelfPermission(
+        if (ContextCompat.checkSelfPermission(
                 this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
+            mMap.isMyLocationEnabled = true
+        } else {
+            // Request location permission if not granted
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
             )
-            return
         }
-        mMap.isMyLocationEnabled = true
 
-        /*fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
-            // Got last known location. In some rare situations this can be null.
-            Log.d("TAG", "setUpMap1: $location")
-            if (location != null) {
-                lastLocation = location
-                val currentLatLng = LatLng(location.latitude, location.longitude)
-                placeMarkerOnMap(currentLatLng)
-
-            }
-        }*/
     }
 
 

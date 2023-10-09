@@ -93,6 +93,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
     private var marker: Marker? = null
 
     var myaddress=""
+    var location=""
 
     companion object {
         const val LOCATION_PERMISSION_REQUEST_CODE = 1
@@ -118,17 +119,20 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-//        binding.locationEt.setOnClickListener {
-//            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                ActivityCompat.requestPermissions(
-//                    this,
-//                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-//                    1000
-//                )
-//            }else{
-//                getLocation()
-//            }
-//        }
+        binding.locationEt.setOnClickListener {
+            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    1000
+                )
+            }else{
+                getLocation()
+            }
+        }
+
+        location=sharedPreference.getValueString("latlong").toString()
+        binding.locationEt.setText(location)
 
 //        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
 //        mapFragment.getMapAsync(this)

@@ -119,10 +119,7 @@ class ProductsFragment : Fragment() {
                                             productsBinding.newordersRequestsViewRecyclerview.visibility =
                                                 View.VISIBLE
                                             productsBinding.noData.visibility = View.GONE
-                                            adapter = ProductsAdapter(
-                                                productsresponse.products,
-                                                context!!
-                                            )
+                                            adapter = ProductsAdapter(productsresponse.products, context!!)
                                             //adapter = context?.let { ProductsAdapter(productsresponse.products, context = it)}!!
                                             productsBinding.newordersRequestsViewRecyclerview.adapter =
                                                 adapter

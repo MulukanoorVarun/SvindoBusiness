@@ -60,7 +60,7 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
         @SuppressLint("SetTextI18n")
         fun bind(data: Product) {
             binding.productname.text = data.name
-            binding.productquanity.text = data.quantity
+          //  binding.productquanity.text = data.quantity
             binding.productunit.text = data.unit
             binding.productcost.text = data.sale_price
             binding.productmrp.text = data.mrp_price
@@ -83,7 +83,7 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
                 // Set custom height and width
                 dialog!!.window?.setLayout(700, 800)
                 // Set transparent background
-            //    dialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                // dialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 // Show dialog
                 dialog!!.show()
                 var mrp_price = dialog!!.findViewById<EditText>(R.id.priceet)
@@ -107,66 +107,66 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
                 if(data.is_printable=="1"){
                     mrp_price.isEnabled=false
                    discountprice.text="Price per piece"
-                    max_quantity.isEnabled=false
-                    min_quantity.isEnabled=false
+                    max_quantity.isEnabled=true
+                    min_quantity.isEnabled=true
                 }else{
                     mrp_price.isEnabled=true
                     sale_price.setText("Sale Price")
-                    max_quantity.isEnabled=true
-                    min_quantity.isEnabled=true
+                    max_quantity.isEnabled=false
+                    min_quantity.isEnabled=false
                 }
                 Selfpickupswitch.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked == true) {
-                        self_pick = "1";
+                        self_pick = "1"
                     } else {
-                        self_pick = "0";
+                        self_pick = "0"
                     }
                 }
 
                 instantswitch.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked == true) {
-                        insatantDel = "1";
+                        insatantDel = "1"
 
                     } else {
-                        insatantDel = "0";
+                        insatantDel = "0"
 
                     }
                 }
 
                 generaldeliveryswitch.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked == true) {
-                        GeneralDel = "1";
+                        GeneralDel = "1"
                     } else {
-                        GeneralDel = "0";
+                        GeneralDel = "0"
                     }
                 }
 
                returnswitch.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked == true) {
-                        Return = "1";
+                        Return = "1"
                     } else {
                         Return = "0"
                     }
                 }
                 codswitch.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked == true) {
-                        COD = "1";
+                        COD = "1"
                     } else {
-                        COD = "0";
+                        COD = "0"
                     }
                 }
               replacementswitch.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked == true) {
-                        Replacement = "1";
+                        Replacement = "1"
                     } else {
-                        Replacement = "0";
+                        Replacement = "0"
                     }
                 }
                 shopexchangeswitch.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked == true) {
-                        shopExchange = "1";
+                        shopExchange = "1"
                     } else {
-                        shopExchange = "0";
+                        shopExchange = "0"
                     }
                 }
 
@@ -494,6 +494,7 @@ class ProductsAdapter (private var productsList: List<Product>, private val cont
         return ProductsAdapter.ViewHolder(binding, context)
     }
     override fun getItemCount(): Int {
+
         return productsList.size
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

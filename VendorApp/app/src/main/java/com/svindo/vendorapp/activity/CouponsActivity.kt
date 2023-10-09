@@ -67,7 +67,7 @@ class CouponsActivity : AppCompatActivity() {
         CouponListDeatils()
     }
 
-    internal fun showAlertDialog() {
+    internal fun showAlertDialog(){
         builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
 //        val binding = addNewCouponCodeBinding.inflate(layoutInflater)
         val rootView = addNewCouponCodeBinding.root

@@ -13,7 +13,9 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,7 +34,6 @@ import com.svindo.vendorapp.services.ApiInterface
 import com.svindo.vendorapp.utils.SharedPreference
 import com.svindo.vendorapp.utils.getFileSizeInMB
 import com.svindo.vendorapp.utils.showToast
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -47,7 +48,7 @@ import java.util.concurrent.TimeoutException
 
 
 @SuppressLint("StaticFieldLeak")
-private lateinit var Binding:ActivityAddNewProductBinding
+private lateinit var Binding: ActivityAddNewProductBinding
 class AddNewProduct : AppCompatActivity() {
     private lateinit var galleryResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
@@ -84,7 +85,7 @@ class AddNewProduct : AppCompatActivity() {
     private val cameraPermissionCode = 201
     private val storagePermissionCode = 202
 
-    @SuppressLint("SetTextI18n", "SuspiciousIndentation")
+    @SuppressLint("SetTextI18n", "SuspiciousIndentation", "ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Binding = ActivityAddNewProductBinding.inflate(layoutInflater)
@@ -118,6 +119,18 @@ class AddNewProduct : AppCompatActivity() {
 //            selected_index=5
 //            showAlertDialog()
 //        }
+
+        Binding.productdescriptionet.setOnTouchListener(OnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                // Disable scrolling of the parent ScrollView
+                Binding.scrollView.requestDisallowInterceptTouchEvent(true)
+            } else if (event.action == MotionEvent.ACTION_UP) {
+                // Re-enable scrolling of the parent ScrollView
+                Binding.scrollView.requestDisallowInterceptTouchEvent(false)
+            }
+            false
+        })
+
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
@@ -264,6 +277,8 @@ class AddNewProduct : AppCompatActivity() {
                 Binding.priceet.isEnabled = false
                // Binding.unitsspinner.isEnabled = false
                 Binding.stocket.isEnabled = false
+                Binding.quantityet.isEnabled = true
+                Binding.minquantityet.isEnabled = true
                // showToast(is_printing)
             } else {
                 is_printing ="0"
@@ -271,8 +286,18 @@ class AddNewProduct : AppCompatActivity() {
                 Binding.priceet.isEnabled = true
                 //Binding.unitsspinner.isEnabled = true
                 Binding.stocket.isEnabled = true
+                Binding.quantityet.isEnabled = false
+                Binding.minquantityet.isEnabled = false
             //    showToast(is_printing)
             }
+        }
+
+        if( Binding.printingswitch.isChecked==false){
+            Binding.quantityet.isEnabled = false
+            Binding.minquantityet.isEnabled = false
+        }else{
+            Binding.quantityet.isEnabled = true
+            Binding.minquantityet.isEnabled = true
         }
 
 
@@ -830,7 +855,7 @@ class AddNewProduct : AppCompatActivity() {
 //        file4: File,
        // file5: File,
     ) {
-           //showToast(file1.toString())
+        Binding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try {
 
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
@@ -911,7 +936,8 @@ class AddNewProduct : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<Bankdetails_Response>,
                     response: Response<Bankdetails_Response>
-                ) =//dashboardBinding.progressBarLay.visibility  = View.GONE
+                ) {
+                    Binding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
@@ -920,16 +946,15 @@ class AddNewProduct : AppCompatActivity() {
                                     if (response.body() != null) {
                                         if (response.body()!!.error == "0") {
                                             showToast(response.body()!!.message.toString())
-                                    val i = Intent(this@AddNewProduct,MainActivity::class.java)
-                                    startActivity(i)
-
+                                            val i = Intent(this@AddNewProduct, MainActivity::class.java)
+                                            startActivity(i)
                                         } else {
-                                           // showToast(response.body()!!.message.toString())
+                                            // showToast(response.body()!!.message.toString())
                                         }
-                                    }else{
+                                    } else {
 
                                     }
-                                }else{
+                                } else {
 
                                 }
                             }
@@ -946,9 +971,9 @@ class AddNewProduct : AppCompatActivity() {
                     } catch (e: TimeoutException) {
                         showToast(getString(R.string.time_out))
                     }
-
+                }
                 override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
-                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    Binding.progressBarLay.progressBarLayout.visibility = View.GONE
                     showToast(t.message.toString())
                 }
 

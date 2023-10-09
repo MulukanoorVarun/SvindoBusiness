@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
          bottomNavigationView.menu.findItem(R.id.catalogue).isEnabled = false
          bottomNavigationView.menu.findItem(R.id.account).isEnabled = false
          bottomNavigationView.menu.findItem(R.id.account).isEnabled = false
+
             when (it.itemId){
                 R.id.home -> {
                     bottomNavigationView.menu.findItem(R.id.home).isEnabled = false

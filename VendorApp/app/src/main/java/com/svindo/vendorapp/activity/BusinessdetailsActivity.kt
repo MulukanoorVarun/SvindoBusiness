@@ -18,6 +18,7 @@ import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -53,6 +54,9 @@ import kotlin.system.exitProcess
 import androidx.core.text.HtmlCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.MapView
+import com.svindo.vendorapp.databinding.ActivityGoogleMapsBinding
+import com.svindo.vendorapp.databinding.GooglemappopuplayoutBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -71,6 +75,8 @@ class BusinessdetailsActivity : AppCompatActivity() {
     private lateinit var binding: SpinneritemdesignBinding
     private lateinit var spinner: Spinner
     private val itemList: MutableList<Maincategory> = ArrayList()
+    private lateinit var builder: AlertDialog.Builder
+    private lateinit var alertDialog: AlertDialog
 
     private var fusedLocationClient: FusedLocationProviderClient?=null
 
@@ -85,6 +91,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
     var subzone_id=""
     var location=""
     var cityname=""
+    var myaddress=""
 
 
     @SuppressLint("SetTextI18n", "SuspiciousIndentation")
@@ -103,25 +110,23 @@ class BusinessdetailsActivity : AppCompatActivity() {
             showAlertDialog()
         }
 
-        businessdetailsBinding.locationEt.setOnClickListener {
-            val i = Intent(this@BusinessdetailsActivity, GoogleMapsActivity::class.java)
-            startActivity(i)
-        }
-
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-//        businessdetailsBinding.locationEt.setOnClickListener {
-//            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                ActivityCompat.requestPermissions(
-//                    this,
-//                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-//                    1000
-//                )
-//            }else{
-//                getLocation()
-//            }
-//        }
+        businessdetailsBinding.locationEt.setOnClickListener {
+            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    1000
+                )
+            }else{
+            }
+//            val i = Intent(this@BusinessdetailsActivity, GoogleMapsActivity::class.java)
+//            startActivity(i)
+        }
+
+     //   getLocation()
 
 
         val loginButton = findViewById<ImageView>(R.id.business_details_backbutton)
@@ -288,7 +293,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
 //            }
 //        }
 //    }
-
+//
 //    private fun getAddress(lat:Double,lon:Double){
 //        try {
 //            val geocoder= Geocoder(this, Locale.getDefault())

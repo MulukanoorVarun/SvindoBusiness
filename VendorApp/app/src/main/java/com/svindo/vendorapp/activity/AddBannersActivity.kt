@@ -55,8 +55,6 @@ import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 import java.util.concurrent.TimeoutException
-
-
 @SuppressLint("StaticFieldLeak")
 
 class AddBannersActivity : AppCompatActivity() {
@@ -389,6 +387,7 @@ class AddBannersActivity : AppCompatActivity() {
         banner_name:String,
         file1: File
     ) {
+        bannersBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestFile2= file1.asRequestBody("image/*".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("banner", file1.name, requestFile2)
@@ -404,6 +403,7 @@ class AddBannersActivity : AppCompatActivity() {
                 call: Call<Verify_otp_Response>,
                 response: Response<Verify_otp_Response>
             ) {
+                bannersBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
                         addBannerResponse= response.body()!!
@@ -431,6 +431,7 @@ class AddBannersActivity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                bannersBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                 showToast(getString(R.string.session_exp))
             }
         })

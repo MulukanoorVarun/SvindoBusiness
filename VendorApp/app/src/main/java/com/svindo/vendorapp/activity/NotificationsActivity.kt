@@ -339,6 +339,7 @@ sharedPreference=SharedPreference(this)
         description: String,
         file1: File
     ) {
+        notificationsBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestFile2= file1.asRequestBody("image/*".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("image", file1.name, requestFile2)
@@ -351,11 +352,15 @@ sharedPreference=SharedPreference(this)
                 call: Call<Verify_otp_Response>,
                 response: Response<Verify_otp_Response>
             ) {
+                notificationsBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
                         addResponse= response.body()!!
                         if (addResponse.error=="0") {
                             notificationdetails()
+                            notificationsBinding.notidescettxt.text.clear()
+                            notificationsBinding.notificationImg.setImageDrawable(null)
+
                             showToast(addResponse.message.toString())
                         }
                         if(addResponse.error=="1"){
@@ -372,6 +377,7 @@ sharedPreference=SharedPreference(this)
                 }
             }
             override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                notificationsBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                 showToast(getString(R.string.session_exp))
             }
         })
