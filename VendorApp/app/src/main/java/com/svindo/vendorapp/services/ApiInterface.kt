@@ -1,4 +1,4 @@
-package com.svindo.vendorapp.services
+    package com.svindo.vendorapp.services
 
 import androidx.annotation.NonNull
 import com.svindo.vendorapp.modelclass.*
@@ -577,10 +577,11 @@ interface ApiInterface {
         @Field("id") id: String,
     ): Call<ViewAddonsListModal>
 
-
+    @FormUrlEncoded
     @POST("Home/check_free_delivery")
     fun CashBackStatus(
         @Header("Sessionid")  content_type:String?,
+        @Field("status") status: String,
     ): Call<CashbackStatusModal>
 
 
