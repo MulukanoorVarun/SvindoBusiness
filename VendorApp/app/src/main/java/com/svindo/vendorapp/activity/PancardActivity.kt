@@ -3,6 +3,7 @@ package com.svindo.vendorapp.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -55,6 +56,7 @@ private val cameraPermissionCode = 201
 private val storagePermissionCode = 202
 
 class PancardActivity : AppCompatActivity() {
+    lateinit var progress: ProgressDialog
     private lateinit var sharedPreference: SharedPreference
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?){
@@ -63,6 +65,12 @@ class PancardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_pancard)
         pancardBinding = ActivityPancardBinding.inflate(layoutInflater)
         setContentView(pancardBinding.root)
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
 
         pancardBinding.camerabutton.setOnClickListener {
             showAlertDialog()
@@ -330,6 +338,7 @@ class PancardActivity : AppCompatActivity() {
         private fun uploadprofile(
             pannumber:String,
             file1: File) {
+            progress.show()
             try {
                 val uploadBillService = ApiClient.buildService(ApiInterface::class.java)
                 val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
@@ -354,8 +363,10 @@ class PancardActivity : AppCompatActivity() {
                                     "0" -> {
                                         startActivity(Intent(this@PancardActivity, BankaccountActivity::class.java))
                                         showToast(pancradresponse.message)
+                                        progress.dismiss()
                                     }
                                     else -> {
+                                        progress.dismiss()
                                       //  showToast(pancradresponse.message)
                                     }
                                 }

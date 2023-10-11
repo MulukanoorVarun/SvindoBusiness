@@ -3,6 +3,7 @@ package com.svindo.vendorapp.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -57,6 +58,7 @@ class GstinActivity : AppCompatActivity(){
     private  var file_1: File? = null
     private val cameraPermissionCode = 201
     private val storagePermissionCode = 202
+    lateinit var progress: ProgressDialog
 
 
 
@@ -65,6 +67,12 @@ class GstinActivity : AppCompatActivity(){
         sharedPreference = SharedPreference(this)
         gstbinding = ActivityGstinBinding.inflate(layoutInflater)
         setContentView(gstbinding.root)
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
 
 
         val loginButton = findViewById<ImageView>(R.id.gst_backbutton)
@@ -350,10 +358,9 @@ class GstinActivity : AppCompatActivity(){
         gstnum: String,
         file1: File
     ) {
+        progress.show()
 
         val loginService = ApiClient.buildService(ApiInterface::class.java)
-
-
         val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
         val body1 = MultipartBody.Part.createFormData("gstin_image", file1.name, requestFile1)
         val type: RequestBody = "gstin".toRequestBody("text/plain".toMediaTypeOrNull())
@@ -370,10 +377,12 @@ class GstinActivity : AppCompatActivity(){
                     response.isSuccessful -> {//status code between 200 to 299
                         gstinResponse = response.body()!!
                         if (gstinResponse.error=="0") {
+                            progress.dismiss()
                             showToast(gstinResponse.message)
                             val i = Intent(this@GstinActivity,PancardActivity::class.java)
                             startActivity(i)
                         } else{
+                            progress.dismiss()
                            // showToast(gstinResponse.message)
                         }
                     }

@@ -1,6 +1,7 @@
 package com.svindo.vendorapp.fragements
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
@@ -42,9 +43,11 @@ class  AccountsFragment : Fragment() {
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<Intent>
     private lateinit var builder: AlertDialog.Builder
     private lateinit var alertDialog: AlertDialog
+    lateinit var progress: ProgressDialog
      var is_location=""
     var shop_status=""
     var shop_boost=0
+    var cashbackstatus=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +63,12 @@ class  AccountsFragment : Fragment() {
         accountbinding = FragmentAccountsBinding.inflate(inflater, container, false)
         accountbinding = FragmentAccountsBinding.inflate(layoutInflater)
         binding = ShopboostlayoutBinding.inflate(layoutInflater)
+
+        progress = ProgressDialog(context,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
 
 //          requestPermissionLauncher = registerForActivityResult(
 //            ActivityResultContracts.StartActivityForResult()
@@ -163,8 +172,6 @@ class  AccountsFragment : Fragment() {
 
 
         Accountdetails()
-            CashbackStatus()
-
         accountbinding.locationsswitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked == true) {
                 is_location= "Open";
@@ -175,6 +182,20 @@ class  AccountsFragment : Fragment() {
                 is_location = "Closed";
                 LocationStatus(
                     is_location=is_location.toString().trim()
+                )
+            }
+        }
+
+        accountbinding.cashbackswitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked == true) {
+                cashbackstatus= "enable"
+                CashbackStatus(
+                    cashbackstatus=cashbackstatus.toString().trim()
+                )
+            } else {
+                cashbackstatus = "disable"
+                CashbackStatus(
+                    cashbackstatus=cashbackstatus.toString().trim()
                 )
             }
         }
@@ -271,6 +292,7 @@ class  AccountsFragment : Fragment() {
     fun Shopboostdeatils(
         max_amt:String,
         shop_boost:String){
+        progress.show()
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.ShopboostDetails(sharedPreference.getValueString("token"),shop_boost,max_amt)
@@ -287,16 +309,19 @@ class  AccountsFragment : Fragment() {
                                     if (shopboostresponse.error == "0") {
                                       //  Accountdetails()
                                         alertDialog.hide()
+                                        progress.dismiss()
 //                                        accountbinding.shopboostsswitch.isChecked=true;
                                         Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                     }
                                     if (shopboostresponse.error == "1") {
                                         alertDialog.hide()
+                                        progress.dismiss()
                                         accountbinding.shopboostsswitch.isChecked=false
                                         Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                     }
                                     if (shopboostresponse.error == "2") {
                                         alertDialog.hide()
+                                        progress.dismiss()
                                         accountbinding.shopboostsswitch.isChecked=false
                                         Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                     }else{
@@ -379,6 +404,7 @@ class  AccountsFragment : Fragment() {
     }
 
     fun Accountdetails(){
+        progress.show()
         accountbinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
@@ -390,6 +416,7 @@ class  AccountsFragment : Fragment() {
                     response: Response<AccountsModal>
                 ) {
                     accountbinding.progressBarLay.progressBarLayout.visibility = View.GONE
+                    progress.dismiss()
                     try {
                         when {
                             response.code() == 200 -> {
@@ -436,19 +463,15 @@ class  AccountsFragment : Fragment() {
                                         }
 
 
-                                        var deliveryStatus = accountsresponse.details.free_delivery
+                                        var deliveryStatus = accountsresponse.details.free_delivery.toString()
                                         if (deliveryStatus == "enable") {
-                                            val enable = true
-                                            accountsresponse.details.cashback_percentage
-                                        } else if (deliveryStatus == "disable") {
-                                            val disable = false
-                                            accountbinding.cashbackswitch.isChecked = disable
-                                        } else {
+                                            accountbinding.cashbackswitch.isChecked = true
+                                        } else{
+                                            accountbinding.cashbackswitch.isChecked = false
                                         }
 
                                         var locationStatus =
                                             accountsresponse.details.is_location_visible
-
                                         if (locationStatus == "Open") {
                                             val enable = true
                                             accountbinding.locationsswitch.isChecked = enable
@@ -500,6 +523,7 @@ class  AccountsFragment : Fragment() {
                     }
                 }
                     override fun onFailure(call: Call<AccountsModal>, t: Throwable) {
+                        progress.dismiss()
                         accountbinding.progressBarLay.progressBarLayout.visibility = View.GONE
                 Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
             }
@@ -533,11 +557,10 @@ class  AccountsFragment : Fragment() {
 //    }
 
 
-    fun CashbackStatus(){
+    fun CashbackStatus(cashbackstatus:String){
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
-            val requestCall =
-                ordersService.CashBackStatus(sharedPreference.getValueString("token"))
+            val requestCall = ordersService.CashBackStatus(sharedPreference.getValueString("token"),cashbackstatus)
             requestCall.enqueue(object : Callback<CashbackStatusModal>{
                 override fun onResponse(
                     call: Call<CashbackStatusModal>,
@@ -551,17 +574,17 @@ class  AccountsFragment : Fragment() {
                                         cashbackresponse = response.body()!!
                                         if (cashbackresponse.error == "0") {
                                             Toast.makeText(context,cashbackresponse.message.toString(), Toast.LENGTH_SHORT).show()
-                                            var Status=cashbackresponse.status
-                                            if(Status=="enable"){
-                                                val enable=true
-                                                accountbinding.cashbackswitch.isChecked=enable
-                                            } else if(Status=="disable"){
-                                                val disable=false
-                                                accountbinding.cashbackswitch.isChecked=disable
-                                            }else{
+//                                            var Status=cashbackresponse.status
+//                                            if(Status=="enable"){
+//                                                val enable=true
+//                                                accountbinding.cashbackswitch.isChecked=enable
+//                                            } else if(Status=="disable"){
+//                                                val disable=false
+//                                                accountbinding.cashbackswitch.isChecked=disable
+//                                            }else{
 
-                                            }
-                                        } else {
+                                            //}
+                                        } else{
 
                                         }
                                     } else {

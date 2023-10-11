@@ -3,6 +3,7 @@ package com.svindo.vendorapp.activity
 
 import com.svindo.vendorapp.utils.showToast
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,12 +24,20 @@ import retrofit2.Response
 lateinit var bankaccountdetailsbinding: ActivityBankaccountBinding
 private lateinit var bankdetailsResponse:Bankdetails_Response
 class BankaccountActivity : AppCompatActivity() {
+    lateinit var progress: ProgressDialog
     private lateinit var sharedPreference: SharedPreference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(this)
         bankaccountdetailsbinding = ActivityBankaccountBinding.inflate(layoutInflater)
         setContentView(bankaccountdetailsbinding.root)
+
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
 
         bankaccountdetailsbinding.bankaccskipbtn.setOnClickListener {
             val i = Intent(this@BankaccountActivity,ContactActivity::class.java)
@@ -76,6 +85,7 @@ class BankaccountActivity : AppCompatActivity() {
         account_number: String,
 
         ) {
+        progress.show()
 
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestCall = loginService.bankaccountdetails(sharedPreference.getValueString("token"),"bank_account",name,ifsc_code,bank_name,account_number)
@@ -89,10 +99,12 @@ class BankaccountActivity : AppCompatActivity() {
                     response.isSuccessful -> {//status code between 200 to 299
                         bankdetailsResponse = response.body()!!
                         if (bankdetailsResponse.error=="0") {
+                            progress.dismiss()
                             showToast(bankdetailsResponse.message)
                             val i = Intent(this@BankaccountActivity,ContactActivity::class.java)
                             startActivity(i)
                         } else{
+                            progress.dismiss()
                             //showToast(bankdetailsResponse.message)
                         }
                     }

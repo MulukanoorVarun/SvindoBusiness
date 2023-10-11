@@ -3,6 +3,7 @@ package com.svindo.vendorapp.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -55,12 +56,20 @@ class FssaiActivity : AppCompatActivity() {
     private  var file_1: File? = null
     private val cameraPermissionCode = 201
     private val storagePermissionCode = 202
+    lateinit var progress: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(this)
         fssaiBinding = ActivityFssaiBinding.inflate(layoutInflater)
         setContentView(fssaiBinding.root)
+
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
 
         fssaiBinding.camerabutton.setOnClickListener {
             showAlertDialog()
@@ -334,6 +343,7 @@ class FssaiActivity : AppCompatActivity() {
         fssainum: String,
         file1: File,
         ) {
+        progress.show()
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
         val body1 = MultipartBody.Part.createFormData("fssai_image", file1.name, requestFile1)
@@ -351,10 +361,11 @@ class FssaiActivity : AppCompatActivity() {
                     response.isSuccessful -> {//status code between 200 to 299
                         fssaiResponse = response.body()!!
                         if (fssaiResponse.error=="0") {
+                            progress.dismiss()
                             val i = Intent(this@FssaiActivity,GstinActivity::class.java)
                             startActivity(i)
-
                         } else{
+                            progress.dismiss()
                            // showToast(fssaiResponse.message)
                         }
                     }

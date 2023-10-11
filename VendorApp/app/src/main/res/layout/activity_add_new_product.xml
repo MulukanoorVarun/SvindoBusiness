@@ -739,7 +739,8 @@
                         android:hint="example: 5656-5"
                         android:textSize="13sp"
                         android:text=""
-                        android:inputType="number"
+                        android:digits="1234567890-/,"
+                        android:inputType="text"
                         android:autofillHints=""
                         tools:ignore="Hardcodedtext"/>
 

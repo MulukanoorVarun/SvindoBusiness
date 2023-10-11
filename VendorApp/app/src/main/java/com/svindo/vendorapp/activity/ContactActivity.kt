@@ -1,6 +1,7 @@
 package com.svindo.vendorapp.activity
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,6 +25,7 @@ lateinit var contactbinding : ActivityContactBinding
 lateinit var contactResponse: Bankdetails_Response
 
 class ContactActivity : AppCompatActivity() {
+    lateinit var progress: ProgressDialog
     private lateinit var sharedPreference: SharedPreference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +33,11 @@ class ContactActivity : AppCompatActivity() {
         contactbinding = ActivityContactBinding.inflate(layoutInflater)
         setContentView(contactbinding.root)
 
-
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
 
         contactbinding.contactssubmitbutton.setBackgroundResource(R.drawable.buttonbackground)
         contactbinding.contactssubmitbutton.setOnClickListener {
@@ -76,6 +82,7 @@ class ContactActivity : AppCompatActivity() {
         emergency_contact_name: String,
         emergency_mobile_number: String,
     ) {
+        progress.show()
 //        showToast(emergency_mobile_number)
 //        showToast(emergency_contact_name)
         val loginService = ApiClient.buildService(ApiInterface::class.java)
@@ -92,6 +99,7 @@ class ContactActivity : AppCompatActivity() {
                     response.isSuccessful -> {//status code between 200 to 299
                         contactResponse = response.body()!!
                         if (contactResponse.error=="0") {
+                            progress.dismiss()
                             response.body()?.let { showToast(it.message)}
                             sharedPreference.clearSharedPreference()
                             val i = Intent(this@ContactActivity ,LoginActivity::class.java)
@@ -100,6 +108,9 @@ class ContactActivity : AppCompatActivity() {
                             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
                             startActivity(i)
+                        }
+                        else{
+                            progress.dismiss()
                         }
                     }
                     response.code() == 401 -> {//unauthorised

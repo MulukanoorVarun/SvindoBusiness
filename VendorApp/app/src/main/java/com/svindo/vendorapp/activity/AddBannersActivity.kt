@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -67,6 +68,7 @@ class AddBannersActivity : AppCompatActivity() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: BannersListAdapter
     private lateinit var adapter1: ProductsListAdapter
+    lateinit var progress: ProgressDialog
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private lateinit var galleryResultLauncher: ActivityResultLauncher<Intent>
@@ -86,6 +88,12 @@ class AddBannersActivity : AppCompatActivity() {
         bannersBinding = ActivityAddBannersBinding.inflate(layoutInflater)
        // sharedPreference = SharedPreference(this)
         setContentView(bannersBinding.root)
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(false)
+        progress.setCancelable(false)
 
 
         sharedPreference=SharedPreference(this)
@@ -149,6 +157,7 @@ class AddBannersActivity : AppCompatActivity() {
             var banner_name=bannersBinding.bannernameet.text.toString().trim()
 
             if(redirectType.isNotEmpty()&& file_1!=null && max_amt.isNotEmpty() && banner_name.isNotEmpty()) {
+                progress.show()
                 AddBanners(
                     redirectType = BannerItem.toString().trim(),
                     itemId=itemId.toString().trim(),
@@ -309,7 +318,6 @@ class AddBannersActivity : AppCompatActivity() {
             ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL
         )
         try {
-
             val fileSizeInMB = getFileSizeInMB(filePath)
 
             var quality = 100
@@ -387,6 +395,7 @@ class AddBannersActivity : AppCompatActivity() {
         banner_name:String,
         file1: File
     ) {
+        progress.show()
         bannersBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestFile2= file1.asRequestBody("image/*".toMediaTypeOrNull())
@@ -409,7 +418,7 @@ class AddBannersActivity : AppCompatActivity() {
                         addBannerResponse= response.body()!!
                         if (addBannerResponse.error=="0") {
                             BannersListdetails()
-                            //    sharedPreference.save("token", businessdetailsResponse.token);
+                            progress.dismiss()
                             showToast(addBannerResponse.message)
                         }else{
                           //  showToast(addBannerResponse.message)

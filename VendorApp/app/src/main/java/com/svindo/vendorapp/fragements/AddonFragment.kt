@@ -1,6 +1,7 @@
 package com.svindo.vendorapp.fragements
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -49,6 +50,7 @@ class AddonFragment : Fragment() {
     private lateinit var galleryResultLauncher: ActivityResultLauncher<Intent>
     private var imageUri: Uri? = null
     private  var file_1: File? = null
+    lateinit var progress: ProgressDialog
 
     private lateinit var spinner: Spinner
     var addon_id=""
@@ -69,6 +71,11 @@ class AddonFragment : Fragment() {
 
         AddonBinding = FragmentAddonBinding.inflate(inflater, container, false)
         AddonBinding = FragmentAddonBinding.inflate(layoutInflater)
+        progress = ProgressDialog(context,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
 
 
         binding = AddonlayoutdesignBinding.inflate(inflater, container, false)
@@ -168,6 +175,7 @@ class AddonFragment : Fragment() {
             val addon_desc = binding.addondescEt.text.toString().trim()
             val addon_price = binding.addonpriceet.text.toString().trim()
             if (addon_name.isNotEmpty() && addon_price.isNotEmpty()) {
+                progress.show()
                 AddAddonsdetails(
                     addon_name = binding.addonnameEt.text.toString().trim(),
                     addon_desc = binding.addondescEt.text.toString().trim(),
@@ -213,7 +221,9 @@ class AddonFragment : Fragment() {
                                             ).show()
                                             AddAddonsListdetails()
                                             alertDialog.hide()
+                                            progress.dismiss()
                                         } else {
+                                            progress.dismiss()
                                             //   Toast.makeText(context,addonsresponse.message.toString(), Toast.LENGTH_SHORT).show()
                                         }
                                     } else {
@@ -249,6 +259,7 @@ class AddonFragment : Fragment() {
                 }
                 override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
                     AddonBinding.progressBarLay.progressBarLayout.visibility = View.GONE
+                    progress.dismiss()
                     Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
                 }
 

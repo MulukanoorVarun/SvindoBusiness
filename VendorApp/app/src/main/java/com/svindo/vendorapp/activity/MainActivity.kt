@@ -20,6 +20,7 @@ import kotlin.system.exitProcess
 private lateinit var binding: ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     lateinit var bottomNavigationView: BottomNavigationView
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        binding = ActivityMainBinding.inflate(layoutInflater)
@@ -27,10 +28,7 @@ class MainActivity : AppCompatActivity() {
         loadFragment(HomeFragment())
         bottomNavigationView = findViewById(R.id.bottomnavigation) as BottomNavigationView
      bottomNavigationView.setOnItemSelectedListener {
-       //  binding.bottomnavigation.setBackgroundResource(R.drawable.button_loading_background);
-//         bottomNavigationView.isVisible=false
-//         bottomNavigationView.isEnabled = false;
-//         bottomNavigationView.
+
          bottomNavigationView.menu.findItem(R.id.orders).isEnabled = false
          bottomNavigationView.menu.findItem(R.id.catalogue).isEnabled = false
          bottomNavigationView.menu.findItem(R.id.account).isEnabled = false
@@ -89,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("MissingSuperCall")
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         AlertDialog.Builder(this)

@@ -1,5 +1,7 @@
 package com.svindo.vendorapp.activity
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -127,6 +129,12 @@ class AcceptOrder : AppCompatActivity() {
                                     acceptOrderBinding.itemtotal.text = acceptorderresponse.order_details.order_amount
                                     acceptOrderBinding.deliverytype.text = acceptorderresponse.order_details.delivery_type
 
+                                    if(acceptorderresponse.order_details.delivery_type=="Genral") {
+                                        acceptOrderBinding.deliverytype.text = "General"
+                                    }else{
+                                        acceptOrderBinding.deliverytype.text = acceptorderresponse.order_details.delivery_type
+                                    }
+
 
                                     var availability =
                                         acceptorderresponse.order_details.is_delivery_boy_available
@@ -141,13 +149,25 @@ class AcceptOrder : AppCompatActivity() {
                                     var order_id = acceptorderresponse.order_details.id
                                     orderstatus = acceptorderresponse.order_details.order_status
 
-                                    if (orderstatus != "Order Placed" && orderstatus != "Order Accepted") {
-                                        acceptOrderBinding.acceptbutton.isVisible = false;
-                                        acceptOrderBinding.rejectbutton.isVisible = false;
-
+                                    if (orderstatus != "Order Placed" && orderstatus != "Order Accepted"){
+                                        acceptOrderBinding.acceptbutton.isVisible = false
+                                        acceptOrderBinding.rejectbutton.isVisible = false
                                     }
+
                                     if (orderstatus == "Order Accepted") {
                                         acceptOrderBinding.acceptbutton.text = "Ship Order"
+                                    }
+                                    if(orderstatus == "Delivered"){
+                                        acceptOrderBinding.billdownloadbtn.isVisible = true
+                                        acceptOrderBinding.billdownloadbtn.setOnClickListener {
+                                            var url= acceptorderresponse.bills
+                                            //showToast(url.toString())
+                                            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                                            startActivity(browserIntent)
+                                        }
+
+                                    } else{
+                                        acceptOrderBinding.billdownloadbtn.isVisible = false
                                     }
 
                                     acceptOrderBinding.rejectbutton.setOnClickListener {

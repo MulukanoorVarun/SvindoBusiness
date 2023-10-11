@@ -1,6 +1,7 @@
 package com.svindo.vendorapp.activity
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,6 +30,7 @@ class AddSpotlightActivity : AppCompatActivity() {
     private lateinit var sharedPreference: SharedPreference
     private lateinit var spotlightResponse: Verify_otp_Response
     private lateinit var spinner: Spinner
+    lateinit var progress: ProgressDialog
 
     var ItemId=""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +39,12 @@ class AddSpotlightActivity : AppCompatActivity() {
         sharedPreference= SharedPreference(this)
         addspotlightBinding = ActivityAddSpotlightBinding.inflate(layoutInflater)
         setContentView(addspotlightBinding.root)
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
 
 
         val loginButton = findViewById<ImageView>(R.id.AddSpotlightbackbutton)
@@ -109,6 +117,7 @@ class AddSpotlightActivity : AppCompatActivity() {
                 ItemId = selectedItem.id
                 addspotlightBinding.submitbutton.setBackgroundResource(R.drawable.buttonbackground);
                 addspotlightBinding.submitbutton.setOnClickListener {
+                    progress.show()
                     addspotlightBinding.submitbutton.setBackgroundResource(R.drawable.button_loading_background);
                     addspotlightBinding.submitbutton.setEnabled(false)
                     Handler().postDelayed({
@@ -143,10 +152,11 @@ class AddSpotlightActivity : AppCompatActivity() {
                                 if (spotlightResponse.error=="0") {
                                     val i = Intent(this@AddSpotlightActivity, MainActivity::class.java)
                                     startActivity(i)
+                                    progress.dismiss()
                                     showToast(spotlightResponse.message)
                                 }
                                 else {
-                                //   showToast(spotlightResponse.message)
+                                    progress.dismiss()
                                 }
                             }
                             response.code() == 401 -> {
@@ -161,6 +171,7 @@ class AddSpotlightActivity : AppCompatActivity() {
                     }
                 override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    progress.dismiss()
                     showToast(t.message.toString())
                 }
             })

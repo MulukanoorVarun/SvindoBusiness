@@ -5,7 +5,8 @@ data class OrderAcceptModal(
     val error: String,
     val message: String,
     val list: List<OrderDetailsList>,
-    val order_details: OrderDetails
+    val order_details: OrderDetails,
+    val bills:String
 )
 
 data class OrderDetailsList(

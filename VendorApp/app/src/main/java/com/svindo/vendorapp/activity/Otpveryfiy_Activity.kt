@@ -1,6 +1,7 @@
 package com.svindo.vendorapp.activity
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,6 +30,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
     private lateinit var mobile_number: String
     private lateinit var genrateotpresponse: Mobileotp_Response
     private lateinit var sharedPreference: SharedPreference
+    lateinit var progress: ProgressDialog
 
 
     var FCM_token=""
@@ -43,6 +45,15 @@ class Otpveryfiy_Activity : AppCompatActivity() {
 //        binding.firstPinView.setText(otp)
         otpverifybinding = ActivityOtpveryfiyBinding.inflate(layoutInflater)
         setContentView(otpverifybinding.root)
+
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
+
+
         otpverifybinding.editmobileNumbertxt.setText(mobile_number)
         otpverifybinding.editmobileNumbertxt.setOnClickListener {
             val i = Intent(this@Otpveryfiy_Activity, LoginActivity::class.java)
@@ -140,6 +151,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
         })
     }
     private fun verifyotp(mobile_number: String, otp: String ,FCM_token:String) {
+        progress.show()
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestCall = loginService.Verify_otp(mobile_number, otp,FCM_token)
         requestCall.enqueue(object : Callback<Verify_otp_Response> {
@@ -165,6 +177,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
                                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                     startActivity(intent)
+                                    progress.dismiss()
 
                                 } else if (response.body()!!.error == "2") {
                                     sharedPreference.save("mobile_number",mobile_number)
@@ -172,8 +185,10 @@ class Otpveryfiy_Activity : AppCompatActivity() {
                                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                     startActivity(intent)
+                                    progress.dismiss()
 
                                 } else if (response.body()!!.error == "1") {
+                                    progress.dismiss()
                                     response.body()?.let { showToast(it.message) }
                                 }
                             }

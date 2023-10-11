@@ -3,6 +3,7 @@ package com.svindo.vendorapp.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -77,6 +78,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
     private val itemList: MutableList<Maincategory> = ArrayList()
     private lateinit var builder: AlertDialog.Builder
     private lateinit var alertDialog: AlertDialog
+    lateinit var progress: ProgressDialog
 
     private var fusedLocationClient: FusedLocationProviderClient?=null
 
@@ -103,6 +105,12 @@ class BusinessdetailsActivity : AppCompatActivity() {
         gstinBinding = ActivityGstinBinding.inflate(layoutInflater)
         setContentView(businessdetailsBinding.root)
 
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
+
         location=sharedPreference.getValueString("latlong").toString()
         businessdetailsBinding.locationEt.setText(location)
 
@@ -112,19 +120,19 @@ class BusinessdetailsActivity : AppCompatActivity() {
 
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
-        businessdetailsBinding.locationEt.setOnClickListener {
-            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                    1000
-                )
-            }else{
-            }
-//            val i = Intent(this@BusinessdetailsActivity, GoogleMapsActivity::class.java)
-//            startActivity(i)
-        }
+//
+//        businessdetailsBinding.locationEt.setOnClickListener {
+//            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(
+//                    this,
+//                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+//                    1000
+//                )
+//            }else{
+//            }
+////            val i = Intent(this@BusinessdetailsActivity, GoogleMapsActivity::class.java)
+////            startActivity(i)
+//        }
 
      //   getLocation()
 
@@ -734,6 +742,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
         subzone_id:String,
         file1: File
         ) {
+        progress.show()
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestFile2= file1.asRequestBody("image/*".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("logo", file1.name, requestFile2)
@@ -790,8 +799,10 @@ class BusinessdetailsActivity : AppCompatActivity() {
                                 i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(i)
                             }
+                            progress.dismiss()
                         }else{
                             showToast(businessdetailsResponse.message)
+                            progress.dismiss()
                         }
                     }
                     response.code() == 401 -> {//unauthorised
@@ -804,6 +815,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                progress.dismiss()
                 showToast(getString(R.string.session_exp))
             }
         })

@@ -1,4 +1,4 @@
-package com.svindo.vendorapp.activity
+    package com.svindo.vendorapp.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -82,6 +82,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
     private var imageUri: Uri? = null
     private  var file_1: File? = null
     private  var file_2: File? = null
+    lateinit var progress: ProgressDialog
 
 
     private lateinit var mMap: GoogleMap
@@ -117,19 +118,25 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
         binding = ActivityEditBusinessdetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        binding.locationEt.setOnClickListener {
-            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                    1000
-                )
-            }else{
-                getLocation()
-            }
-        }
+//        binding.locationEt.setOnClickListener {
+//            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(
+//                    this,
+//                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+//                    1000
+//                )
+//            }else{
+//                getLocation()
+//            }
+//        }
 
         location=sharedPreference.getValueString("latlong").toString()
         binding.locationEt.setText(location)
@@ -701,40 +708,40 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
 //            }
 //        }
 //    }
-   @SuppressLint("SetTextI18n")
-   private fun getLocation(){
-    if (ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED
-    ) {
+//   @SuppressLint("SetTextI18n")
+//   private fun getLocation(){
+//    if (ActivityCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.ACCESS_FINE_LOCATION
+//        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.ACCESS_COARSE_LOCATION
+//        ) != PackageManager.PERMISSION_GRANTED
+//    ) {
+//
+//        return
+//    }
+//    fusedLocationClient?.lastLocation?.addOnSuccessListener { location : Location? ->
+//        if(location!=null){
+//            getAddress(location.latitude,location.longitude)
+//            binding.locationEt.setText(location.latitude.toString()+location.longitude.toString())
+//        }
+//    }
+//   }
 
-        return
-    }
-    fusedLocationClient?.lastLocation?.addOnSuccessListener { location : Location? ->
-        if(location!=null){
-            getAddress(location.latitude,location.longitude)
-            binding.locationEt.setText(location.latitude.toString()+location.longitude.toString())
-        }
-    }
-   }
 
-
-    private fun getAddress(lat:Double,lon:Double): String? {
-        try {
-            val geocoder= Geocoder(this, Locale.getDefault())
-            val addresses=geocoder.getFromLocation(lat,lon,1)
-            if(addresses!=null){
-                myaddress=addresses[0].getAddressLine(0)
-            }
-        }catch (e:Exception){
-
-        }
-        return myaddress
-    }
+//    private fun getAddress(lat:Double,lon:Double): String? {
+//        try {
+//            val geocoder= Geocoder(this, Locale.getDefault())
+//            val addresses=geocoder.getFromLocation(lat,lon,1)
+//            if(addresses!=null){
+//                myaddress=addresses[0].getAddressLine(0)
+//            }
+//        }catch (e:Exception){
+//
+//        }
+//        return myaddress
+//    }
 
 
     private fun showAlertDialog(){
@@ -850,8 +857,8 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                 }
             }
             1 -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getLocation()
+                if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    //getLocation()
                     if ((ContextCompat.checkSelfPermission(
                             this,
                             Manifest.permission.READ_EXTERNAL_STORAGE
@@ -862,7 +869,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                 }else{
                     val showRationale = ActivityCompat.shouldShowRequestPermissionRationale(this,
                         Manifest.permission.READ_EXTERNAL_STORAGE)
-                    if (!showRationale) {
+                    if (!showRationale){
                         // user also CHECKED "never ask again"
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                         val uri = Uri.fromParts("package", packageName, null)
@@ -871,13 +878,9 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                     } else if (Manifest.permission.READ_EXTERNAL_STORAGE == Manifest.permission.READ_EXTERNAL_STORAGE) {
                         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1) }
                 }
-
             }
         }
     }
-
-
-
 
     private fun openCamera(){
         val values = ContentValues()
@@ -995,6 +998,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
     private fun uploadprofile(
         file1: File,
         panNumber:String) {
+        progress.show()
         try {
             val uploadBillService = ApiClient.buildService(ApiInterface::class.java)
             val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
@@ -1018,8 +1022,10 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                             when (pancradresponse.error) {
                                 "0" -> {
                                     showToast(pancradresponse.message)
+                                    progress.dismiss()
                                 }
                                 else -> {
+                                    progress.dismiss()
                                    // showToast(pancradresponse.message)
                                 }
                             }
@@ -1038,6 +1044,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                 //invoked in case of Network Error or Establishing connection with Server
                 //or Error Creating Http Request or Error Processing Http Response
                 override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                    progress.dismiss()
                     showToast(getString(R.string.server_error))
                 }
             })
@@ -1053,6 +1060,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
         fssainum: String,
         file1: File,
     ) {
+        progress.show()
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
         val body1 = MultipartBody.Part.createFormData("fssai_image", file1.name, requestFile1)
@@ -1070,8 +1078,10 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                     response.isSuccessful -> {//status code between 200 to 299
                         fssaiResponse = response.body()!!
                         if (fssaiResponse.error=="0") {
+                            progress.dismiss()
                             showToast(fssaiResponse.message)
                         } else{
+                            progress.dismiss()
                            // showToast(fssaiResponse.message)
                         }
                     }
@@ -1085,7 +1095,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                 }
             }
             override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
-
+                progress.dismiss()
                 showToast(getString(R.string.session_exp))
             }
 
@@ -1098,7 +1108,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
         gstnum: String,
         file1: File
     ) {
-
+        progress.show()
         val loginService = ApiClient.buildService(ApiInterface::class.java)
 
 
@@ -1119,8 +1129,10 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                     response.isSuccessful -> {//status code between 200 to 299
                         fssaiResponse = response.body()!!
                         if (fssaiResponse.error == "0") {
+                            progress.dismiss()
                             showToast(fssaiResponse.message)
                         } else {
+                            progress.dismiss()
                            // showToast(fssaiResponse.message)
                         }
                     }
@@ -1135,7 +1147,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
             }
 
             override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
-
+                progress.dismiss()
                 showToast(getString(R.string.session_exp))
             }
 
@@ -1148,6 +1160,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
             ifsc_code: String,
             account_number: String,
             ) {
+            progress.show()
             val loginService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = loginService.bankaccountdetails(sharedPreference.getValueString("token"),"bank_account",name,ifsc_code,bank_name,account_number)
             requestCall.enqueue(object : Callback<Bankdetails_Response> {
@@ -1160,8 +1173,10 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                         response.isSuccessful -> {//status code between 200 to 299
                             fssaiResponse = response.body()!!
                             if (fssaiResponse.error=="0") {
+                                progress.dismiss()
                                 showToast(fssaiResponse.message)
                             } else{
+                                progress.dismiss()
                               //  showToast(fssaiResponse.message)
                             }
                         }
@@ -1175,7 +1190,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                     }
                 }
                 override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
-
+                    progress.dismiss()
                     showToast(getString(R.string.session_exp))
                 }
 
@@ -1183,6 +1198,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
         }
 
     fun Editbusinessdetails(){
+        progress.show()
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall =
@@ -1198,6 +1214,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                                 if (response.body() != null) {
                                     EditResponse = response.body()!!
                                     if (EditResponse.error == "0") {
+                                        progress.dismiss()
                                         binding.businessnameet.setText(EditResponse.details.store_name)
                                         binding.mobileNumEt.setText(EditResponse.details.mobile_number)
                                         binding.storeEmailIdEt.setText(EditResponse.details.email_id)
@@ -1254,7 +1271,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                                         var deliveryStatus = EditResponse.details.free_delivery
 
                                     } else {
-
+                                        progress.dismiss()
                                     }
                                 }else {
 
@@ -1272,6 +1289,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                     }
                 override fun onFailure(call: Call<EditBusinessDetailsModal>, t: Throwable) {
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    progress.dismiss()
                     showToast(getString(R.string.session_exp))
                 }
             })
@@ -1291,6 +1309,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
         file1: File,
         file2: File,
     ) {
+        progress.show()
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("logo", file1.name, requestFile1)
@@ -1316,7 +1335,11 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                     response.isSuccessful -> {//status code between 200 to 299
                         pancradresponse= response.body()!!
                         if (pancradresponse.error=="0") {
+                            progress.dismiss()
                             showToast(pancradresponse.message.toString())
+                        }
+                        else{
+                            progress.dismiss()
                         }
                     }
                     response.code() == 401 -> {//unauthorised
@@ -1329,6 +1352,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                 }
             }
             override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                progress.dismiss()
                 showToast(getString(R.string.session_exp))
             }
         })
@@ -1346,6 +1370,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
         file1: File?,
         file2: File?,
     ) {
+        progress.show()
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         var body:MultipartBody.Part
 
@@ -1380,7 +1405,11 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                     response.isSuccessful -> {//status code between 200 to 299
                         pancradresponse= response.body()!!
                         if (pancradresponse.error=="0") {
+                            progress.dismiss()
                             showToast(pancradresponse.message.toString())
+                        }
+                        else{
+                            progress.dismiss()
                         }
                     }
                     response.code() == 401 -> {//unauthorised
@@ -1393,6 +1422,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                 }
             }
             override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                progress.dismiss()
                 showToast(getString(R.string.session_exp))
             }
         })
@@ -1408,6 +1438,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
         address : String,
         location:String,
     ) {
+        progress.show()
         val loginService = ApiClient.buildService(ApiInterface::class.java)
 //        val requestFile1= file1.asRequestBody("image/*".toMediaTypeOrNull())
 //        val body = MultipartBody.Part.createFormData("logo", file1.name, requestFile1)
@@ -1431,7 +1462,11 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                     response.isSuccessful -> {//status code between 200 to 299
                         pancradresponse= response.body()!!
                         if (pancradresponse.error=="0") {
+                            progress.dismiss()
                             showToast(pancradresponse.message.toString())
+                        }
+                        else{
+                            progress.dismiss()
                         }
                     }
                     response.code() == 401 -> {//unauthorised
@@ -1444,6 +1479,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                 }
             }
             override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                progress.dismiss()
                 showToast(getString(R.string.session_exp))
             }
         })
@@ -1452,6 +1488,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
         emergency_contact_name: String,
         emergency_mobile_number: String,
     ) {
+        progress.show()
 //        showToast(emergency_mobile_number)
 //        showToast(emergency_contact_name)
         val loginService = ApiClient.buildService(ApiInterface::class.java)
@@ -1468,7 +1505,10 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                     response.isSuccessful -> {//status code between 200 to 299
                         contactResponse = response.body()!!
                         if (contactResponse.error=="0") {
+                            progress.dismiss()
                             response.body()?.let { showToast(it.message)}
+                        }else{
+                            progress.dismiss()
                         }
                     }
                     response.code() == 401 -> {//unauthorised

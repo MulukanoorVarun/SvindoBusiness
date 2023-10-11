@@ -2,25 +2,34 @@ package com.svindo.vendorapp.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.svindo.vendorapp.R
 import com.svindo.vendorapp.utils.SharedPreference
-import com.svindo.vendorapp.utils.showToast
 
 
 @SuppressLint("CustomSplashScreen", "Registered")
 class SplashActivity : AppCompatActivity() {
     private lateinit var sharedPreference: SharedPreference
+//    private val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.CAMERA, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+//    private val permissionRequestCode = 123
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         sharedPreference = SharedPreference(this)
 
-      //  sharedPreference.save("mobile_no","9390776532")
+//        if (checkPermissions()) {
+//            startNextActivity()
+//        } else {
+//            requestPermissions()
+//        }
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -30,11 +39,52 @@ class SplashActivity : AppCompatActivity() {
         // to send a message with a delayed time.
         //Normal Handler is deprecated , so we have to change the code little bit
 
-        // Handler().postDelayed({
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this,LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
-        }, 3000) // 3000 is
+        }, 3000) // 3000 milliseconds
+
     }
+
+
+//    private fun checkPermissions(): Boolean {
+//        for (permission in permissions) {
+//            if (ContextCompat.checkSelfPermission(this, permission)
+//                != PackageManager.PERMISSION_GRANTED
+//            ) {
+//                return false
+//            }
+//        }
+//        return true
+//    }
+//
+//    private fun requestPermissions() {
+//        ActivityCompat.requestPermissions(this, permissions, permissionRequestCode)
+//    }
+//
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        if (requestCode == permissionRequestCode) {
+//            if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+//                // All permissions granted
+//                startNextActivity()
+//            } else {
+//                // Permissions not granted
+//                // Handle this case, e.g., show an error message or exit the app
+//            }
+//        }
+//    }
+//
+//    private fun startNextActivity() {
+//        // Start your main activity or the next activity after obtaining permissions
+//        val intent = Intent(this, LoginActivity::class.java)
+//        startActivity(intent)
+//        finish()
+//    }
 }
+

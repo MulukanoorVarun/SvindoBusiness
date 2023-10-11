@@ -3,6 +3,7 @@ package com.svindo.vendorapp.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -63,13 +64,21 @@ class NotificationsActivity : AppCompatActivity() {
     private  var file_1: File? = null
     private val cameraPermissionCode = 201
     private val storagePermissionCode = 202
+    lateinit var progress: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         notificationsBinding = ActivityNotificationsBinding.inflate(layoutInflater)
         //sharedPreference = SharedPreference(this)
         setContentView(notificationsBinding.root)
-sharedPreference=SharedPreference(this)
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
+
+        sharedPreference=SharedPreference(this)
 
         notificationsBinding. cardclicking.setOnClickListener {
             showAlertDialog()
@@ -124,20 +133,19 @@ sharedPreference=SharedPreference(this)
         notificationdetails()
 
 
-        notificationsBinding.notificationsSubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
+        notificationsBinding.notificationsSubmitbutton.setBackgroundResource(R.drawable.buttonbackground)
         notificationsBinding.notificationsSubmitbutton.setOnClickListener {
-            notificationsBinding.notificationsSubmitbutton.setBackgroundResource(R.drawable.button_loading_background);
+            notificationsBinding.notificationsSubmitbutton.setBackgroundResource(R.drawable.button_loading_background)
             notificationsBinding.notificationsSubmitbutton.setEnabled(false)
             Handler().postDelayed({
                 notificationsBinding.notificationsSubmitbutton.setEnabled(true)
-                notificationsBinding.notificationsSubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
+                notificationsBinding.notificationsSubmitbutton.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
-
-
 
             val description = notificationsBinding.notidescettxt.text.toString().trim()
 
             if (description.isNotEmpty()&&file_1!=null){
+                progress.show()
                 Addnotifications(
                     notificationsBinding.notidescettxt.text.toString().trim(),
                     file_1!!
@@ -339,6 +347,7 @@ sharedPreference=SharedPreference(this)
         description: String,
         file1: File
     ) {
+        progress.show()
         notificationsBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestFile2= file1.asRequestBody("image/*".toMediaTypeOrNull())
@@ -360,11 +369,13 @@ sharedPreference=SharedPreference(this)
                             notificationdetails()
                             notificationsBinding.notidescettxt.text.clear()
                             notificationsBinding.notificationImg.setImageDrawable(null)
+                          progress.dismiss()
+                            Toast.makeText(applicationContext,"Notification Successfully Added.Notification will appear ones approved by admin!",Toast.LENGTH_LONG).show()
 
-                            showToast(addResponse.message.toString())
                         }
                         if(addResponse.error=="1"){
                            showToast(addResponse.message)
+                            progress.dismiss()
                         }
                     }
                     response.code() == 401 -> {//unauthorised
@@ -378,6 +389,7 @@ sharedPreference=SharedPreference(this)
             }
             override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
                 notificationsBinding.progressBarLay.progressBarLayout.visibility = View.GONE
+                progress.dismiss()
                 showToast(getString(R.string.session_exp))
             }
         })

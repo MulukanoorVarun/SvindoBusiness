@@ -3,6 +3,7 @@ package com.svindo.vendorapp.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -60,6 +61,7 @@ class AddNewProduct : AppCompatActivity() {
 
     private lateinit var spinner: Spinner
     private lateinit var spinneritem: Spinner
+    lateinit var progress: ProgressDialog
 
     var MainCatId=""
     var ItemId=""
@@ -78,6 +80,7 @@ class AddNewProduct : AppCompatActivity() {
 
     var is_printing="0"
     var selected_index=1
+    var mrp_price=""
 
     private val itemList: MutableList<Unititem> = ArrayList()
 
@@ -90,6 +93,12 @@ class AddNewProduct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Binding = ActivityAddNewProductBinding.inflate(layoutInflater)
         setContentView(Binding.root)
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
 
 
         sharedPreference=SharedPreference(this)
@@ -305,7 +314,7 @@ class AddNewProduct : AppCompatActivity() {
             val name = Binding.productnameet.text.toString().trim()
             val deliverydays = Binding.generaldeliverydays.text.toString().trim()
             val description = Binding.productdescriptionet.text.toString().trim()
-            val mrp_price = Binding.priceet.text.toString().trim()
+            mrp_price = Binding.priceet.text.toString().trim()
             val sale_price = Binding.discountpriceet.text.toString().trim()
             val stock = Binding.stocket.text.toString().trim()
             val quantiy = Binding.quantityet.text.toString().trim()
@@ -315,7 +324,7 @@ class AddNewProduct : AppCompatActivity() {
             val color = Binding.coloret.text.toString().trim()
             val gst_code = Binding.gstinet.text.toString().trim()
 
-        //    if (file_1 != null && file_2 != null && file_3 != null && file_4 != null) {
+            if (name.isNotEmpty() && ItemId.isNotEmpty() && sale_price.isNotEmpty() && file_1!=null) {
                 AddNewProductDetails(
                     category_id = subcat_id.toString().trim(),
                     unit_id = ItemId.toString().trim(),
@@ -330,7 +339,7 @@ class AddNewProduct : AppCompatActivity() {
                     Return = Return.toString().trim(),
                     shopExchange = shopExchange.toString().trim(),
                     description = Binding.productdescriptionet.text.toString().trim(),
-                    mrp_price = Binding.priceet.text.toString().trim(),
+                    mrp_price =mrp_price.toString().trim(),
                     sale_price = Binding.discountpriceet.text.toString().trim(),
                     stock = Binding.stocket.text.toString().trim(),
                     name = Binding.productnameet.text.toString().trim() + " " + Binding.brandet.text.toString().trim() +" " + size_name.toString() + " " + Binding.modelnoet.text.toString()
@@ -345,9 +354,9 @@ class AddNewProduct : AppCompatActivity() {
 //                    file4 = file_4!!
                     //    file5= file_5!!
                 )
-//            }else{
-//                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
-//            }
+            }else{
+                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+            }
         }
 
         MainCategoryList()
@@ -570,7 +579,7 @@ class AddNewProduct : AppCompatActivity() {
                 id: Long
             ) {
                 val selectedItem = items[position]
-                 var ItemId = selectedItem.id
+                  ItemId = selectedItem.id
             //    showToast(ItemId.toString())
 
                 //  fetchItemDetailsCal(itemId)
@@ -855,11 +864,11 @@ class AddNewProduct : AppCompatActivity() {
 //        file4: File,
        // file5: File,
     ) {
+        progress.show()
         Binding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try {
-
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
-            println("error 1");
+            println("error 1")
             val emptyRequestBody: RequestBody = "".toRequestBody("text/plain".toMediaTypeOrNull())
             val emptyFilePart: MultipartBody.Part = MultipartBody.Part.createFormData("empty_file", "", emptyRequestBody)
             var body1:MultipartBody.Part=emptyFilePart;
@@ -948,8 +957,9 @@ class AddNewProduct : AppCompatActivity() {
                                             showToast(response.body()!!.message.toString())
                                             val i = Intent(this@AddNewProduct, MainActivity::class.java)
                                             startActivity(i)
+                                            progress.dismiss()
                                         } else {
-                                            // showToast(response.body()!!.message.toString())
+                                            progress.dismiss()
                                         }
                                     } else {
 
@@ -974,6 +984,7 @@ class AddNewProduct : AppCompatActivity() {
                 }
                 override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
                     Binding.progressBarLay.progressBarLayout.visibility = View.GONE
+                    progress.dismiss()
                     showToast(t.message.toString())
                 }
 

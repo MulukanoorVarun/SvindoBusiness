@@ -95,12 +95,12 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
     }
 
     private fun checkValidations() {
-        if (mapsBinding.edtLocation.text.toString().trim().isEmpty()) {
+        if (mapsBinding.edtLocation.text.toString().trim().isEmpty()){
             mapsBinding.edtLocation.error = "Enter Location"
         } else {
             if(gpsStatus()) {
                 requestPermissions()
-            }else{
+            }else {
                 showGPSDialog()
             }
 

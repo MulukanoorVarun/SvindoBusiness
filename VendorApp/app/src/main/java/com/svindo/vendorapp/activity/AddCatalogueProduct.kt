@@ -2,6 +2,7 @@ package com.svindo.vendorapp.activity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -51,6 +52,7 @@ class AddCatalogueProduct : AppCompatActivity() {
     // Inside your Activity or Fragment
     lateinit var productsarrayList: ArrayList<String>
     lateinit var addondsarrayList: ArrayList<String>
+    lateinit var progress: ProgressDialog
 
     private lateinit var spinner: Spinner
     private var itemList: MutableList<String> =  mutableListOf()
@@ -84,6 +86,12 @@ class AddCatalogueProduct : AppCompatActivity() {
         setContentView(R.layout.activity_add_catalogue_product)
         ProductBinding = ActivityAddCatalogueProductBinding.inflate(layoutInflater)
         setContentView(ProductBinding.root)
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
 
 //        linearLayoutManager = LinearLayoutManager(this)
 //        ProductBinding.AddonsRecyclerView.layoutManager = linearLayoutManager
@@ -212,7 +220,7 @@ class AddCatalogueProduct : AppCompatActivity() {
             ProductBinding.submitbutton.setBackgroundResource(R.drawable.button_loading_background);
             ProductBinding.submitbutton.setEnabled(false)
             Handler().postDelayed({
-                ProductBinding.submitbutton.setEnabled(true)
+               ProductBinding.submitbutton.setEnabled(true)
                 ProductBinding.submitbutton.setBackgroundResource(R.drawable.buttonbackground);
             }, 2000)
 
@@ -347,6 +355,7 @@ class AddCatalogueProduct : AppCompatActivity() {
         printing: String,
         minQuantity:String,
     ) {
+        progress.show()
         ProductBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
@@ -365,11 +374,11 @@ class AddCatalogueProduct : AppCompatActivity() {
                             if (productdetailsResponse != null) {
                                 if (productdetailsResponse.error == "0") {
                                     showToast(productdetailsResponse.message.toString())
-                                    val i =
-                                        Intent(this@AddCatalogueProduct, MainActivity::class.java)
+                                    val i = Intent(this@AddCatalogueProduct, MainActivity::class.java)
                                     startActivity(i)
+                                    progress.dismiss()
                                 } else {
-                                    // showToast(productdetailsResponse.message.toString())
+                                    progress.dismiss()
                                 }
                             } else {
 
@@ -390,6 +399,7 @@ class AddCatalogueProduct : AppCompatActivity() {
 
                 override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
                     ProductBinding.progressBarLay.progressBarLayout.visibility = View.GONE
+                    progress.dismiss()
                     showToast(t.message.toString())
                 }
             })

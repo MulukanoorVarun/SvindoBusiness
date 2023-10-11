@@ -16,13 +16,12 @@
             android:layout_width="match_parent"
             android:background="@drawable/rounded_corners_background"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
@@ -30,33 +29,51 @@
                     android:id="@+id/acceptbackbutton"
                     android:src="@drawable/backbutton"
                     tools:ignore="ContentDescription" />
-
                 <TextView
                     android:id="@+id/ordertxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
+                    android:layout_toEndOf="@+id/acceptbackbutton"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/order_no_txt"
                     android:textColor="@color/white"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="RelativeOverlap" />
                 <TextView
                     android:id="@+id/orderno"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/ordertxt"
                     android:text=""
                     android:textColor="@color/white"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    android:textStyle="bold"
+                    tools:ignore="RelativeOverlap" />
+            </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/billdownloadbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/toolbar"
+            android:padding="5dp"
+            android:background="@drawable/buttonbackground"
+            android:text="Download Bill"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText" />
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
+            android:layout_below="@+id/billdownloadbtn"
             android:orientation="horizontal"
             android:weightSum="2">
             <TextView

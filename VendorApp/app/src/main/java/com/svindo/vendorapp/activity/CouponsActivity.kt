@@ -1,6 +1,7 @@
 package com.svindo.vendorapp.activity
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -38,6 +39,7 @@ class CouponsActivity : AppCompatActivity() {
     private lateinit var adapter: CouponListAdapter
     private lateinit var builder: AlertDialog.Builder
     private lateinit var alertDialog: AlertDialog
+    lateinit var progress: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,11 @@ class CouponsActivity : AppCompatActivity() {
         addNewCouponCodeBinding = ActivityAddNewCouponCodeBinding.inflate(layoutInflater)
         //sharedPreference = SharedPreference(this)
         setContentView(couponsBinding.root)
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
         sharedPreference=SharedPreference(this)
 //        couponsBinding.addbutton.setOnClickListener {
 //            val intent = Intent(this, AddNewCouponCode::class.java)
@@ -100,6 +107,7 @@ class CouponsActivity : AppCompatActivity() {
             val description = addNewCouponCodeBinding.coupondescpt.text.toString().trim()
 
             if (couponCode.isNotEmpty() && minamount.isNotEmpty() && maximumamount.isNotEmpty() && discountpercentage.isNotEmpty()  && description.isNotEmpty() && validitydays.isNotEmpty()){
+                progress.show()
                 AddCouponDetails(
                     addNewCouponCodeBinding.couponcode.text.toString().trim(),
                     addNewCouponCodeBinding.coupondescpt.text.toString().trim(),
@@ -173,8 +181,6 @@ class CouponsActivity : AppCompatActivity() {
         }
     }
 
-
-
     fun AddCouponDetails(
         couponCode: String,
         description: String,
@@ -184,11 +190,11 @@ class CouponsActivity : AppCompatActivity() {
         validitydays: String,
 
         ) {
-
+        progress.show()
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestCall = loginService.AddCoupondetails(sharedPreference.getValueString("token"),couponCode,description,minamount,maximumamount,discountpercentage,validitydays)
 
-        requestCall.enqueue(object : Callback<AddCouponModal>{
+        requestCall.enqueue(object : Callback<AddCouponModal> {
             @SuppressLint("SuspiciousIndentation")
             override fun onResponse(
                 call: Call<AddCouponModal>,
@@ -198,11 +204,13 @@ class CouponsActivity : AppCompatActivity() {
                     response.isSuccessful -> {//status code between 200 to 29
                         addcoupopnResponse = response.body()!!
                         if (addcoupopnResponse.error=="0") {
+                            progress.dismiss()
                             CouponListDeatils()
                             showToast(addcoupopnResponse.message)
 //                            val i = Intent(this@AddNewCouponCode,CouponsActivity::class.java)
 //                            startActivity(i)
                         } else{
+                            progress.dismiss()
                             //howToast(addcoupopnResponse.message)
                         }
                     }
@@ -217,6 +225,7 @@ class CouponsActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<AddCouponModal>, t: Throwable) {
+                progress.dismiss()
                 showToast(getString(R.string.session_exp))
             }
 
