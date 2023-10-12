@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace 'com.svindo.vendorapp'
+    namespace 'in.webgrid.svindobusiness'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.svindo.vendorapp"
+        applicationId "in.webgrid.svindobusiness"
         minSdk 24
         targetSdk 34
-        versionCode 5
-        versionName "1.0.3"
+        versionCode 1
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

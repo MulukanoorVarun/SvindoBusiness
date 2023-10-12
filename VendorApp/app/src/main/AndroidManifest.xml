@@ -236,7 +236,7 @@
             <intent-filter>
                 <action
                     android:name="android.net.conn.CONNECTIVITY_CHANGE"
-                    tools:ignore="BatteryLife" />
+                    tools:ignore="BatteryLife"/>
             </intent-filter>
         </receiver>
     </application>
