@@ -189,7 +189,7 @@ interface ApiInterface {
 
 
     @POST("Home/store_products_category_list")
-    fun  CategoriesDetails(
+    fun  Categoriesdetails(
         @Header("Sessionid")  content_type:String?,
     ): Call<ProductCategoryModal>
 
@@ -504,7 +504,7 @@ interface ApiInterface {
 
     @FormUrlEncoded
     @POST("Home/add_addons")
-    fun  AddAddonsDetails(
+    fun  AddAddonsdetails(
         @Header("Sessionid") content_type:String?,
         @Field("name") name: String,
         @Field("description") description: String,

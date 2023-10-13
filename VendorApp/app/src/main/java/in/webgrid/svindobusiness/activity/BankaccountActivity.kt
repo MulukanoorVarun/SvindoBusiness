@@ -118,10 +118,8 @@ class BankaccountActivity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
-
                 showToast(getString(R.string.session_exp))
             }
-
         })
 
     }

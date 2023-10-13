@@ -54,15 +54,15 @@
                     android:layout_marginTop="5dp"
                     android:layout_below="@+id/productname"
                     android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/productquanity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:layout_marginStart="10dp"
-                        tools:ignore="HardcodedText" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/productquanity"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="1"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        tools:ignore="HardcodedText" />-->
                     <TextView
                         android:id="@+id/productunit"
                         android:layout_width="wrap_content"

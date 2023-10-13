@@ -17,7 +17,7 @@ class AcceptOrderAdapter(private var ordersList: List<OrderDetailsList>, private
         fun bind(data: OrderDetailsList) {
             binding.productname.text = data.name
             binding.productunit.text = data.unit
-            binding.productquanity.text = data.quantity
+            //binding.productquanity.text = data.quantity
             binding.productcount.text = data.cart_quantity
             binding.productprice.text = data.sale_price
             binding.productprice2.text = data.total_price

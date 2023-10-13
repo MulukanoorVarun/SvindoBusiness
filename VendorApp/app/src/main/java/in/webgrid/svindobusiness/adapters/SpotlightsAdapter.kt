@@ -39,7 +39,7 @@ class SpotlightsAdapter (private var productsList: List<Spotlight>, private val 
         fun bind(data: Spotlight) {
             //"#${data.store_name}".also { binding.storeName.text = it }
             binding.productname.text = data.name
-            binding.productquanity.text = data.quantity
+        //    binding.productquanity.text = data.quantity
             binding.productunit.text = data.unit
             binding.productcost.text = data.sale_price
             binding.productmrp.text = data.mrp_price

@@ -1,6 +1,11 @@
 package `in`.webgrid.svindobusiness.fragements
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +20,8 @@ import`in`.webgrid.svindobusiness.modelclass.ProductCategoryModal
 import`in`.webgrid.svindobusiness.services.ApiClient
 import`in`.webgrid.svindobusiness.services.ApiInterface
 import `in`.webgrid.svindobusiness.Utils.SharedPreference
+import `in`.webgrid.svindobusiness.activity.NetworkIssueActivity
+import `in`.webgrid.svindobusiness.adapters.ProductsAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,13 +52,59 @@ class CategoryFragment : Fragment() {
         categoriesbinding.newordersRequestsViewRecyclerview.layoutManager = linearLayoutManager
         categoriesbinding.newordersRequestsViewRecyclerview.hasFixedSize()
         CategoriesDetails()
-        return categoriesbinding.root
+        if (checkForInternet(requireContext())) {
+            // Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show()
+        } else {
+            //  Toast.makeText(context, "Disconnected", Toast.LENGTH_SHORT).show()
+            val intent = Intent(getActivity(), NetworkIssueActivity::class.java)
+            getActivity()?.startActivity(intent)
         }
+        return categoriesbinding.root
+    }
+
+    private fun checkForInternet(context: Context): Boolean {
+        // register activity with the connectivity manager service
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        // if the android version is equal to M
+        // or greater we need to use the
+        // NetworkCapabilities to check what type of
+        // network has the internet connection
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            // Returns a Network object corresponding to
+            // the currently active default data network.
+            val network = connectivityManager.activeNetwork ?: return false
+
+            // Representation of the capabilities of an active network.
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+            return when {
+                // Indicates this network uses a Wi-Fi transport,
+                // or WiFi has network connectivity
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+                // Indicates this network uses a Cellular transport. or
+                // Cellular has network connectivity
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+                // else return false
+                else -> false
+            }
+        } else {
+            // if the android version is below M
+            @Suppress("DEPRECATION") val networkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
+    }
+
     fun CategoriesDetails() {
         try {
             categoriesbinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
-            val requestCall = ordersService.CategoriesDetails(sharedPreference.getValueString("token"))
+            val requestCall = ordersService.Categoriesdetails(sharedPreference.getValueString("token"))
             requestCall.enqueue(object : Callback<ProductCategoryModal> {
                 override fun onResponse(
                     call: Call<ProductCategoryModal>,
@@ -66,7 +119,8 @@ class CategoryFragment : Fragment() {
                                     if (categoryresponse.error == "0") {
                                         if (categoryresponse.products.count() > 0) {
                                             categoriesbinding.newordersRequestsViewRecyclerview.visibility = View.VISIBLE
-                                            adapter = context?.let { CategoryAdapter(categoryresponse.products, it)}!!
+                                            //adapter = context?.let { CategoryAdapter(categoryresponse.products, it)}!!
+                                            adapter = CategoryAdapter(categoryresponse.products, context!!)
                                           //  adapter = context?.let { CategoryAdapter(categoryresponse.products, context = it)}!!
                                             categoriesbinding.newordersRequestsViewRecyclerview.adapter = adapter
                                         }

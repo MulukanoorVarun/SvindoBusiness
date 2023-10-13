@@ -33,7 +33,6 @@ class OrdersFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater?.inflate(R.layout.fragment_orders, container, false)
-
         return inflater.inflate(R.layout.fragment_orders, container, false)
     }
 

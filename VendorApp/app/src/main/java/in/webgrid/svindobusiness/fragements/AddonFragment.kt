@@ -2,8 +2,12 @@ package `in`.webgrid.svindobusiness.fragements
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,6 +28,7 @@ import`in`.webgrid.svindobusiness.services.ApiClient
 import`in`.webgrid.svindobusiness.services.ApiInterface
 import `in`.webgrid.svindobusiness.Utils.SharedPreference
 import com.squareup.picasso.Picasso
+import `in`.webgrid.svindobusiness.activity.NetworkIssueActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -125,10 +130,57 @@ class AddonFragment : Fragment() {
 //                    }
 //                }
 //            }
+        if (checkForInternet(requireContext())) {
+            // Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show()
+        } else {
+            //  Toast.makeText(context, "Disconnected", Toast.LENGTH_SHORT).show()
+            val intent = Intent(getActivity(), NetworkIssueActivity::class.java)
+            getActivity()?.startActivity(intent)
+        }
 
 
         AddAddonsListdetails()
         return AddonBinding.root
+    }
+
+
+    private fun checkForInternet(context: Context): Boolean {
+
+        // register activity with the connectivity manager service
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        // if the android version is equal to M
+        // or greater we need to use the
+        // NetworkCapabilities to check what type of
+        // network has the internet connection
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            // Returns a Network object corresponding to
+            // the currently active default data network.
+            val network = connectivityManager.activeNetwork ?: return false
+
+            // Representation of the capabilities of an active network.
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+            return when {
+                // Indicates this network uses a Wi-Fi transport,
+                // or WiFi has network connectivity
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+                // Indicates this network uses a Cellular transport. or
+                // Cellular has network connectivity
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+                // else return false
+                else -> false
+            }
+        } else {
+            // if the android version is below M
+            @Suppress("DEPRECATION") val networkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
     }
 
 //    private fun gallery() {
@@ -200,7 +252,7 @@ class AddonFragment : Fragment() {
         AddonBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try{
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
-            val requestCall = ordersService.AddAddonsDetails(sharedPreference.getValueString("token"),addon_name,addon_desc,addon_price,addon_id)
+            val requestCall = ordersService.AddAddonsdetails(sharedPreference.getValueString("token"),addon_name,addon_desc,addon_price,addon_id)
             requestCall.enqueue(object : Callback<Bankdetails_Response> {
                 override fun onResponse(
                     call: Call<Bankdetails_Response>,

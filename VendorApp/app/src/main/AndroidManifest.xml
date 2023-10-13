@@ -9,14 +9,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-<!--    <uses-permission-->
-<!--        android:name="com.google.android.gms.permission.AD_ID"-->
-<!--        tools:node="remove" />-->
+    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- <uses-permission -->
+    <!-- android:name="com.google.android.gms.permission.AD_ID" -->
+    <!-- tools:node="remove" /> -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission-group.READ_MEDIA_VISUAL" /> <!-- <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -62,14 +60,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VendorApp"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.NetworkIssueActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/svindobusiness"/>
-
+            android:resource="@drawable/svindobusiness" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAA2ukvrb1kWQZ2dttsNIMynLJqVCYYrhw"/>
+            android:value="AIzaSyAA2ukvrb1kWQZ2dttsNIMynLJqVCYYrhw" />
         <!--
  Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more.
@@ -81,11 +81,9 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/notification_id" />
 
-
         <activity
             android:name=".activity.GoogleMapsActivity"
             android:exported="false" />
-
         <activity
             android:name=".activity.LocationPermission"
             android:exported="false" />
@@ -95,7 +93,6 @@
         <activity
             android:name=".activity.AdWalletActivity"
             android:exported="false" />
-
         <activity
             android:name=".activity.NotificationsShowingActivity"
             android:exported="false" />
@@ -217,13 +214,11 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".services.LocationService"
             android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="location" />
-        <!-- <service -->
+            android:foregroundServiceType="location" /> <!-- <service -->
         <!-- android:name=".MyFirebaseMessagingService" -->
         <!-- android:exported="false"> -->
         <!-- <intent-filter> -->
@@ -236,7 +231,7 @@
             <intent-filter>
                 <action
                     android:name="android.net.conn.CONNECTIVITY_CHANGE"
-                    tools:ignore="BatteryLife"/>
+                    tools:ignore="BatteryLife" />
             </intent-filter>
         </receiver>
     </application>
