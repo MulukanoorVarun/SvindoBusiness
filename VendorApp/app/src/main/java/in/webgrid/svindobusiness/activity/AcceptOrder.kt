@@ -143,9 +143,9 @@ class AcceptOrder : AppCompatActivity() {
                                     var availability =
                                         acceptorderresponse.order_details.is_delivery_boy_available
                                     if (availability == "0") {
-                                        acceptOrderBinding.Cardview1.isVisible = false;
+                                        acceptOrderBinding.Cardview1.isVisible = false
                                     } else {
-                                        acceptOrderBinding.Cardview1.isVisible = true;
+                                        acceptOrderBinding.Cardview1.isVisible = true
                                     }
 //                                OrderStatus(
 //                                    orderstatus=orderstatus.toString(),
@@ -161,18 +161,14 @@ class AcceptOrder : AppCompatActivity() {
                                     if (orderstatus == "Order Accepted") {
                                         acceptOrderBinding.acceptbutton.text = "Ship Order"
                                     }
-                                    if(orderstatus == "Delivered"){
-                                        acceptOrderBinding.billdownloadbtn.isVisible = true
+
                                         acceptOrderBinding.billdownloadbtn.setOnClickListener {
-                                            var url= acceptorderresponse.bills
+                                            var url = acceptorderresponse.bills
                                             //showToast(url.toString())
-                                            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                                            val browserIntent =
+                                                Intent(Intent.ACTION_VIEW, Uri.parse(url))
                                             startActivity(browserIntent)
                                         }
-
-                                    } else{
-                                        acceptOrderBinding.billdownloadbtn.isVisible = false
-                                    }
 
                                     acceptOrderBinding.rejectbutton.setOnClickListener {
                                         if (orderstatus == "Order Placed") {
