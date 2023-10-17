@@ -37,25 +37,26 @@ class FirebaseService : FirebaseMessagingService() {
 //        d("TAG ", "Refreshed token :: $token")
     }
 
-    override fun onMessageReceived(message: RemoteMessage) {
+    override fun onMessageReceived(message: RemoteMessage){
         super.onMessageReceived(message)
 //        d("TAG", "onMessageReceived: ${message.data}")
-
         showNotification(message.data)
 
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    fun showNotification(data: MutableMap<String, String>) {
+    fun showNotification(
+        data: MutableMap<String, String>
+    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel()
         }
         val type = data["type"]
         val title = data["title"]
         val body = data["message"]
-        val alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound)
-     //   val alarmSound = Uri.parse("android.resource://packageName/raw/svindonotificationsound")
-
+        val alarmSound = Uri.parse(
+            ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound
+        )
         try {
             val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
             r.play()
@@ -65,8 +66,8 @@ class FirebaseService : FirebaseMessagingService() {
         }
 
         var intent1  = Intent(this, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
 
         val launchIntent = TaskStackBuilder.create(this).run {
             addNextIntentWithParentStack(intent1)
@@ -74,7 +75,7 @@ class FirebaseService : FirebaseMessagingService() {
 
         }
 
-        val acceptIntent = Intent(this,MainActivity::class.java)
+        val acceptIntent = Intent(this, MainActivity::class.java)
             .apply {
                 action = "accept"
                 putExtra("UserID","100")
@@ -93,7 +94,6 @@ class FirebaseService : FirebaseMessagingService() {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
         val rejectPendingIntent = PendingIntent.getBroadcast(baseContext, 0, rejectIntent, PendingIntent.FLAG_CANCEL_CURRENT)
-
         val builder = NotificationCompat.Builder(this, getString(R.string.channel_id))
             .setSmallIcon(R.drawable.svindobusiness)
             .setContentTitle(type)
@@ -104,7 +104,7 @@ class FirebaseService : FirebaseMessagingService() {
             .setContentIntent(launchIntent)
             .setGroup("Backend Notifications")
             .setVibrate(longArrayOf( 1000, 1000, 1000, 1000, 1000 ))
-            .setLights(Color.GREEN, 3000, 3000)
+            .setLights(Color.RED, 3000, 3000)
             .setGroupSummary(true)
             .setAutoCancel(true)
         // Set the intent that will fire when the user taps the notification
@@ -139,8 +139,9 @@ class FirebaseService : FirebaseMessagingService() {
         val mChannel = NotificationChannel(getString(R.string.channel_id), name, importance)
             .apply {
                 description = descriptionText
-                lightColor = R.color.buttongreen
+                lightColor = R.color.orange
                 enableLights(true)
+
             }
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(mChannel)
