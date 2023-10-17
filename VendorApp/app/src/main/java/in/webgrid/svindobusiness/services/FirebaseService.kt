@@ -93,6 +93,7 @@ class FirebaseService : FirebaseMessagingService() {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
         val rejectPendingIntent = PendingIntent.getBroadcast(baseContext, 0, rejectIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+
         val builder = NotificationCompat.Builder(this, getString(R.string.channel_id))
             .setSmallIcon(R.drawable.svindobusiness)
             .setContentTitle(type)

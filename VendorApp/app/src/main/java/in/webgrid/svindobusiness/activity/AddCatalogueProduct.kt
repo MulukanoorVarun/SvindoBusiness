@@ -754,8 +754,17 @@ class AddCatalogueProduct : AppCompatActivity() {
             listView.setOnItemClickListener { parent, view, position, id ->
                var selectedItem=adapter.getItem(position).toString()
 
-                var AddonObj = AddonsData(id.toString())
-                ADDONData.add(AddonObj)
+                for (i in addondata.add_on_list)
+                {
+                    if(i.name==selectedItem)
+                    {
+                        var addonId=i.id
+                        var AddonObj = AddonsData(addonId)
+                        showToast(AddonObj.toString())
+                        ADDONData.add(AddonObj)
+                    }
+                }
+
                 itemList.add(selectedItem)
                 val selectedItemsAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,itemList)
                 Listview.adapter = selectedItemsAdapter
@@ -765,7 +774,7 @@ class AddCatalogueProduct : AppCompatActivity() {
                 Listview.setOnItemClickListener { _, _, position, _ ->
                     // Remove the selected item from the list
                     itemList.removeAt(position)
-
+                    ADDONData.removeAt(position)
                     // Notify the adapter that the data set has changed
                     selectedItemsAdapter.notifyDataSetChanged()
                 }

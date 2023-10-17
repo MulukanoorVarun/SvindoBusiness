@@ -40,9 +40,9 @@
     <string name="forgot_password">
 <u>Forgot Password</u>
 </string>
-    <string name="channel_id">trolleyDeliveryChannelID</string>
-    <string name="channel_name">trolleyDeliveryChannel</string>
-    <string name="channel_description">Trolley Notifications</string>
+    <string name="channel_id">svindobusinessChannelID</string>
+    <string name="channel_name">svindobusinessChannel</string>
+    <string name="channel_description">Svindobusiness Notifications</string>
     <string name="notification_id">101</string>
     <string name="enter_mobile_number">Enter Mobile Number</string>
     <string name="resend_otp">

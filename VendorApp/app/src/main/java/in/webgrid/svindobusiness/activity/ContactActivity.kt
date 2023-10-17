@@ -45,7 +45,7 @@ class ContactActivity : AppCompatActivity() {
             contactbinding.contactssubmitbutton.setEnabled(false)
             Handler().postDelayed({
                 contactbinding.contactssubmitbutton.setEnabled(true)
-                contactbinding.contactssubmitbutton.setBackgroundResource(R.drawable.buttonbackground);
+                contactbinding.contactssubmitbutton.setBackgroundResource(R.drawable.buttonbackground)
             }, 2000)
             val emergency_mobile_number = contactbinding.mobNumEtTxt.text.toString().trim()
             val emergency_contact_name = contactbinding.nameEtTxt.text.toString().trim()
