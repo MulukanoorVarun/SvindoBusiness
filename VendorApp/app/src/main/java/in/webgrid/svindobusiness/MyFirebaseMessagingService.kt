@@ -15,11 +15,12 @@ package `in`.webgrid.svindobusiness
 //import android.widget.RemoteViews
 //import androidx.core.app.NotificationCompat
 //import androidx.test.core.app.ApplicationProvider
-//import`in`.example.vendorapp.activity.MainActivity
 //import com.google.firebase.messaging.FirebaseMessagingService
 //import com.google.firebase.messaging.RemoteMessage
+//import `in`.webgrid.svindobusiness.activity.MainActivity
 //
 //
+//@SuppressLint("Registered")
 //class MyFirebaseMessagingService  : FirebaseMessagingService() {
 //    val channel_id = "notification_channel"
 //    val channel_name = "com.example.vendorapp"
@@ -80,6 +81,7 @@ package `in`.webgrid.svindobusiness
 //        }
 //
 //        // Pass the intent to switch to the MainActivity
+//
 //        val intent = Intent(this, MainActivity::class.java)
 //        // Assign channel ID
 //        // Here FLAG_ACTIVITY_CLEAR_TOP flag is set to clear
