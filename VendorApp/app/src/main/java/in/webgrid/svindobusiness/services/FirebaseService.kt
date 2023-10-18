@@ -13,6 +13,7 @@ import android.graphics.Color
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -44,7 +45,7 @@ class FirebaseService : FirebaseMessagingService() {
 
     }
 
-    @SuppressLint("UnspecifiedImmutableFlag")
+    @SuppressLint("UnspecifiedImmutableFlag", "LogConditional")
     fun showNotification(
         data: MutableMap<String, String>
     ) {
@@ -61,7 +62,7 @@ class FirebaseService : FirebaseMessagingService() {
             val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
             r.play()
         } catch (e: Exception) {
-//            d("TAG", "showNotification: $e")
+           Log.d("TAG", "showNotification: $e")
             e.printStackTrace()
         }
 
@@ -114,21 +115,21 @@ class FirebaseService : FirebaseMessagingService() {
         // .setColor(ContextCompat.getColor(this, R.color.orange))
 
         with(NotificationManagerCompat.from(this)) {
-            // notificationId is a unique int for each notification that you must define
-            if (ActivityCompat.checkSelfPermission(
-                    applicationContext,
+          //   notificationId is a unique int for each notification that you must define
+            if (ActivityCompat.checkSelfPermission(applicationContext,
                     Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
                 return
             }
             notify(notificationId, builder.build())
-        }
-
-
-        with(NotificationManagerCompat.from(this)) {
-            // notificationId is a unique int for each notification that you must define
-//            notify(notificationId, builder.build())
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)

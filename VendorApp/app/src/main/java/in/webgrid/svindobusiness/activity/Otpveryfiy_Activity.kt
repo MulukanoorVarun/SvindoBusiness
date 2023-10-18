@@ -17,7 +17,7 @@ import`in`.webgrid.svindobusiness.services.ApiClient
 import`in`.webgrid.svindobusiness.services.ApiInterface
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
-import com.google.firebase.messaging.FirebaseMessaging.getInstance
+import com.google.firebase.messaging.FirebaseMessaging
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,8 +61,8 @@ class Otpveryfiy_Activity : AppCompatActivity() {
         }
 
         FirebaseApp.initializeApp(this)
-        getInstance().subscribeToTopic("all")
-        getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+        FirebaseMessaging.getInstance().subscribeToTopic("all")
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Log.d("TAG", "Fetching FCM registration token failed", task.exception)
                 return@OnCompleteListener

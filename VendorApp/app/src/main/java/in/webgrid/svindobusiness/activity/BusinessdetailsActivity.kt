@@ -757,7 +757,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
             override fun onResponse(
                 call: Call<Verify_otp_Response>,
                 response: Response<Verify_otp_Response>
-            ) {
+            ) {   progress.dismiss()
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
                         businessdetailsResponse= response.body()!!
@@ -793,10 +793,8 @@ class BusinessdetailsActivity : AppCompatActivity() {
                                 i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(i)
                             }
-                            progress.dismiss()
                         }else{
                             showToast(businessdetailsResponse.message)
-                            progress.dismiss()
                         }
                     }
                     response.code() == 401 -> {//unauthorised
