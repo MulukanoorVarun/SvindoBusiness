@@ -9,7 +9,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardclicking"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="5dp"
@@ -123,7 +123,8 @@
                     <LinearLayout
                         android:id="@+id/linearlayout2"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="wrap_content"

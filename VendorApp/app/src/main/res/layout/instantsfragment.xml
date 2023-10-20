@@ -18,7 +18,7 @@
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Allbtn"
-                    android:layout_width="84dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:textColor="@color/black"
                     android:layout_marginStart="13dp"
@@ -28,7 +28,7 @@
                     android:text="@string/all" />
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Pendingbtn"
-                    android:layout_width="84dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:textColor="@color/black"
                     android:layout_marginStart="13dp"
@@ -38,7 +38,7 @@
                     android:text="@string/pending" />
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Acceptedbtn"
-                    android:layout_width="84dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:textColor="@color/black"
                     android:layout_marginStart="13dp"
@@ -47,7 +47,7 @@
                     android:text="@string/accepted" />
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/pickupbtn"
-                    android:layout_width="150dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:textColor="@color/black"
                     android:layout_marginStart="13dp"
@@ -57,7 +57,7 @@
                     android:text="@string/readyforpickup" />
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/returnbtn"
-                    android:layout_width="150dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:textColor="@color/black"
                     android:layout_marginStart="13dp"
@@ -68,7 +68,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/shopexchangebtn"
-                    android:layout_width="150dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:textColor="@color/black"
                     android:layout_marginStart="13dp"
@@ -79,7 +79,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/cancelorders"
-                    android:layout_width="150dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:textColor="@color/black"
                     android:layout_marginStart="13dp"
@@ -90,7 +90,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/delivered"
-                    android:layout_width="150dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:textColor="@color/black"
                     android:layout_marginStart="13dp"
