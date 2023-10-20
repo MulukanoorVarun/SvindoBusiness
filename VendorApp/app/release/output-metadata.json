@@ -4,14 +4,14 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.svindo.vendorapp",
+  "applicationId": "in.webgrid.svindobusiness",
   "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 5,
+      "versionCode": 3,
       "versionName": "1.0.3",
       "outputFile": "app-release.apk"
     }

@@ -118,18 +118,15 @@ class AcceptOrder : AppCompatActivity() {
                                         acceptorderresponse.order_details.order_date
                                     acceptOrderBinding.grandtotal.text =
                                         acceptorderresponse.order_details.net_payable_amount
-                                    acceptOrderBinding.orderamount.text =
-                                        acceptorderresponse.order_details.order_amount
+                                    acceptOrderBinding.orderamount.text = acceptorderresponse.order_details.order_amount
                                     acceptOrderBinding.orderstatus.text =
                                         acceptorderresponse.order_details.order_status
                                     acceptOrderBinding.orderno.text =
                                         acceptorderresponse.order_details.order_number
                                     acceptOrderBinding.paymentmode.text =
                                         acceptorderresponse.order_details.payment_type
-                                    acceptOrderBinding.subsidyamt.text =
-                                        acceptorderresponse.order_details.delivery_discount
-                                    acceptOrderBinding.deliveryfee.text =
-                                        acceptorderresponse.order_details.porter_delivery_fee
+                                    acceptOrderBinding.subsidyamt.text = acceptorderresponse.order_details.delivery_discount
+                                    acceptOrderBinding.deliveryfee.text = acceptorderresponse.order_details.porter_delivery_fee
                                     acceptOrderBinding.itemtotal.text = acceptorderresponse.order_details.order_amount
                                     acceptOrderBinding.deliverytype.text = acceptorderresponse.order_details.delivery_type
 

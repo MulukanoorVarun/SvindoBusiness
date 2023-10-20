@@ -210,8 +210,8 @@
                 android:textAlignment="viewEnd"
                 android:textColor="@color/black"
                 android:textSize="13sp"
-                tools:ignore="Hardcodedtext"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                tools:ignore="Hardcodedtext" />
 
         </LinearLayout>
 
