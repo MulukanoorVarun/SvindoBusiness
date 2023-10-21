@@ -55,6 +55,8 @@
                     android:layout_marginStart="13dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="8dp"
                     android:background="@drawable/rejectbtnbg"
                     android:text="@string/readyforpickup" />
                 <androidx.appcompat.widget.AppCompatButton
@@ -65,6 +67,8 @@
                     android:layout_marginStart="13dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="8dp"
                     android:background="@drawable/rejectbtnbg"
                     android:text="@string/return_order" />
 
@@ -76,6 +80,8 @@
                     android:layout_marginStart="13dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="8dp"
                     android:background="@drawable/rejectbtnbg"
                     android:text="@string/shopexchange" />
                 <androidx.appcompat.widget.AppCompatButton
@@ -86,6 +92,8 @@
                     android:layout_marginStart="13dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="8dp"
                     android:background="@drawable/rejectbtnbg"
                     android:text="@string/cancel_orders" />
 
@@ -97,6 +105,8 @@
                     android:layout_marginStart="13dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="8dp"
                     android:background="@drawable/rejectbtnbg"
                     android:text="@string/delivered" />
             </LinearLayout>

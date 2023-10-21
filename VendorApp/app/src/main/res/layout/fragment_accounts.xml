@@ -163,7 +163,8 @@
                             android:layout_weight="1.9"
                             android:text="@string/credit_txt"
                             android:textColor="@color/black"
-                            android:textSize="11sp" />
+                            android:textSize="13dp"
+                            tools:ignore="SpUsage" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -224,7 +225,8 @@
                         android:layout_marginTop="5dp"
                         android:text="@string/note_txt"
                         android:textColor="@color/black"
-                        android:textSize="11sp" />
+                        android:textSize="11dp"
+                        tools:ignore="SpUsage" />
                         <TextView
                             android:id="@+id/cashbackpercent"
                             android:layout_width="wrap_content"
@@ -233,26 +235,28 @@
                             android:layout_marginStart="5dp"
                             android:text="0"
                             android:textColor="@color/black"
-                            android:textSize="12sp"
-                            tools:ignore="Hardcodedtext"/>
+                            android:textSize="12dp"
+                            tools:ignore="Hardcodedtext,SpUsage"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="@string/subsidy_on_their_delivery_charges"
                             android:textColor="@color/black"
-                            android:textSize="11sp" />
+                            android:textSize="11dp"
+                            tools:ignore="SpUsage" />
                     </LinearLayout>
                     <TextView
                         android:id="@+id/textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="20dp"
                         android:layout_below="@+id/LinearLayout"
                         android:text="@string/delivery_charges"
                         android:textColor="@color/black"
-                        android:textSize="12sp" />
+                        android:textSize="12dp"
+                        tools:ignore="SpUsage" />
                     <LinearLayout
                         android:id="@+id/shopstatusLayout"
                         android:layout_width="match_parent"
@@ -285,8 +289,8 @@
                         android:text="Note:  Enabling this button will hide your shop from the svindo customer App."
                         android:layout_below="@+id/shopstatusLayout"
                         android:textColor="@color/black"
-                        android:textSize="9sp"
-                        tools:ignore="HardcodedText,SmallSp" />
+                        android:textSize="11dp"
+                        tools:ignore="HardcodedText,SmallSp,SpUsage" />
 
                     <LinearLayout
                         android:id="@+id/locationLayout"

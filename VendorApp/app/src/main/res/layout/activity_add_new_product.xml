@@ -550,7 +550,8 @@
                             android:layout_marginTop="6dp"
                             android:layout_weight="1"
                             android:autofillHints=""
-                            android:inputType="number"
+                            android:digits="0123456789.RS"
+                            android:inputType="text"
                             android:background="@drawable/boarder"
                             android:hint="Enter Price"
                             android:padding="10dp"
@@ -569,7 +570,8 @@
                             android:layout_weight="1"
                             android:hint="Enter price"
                             android:textSize="13sp"
-                            android:inputType="number"
+                            android:digits="0123456789.RS"
+                            android:inputType="text"
                             android:autofillHints=""
                             tools:ignore="Hardcodedtext"/>
                     </LinearLayout>
@@ -620,7 +622,7 @@
                             android:prompt="@string/prompt"
                             android:layout_marginTop="-8dp"
                             android:id="@+id/unitsspinner"
-                            tools:ignore="HardcodedText,NegativeMargin" />
+                            tools:ignore="HardcodedText,NegativeMargin"/>
                         <EditText
                             android:id="@+id/stocket"
                             android:layout_width="150dp"

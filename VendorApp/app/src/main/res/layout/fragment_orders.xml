@@ -38,7 +38,7 @@
                 app:tabIndicatorColor="@color/white"
                 android:background="#2178AE"
                 app:tabSelectedTextColor="@color/white"
-                app:tabTextColor="@android:color/white" >
+                app:tabTextColor="@android:color/white">
             </com.google.android.material.tabs.TabLayout>
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>

@@ -760,7 +760,7 @@ class AddCatalogueProduct : AppCompatActivity() {
                     {
                         var addonId=i.id
                         var AddonObj = AddonsData(addonId)
-                        showToast(AddonObj.toString())
+                      //  showToast(AddonObj.toString())
                         ADDONData.add(AddonObj)
                     }
                 }
