@@ -646,8 +646,7 @@ class AddCatalogueProduct : AppCompatActivity() {
     fun AddonsList() {
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
-            val requestCall =
-                ordersService.AddAddonsListDetails(sharedPreference.getValueString("token"))
+            val requestCall = ordersService.AddAddonsListDetails(sharedPreference.getValueString("token"))
             requestCall.enqueue(object : Callback<AddonsListModal> {
                 override fun onResponse(
                     call: Call<AddonsListModal>,
@@ -729,8 +728,7 @@ class AddCatalogueProduct : AppCompatActivity() {
 //            val customAdapter = CustomProductsSoinnerAdapter(items, this)
             val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
                 this@AddCatalogueProduct,
-                android.R.layout.simple_list_item_1,
-                items
+                android.R.layout.simple_list_item_1, items
             )
             // Set adapter
             listView.adapter = adapter

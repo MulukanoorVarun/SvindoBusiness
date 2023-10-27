@@ -55,9 +55,7 @@ class FirebaseService : FirebaseMessagingService() {
         val type = data["type"]
         val title = data["title"]
         val body = data["message"]
-        val alarmSound = Uri.parse(
-            ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound
-        )
+        val alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound)
         try {
             val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
             r.play()
@@ -88,7 +86,6 @@ class FirebaseService : FirebaseMessagingService() {
 
         val rejectIntent = Intent(baseContext, MainActivity::class.java)
             .apply {
-
                 action = "reject"
                 putExtra("UserID","100")
                 putExtra("notificationId", notificationId)
