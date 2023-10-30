@@ -1,4 +1,4 @@
-package `in`.webgrid.svindobusiness
+//package `in`.webgrid.svindobusiness
 //import android.annotation.SuppressLint
 //import android.app.Notification
 //import android.app.NotificationChannel
@@ -23,7 +23,7 @@ package `in`.webgrid.svindobusiness
 //@SuppressLint("Registered")
 //class MyFirebaseMessagingService  : FirebaseMessagingService() {
 //    val channel_id = "notification_channel"
-//    val channel_name = "com.example.vendorapp"
+//    val channel_name = "svindobusiness"
 //
 //    @SuppressLint("LogConditional")
 //    override fun onNewToken(token: String){
@@ -34,6 +34,7 @@ package `in`.webgrid.svindobusiness
 //    // title
 //    // and
 //    // body from the message passed in FCM
+//    @SuppressLint("LogConditional")
 //    override fun onMessageReceived(remoteMessage: RemoteMessage){
 //        // First case when notifications are received via
 //        // data event
@@ -48,6 +49,8 @@ package `in`.webgrid.svindobusiness
 //        }*/
 //        // Second case when notification payload is
 //        // received.
+//        Log.i("SellerFirebaseService ", "Message :: $remoteMessage")
+//
 //        if(remoteMessage.getNotification()!= null){
 //            // Since the notification is received directly from
 //            // FCM, the title and the body can be fetched
@@ -65,13 +68,12 @@ package `in`.webgrid.svindobusiness
 //    }
 //
 //
-//    @SuppressLint("UnspecifiedImmutableFlag")
+//    @SuppressLint("UnspecifiedImmutableFlag", "LogConditional")
 //    fun showNotification(title: String, message: String) {
 //
+//        Log.d("TAG", "Title: $title, Body: $message")
 //
-//        val alarmSound = Uri.parse(
-//            ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.foodsound
-//        )
+//        val alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.foodsound)
 //        try {
 //            val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
 //            r.play()
@@ -101,9 +103,7 @@ package `in`.webgrid.svindobusiness
 //            .setVibrate(longArrayOf(1000, 1000, 1000, 1000))
 //            .setOnlyAlertOnce(true)
 //            .setContentIntent(pendingIntent)
-//        val soundUri = Uri.parse("android.resource://${packageName}/${R.raw.foodsound}")
-//        builder.setSound(soundUri)
-//           // .setSound(Uri.parse("android.resource://com.example.vendorapp/" + R.raw.foodsound))
+//            .setSound(alarmSound)
 //      //  notification.sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.kalimba)
 //
 //        // A customized design for the notification can be
@@ -117,7 +117,6 @@ package `in`.webgrid.svindobusiness
 //        // Check if the Android Version is greater than Oreo
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //            val notificationChannel = NotificationChannel(channel_id,channel_name, NotificationManager.IMPORTANCE_HIGH)
-//            notificationChannel.setSound(soundUri, AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION).build())
 //            notificationManager!!.createNotificationChannel(notificationChannel)
 //        }
 //        notificationManager!!.notify(0, builder.build())

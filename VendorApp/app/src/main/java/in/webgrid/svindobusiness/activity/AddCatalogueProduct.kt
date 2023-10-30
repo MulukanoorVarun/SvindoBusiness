@@ -35,7 +35,6 @@ import java.util.concurrent.TimeoutException
 
 
 @SuppressLint("StaticFieldLeak")
-
 private lateinit var ProductBinding: ActivityAddCatalogueProductBinding
 
 class AddCatalogueProduct : AppCompatActivity() {

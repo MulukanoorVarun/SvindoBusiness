@@ -38,23 +38,25 @@ class FirebaseService : FirebaseMessagingService() {
 //        d("TAG ", "Refreshed token :: $token")
     }
 
+    @SuppressLint("LogConditional")
     override fun onMessageReceived(message: RemoteMessage){
         super.onMessageReceived(message)
-//        d("TAG", "onMessageReceived: ${message.data}")
-        showNotification(message.data)
+        Log.d("TAG", "onMessageReceived: ${message.data}")
 
-    }
-
-    @SuppressLint("UnspecifiedImmutableFlag", "LogConditional")
-    fun showNotification(
-        data: MutableMap<String, String>
-    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel()
         }
-        val type = data["type"]
+        showNotification(message.data)
+    }
+
+    @SuppressLint("UnspecifiedImmutableFlag", "LogConditional")
+    fun showNotification(data: MutableMap<String, String>){
+       // val type = data["type"]
         val title = data["title"]
         val body = data["message"]
+
+        Log.d("TAG", "Title: $title, Body: $body")
+
         val alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound)
         try {
             val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
@@ -92,9 +94,10 @@ class FirebaseService : FirebaseMessagingService() {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
         val rejectPendingIntent = PendingIntent.getBroadcast(baseContext, 0, rejectIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+
         val builder = NotificationCompat.Builder(this, getString(R.string.channel_id))
             .setSmallIcon(R.drawable.svindobusiness)
-            .setContentTitle(type)
+          //  .setContentTitle(type)
             .setContentTitle(title)
             .setContentText(body)
             .setStyle(NotificationCompat.BigTextStyle().bigText(body))
@@ -105,6 +108,7 @@ class FirebaseService : FirebaseMessagingService() {
             .setLights(Color.RED, 3000, 3000)
             .setGroupSummary(true)
             .setAutoCancel(true)
+            .setSound(alarmSound)
         // Set the intent that will fire when the user taps the notification
         //  .addAction(android.R.drawable.ic_menu_view, "ACCEPT", acceptPendingIntent)
         //   .addAction(android.R.drawable.ic_delete, "REJECT", rejectPendingIntent)
