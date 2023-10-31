@@ -337,9 +337,9 @@ Front side photo of your PAN card with your clear name and photo
     <string name="fssai_deatils">FSSAI Details</string>
     <string name="fssai_code">FSSAI License number</string>
     <string name="fssai_et_txt">Enter FSSAI License number</string>
-    <string name="gstin_num">GSTIN Number</string>
-    <string name="gstin_num_et_txt">Enter GSTIN number</string>
-    <string name="gstin_deatils">GSTIN Details</string>
+    <string name="gstin_num">GSTIN/UID Number</string>
+    <string name="gstin_num_et_txt">Enter number</string>
+    <string name="gstin_deatils">GSTIN/UID Details</string>
     <string name="location_txt">Location</string>
     <string name="location_et_txt">Add location</string>
     <string name="edit_business_details">Edit Business Details</string>

@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
 //    private val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.CAMERA, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 //    private val permissionRequestCode = 123
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         sharedPreference = SharedPreference(this)

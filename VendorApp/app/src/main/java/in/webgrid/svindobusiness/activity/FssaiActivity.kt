@@ -356,7 +356,7 @@ class FssaiActivity : AppCompatActivity() {
             override fun onResponse(
                 call: Call<Bankdetails_Response>,
                 response: Response<Bankdetails_Response>
-            ) {
+            ) { progress.dismiss()
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
                         fssaiResponse = response.body()!!
@@ -379,7 +379,7 @@ class FssaiActivity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<Bankdetails_Response>,t: Throwable) {
-
+                progress.dismiss()
                 showToast(getString(R.string.session_exp))
             }
 

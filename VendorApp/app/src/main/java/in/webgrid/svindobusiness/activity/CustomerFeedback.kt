@@ -2,6 +2,7 @@
 package `in`.webgrid.svindobusiness.activity
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -27,12 +28,20 @@ class CustomerFeedback : AppCompatActivity() {
     lateinit var feedbackresponse: CustomerFeedbackModal
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: CustomerFeedbackAdapter
+    lateinit var progress: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(this)
         feedbackBinding = ActivityCustomerFeedbackBinding.inflate(layoutInflater)
         //sharedPreference = SharedPreference(this)
         setContentView(feedbackBinding.root)
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(false)
+        progress.setCancelable(false)
+
 
 
         val loginButton = findViewById<ImageView>(R.id.feedbackbackbutton)
@@ -48,6 +57,7 @@ class CustomerFeedback : AppCompatActivity() {
 
 
     fun CustomerFeebackdetails() {
+        progress.show()
         try {
             // dashboardBinding.progressBarLay.visibility = View.VISIBLE
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
@@ -58,7 +68,7 @@ class CustomerFeedback : AppCompatActivity() {
                     call: Call<CustomerFeedbackModal>,
                     response: Response<CustomerFeedbackModal>
                 ) {
-
+                   progress.dismiss()
                     //dashboardBinding.progressBarLay.visibility  = View.GONE
                     try {
                         when {
@@ -68,6 +78,7 @@ class CustomerFeedback : AppCompatActivity() {
 
                                 if (response.body() != null) {
                                     if (response.body()!!.error == "0") {
+                                        progress.dismiss()
                                         if (feedbackresponse.data.isNotEmpty()) {
                                             feedbackBinding.feedbackrv.visibility = View.VISIBLE
                                             // feedbackBinding.noData.visibility = View.GONE
@@ -103,6 +114,7 @@ class CustomerFeedback : AppCompatActivity() {
 
                 override fun onFailure(call: Call<CustomerFeedbackModal>, t: Throwable) {
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    progress.dismiss()
                     showToast(t.message.toString())
                 }
 

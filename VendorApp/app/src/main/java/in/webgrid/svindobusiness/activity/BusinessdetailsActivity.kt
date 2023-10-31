@@ -795,6 +795,7 @@ class BusinessdetailsActivity : AppCompatActivity() {
                                 startActivity(i)
                             }
                         }else{
+                            progress.dismiss()
                             showToast(businessdetailsResponse.message)
                         }
                     }

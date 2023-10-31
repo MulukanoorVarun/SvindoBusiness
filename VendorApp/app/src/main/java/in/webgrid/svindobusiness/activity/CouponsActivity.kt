@@ -199,7 +199,7 @@ class CouponsActivity : AppCompatActivity() {
             override fun onResponse(
                 call: Call<AddCouponModal>,
                 response: Response<AddCouponModal>
-            ) {
+            ) { progress.dismiss()
                 when {
                     response.isSuccessful -> {//status code between 200 to 29
                         addcoupopnResponse = response.body()!!

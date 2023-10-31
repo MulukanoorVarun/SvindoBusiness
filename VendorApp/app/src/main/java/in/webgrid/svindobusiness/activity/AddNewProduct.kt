@@ -865,7 +865,6 @@ class AddNewProduct : AppCompatActivity() {
        // file5: File,
     ) {
         progress.show()
-        Binding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             println("error 1")
@@ -946,7 +945,7 @@ class AddNewProduct : AppCompatActivity() {
                     call: Call<Bankdetails_Response>,
                     response: Response<Bankdetails_Response>
                 ) {
-                    Binding.progressBarLay.progressBarLayout.visibility = View.GONE
+                    progress.dismiss()
                     try {
                         when {
                             response.code() == 200 -> {
@@ -983,7 +982,6 @@ class AddNewProduct : AppCompatActivity() {
                     }
                 }
                 override fun onFailure(call: Call<Bankdetails_Response>, t: Throwable) {
-                    Binding.progressBarLay.progressBarLayout.visibility = View.GONE
                     progress.dismiss()
                     showToast(t.message.toString())
                 }

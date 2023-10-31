@@ -1,5 +1,6 @@
 package `in`.webgrid.svindobusiness.activity
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +46,7 @@ class AcceptOrder : AppCompatActivity() {
     private lateinit var linearLayoutManager1: LinearLayoutManager
     private lateinit var builder: AlertDialog.Builder
     private lateinit var alertDialog: AlertDialog
+    lateinit var progress: ProgressDialog
 
     var orderstatus="0"
 
@@ -59,6 +61,12 @@ class AcceptOrder : AppCompatActivity() {
 
         sharedPreference = SharedPreference(this)
         setContentView(acceptOrderBinding.root)
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(false)
+        progress.setCancelable(false)
        // setContentView(Binding.root)
 
         linearLayoutManager = LinearLayoutManager(this)
@@ -92,6 +100,7 @@ class AcceptOrder : AppCompatActivity() {
 //        alertDialog.setCanceledOnTouchOutside(false)
 //    }
     fun Acceptorder(id: String) {
+    progress.show()
         try {
             // dashboardBinding.progressBarLay.visibility = View.VISIBLE
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
@@ -102,12 +111,13 @@ class AcceptOrder : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<OrderAcceptModal>,
                     response: Response<OrderAcceptModal>
-                ) {
+                ) { progress.dismiss()
                     try {
                         when {
                             response.code() == 200 -> {
                                 acceptorderresponse = response.body()!!
                                 if (acceptorderresponse.error == "0") {
+                                    progress.dismiss()
                                     acceptOrderBinding.otptext.text =
                                         acceptorderresponse.order_details.otp
                                     acceptOrderBinding.name.text =
@@ -234,6 +244,7 @@ class AcceptOrder : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<OrderAcceptModal>, t: Throwable) {
+                    progress.dismiss()
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
                     showToast(t.message.toString())
                 }
@@ -247,8 +258,10 @@ class AcceptOrder : AppCompatActivity() {
         }
 
     }
-    fun OrderStatus(orderstatus:String,
-                    order_id:String) {
+    fun OrderStatus(
+        orderstatus:String,
+        order_id:String) {
+        progress.show()
         try {
             // dashboardBinding.progressBarLay.visibility = View.VISIBLE
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
@@ -259,13 +272,14 @@ class AcceptOrder : AppCompatActivity() {
                     call: Call<Verify_otp_Response>,
                     response: Response<Verify_otp_Response>
                 ) {
-
+                    progress.dismiss()
                     //dashboardBinding.progressBarLay.visibility  = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
                                 orderstatusresponse = response.body()!!
                                 if (orderstatusresponse.error == "0") {
+                                    progress.dismiss()
                                     showToast(orderstatusresponse.message.toString())
                                     Acceptorder(order_id)
                                 }
@@ -285,6 +299,7 @@ class AcceptOrder : AppCompatActivity() {
 
                 override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    progress.dismiss()
                     showToast(t.message.toString())
                 }
 

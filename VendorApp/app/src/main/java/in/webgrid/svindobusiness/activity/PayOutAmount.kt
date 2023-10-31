@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import`in`.webgrid.svindobusiness.R
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.os.Handler
 import android.view.View
 import android.widget.ImageView
@@ -35,6 +36,7 @@ class PayOutAmountActivity : AppCompatActivity() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var builder: AlertDialog.Builder
     private lateinit var alertDialog: AlertDialog
+    lateinit var progress: ProgressDialog
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,13 +44,16 @@ class PayOutAmountActivity : AppCompatActivity() {
         walletbinding = ActivityPayOutAmountBinding.inflate(layoutInflater)
         setContentView(walletbinding.root)
 
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(false)
+        progress.setCancelable(false)
 
         linearLayoutManager = LinearLayoutManager(this)
         sharedPreference= SharedPreference(this)
         walletbinding.transactiondetailsrecyclerview.layoutManager = linearLayoutManager
         walletbinding.transactiondetailsrecyclerview.hasFixedSize()
-
-
 
         val loginButton = findViewById<ImageView>(R.id.backbutton)
         loginButton.setOnClickListener { this.onBackPressed()
@@ -102,6 +107,7 @@ class PayOutAmountActivity : AppCompatActivity() {
         }
     }
         fun WalletDetails() {
+            progress.show()
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall =ordersService.WalletDetailsInterface(sharedPreference.getValueString("token"))
@@ -111,12 +117,14 @@ class PayOutAmountActivity : AppCompatActivity() {
                     call: Call<WalletModal>,
                     response: Response<WalletModal>
                 ) {
+                    progress.dismiss()
                     try {
                         when {
                             response.code() == 200 -> {
                                 walletModalres = response.body()!!
                                 if (walletModalres.error=="0")
                                 {
+                                    progress.dismiss()
                                     if (walletModalres.transaction.isNotEmpty()) {
                                     walletbinding.transactiondetailsrecyclerview.visibility = View.VISIBLE
                                     adapter = AccountsAdapter(walletModalres.transaction)
@@ -134,6 +142,7 @@ class PayOutAmountActivity : AppCompatActivity() {
 //                                        accountbinding.noData.visibility = View.VISIBLE
                                 }
                                 }else{
+                                    progress.dismiss()
                                    // showToast(walletModalres.message.toString())
                                 }
                             }
@@ -153,6 +162,7 @@ class PayOutAmountActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<WalletModal>, t: Throwable) {
+                    progress.dismiss()
 //                        accountbinding.progressBarLay.visibility  = View.GONE
                 showToast(t.message.toString())
 //                Toast(,t.message.toString());
@@ -166,6 +176,7 @@ class PayOutAmountActivity : AppCompatActivity() {
     fun WithDrawlDetails(
         amount:String
     ) {
+        progress.show()
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall =ordersService.WithDrawlAmount(sharedPreference.getValueString("token"),amount)
@@ -175,6 +186,7 @@ class PayOutAmountActivity : AppCompatActivity() {
                     call: Call<Verify_otp_Response>,
                     response: Response<Verify_otp_Response>
                 ) {
+                    progress.dismiss()
                     try {
                         when {
                             response.code() == 200 -> {
@@ -200,6 +212,7 @@ class PayOutAmountActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                    progress.dismiss()
 //                        accountbinding.progressBarLay.visibility  = View.GONE
                     showToast(t.message.toString())
 //                Toast(,t.message.toString());

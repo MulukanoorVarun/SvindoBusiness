@@ -1,6 +1,7 @@
 package `in`.webgrid.svindobusiness.activity
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -23,7 +24,6 @@ import java.util.concurrent.TimeoutException
 @SuppressLint("StaticFieldLeak")
 private lateinit var insightsBinding: ActivityInsightsBinding
 class InsightsActivity : AppCompatActivity() {
-
     private lateinit var sharedPreference: SharedPreference
     lateinit var insightsResponse: InsightsModalClass
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -32,6 +32,7 @@ class InsightsActivity : AppCompatActivity() {
     private lateinit var adapter: InsightsAdapter
     private lateinit var adaptertop: TopratedAdapter
     private lateinit var adaptermost: MostByAdapter
+    lateinit var progress: ProgressDialog
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +42,12 @@ class InsightsActivity : AppCompatActivity() {
         setContentView(insightsBinding.root)
 
         sharedPreference= SharedPreference(this)
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
 
 
 
@@ -71,6 +78,7 @@ class InsightsActivity : AppCompatActivity() {
 
     fun InsightsDetails()
     {
+        progress.show()
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall =
@@ -79,7 +87,7 @@ class InsightsActivity : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<InsightsModalClass>,
                     response: Response<InsightsModalClass>
-                ) {
+                ) { progress.dismiss()
                     //dashboardBinding.progressBarLay.visibility  = View.GONE
                     try {
                         when {
@@ -113,7 +121,7 @@ class InsightsActivity : AppCompatActivity() {
                                             insightsBinding.horizontalrv2.visibility = View.GONE
                                         }
                                     }else{
-
+                                        progress.dismiss()
                                     }
                                 }
                             }
@@ -134,6 +142,7 @@ class InsightsActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<InsightsModalClass>, t: Throwable) {
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    progress.dismiss()
                     showToast(t.message.toString())
                 }
 

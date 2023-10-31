@@ -191,6 +191,7 @@ class LoginActivity : AppCompatActivity() {
                 call: Call<Mobileotp_Response>,
                 response: Response<Mobileotp_Response>
             ) {
+                progress.dismiss()
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
 
@@ -215,12 +216,14 @@ class LoginActivity : AppCompatActivity() {
                         showToast(getString(R.string.session_exp))
                     }
                     else -> {//Application-level failure
+                        progress.dismiss()
                         //status code in the range of 300's, 400's, and 500's
                         showToast(getString(R.string.server_error))
                     }
                 }
             }
             override fun onFailure(call: Call<Mobileotp_Response>, t: Throwable) {
+                progress.dismiss()
                 showToast(getString(R.string.server_error))
             }
         })

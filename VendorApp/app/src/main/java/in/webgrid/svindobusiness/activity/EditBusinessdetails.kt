@@ -998,7 +998,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                 override fun onResponse(
                     call: Call<Verify_otp_Response>,
                     response: Response<Verify_otp_Response>
-                ) {
+                ) { progress.dismiss()
                     when {
                         response.code() == 200 -> {//status code between 200 to 299
                             pancradresponse = response.body()!!
@@ -1056,7 +1056,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
             override fun onResponse(
                 call: Call<Bankdetails_Response>,
                 response: Response<Bankdetails_Response>
-            ) {
+            ) { progress.dismiss()
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
                         fssaiResponse = response.body()!!
@@ -1107,7 +1107,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
             override fun onResponse(
                 call: Call<Bankdetails_Response>,
                 response: Response<Bankdetails_Response>
-            ) {
+            ) { progress.dismiss()
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
                         fssaiResponse = response.body()!!
@@ -1151,7 +1151,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                 override fun onResponse(
                     call: Call<Bankdetails_Response>,
                     response: Response<Bankdetails_Response>
-                ) {
+                ) { progress.dismiss()
                     when {
                         response.isSuccessful -> {//status code between 200 to 299
                             fssaiResponse = response.body()!!
@@ -1190,7 +1190,8 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                 override fun onResponse(
                     call: Call<EditBusinessDetailsModal>,
                     response: Response<EditBusinessDetailsModal>
-                ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
+                ) {//dashboardBinding.progressBarLay.visibility  = View.GONE
+                    progress.dismiss()
                     try {
                         when {
                             response.code() == 200 -> {
@@ -1216,53 +1217,60 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                                         binding.nameEtTxt.setText(EditResponse.details.contact_person_name)
                                         binding.mobNumEtTxt.setText(EditResponse.details.contact_number)
 
-                                        if(EditResponse.details.status=="Verified"){
-                                            binding.mobileNumEt.isEnabled=false
-                                            binding.storeEmailIdEt.isEnabled=false
-                                            binding.locationEt.isEnabled=false
-                                            binding.addressEt.isEnabled=false
-                                            binding.categoryspinnerview.isEnabled=false
-                                            binding.fssaicamerabutton.isEnabled=false
-                                            binding.fssaiEtTxt.isEnabled=false
-                                            binding.fssaisubmitbutton.isEnabled=false
-                                            binding.gstsubmitbutton.isEnabled=false
-                                            binding.gstcamerabutton.isEnabled=false
-                                            binding.gstinEtTxt.isEnabled=false
-                                            binding.pansubmitbutton.isEnabled=false
-                                            binding.pancamerabutton.isEnabled=false
-                                            binding.panNOet.isEnabled=false
-                                            binding.bankNameEtTxt.isEnabled=false
-                                            binding.ifscEtTxt.isEnabled=false
-                                            binding.accNumEtTxt.isEnabled=false
-                                            binding.reAccNumEtTxt.isEnabled=false
-                                            binding.banksubmitbutton.isEnabled=false
-                                            binding.note.isVisible=false
-                                            binding.accHolderNameEt.isEnabled=false
-                                            binding.nameEtTxt.isEnabled=false
-                                            binding.mobNumEtTxt.isEnabled=false
-                                            binding.contactsubmitbutton.isEnabled=false
+                                        if (EditResponse.details.status == "Verified") {
+                                            binding.mobileNumEt.isEnabled = false
+                                            binding.storeEmailIdEt.isEnabled = false
+                                            binding.locationEt.isEnabled = false
+                                            binding.addressEt.isEnabled = false
+                                            binding.categoryspinnerview.isEnabled = false
+                                            binding.fssaicamerabutton.isEnabled = false
+                                            binding.fssaiEtTxt.isEnabled = false
+                                            binding.fssaisubmitbutton.isEnabled = false
+                                            binding.gstsubmitbutton.isEnabled = false
+                                            binding.gstcamerabutton.isEnabled = false
+                                            binding.gstinEtTxt.isEnabled = false
+                                            binding.pansubmitbutton.isEnabled = false
+                                            binding.pancamerabutton.isEnabled = false
+                                            binding.panNOet.isEnabled = false
+                                            binding.bankNameEtTxt.isEnabled = false
+                                            binding.ifscEtTxt.isEnabled = false
+                                            binding.accNumEtTxt.isEnabled = false
+                                            binding.reAccNumEtTxt.isEnabled = false
+                                            binding.banksubmitbutton.isEnabled = false
+                                            binding.note.isVisible = false
+                                            binding.accHolderNameEt.isEnabled = false
+                                            binding.nameEtTxt.isEnabled = false
+                                            binding.mobNumEtTxt.isEnabled = false
+                                            binding.contactsubmitbutton.isEnabled = false
                                         }
 
 //                                        binding.storemail.text = EditResponse.details.email_id
-                                        Picasso.get().load(EditResponse.details.image).into(binding.businessProfile)
-                                        Picasso.get().load(EditResponse.details.fssai_img).into(binding.Fssaiimage)
-                                        Picasso.get().load(EditResponse.details.pan_img).into(binding.PANimage)
-                                        Picasso.get().load(EditResponse.details.gstin_img).into(binding.Gstimage)
-                                        Picasso.get().load(EditResponse.details.banner).into(binding.bannerImage)
-                                         image_file=EditResponse.details.image
+                                        Picasso.get().load(EditResponse.details.image)
+                                            .into(binding.businessProfile)
+                                        Picasso.get().load(EditResponse.details.fssai_img)
+                                            .into(binding.Fssaiimage)
+                                        Picasso.get().load(EditResponse.details.pan_img)
+                                            .into(binding.PANimage)
+                                        Picasso.get().load(EditResponse.details.gstin_img)
+                                            .into(binding.Gstimage)
+                                        Picasso.get().load(EditResponse.details.banner)
+                                            .into(binding.bannerImage)
+                                        image_file = EditResponse.details.image
 
                                         var deliveryStatus = EditResponse.details.free_delivery
 
                                     } else {
                                         progress.dismiss()
                                     }
-                                }else {
+                                } else {
 
                                 }
                             }
+
                             response.code() == 401 -> {
                                 showToast(getString(R.string.session_exp))
                             }
+
                             else -> {
                                 showToast(getString(R.string.server_error))
                             }
@@ -1270,6 +1278,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
                     } catch (e: TimeoutException) {
                         showToast(getString(R.string.time_out))
                     }
+                }
                 override fun onFailure(call: Call<EditBusinessDetailsModal>, t: Throwable) {
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
                     progress.dismiss()
@@ -1313,7 +1322,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
             override fun onResponse(
                 call: Call<Verify_otp_Response>,
                 response: Response<Verify_otp_Response>
-            ) {
+            ) { progress.dismiss()
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
                         pancradresponse= response.body()!!
@@ -1383,7 +1392,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
             override fun onResponse(
                 call: Call<Verify_otp_Response>,
                 response: Response<Verify_otp_Response>
-            ) {
+            ) {progress.dismiss()
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
                         pancradresponse= response.body()!!
@@ -1440,7 +1449,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
             override fun onResponse(
                 call: Call<Verify_otp_Response>,
                 response: Response<Verify_otp_Response>
-            ) {
+            ) {progress.dismiss()
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
                         pancradresponse= response.body()!!
@@ -1483,7 +1492,7 @@ class EditBusinessdetails : AppCompatActivity(){//, OnMapReadyCallback, GoogleMa
             override fun onResponse(
                 call: Call<Bankdetails_Response>,
                 response: Response<Bankdetails_Response>
-            ) {
+            ) {progress.dismiss()
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
                         contactResponse = response.body()!!

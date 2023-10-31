@@ -383,7 +383,6 @@ class InstantsFragment : Fragment() {
         }
 
         instantBinding.delivered.setOnClickListener {
-
             instantBinding.delivered.setBackgroundResource(R.drawable.button_loading_background)
 
             instantBinding.Allbtn.setEnabled(false)
@@ -483,13 +482,12 @@ class InstantsFragment : Fragment() {
                     call: Call<OrdersListModal>,
                     response: Response<OrdersListModal>
                 ) {
-
                     instantBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                     try {
                         when {
                             response.code() == 200 -> {
                                 if (response.body() != null) {
-                                instantResponse = response.body()!!
+                                        instantResponse = response.body()!!
                                     if (instantResponse.error == "0") {
                                         if (instantResponse.orders.isNotEmpty()) {
                                             instantBinding.newordersRequestsViewRecyclerview.visibility = View.VISIBLE
@@ -502,12 +500,9 @@ class InstantsFragment : Fragment() {
                                         }
                                     }
                                 }
-
                             }
-
                             response.code() == 401 -> {
                                 Toast.makeText(context,getString(R.string.session_exp),Toast.LENGTH_SHORT).show()
-
                             }else -> {
                                 Toast.makeText(context,getString(R.string.server_error),Toast.LENGTH_SHORT).show()
                             }

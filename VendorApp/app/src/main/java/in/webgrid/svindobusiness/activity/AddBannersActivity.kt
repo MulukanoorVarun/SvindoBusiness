@@ -412,6 +412,7 @@ class AddBannersActivity : AppCompatActivity() {
                 call: Call<Verify_otp_Response>,
                 response: Response<Verify_otp_Response>
             ) {
+                progress.dismiss()
                 bannersBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
@@ -421,6 +422,7 @@ class AddBannersActivity : AppCompatActivity() {
                             progress.dismiss()
                             showToast(addBannerResponse.message)
                         }else{
+                            progress.dismiss()
                           //  showToast(addBannerResponse.message)
                         }
                         if(addBannerResponse.error=="1"){
@@ -440,6 +442,7 @@ class AddBannersActivity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                progress.dismiss()
                 bannersBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                 showToast(getString(R.string.session_exp))
             }

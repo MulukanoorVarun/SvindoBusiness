@@ -175,7 +175,6 @@ class ProductsFragment : Fragment() {
                                             View.GONE
                                         productsBinding.noData.visibility = View.VISIBLE
                                     }
-
                                 } else {
 
                                 }

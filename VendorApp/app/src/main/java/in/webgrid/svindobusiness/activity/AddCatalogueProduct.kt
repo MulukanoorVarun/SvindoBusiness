@@ -356,7 +356,6 @@ class AddCatalogueProduct : AppCompatActivity() {
         minQuantity:String,
     ) {
         progress.show()
-        ProductBinding.progressBarLay.progressBarLayout.visibility = View.VISIBLE
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ordersService.CatProductDetails(sharedPreference.getValueString("token"), product_id, "0", mrp_price, sale_price, quantity, unit_id, stock, insatantDel, delivery_days, GeneralDel, self_pick, COD, Replacement, Return, shopExchange, ADDONData, printing, minQuantity,size_id)
@@ -365,7 +364,7 @@ class AddCatalogueProduct : AppCompatActivity() {
                     call: Call<Bankdetails_Response>,
                     response: Response<Bankdetails_Response>
                 ) {
-                    ProductBinding.progressBarLay.progressBarLayout.visibility = View.GONE
+                    progress.dismiss()
                 try
                 {
                     when {

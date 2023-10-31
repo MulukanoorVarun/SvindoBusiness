@@ -43,17 +43,21 @@ class FirebaseService : FirebaseMessagingService() {
         super.onMessageReceived(message)
         Log.d("TAG", "onMessageReceived: ${message.data}")
 
+        val title : String = message.notification?.title!!
+        val body : String = message.notification?.body!!
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel()
         }
-        showNotification(message.data)
+
+        showNotification(title,body)
     }
 
     @SuppressLint("UnspecifiedImmutableFlag", "LogConditional")
-    fun showNotification(data: MutableMap<String, String>){
+    fun showNotification(title: String, body: String){
        // val type = data["type"]
-        val title = data["title"]
-        val body = data["message"]
+//        val title = data["title"]
+//        val body = data["body"]
 
         Log.d("TAG", "Title: $title, Body: $body")
 
@@ -76,24 +80,24 @@ class FirebaseService : FirebaseMessagingService() {
 
         }
 
-        val acceptIntent = Intent(this, MainActivity::class.java)
-            .apply {
-                action = "accept"
-                putExtra("UserID","100")
-                putExtra("Name","Jones")
-                putExtra("notificationId", notificationId)
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
-        val acceptPendingIntent = PendingIntent.getActivity(this, 0, acceptIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+//        val acceptIntent = Intent(this, MainActivity::class.java)
+//            .apply {
+//                action = "accept"
+//                putExtra("UserID","100")
+//                putExtra("Name","Jones")
+//                putExtra("notificationId", notificationId)
+//                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            }
+//        val acceptPendingIntent = PendingIntent.getActivity(this, 0, acceptIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
-        val rejectIntent = Intent(baseContext, MainActivity::class.java)
-            .apply {
-                action = "reject"
-                putExtra("UserID","100")
-                putExtra("notificationId", notificationId)
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
-        val rejectPendingIntent = PendingIntent.getBroadcast(baseContext, 0, rejectIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+//        val rejectIntent = Intent(baseContext, MainActivity::class.java)
+//            .apply {
+//                action = "reject"
+//                putExtra("UserID","100")
+//                putExtra("notificationId", notificationId)
+//                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            }
+//        val rejectPendingIntent = PendingIntent.getBroadcast(baseContext, 0, rejectIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
         val builder = NotificationCompat.Builder(this, getString(R.string.channel_id))
             .setSmallIcon(R.drawable.svindobusiness)
@@ -105,7 +109,7 @@ class FirebaseService : FirebaseMessagingService() {
             .setContentIntent(launchIntent)
             .setGroup("Backend Notifications")
             .setVibrate(longArrayOf( 1000, 1000, 1000, 1000, 1000 ))
-            .setLights(Color.RED, 3000, 3000)
+            .setLights(Color.WHITE, 3000, 3000)
             .setGroupSummary(true)
             .setAutoCancel(true)
             .setSound(alarmSound)
@@ -141,9 +145,8 @@ class FirebaseService : FirebaseMessagingService() {
         val mChannel = NotificationChannel(getString(R.string.channel_id), name, importance)
             .apply {
                 description = descriptionText
-                lightColor = R.color.orange
+                lightColor = R.color.buttonColor
                 enableLights(true)
-
             }
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(mChannel)
@@ -162,19 +165,19 @@ class FirebaseService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
     }
-    private fun getBitmapFromURL(strURL: String): Bitmap? {
-        var myBitmap: Bitmap? = null
-        try {
-            val url = URL(strURL)
-            val connection = url.openConnection() as HttpURLConnection
-            connection.doInput = true
-            connection.connect()
-            val input = connection.inputStream
-            myBitmap = BitmapFactory.decodeStream(input)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return myBitmap
-    }
 
+//    private fun getBitmapFromURL(strURL: String): Bitmap? {
+//        var myBitmap: Bitmap? = null
+//        try {
+//            val url = URL(strURL)
+//            val connection = url.openConnection() as HttpURLConnection
+//            connection.doInput = true
+//            connection.connect()
+//            val input = connection.inputStream
+//            myBitmap = BitmapFactory.decodeStream(input)
+//        } catch (e: IOException) {
+//            e.printStackTrace()
+//        }
+//        return myBitmap
+//    }
 }

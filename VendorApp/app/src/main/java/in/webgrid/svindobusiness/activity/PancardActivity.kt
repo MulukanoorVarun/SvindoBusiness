@@ -355,7 +355,7 @@ class PancardActivity : AppCompatActivity() {
                     override fun onResponse(
                         call: Call<Verify_otp_Response>,
                         response: Response<Verify_otp_Response>
-                    ) {
+                    ) {progress.dismiss()
                         when {
                             response.code() == 200 -> {//status code between 200 to 299
                                 pancradresponse = response.body()!!

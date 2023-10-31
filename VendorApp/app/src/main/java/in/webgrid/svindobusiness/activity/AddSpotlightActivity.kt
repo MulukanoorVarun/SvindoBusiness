@@ -111,10 +111,15 @@ class AddSpotlightActivity : AppCompatActivity() {
         val adapter = SpotlightSpinnerAdapter(this,items)
         spinner.adapter = adapter
         // Handle item selection
+
+
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = items[position]
                 ItemId = selectedItem.id
+
+
+
                 addspotlightBinding.submitbutton.setBackgroundResource(R.drawable.buttonbackground);
                 addspotlightBinding.submitbutton.setOnClickListener {
                     progress.show()
@@ -136,6 +141,7 @@ class AddSpotlightActivity : AppCompatActivity() {
     }
 
     fun fetchItemDetails(itemId: String) {
+        progress.show()
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall =
@@ -144,24 +150,27 @@ class AddSpotlightActivity : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<Verify_otp_Response>,
                     response: Response<Verify_otp_Response>
-                ) =//dashboardBinding.progressBarLay.visibility  = View.GONE
+                ) {
+                    progress.dismiss()
                     try {
                         when {
                             response.code() == 200 -> {
                                 spotlightResponse = response.body()!!
-                                if (spotlightResponse.error=="0") {
-                                    val i = Intent(this@AddSpotlightActivity, MainActivity::class.java)
+                                if (spotlightResponse.error == "0") {
+                                    val i =
+                                        Intent(this@AddSpotlightActivity, MainActivity::class.java)
                                     startActivity(i)
                                     progress.dismiss()
                                     showToast(spotlightResponse.message)
-                                }
-                                else {
+                                } else {
                                     progress.dismiss()
                                 }
                             }
+
                             response.code() == 401 -> {
                                 showToast(getString(R.string.session_exp))
                             }
+
                             else -> {
                                 showToast(getString(R.string.server_error))
                             }
@@ -169,6 +178,7 @@ class AddSpotlightActivity : AppCompatActivity() {
                     } catch (e: TimeoutException) {
                         showToast(getString(R.string.time_out))
                     }
+                }
                 override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
                     progress.dismiss()

@@ -359,7 +359,7 @@ class NotificationsActivity : AppCompatActivity() {
             override fun onResponse(
                 call: Call<Verify_otp_Response>,
                 response: Response<Verify_otp_Response>
-            ) {
+            ) {progress.dismiss()
                 notificationsBinding.progressBarLay.progressBarLayout.visibility = View.GONE
                 when {
                     response.isSuccessful -> {//status code between 200 to 299

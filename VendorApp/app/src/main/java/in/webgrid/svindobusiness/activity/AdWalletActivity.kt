@@ -1,6 +1,7 @@
 package `in`.webgrid.svindobusiness.activity
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -26,10 +27,17 @@ class AdWalletActivity : AppCompatActivity() {
     lateinit var adapter: AdWalletAdapter
     private lateinit var sharedPreference: SharedPreference
     private lateinit var linearLayoutManager: LinearLayoutManager
+    lateinit var progress: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         walletbinding = ActivityAdWalletBinding.inflate(layoutInflater)
         setContentView(walletbinding.root)
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(false)
+        progress.setCancelable(false)
 
 
         linearLayoutManager = LinearLayoutManager(this)
@@ -46,6 +54,7 @@ class AdWalletActivity : AppCompatActivity() {
     }
 
     fun AdWalletdetails() {
+        progress.show()
         try {
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
             val requestCall =ordersService.AdWalletDetails(sharedPreference.getValueString("token"))
@@ -55,12 +64,14 @@ class AdWalletActivity : AppCompatActivity() {
                     call: Call<WalletModal>,
                     response: Response<WalletModal>
                 ) {
+                    progress.dismiss()
                     try {
                         when {
                             response.code() == 200 -> {
                                 walletModalres = response.body()!!
                                 if (walletModalres.error=="0")
                                 {
+                                    progress.dismiss()
                                     if (walletModalres.transaction.isNotEmpty()) {
                                         walletbinding.transactiondetailsrecyclerview.visibility = View.VISIBLE
                                         adapter = AdWalletAdapter(walletModalres.transaction)
@@ -78,6 +89,7 @@ class AdWalletActivity : AppCompatActivity() {
 //                                        accountbinding.noData.visibility = View.VISIBLE
                                     }
                                 }else{
+                                    progress.dismiss()
                                     // showToast(walletModalres.message.toString())
                                 }
                             }
@@ -97,6 +109,7 @@ class AdWalletActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<WalletModal>, t: Throwable) {
+                    progress.dismiss()
 //                        accountbinding.progressBarLay.visibility  = View.GONE
                     showToast(t.message.toString())
 //                Toast(,t.message.toString());

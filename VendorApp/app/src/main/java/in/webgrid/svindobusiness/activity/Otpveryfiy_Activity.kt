@@ -162,6 +162,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
                 call: Call<Verify_otp_Response>,
                 response: Response<Verify_otp_Response>
             ) {
+                progress.dismiss()
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
                         if (response.isSuccessful) {
@@ -205,7 +206,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
-
+                progress.dismiss()
                 showToast(getString(R.string.session_exp))
             }
         })
