@@ -93,6 +93,20 @@ class AddCatalogueProduct : AppCompatActivity() {
         progress.setCanceledOnTouchOutside(true)
         progress.setCancelable(false)
 
+        val i = intent
+        var image_path = i.getStringExtra("image_path")
+       // showToast(image_path.toString())
+        var product_name = i.getStringExtra("product_name")
+        var is_printing= i.getStringExtra("is_printing")
+
+//        if(is_printing=="1"){
+//            ProductBinding.printingswitch.isChecked=true
+//        }else{
+//            ProductBinding.printingswitch.isChecked=false
+//        }
+        Picasso.get().load(image_path).into(ProductBinding.imageview)
+        ProductBinding.testView.text=product_name
+
 //        linearLayoutManager = LinearLayoutManager(this)
 //        ProductBinding.AddonsRecyclerView.layoutManager = linearLayoutManager
 //        ProductBinding.AddonsRecyclerView.hasFixedSize()
@@ -298,7 +312,7 @@ class AddCatalogueProduct : AppCompatActivity() {
 
         Unitsdetails()
         AddonsList()
-        MainCategoryList()
+        //MainCategoryList()
     }
 
 //    internal fun showAddonDialog() {
@@ -453,7 +467,7 @@ class AddCatalogueProduct : AppCompatActivity() {
                         showToast(getString(R.string.time_out))
                     }
 
-                override fun onFailure(call: Call<CustomSpinAdapter>, t: Throwable) {
+                override fun onFailure(call: Call<CustomSpinAdapter>, t: Throwable){
                     //  dashboardBinding.progressBarLay.visibility  = View.GONE
                     showToast(t.message.toString())
                 }

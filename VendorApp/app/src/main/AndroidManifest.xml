@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="in.webgrid.svindobusiness">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- <uses-permission -->
     <!-- android:name="android.permission.QUERY_ALL_PACKAGES" -->
@@ -14,7 +15,6 @@
     <!-- tools:node="remove" /> -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission-group.READ_MEDIA_VISUAL" /> <!-- <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -24,10 +24,10 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -62,6 +62,12 @@
         android:theme="@style/Theme.VendorApp"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ProductDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SearchingProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.NetworkIssueActivity"
             android:exported="false" />
 
@@ -78,7 +84,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/buttonColor" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/notification_id" />
@@ -115,7 +120,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.AddCatalogueProduct"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".activity.AddPrintingProduct"
             android:exported="false" />
@@ -216,21 +221,17 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".services.LocationService"
             android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="location" />
-
-<!--         <service-->
-<!--         android:name=".MyFirebaseMessagingService"-->
-<!--         android:exported="false">-->
-<!--         <intent-filter>-->
-<!--         <action android:name="com.google.firebase.MESSAGING_EVENT"/>-->
-<!--         </intent-filter>-->
-<!--         </service>-->
-
+            android:foregroundServiceType="location" /> <!-- <service -->
+        <!-- android:name=".MyFirebaseMessagingService" -->
+        <!-- android:exported="false"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.MESSAGING_EVENT"/> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
         <receiver
             android:name=".services.NetworkChangeReceiver"
             android:exported="true">

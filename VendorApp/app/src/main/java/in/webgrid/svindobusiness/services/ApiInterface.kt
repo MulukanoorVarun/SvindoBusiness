@@ -7,7 +7,7 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
-interface ApiInterface {
+    interface ApiInterface {
 
 
     @FormUrlEncoded
@@ -634,7 +634,17 @@ interface ApiInterface {
     ): Call<Bankdetails_Response>
 
 
+    @FormUrlEncoded
+    @POST("Home/universal_search_products")
+    fun SearchProducts(
+        @Header("Sessionid")  content_type:String?,
+        @Field("text") text: String,
+    ): Call<UniversalSearchModal>
 
-
-
+        @FormUrlEncoded
+        @POST("Home/product_details")
+        fun ProductDetails(
+            @Header("Sessionid")  content_type:String?,
+            @Field("product_id") product_id: String,
+        ): Call<ProductDetailsModal>
 }

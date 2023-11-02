@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardclicking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="5dp"
+        android:padding="25dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="1dp"
+        app:strokeWidth="0.1dp"
+        app:strokeColor="#454545">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview"
+                android:layout_width="140dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="7dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/productImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        tools:ignore="ContentDescription" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/productname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Canon 5d mark iv"
+                android:textColor="@color/black"
+                android:layout_below="@+id/cardview"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:lines="1"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                tools:ignore="HardcodedText" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/productunit"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="piece"-->
+<!--                android:layout_below="@+id/productname"-->
+<!--                android:textColor="@color/grey"-->
+<!--                android:textSize="13sp"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                tools:ignore="HardcodedText" />-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/linearlayout2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/productunit"-->
+<!--                android:layout_marginBottom="6dp"-->
+<!--                android:orientation="horizontal">-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="₹"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="13sp"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                tools:ignore="HardcodedText" />-->
+<!--            <TextView-->
+<!--                android:id="@+id/productcost"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="12456"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="13sp"-->
+<!--                android:textStyle="bold"-->
+<!--                tools:ignore="HardcodedText" />-->
+<!--            </LinearLayout>-->
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

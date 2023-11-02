@@ -26,6 +26,7 @@ import`in`.webgrid.svindobusiness.services.ApiClient
 import`in`.webgrid.svindobusiness.services.ApiInterface
 import `in`.webgrid.svindobusiness.Utils.SharedPreference
 import `in`.webgrid.svindobusiness.activity.NetworkIssueActivity
+import `in`.webgrid.svindobusiness.activity.SearchingProductActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -96,7 +97,7 @@ class ProductsFragment : Fragment() {
                 productsBinding.addproductbutton.setEnabled(true)
                 productsBinding.addproductbutton.setBackgroundResource(R.drawable.buttonbackground);
             }, 2000)
-            val intent = Intent (getActivity(), AddCatalogueProduct::class.java)
+            val intent = Intent (getActivity(), SearchingProductActivity::class.java)
             getActivity()?.startActivity(intent)
         }
         //return inflater.inflate(R.layout.instantsfragment, container, false)

@@ -8,7 +8,6 @@ plugins {
 android {
     namespace 'in.webgrid.svindobusiness'
     compileSdk 34
-
     defaultConfig {
         applicationId "in.webgrid.svindobusiness"
         minSdk 24
@@ -42,6 +41,7 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
+        //noinspection DataBindingWithoutKapt
         dataBinding true
         viewBinding true
     }
@@ -92,7 +92,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
 
-    implementation 'androidx.fragment:fragment:1.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.6.1'
 
     implementation "com.google.android.gms:play-services-wearable:18.1.0"
     implementation "com.google.android.gms:play-services-analytics:18.0.4"
@@ -101,4 +101,7 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:3.2.0'
 
     implementation 'com.karumi:dexter:6.2.3'
+
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
 }

@@ -462,6 +462,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="Stop">Stop</string>
     <string name="per_click_cost">Per Click Cost:</string>
     <string name="cancel_orders">Cancel Orders</string>
+    <string name="descriptiontxt">Description:</string>
 
 
     <string-array name="services">

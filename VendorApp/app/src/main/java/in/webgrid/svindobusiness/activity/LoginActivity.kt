@@ -201,10 +201,7 @@ class LoginActivity : AppCompatActivity() {
                             if (genrateotpresponse.error == 0) {
                                 progress.dismiss()
                                 val i = Intent(this@LoginActivity, Otpveryfiy_Activity::class.java)
-                                i.putExtra(
-                                    "TextBox",
-                                    mobileloginbinding.mobileNumberEtxt.text.toString()
-                                )
+                                i.putExtra("TextBox", mobileloginbinding.mobileNumberEtxt.text.toString())
                                 response.body()?.let { i.putExtra("otpcode", it.otp) }
                                 startActivity(i)
                             }

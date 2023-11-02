@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    tools:context=".activity.SearchingProductActivity">
+
+<!--    <EditText-->
+<!--        android:id="@+id/searchet"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="49dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:autofillHints=""-->
+<!--        android:digits="0123456789.RS"-->
+<!--        android:background="@drawable/search_bg"-->
+<!--        android:hint="Search your product"-->
+<!--        android:inputType="text"-->
+<!--        android:paddingStart="30dp"-->
+<!--        android:textSize="14sp"-->
+<!--        android:text=""-->
+<!--        tools:ignore="Hardcodedtext,RtlSymmetry"/>-->
+
+    <SearchView
+        android:id="@+id/SearchPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:iconifiedByDefault="false"
+        android:padding="4dp"
+        android:queryHint="Search Programming language" />
+
+        <GridView
+            android:id="@+id/idSearchGRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/SearchPage"
+            android:horizontalSpacing="6dp"
+            android:isScrollContainer="false"
+            android:numColumns="2"
+            android:verticalSpacing="6dp" />
+</RelativeLayout>

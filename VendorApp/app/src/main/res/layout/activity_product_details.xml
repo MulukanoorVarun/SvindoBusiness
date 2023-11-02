@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ProductDetailsActivity">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/backbutton"
+        android:src="@drawable/backbutton"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/productname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Canon 5d mark iv"
+        android:textColor="@color/black"
+        android:layout_below="@+id/viewPager"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        tools:ignore="HardcodedText" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/productunit"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="piece"-->
+<!--        android:layout_below="@+id/productname"-->
+<!--        android:textColor="@color/grey"-->
+<!--        android:textSize="15sp"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        tools:ignore="HardcodedText" />-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linearlayout2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/productunit"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:orientation="horizontal">-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="₹"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            tools:ignore="HardcodedText" />-->
+<!--        <TextView-->
+<!--            android:id="@+id/productcost"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="12456"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            tools:ignore="HardcodedText" />-->
+<!--        <TextView-->
+<!--            android:id="@+id/salepricesymbol"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="₹"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="13sp"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            tools:ignore="HardcodedText" />-->
+<!--        <TextView-->
+<!--            android:id="@+id/productmrp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="12456"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="13sp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            tools:ignore="HardcodedText" />-->
+<!--    </LinearLayout>-->
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/descriptiontxt"
+        android:layout_below="@+id/productname"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/desc_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/note_descn_txt"
+        android:textSize="13sp"
+        android:textColor="@color/black" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_product"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:background="@drawable/buttonbackground"
+        android:padding="5dp"
+        android:textAllCaps="false"
+        android:text="Add Product"
+        tools:ignore="HardcodedText" />
+</RelativeLayout>
