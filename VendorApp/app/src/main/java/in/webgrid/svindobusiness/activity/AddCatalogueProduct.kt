@@ -98,6 +98,7 @@ class AddCatalogueProduct : AppCompatActivity() {
        // showToast(image_path.toString())
         var product_name = i.getStringExtra("product_name")
         var is_printing= i.getStringExtra("is_printing")
+        var product_id= i.getStringExtra("product_id")
 
 //        if(is_printing=="1"){
 //            ProductBinding.printingswitch.isChecked=true
@@ -249,7 +250,7 @@ class AddCatalogueProduct : AppCompatActivity() {
             val AddonDataJson: String = gson.toJson(ADDONData)
 
             Productdetails(
-                product_id = itemId.toString().trim(),
+                product_id = product_id.toString().trim(),
                 unit_id = unitId.toString().trim(),
                 size_id = size_id.toString().trim(),
                 quantity = ProductBinding.quantityet.text.toString().trim(),

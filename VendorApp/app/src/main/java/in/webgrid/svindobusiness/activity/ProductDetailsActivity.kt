@@ -1,5 +1,6 @@
 package `in`.webgrid.svindobusiness.activity
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,6 +30,7 @@ import java.util.concurrent.TimeoutException
 class ProductDetailsActivity : AppCompatActivity() {
     lateinit var productDetailsBinding: ActivityProductDetailsBinding
     lateinit var productresponse: ProductDetailsModal
+    lateinit var progress: ProgressDialog
     private lateinit var sharedPreference: SharedPreference
     lateinit var adapter:CarouselAdapter
     private val carouselItems =ArrayList<String>()
@@ -40,6 +42,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     var image_path=""
     var product_name=""
     var is_printing=""
+    var product_id=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,20 +50,37 @@ class ProductDetailsActivity : AppCompatActivity() {
         setContentView(productDetailsBinding.root)
         sharedPreference= SharedPreference(this)
 
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
+
+        productDetailsBinding.backbutton.setOnClickListener {
+            val i = Intent(this@ProductDetailsActivity,SearchingProductActivity::class.java)
+            i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(i)
+        }
+
         productDetailsBinding.addProduct.setOnClickListener {
             val intent = Intent(this, AddCatalogueProduct::class.java)
             intent.putExtra("image_path",image_path)
             intent.putExtra("product_name",product_name)
             intent.putExtra("is_printing",is_printing)
+            intent.putExtra("product_id",product_id)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
         val i = intent
-        val product_id = i.getStringExtra("product_id")
+        product_id = i.getStringExtra("product_id").toString()
 
         Productdetails(product_id.toString())
     }
 
     fun Productdetails(id:String) {
+        progress.show()
         try {
             val ApiServices = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ApiServices.ProductDetails(sharedPreference.getValueString("token"),id)
@@ -69,12 +89,14 @@ class ProductDetailsActivity : AppCompatActivity() {
                     call: Call<ProductDetailsModal>,
                     response: Response<ProductDetailsModal>
                 ) {
+                    progress.hide()
                     try {
                         when{
                             response.code() == 200 -> {
                                 productresponse = response.body()!!
                                 if (productresponse != null) {
                                     if (productresponse.error == "0") {
+                                        progress.hide()
                                         productDetailsBinding.productname.text=productresponse.details.name
                                         product_name=productresponse.details.name
                                         is_printing=productresponse.details.is_printing
@@ -89,7 +111,7 @@ class ProductDetailsActivity : AppCompatActivity() {
                                                     currentPage = 0
                                                 }
                                                 viewPager.setCurrentItem(currentPage++, true)
-                                                handler.postDelayed(this, 5000) // Adjust the delay as needed (in milliseconds)
+                                                handler.postDelayed(this, 4000) // Adjust the delay as needed (in milliseconds)
                                             }
                                         }
                                         handler.post(autoScrollRunnable)
@@ -102,6 +124,7 @@ class ProductDetailsActivity : AppCompatActivity() {
                                         }
 
                                     } else {
+                                        progress.hide()
                                         Toast.makeText(applicationContext, "No Match found", Toast.LENGTH_LONG).show()
                                     }
 
@@ -123,12 +146,10 @@ class ProductDetailsActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ProductDetailsModal>, t: Throwable) {
+                    progress.hide()
                     Toast.makeText(applicationContext, t.message.toString(), Toast.LENGTH_SHORT).show()
                 }
-
             })
-
-
         }catch (e: Exception){
             Toast.makeText(applicationContext, e.message.toString(), Toast.LENGTH_SHORT).show()
         }

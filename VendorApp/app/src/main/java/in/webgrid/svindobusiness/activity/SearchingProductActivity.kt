@@ -1,5 +1,6 @@
 package `in`.webgrid.svindobusiness.activity
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +24,7 @@ class SearchingProductActivity : AppCompatActivity() {
     lateinit var searchingProductBinding: ActivitySearchingProductBinding
     private lateinit var sharedPreference: SharedPreference
     lateinit var serachresponse: UniversalSearchModal
+    lateinit var progress: ProgressDialog
      var list: List<ProductXX> = emptyList()
     private lateinit var adapter: GridViewAdapter
 
@@ -31,6 +33,13 @@ class SearchingProductActivity : AppCompatActivity() {
         sharedPreference= SharedPreference(this)
         searchingProductBinding = ActivitySearchingProductBinding.inflate(layoutInflater)
         setContentView(searchingProductBinding.root)
+
+        progress = ProgressDialog(this,5)
+        progress.setTitle("Svindo Business")
+        progress.setMessage("Loading, Please wait.")
+        progress.setCanceledOnTouchOutside(true)
+        progress.setCancelable(false)
+
 
        // Searchdetails("")
         searchingProductBinding.SearchPage.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -46,6 +55,7 @@ class SearchingProductActivity : AppCompatActivity() {
     }
 
     fun Searchdetails(text:String) {
+        progress.show()
         try {
             val ApiServices = ApiClient.buildService(ApiInterface::class.java)
             val requestCall = ApiServices.SearchProducts(sharedPreference.getValueString("token"),text)
@@ -54,11 +64,13 @@ class SearchingProductActivity : AppCompatActivity() {
                     call: Call<UniversalSearchModal>,
                     response: Response<UniversalSearchModal>
                 ) {
+                    progress.hide()
                     try {
                         when{
                             response.code() == 200 -> {
                                 serachresponse = response.body()!!
                                 if (serachresponse.error == "0") {
+                                    progress.hide()
                                     list = serachresponse.products
                                     adapter = GridViewAdapter(serachresponse.products, this@SearchingProductActivity)
                                     searchingProductBinding.idSearchGRV.adapter = adapter
@@ -72,6 +84,7 @@ class SearchingProductActivity : AppCompatActivity() {
 //                                    }
 
                                 }else{
+                                    progress.hide()
                                     Toast.makeText(applicationContext, "No Match found", Toast.LENGTH_LONG).show()
                                 }
 
@@ -92,6 +105,7 @@ class SearchingProductActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<UniversalSearchModal>, t: Throwable) {
+                    progress.hide()
                     Toast.makeText(applicationContext, t.message.toString(), Toast.LENGTH_SHORT).show()
                 }
 
