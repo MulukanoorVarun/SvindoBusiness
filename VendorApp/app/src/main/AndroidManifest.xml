@@ -114,7 +114,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.AddPrintingProduct"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".activity.UnitsActivity"
             android:exported="false" /> <!-- <activity -->
