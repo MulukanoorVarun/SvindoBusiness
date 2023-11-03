@@ -118,8 +118,8 @@ class AcceptOrder : AppCompatActivity() {
                                 acceptorderresponse = response.body()!!
                                 if (acceptorderresponse.error == "0") {
                                     progress.dismiss()
-                                    acceptOrderBinding.otptext.text =
-                                        acceptorderresponse.order_details.otp
+//                                    acceptOrderBinding.otptext.text =
+//                                        acceptorderresponse.order_details.otp
                                     acceptOrderBinding.name.text =
                                         acceptorderresponse.order_details.user_name
                                     acceptOrderBinding.addressTxt.text =

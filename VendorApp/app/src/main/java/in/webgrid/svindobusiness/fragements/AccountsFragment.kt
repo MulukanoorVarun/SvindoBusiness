@@ -112,6 +112,7 @@ class  AccountsFragment : Fragment() {
 //        }
 
         accountbinding.logout.setOnClickListener {
+            Logout()
             sharedPreference.clearSharedPreference()
             val intent = Intent(getActivity(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -607,6 +608,54 @@ class  AccountsFragment : Fragment() {
 //    companion object {
 //        private const val PERMISSION_REQUEST_CODE = 1001
 //    }
+
+    fun Logout(){
+        try {
+            val ordersService = ApiClient.buildService(ApiInterface::class.java)
+            val requestCall = ordersService.session_logout(sharedPreference.getValueString("token"))
+            requestCall.enqueue(object : Callback<Verify_otp_Response>{
+                override fun onResponse(
+                    call: Call<Verify_otp_Response>,
+                    response: Response<Verify_otp_Response>
+                ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    try {
+                        when {
+                            response.code() == 200 -> {
+                                if (response.isSuccessful) {
+                                    if (response.body() != null) {
+                                        shopboostresponse = response.body()!!
+                                        if (shopboostresponse.error == "0") {
+                                            Toast.makeText(context,shopboostresponse.message.toString(), Toast.LENGTH_SHORT).show()
+                                        } else{
+
+                                        }
+                                    } else {
+
+                                    }
+                                }else{
+
+                                }
+                            }
+                            response.code() == 401 -> {
+                                Toast.makeText(context,getString(R.string.session_exp), Toast.LENGTH_SHORT).show()
+                            }
+                            else -> {
+                                Toast.makeText(context,getString(R.string.server_error), Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } catch (e: TimeoutException) {
+                        Toast.makeText(context,getString(R.string.time_out), Toast.LENGTH_SHORT).show()
+                    }
+                override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    Toast.makeText(context,t.message.toString(), Toast.LENGTH_SHORT).show()
+                }
+            })
+        } catch (e: Exception) {
+            //dashboardBinding.progressBarLay.visibility = View.GONE
+            Toast.makeText(context,e.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
 
 
     fun CashbackStatus(cashbackstatus:String){

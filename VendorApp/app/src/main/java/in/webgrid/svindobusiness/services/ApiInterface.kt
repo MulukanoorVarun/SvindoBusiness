@@ -585,6 +585,12 @@ import retrofit2.http.*
     ): Call<CashbackStatusModal>
 
 
+        @POST("Home/logout")
+        fun session_logout(
+            @Header("Sessionid")  content_type:String?,
+        ): Call<Verify_otp_Response>
+
+
     @FormUrlEncoded
     @POST("Home/vendor_status_update")
     fun LocationStatusDetails(
