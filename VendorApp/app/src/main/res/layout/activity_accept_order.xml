@@ -133,7 +133,7 @@
                 android:id="@+id/deliverytype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="105dp"
+                android:layout_marginStart="80dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:text=""
@@ -213,6 +213,35 @@
                 android:textStyle="bold"
                 tools:ignore="Hardcodedtext" />
 
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/comments_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearlayout7"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="10dp"
+                android:textStyle="bold"
+                android:text="@string/comments"
+                android:textSize="15sp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/comments_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/comments"
+                android:textSize="13sp"
+                android:textColor="@color/black" />
         </LinearLayout>
 
 
@@ -666,8 +695,7 @@
                         android:drawablePadding="5dp"
                         android:textColor="@color/black"
                         android:textSize="13sp"
-                        android:textStyle="bold"
-                        />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/contactnumber"
@@ -679,7 +707,6 @@
                         android:textSize="13sp"
                         android:textStyle="bold"/>
                 </LinearLayout>
-
                 <TextView
                     android:id="@+id/callicon"
                     android:layout_width="wrap_content"

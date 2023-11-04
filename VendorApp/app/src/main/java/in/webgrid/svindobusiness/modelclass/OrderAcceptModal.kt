@@ -34,5 +34,7 @@ data class OrderDetails(
     val user_name: String,
     val porter_delivery_fee:String,
     val delivery_discount:String,
-    val delivery_type:String
+    val delivery_type:String,
+    val comment:String,
+
 )

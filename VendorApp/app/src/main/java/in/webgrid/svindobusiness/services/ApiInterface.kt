@@ -547,11 +547,20 @@ import retrofit2.http.*
 
 
     @FormUrlEncoded
-    @POST("Home/add_spotlight")
-    fun  AddSpotlight(
+    @POST("Home/self_pickup_otp_verification")
+    fun  Order_delivered(
         @Header("Sessionid")  content_type:String?,
-        @Field("product_id") product_id: String,
+        @Field("order_id") order_id: String,
+        @Field("otp") otp: String,
     ): Call<Verify_otp_Response>
+
+
+        @FormUrlEncoded
+        @POST("Home/")
+        fun  AddSpotlight(
+            @Header("Sessionid")  content_type:String?,
+            @Field("product_id") product_id: String,
+        ): Call<Verify_otp_Response>
 
 
     @FormUrlEncoded

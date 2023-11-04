@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
@@ -24,6 +25,7 @@ import `in`.webgrid.svindobusiness.Utils.showToast
 import `in`.webgrid.svindobusiness.adapters.AcceptOrderAdapter
 import `in`.webgrid.svindobusiness.adapters.ViewAddonsAdapter
 import `in`.webgrid.svindobusiness.databinding.AcceptorderlayoutdesignBinding
+import `in`.webgrid.svindobusiness.databinding.ActivityOtpBinding
 import `in`.webgrid.svindobusiness.modelclass.Verify_otp_Response
 import `in`.webgrid.svindobusiness.modelclass.ViewAddonsListModal
 import retrofit2.Call
@@ -36,6 +38,7 @@ import java.util.concurrent.TimeoutException
 private lateinit var acceptOrderBinding: ActivityAcceptOrderBinding
 class AcceptOrder : AppCompatActivity() {
     private lateinit var Binding: AcceptorderlayoutdesignBinding
+    private lateinit var otpbinding: ActivityOtpBinding
     private lateinit var sharedPreference: SharedPreference
     private lateinit var acceptorderresponse: OrderAcceptModal
     private lateinit var orderstatusresponse: Verify_otp_Response
@@ -58,6 +61,7 @@ class AcceptOrder : AppCompatActivity() {
         acceptOrderBinding = ActivityAcceptOrderBinding.inflate(layoutInflater)
 
         Binding=AcceptorderlayoutdesignBinding.inflate(layoutInflater)
+        otpbinding=ActivityOtpBinding.inflate(layoutInflater)
 
         sharedPreference = SharedPreference(this)
         setContentView(acceptOrderBinding.root)
@@ -82,25 +86,83 @@ class AcceptOrder : AppCompatActivity() {
         loginButton.setOnClickListener { this.onBackPressed()
         }
 
-//        acceptOrderBinding.acceptbutton.setOnClickListener {
-//            val i = Intent(this@AcceptOrder,ShipOrderScreen::class.java)
-//            startActivity(i)
-//        }
-
         Acceptorder(order_id!!)
 
     }
-//    internal fun showAlertDialog() {
-//        builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
-//        val binding = ViewaddonslayoutBinding.inflate(layoutInflater)
-//        builder.setView(binding.root)
-//        builder.setCancelable(true)
-//        alertDialog = builder.create()
-//        alertDialog.show()
-//        alertDialog.setCanceledOnTouchOutside(false)
-//    }
+     fun showOTPDialog(order_id: String) {
+        builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
+         val rootView = otpbinding.root
+         // Check if the rootView already has a parent
+         val parent = rootView.parent as? ViewGroup
+         parent?.removeView(rootView)
+        builder.setView(otpbinding.root)
+        builder.setCancelable(true)
+        alertDialog = builder.create()
+        alertDialog.show()
+        alertDialog.setCanceledOnTouchOutside(false)
+         otpbinding.submit.setOnClickListener {
+            if (otpbinding.firstPinView.text.toString().trim().isEmpty()) {
+                showToast("OTP should be of minimum of 6 numbers")
+                otpbinding.firstPinView.error = "Enter otp"
+            } else if (otpbinding.firstPinView.text.toString().trim().length != 6) {
+                showToast("OTP should be of minimum of 6 numbers")
+            } else if (otpbinding.firstPinView.text.toString().trim().length == 6) {
+                val otp: String = otpbinding.firstPinView.text.toString()
+                Delivered_order(
+                    order_id.toString().trim(),
+                    otp = otp.toString().trim()
+                )
+            }
+        }
+    }
+
+    internal fun Delivered_order(order_id: String, otp: String) {
+        val loginService = ApiClient.buildService(ApiInterface::class.java)
+        val requestCall = loginService.Order_delivered(
+            sharedPreference.getValueString("token"),
+            order_id,
+            otp
+        )
+//        val requestCall = loginService.vehicaldetailsupdatedetails(SessionManager.getToken(),vehical_number, vehical_model)
+        requestCall.enqueue(object : Callback<Verify_otp_Response> {
+            //if you receive http response then this method will executed
+            //your status code decide if your http response is a success or failure
+            @SuppressLint("SuspiciousIndentation")
+            override fun onResponse(
+                call: Call<Verify_otp_Response>,
+                response: Response<Verify_otp_Response>
+            ) {
+                when {
+                    response.isSuccessful -> {//status code between 200 to 299
+                        orderstatusresponse = response.body()!!
+                        if (orderstatusresponse.error == "0") {
+                            showToast(orderstatusresponse.message.toString())
+                            val intent = Intent(this@AcceptOrder, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            startActivity(intent)
+                            alertDialog.hide()
+                        }else{
+                            showToast(orderstatusresponse.message.toString())
+                            alertDialog.hide()
+                        }
+                    }
+                    response.code() == 401 -> {//unauthorised
+                        showToast(getString(R.string.session_exp))
+                    }
+                    else -> {//Application-level failure
+                        //status code in the range of 300's, 400's, and 500's
+                        showToast(getString(R.string.server_error))
+                    }
+                }
+            }
+            override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                showToast(getString(R.string.session_exp))
+            }
+        })
+    }
     fun Acceptorder(id: String) {
-    progress.show()
+      progress.show()
         try {
             // dashboardBinding.progressBarLay.visibility = View.VISIBLE
             val ordersService = ApiClient.buildService(ApiInterface::class.java)
@@ -131,14 +193,13 @@ class AcceptOrder : AppCompatActivity() {
                                     acceptOrderBinding.orderamount.text = acceptorderresponse.order_details.order_amount
                                     acceptOrderBinding.orderstatus.text =
                                         acceptorderresponse.order_details.order_status
-                                    acceptOrderBinding.orderno.text =
-                                        acceptorderresponse.order_details.order_number
-                                    acceptOrderBinding.paymentmode.text =
-                                        acceptorderresponse.order_details.payment_type
+                                    acceptOrderBinding.orderno.text = acceptorderresponse.order_details.order_number
+                                    acceptOrderBinding.paymentmode.text = acceptorderresponse.order_details.payment_type
                                     acceptOrderBinding.subsidyamt.text = acceptorderresponse.order_details.delivery_discount
                                     acceptOrderBinding.deliveryfee.text = acceptorderresponse.order_details.porter_delivery_fee
                                     acceptOrderBinding.itemtotal.text = acceptorderresponse.order_details.order_amount
                                     acceptOrderBinding.deliverytype.text = acceptorderresponse.order_details.delivery_type
+                                    acceptOrderBinding.commentsDesc.text = acceptorderresponse.order_details.comment
 
                                     if(acceptorderresponse.order_details.delivery_type=="Genral") {
                                         acceptOrderBinding.deliverytype.text = "General"
@@ -147,26 +208,50 @@ class AcceptOrder : AppCompatActivity() {
                                     }
 
 
-                                    var availability =
-                                        acceptorderresponse.order_details.is_delivery_boy_available
+                                    var availability = acceptorderresponse.order_details.is_delivery_boy_available
                                     if (availability == "0") {
                                         acceptOrderBinding.Cardview1.isVisible = false
                                     } else {
                                         acceptOrderBinding.Cardview1.isVisible = true
                                     }
-//                                OrderStatus(
-//                                    orderstatus=orderstatus.toString(),
-//                                    order_id=acceptorderresponse.order_details.id.toString())
+
                                     var order_id = acceptorderresponse.order_details.id
                                     orderstatus = acceptorderresponse.order_details.order_status
 
-                                    if (orderstatus != "Order Placed" && orderstatus != "Order Accepted"){
+                                    var delivery_type=acceptorderresponse.order_details.delivery_type
+
+                                    if ((orderstatus == "Store Pickedup" && delivery_type=="Self Pickup")){
+                                        acceptOrderBinding.acceptbutton.isVisible = true
+                                        acceptOrderBinding.rejectbutton.isVisible = false
+                                        acceptOrderBinding.linearlayout7.isVisible = true
+                                        acceptOrderBinding.commentsLayout.isVisible = false
+                                    }else if(orderstatus != "Order Placed" && orderstatus != "Order Accepted"){
                                         acceptOrderBinding.acceptbutton.isVisible = false
                                         acceptOrderBinding.rejectbutton.isVisible = false
+                                        if(orderstatus == "Exchange Requested" || orderstatus == "Exchange Accepted"){
+                                            acceptOrderBinding.linearlayout7.isVisible =false
+                                            acceptOrderBinding.commentsLayout.isVisible = true
+                                            acceptOrderBinding.acceptbutton.isVisible = true
+                                            acceptOrderBinding.rejectbutton.isVisible = false
+                                        }else if(orderstatus == "Exchanged"){
+                                                acceptOrderBinding.linearlayout7.isVisible = false
+                                                acceptOrderBinding.commentsLayout.isVisible = true
+                                        }else{
+                                            acceptOrderBinding.linearlayout7.isVisible = true
+                                            acceptOrderBinding.commentsLayout.isVisible = false
+                                        }
+
+                                    }else{
+                                        acceptOrderBinding.linearlayout7.isVisible = true
+                                        acceptOrderBinding.commentsLayout.isVisible = false
                                     }
 
                                     if (orderstatus == "Order Accepted") {
                                         acceptOrderBinding.acceptbutton.text = "Ship Order"
+                                    }else if(orderstatus == "Store Pickedup"){
+                                        acceptOrderBinding.acceptbutton.text = "Delivered Order"
+                                    }else if(orderstatus == "Exchange Accepted"){
+                                        acceptOrderBinding.acceptbutton.text = "Exchanged Order"
                                     }
 
                                         acceptOrderBinding.billdownloadbtn.setOnClickListener {
@@ -188,7 +273,6 @@ class AcceptOrder : AppCompatActivity() {
                                     }
 
                                     acceptOrderBinding.acceptbutton.setOnClickListener {
-
                                         if (orderstatus == "Order Placed"){
                                             orderstatus = "Order Accepted"
 //                                        showToast(orderstatus.toString())
@@ -199,31 +283,35 @@ class AcceptOrder : AppCompatActivity() {
                                         } else if (orderstatus == "Order Accepted") {
                                             acceptOrderBinding.acceptbutton.text = "Ship Order"
                                             orderstatus = "Store Pickedup"
-//                                        showToast(orderstatus.toString())
                                             OrderStatus(
                                                 orderstatus = orderstatus.toString(),
                                                 order_id = order_id.toString()
                                             )
+                                        } else if(orderstatus == "Exchange Requested"){
+                                            orderstatus = "Exchange Accepted"
+                                            OrderStatus(
+                                                orderstatus = orderstatus.toString(),
+                                                order_id = order_id.toString()
+                                            )
+                                        } else if(orderstatus == "Exchange Accepted"){
+                                            orderstatus = "Exchanged"
+                                            OrderStatus(
+                                                orderstatus = orderstatus.toString(),
+                                                order_id = order_id.toString()
+                                            )
+                                        } else{
+                                            showOTPDialog(order_id)
                                         }
                                     }
                                     if (acceptorderresponse.list.isNotEmpty()) {
-                                        acceptOrderBinding.acceptorderrecyclerview.visibility =
-                                            View.VISIBLE
-                                        //  acceptOrderBinding.noData.visibility = View.GONE
-                                        adapter = AcceptOrderAdapter(
-                                            acceptorderresponse.list,
-                                            applicationContext
-                                        )
-
+                                        acceptOrderBinding.acceptorderrecyclerview.visibility = View.VISIBLE
+                                        adapter = AcceptOrderAdapter(acceptorderresponse.list, applicationContext)
                                         acceptOrderBinding.acceptorderrecyclerview.adapter = adapter
                                         for (item in acceptorderresponse.list) {
-                                            // body of loop
-                                            OrderAddons(item.id);
+                                            OrderAddons(item.id)
                                         }
                                     } else {
                                         acceptOrderBinding.acceptorderrecyclerview.visibility = View.GONE
-                                        // acceptOrderBinding.noData.visibility = View.VISIBLE
-
                                     }
 
                                 }
@@ -329,20 +417,21 @@ class AcceptOrder : AppCompatActivity() {
                                 addonsresponse = response.body()!!
                                 if (addonsresponse.error=="0")
                                 {
-                                    if (addonsresponse.addon_list.isNotEmpty()) {
+                                  //  showToast("Svindo")
+                                    if(addonsresponse.addon_list.isNotEmpty() && addonsresponse.addon_list!=null){
+                                    //    showToast("hi")
                                         acceptOrderBinding.addonsrecyclerview.visibility = View.VISIBLE
-                                        //  acceptOrderBinding.noData.visibility = View.GONE
                                         adapter1 = ViewAddonsAdapter(addonsresponse.addon_list, applicationContext)
-
                                         acceptOrderBinding.addonsrecyclerview.adapter = adapter1
                                     } else {
+                                      //  showToast("varun")
                                         acceptOrderBinding.addonsrecyclerview.visibility = View.GONE
-                                        // acceptOrderBinding.noData.visibility = View.VISIBLE
-
+                                        acceptOrderBinding.Cardview.isVisible = false
                                     }
+                                }else{
+                                  //  showToast("Svindo Business")
+                                    acceptOrderBinding.Cardview.isVisible = false
                                 }
-
-
                             }
                             response.code() == 401 -> {
                                 showToast(getString(R.string.session_exp))

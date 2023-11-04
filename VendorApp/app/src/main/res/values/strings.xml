@@ -33,7 +33,7 @@
     <string name="no_data_found">No Data Found</string>
     <string name="edit_order_icon">edit order icon</string>
     <string name="order_details">Order Details</string>
-    <string name="return_order">Return Order</string>
+    <string name="return_order">Return Orders</string>
     <string name="delivery">Delivery</string>
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
@@ -402,7 +402,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="L">L</string>
     <string name="addon">Add On</string>
     <string name="reject">Reject</string>
-    <string name="accept">Accept Order</string>
+    <string name="accept">Accept</string>
     <string name="addtypeofvariety">Add Type of Varites</string>
     <string name="color">Color</string>
     <string name="fabric">Fabric</string>
@@ -463,6 +463,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="per_click_cost">Per Click Cost:</string>
     <string name="cancel_orders">Cancel Orders</string>
     <string name="descriptiontxt">Description:</string>
+    <string name="comments">Comments</string>
 
 
     <string-array name="services">

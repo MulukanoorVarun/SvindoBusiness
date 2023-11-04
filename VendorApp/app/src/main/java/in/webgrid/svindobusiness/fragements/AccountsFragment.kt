@@ -157,7 +157,7 @@ class  AccountsFragment : Fragment() {
         }
 
         accountbinding.support.setOnClickListener {
-            var supporturl="https://wa.me/919177978065"
+            var supporturl="https://wa.me/918377935333"
             if (!supporturl.startsWith("http://") && !supporturl.startsWith("https://")) {
                 supporturl = "http://$supporturl"
             }

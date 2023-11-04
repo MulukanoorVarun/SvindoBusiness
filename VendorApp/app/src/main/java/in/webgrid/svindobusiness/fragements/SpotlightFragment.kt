@@ -109,7 +109,6 @@ class SpotlightFragment : Fragment() {
 
 
     private fun checkForInternet(context: Context): Boolean {
-
         // register activity with the connectivity manager service
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 

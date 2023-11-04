@@ -40,7 +40,6 @@ class SearchingProductActivity : AppCompatActivity() {
         progress.setCanceledOnTouchOutside(true)
         progress.setCancelable(false)
 
-
        // Searchdetails("")
         searchingProductBinding.SearchPage.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -53,7 +52,6 @@ class SearchingProductActivity : AppCompatActivity() {
             }
         })
     }
-
     fun Searchdetails(text:String) {
         progress.show()
         try {
