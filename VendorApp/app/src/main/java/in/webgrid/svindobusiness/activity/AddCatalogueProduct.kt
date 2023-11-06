@@ -222,10 +222,10 @@ class AddCatalogueProduct : AppCompatActivity() {
             ProductBinding.Addaddon.isEnabled = true
         }
 
-        ProductBinding.addbtn.setOnClickListener {
-            val intent = Intent(this, AddNewProduct::class.java)
-            startActivity(intent)
-        }
+//        ProductBinding.addbtn.setOnClickListener {
+//            val intent = Intent(this, AddNewProduct::class.java)
+//            startActivity(intent)
+//        }
 //
 //        ProductBinding.addaddons.setOnClickListener {
 //            showAddonDialog()

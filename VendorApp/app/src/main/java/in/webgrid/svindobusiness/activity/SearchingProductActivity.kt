@@ -1,7 +1,9 @@
 package `in`.webgrid.svindobusiness.activity
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
@@ -40,6 +42,11 @@ class SearchingProductActivity : AppCompatActivity() {
         progress.setCanceledOnTouchOutside(true)
         progress.setCancelable(false)
 
+        searchingProductBinding.addbtn.setOnClickListener {
+            val intent = Intent(this, AddNewProduct::class.java)
+            startActivity(intent)
+        }
+
        // Searchdetails("")
         searchingProductBinding.SearchPage.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -51,6 +58,15 @@ class SearchingProductActivity : AppCompatActivity() {
                 return false
             }
         })
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+
+        val newOverride = Configuration(newBase?.resources?.configuration)
+        newOverride.fontScale = 1.0f
+        applyOverrideConfiguration(newOverride)
+
+        super.attachBaseContext(newBase)
     }
     fun Searchdetails(text:String) {
         progress.show()

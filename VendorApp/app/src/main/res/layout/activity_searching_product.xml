@@ -22,6 +22,18 @@
 <!--        android:textSize="14sp"-->
 <!--        android:text=""-->
 <!--        tools:ignore="Hardcodedtext,RtlSymmetry"/>-->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/buttonbackground"
+        android:padding="5dp"
+        android:text="+ Request to add"
+        android:textColor="@color/white"
+        tools:ignore="Hardcodedtext"/>
 
     <SearchView
         android:id="@+id/SearchPage"
@@ -30,6 +42,7 @@
         android:layout_margin="8dp"
         android:iconifiedByDefault="false"
         android:padding="4dp"
+        android:layout_below="@+id/addbtn"
         android:background="@drawable/boarder"
         android:queryHint="Search your Product" />
 
