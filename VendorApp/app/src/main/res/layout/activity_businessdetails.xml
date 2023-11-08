@@ -33,7 +33,7 @@
                         android:layout_marginTop="10dp"
                         android:text="@string/add_business_details"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
@@ -227,6 +227,8 @@
                         android:prompt="@string/prompt"
                         android:background="@drawable/bg_spinner"
                         android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:textSize="12dp"
                         android:id="@+id/categoryspinnerview" />
                     <TextView
                         android:id="@+id/Servicetype"
@@ -250,6 +252,8 @@
                         android:background="@drawable/bg_spinner"
                         android:prompt="@string/serviceprompt"
                         android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:textSize="12dp"
                         android:id="@+id/Servicesspinnerview" />
 
                     <TextView
@@ -327,6 +331,8 @@
                         android:spinnerMode="dialog"
                         android:background="@drawable/bg_spinner"
                         android:prompt="@string/zoneprompt"
+                        android:textSize="12dp"
+                        android:gravity="center"
                         android:layout_marginTop="8dp"
                         android:id="@+id/Zonesspinnerview" />
                     <TextView
@@ -352,6 +358,8 @@
                         android:layout_marginTop="8dp"
                         android:background="@drawable/bg_spinner"
                         android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:textSize="12dp"
                         android:id="@+id/SubZonesspinnerview" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -371,7 +379,7 @@
                 android:layout_toEndOf="@id/check_box"
                 android:layout_below="@+id/cardlayout"
                 android:text="By proceeding, you agree to our Terms &amp; Conditions and Privacy Policy."
-                android:textSize="11sp"
+                android:textSize="11dp"
                 android:textColor="@color/black"
                 android:layout_marginTop="13dp"
                 tools:ignore="HardcodedText" />

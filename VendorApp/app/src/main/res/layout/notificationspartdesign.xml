@@ -43,7 +43,7 @@
          android:layout_height="wrap_content"
          android:text="store Name"
          android:textColor="@color/black"
-         android:textSize="13sp"
+         android:textSize="13dp"
          android:textStyle="bold"
          android:layout_weight="1.9"
          android:layout_marginTop="6dp"
@@ -59,7 +59,7 @@
          android:drawablePadding="5dp"
          android:text="@string/day_time_mention"
          android:textColor="@color/black"
-         android:textSize="12sp"
+         android:textSize="12dp"
          tools:ignore="HardcodedText,UseCompatTextViewDrawableXml"/>
  </LinearLayout>
                 <TextView
@@ -72,7 +72,7 @@
                     android:layout_marginStart="13dp"
                     android:layout_marginBottom="10dp"
                     android:textColor="@color/black"
-                    android:textSize="12sp"
+                    android:textSize="12dp"
                     tools:ignore="HardcodedText,UseCompatTextViewDrawableXml"/>
 
             </RelativeLayout>

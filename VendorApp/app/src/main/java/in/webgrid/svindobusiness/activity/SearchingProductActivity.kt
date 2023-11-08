@@ -36,7 +36,7 @@ class SearchingProductActivity : AppCompatActivity() {
         searchingProductBinding = ActivitySearchingProductBinding.inflate(layoutInflater)
         setContentView(searchingProductBinding.root)
 
-        progress = ProgressDialog(this,5)
+        progress = ProgressDialog(this,5)   
         progress.setTitle("Svindo Business")
         progress.setMessage("Loading, Please wait.")
         progress.setCanceledOnTouchOutside(true)

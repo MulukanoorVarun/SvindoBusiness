@@ -33,7 +33,7 @@
                         android:text="Add Contact Person"
                         android:layout_weight="0.2"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText" />
                     <TextView
@@ -44,7 +44,7 @@
                         android:layout_marginEnd="20dp"
                         android:text="skip"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         tools:ignore="Hardcodedtext"/>
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
@@ -56,7 +56,8 @@
                 android:layout_gravity="center"
                 android:id="@+id/cardlayout"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/toolbar"
                 app:cardCornerRadius="20dp"
                 android:layout_marginEnd="10dp">
                 <RelativeLayout
@@ -141,7 +142,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/contactssubmitbutton"
         android:layout_width="300dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"

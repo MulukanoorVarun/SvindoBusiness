@@ -117,9 +117,6 @@ class AddSpotlightActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = items[position]
                 ItemId = selectedItem.id
-
-
-
                 addspotlightBinding.submitbutton.setBackgroundResource(R.drawable.buttonbackground);
                 addspotlightBinding.submitbutton.setOnClickListener {
                     progress.show()
@@ -157,13 +154,13 @@ class AddSpotlightActivity : AppCompatActivity() {
                             response.code() == 200 -> {
                                 spotlightResponse = response.body()!!
                                 if (spotlightResponse.error == "0") {
-                                    val i =
-                                        Intent(this@AddSpotlightActivity, MainActivity::class.java)
+                                    val i = Intent(this@AddSpotlightActivity, MainActivity::class.java)
                                     startActivity(i)
                                     progress.dismiss()
-                                    showToast(spotlightResponse.message)
+                                    showToast(spotlightResponse.message.toString())
                                 } else {
                                     progress.dismiss()
+                                    showToast(spotlightResponse.message.toString())
                                 }
                             }
 

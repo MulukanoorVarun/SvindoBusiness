@@ -34,6 +34,18 @@
         android:text="+ Request to add"
         android:textColor="@color/white"
         tools:ignore="Hardcodedtext"/>
+    <TextView
+        android:id="@+id/desc_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addbtn"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:text="Note : If you didn't get your favourite product,please Request to add product."
+        android:textSize="12dp"
+        android:textColor="@color/black"
+        tools:ignore="HardcodedText" />
 
     <SearchView
         android:id="@+id/SearchPage"
@@ -42,7 +54,7 @@
         android:layout_margin="8dp"
         android:iconifiedByDefault="false"
         android:padding="4dp"
-        android:layout_below="@+id/addbtn"
+        android:layout_below="@+id/desc_txt"
         android:background="@drawable/boarder"
         android:queryHint="Search your Product" />
 
@@ -51,9 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_margin="8dp"
             android:layout_below="@+id/SearchPage"
             android:horizontalSpacing="6dp"
             android:isScrollContainer="false"
-            android:numColumns="2"
-            android:verticalSpacing="6dp" />
+            android:numColumns="1" />
 </RelativeLayout>

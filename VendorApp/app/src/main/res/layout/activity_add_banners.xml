@@ -224,7 +224,7 @@
                             android:layout_marginStart="13dp"
                             android:text="Per View Cost:"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
+                            android:textSize="13dp"
                             tools:ignore="HardcodedText" />
                         <TextView
                             android:id="@+id/viewamt"
@@ -235,7 +235,7 @@
                             android:layout_marginStart="5dp"
                             android:textColor="@color/black"
                             android:textStyle="bold"
-                            android:textSize="13sp" />
+                            android:textSize="13dp" />
 
                         <TextView
                             android:id="@+id/perclickcost"
@@ -243,7 +243,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/per_click_cost"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="13dp" />
 
                         <TextView
                             android:id="@+id/perclickcostamt"
@@ -254,12 +254,12 @@
                             android:layout_weight="0.1"
                             android:textStyle="bold"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="13dp" />
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/maxamt"
-                        android:layout_width="150dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="13dp"
                         android:layout_below="@+id/linearlayout"

@@ -40,7 +40,7 @@ class Otpveryfiy_Activity : AppCompatActivity() {
         sharedPreference = SharedPreference(this)
         val i = intent
         val mobile_number = i.getStringExtra("TextBox")
-        val otp = intent.getStringExtra("otpcode")
+      //  val otp = intent.getStringExtra("otpcode")
 //        val otpCharArray = otp?.toCharArray()
 //        binding.firstPinView.setText(otp)
         otpverifybinding = ActivityOtpveryfiyBinding.inflate(layoutInflater)

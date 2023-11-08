@@ -35,7 +35,7 @@
                 android:text="@string/gstin_deatils"
                 android:layout_weight="0.2"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/gstskipbtn"
@@ -45,7 +45,7 @@
                 android:layout_marginEnd="20dp"
                 android:text="skip"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="15dp"
                 tools:ignore="Hardcodedtext"/>
 
 
@@ -55,9 +55,9 @@
         android:id="@+id/cardlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_below="@+id/toolbar"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
         app:cardBackgroundColor="@color/white"
         android:layout_marginEnd="10dp"
@@ -83,7 +83,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
-                android:layout_marginTop="80dp"
+                android:layout_below="@+id/tv1"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="13dp"
                 android:background="@color/white"
                 app:cardBackgroundColor="@color/white"

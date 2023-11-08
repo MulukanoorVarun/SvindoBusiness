@@ -36,8 +36,10 @@
                     android:layout_marginBottom="15dp"
                     android:gravity="center"
                     android:text=""
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

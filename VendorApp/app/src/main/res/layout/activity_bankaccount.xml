@@ -35,7 +35,7 @@
                         android:layout_weight="0.2"
                         android:text="@string/bank_acc_details"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/bankaccskipbtn"
@@ -45,7 +45,7 @@
                         android:layout_marginEnd="20dp"
                         android:text="skip"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         tools:ignore="Hardcodedtext"/>
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
@@ -57,7 +57,8 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 app:cardCornerRadius="10dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/toolbar"
                 android:layout_marginEnd="10dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -98,7 +99,7 @@
                         android:background="@drawable/boarder"
                         android:hint="Please Enter account holder name"
                         android:inputType="text"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:padding="10dp"
                         tools:ignore="HardcodedText" />
                     <TextView
@@ -127,7 +128,7 @@
                         android:background="@drawable/boarder"
                         android:hint="@string/please_enter_ifsc_code"
                         android:inputType="text"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:padding="10dp" />
 
                     <TextView
@@ -153,7 +154,7 @@
                         android:layout_below="@+id/bank_name_txt"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                         android:hint="@string/please_enter_bank_name"
                         android:inputType="text"
@@ -181,7 +182,7 @@
                         android:layout_marginTop="5dp"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:layout_below="@+id/acc_num_txt"
                         android:hint="@string/please_enter_account_number"
                         android:inputType="number"
@@ -208,7 +209,7 @@
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/boarder"
                         android:padding="10dp"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:layout_below="@+id/re_acc_num_txt"
                         android:hint="@string/re_enter_acc_num_txt"
                         android:inputType="number"

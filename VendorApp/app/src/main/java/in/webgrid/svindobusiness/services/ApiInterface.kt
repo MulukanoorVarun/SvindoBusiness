@@ -556,7 +556,7 @@ import retrofit2.http.*
 
 
         @FormUrlEncoded
-        @POST("Home/")
+        @POST("Home/add_spotlight")
         fun  AddSpotlight(
             @Header("Sessionid")  content_type:String?,
             @Field("product_id") product_id: String,
