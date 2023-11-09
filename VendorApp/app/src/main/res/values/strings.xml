@@ -313,7 +313,7 @@ Front side photo of your PAN card with your clear name and photo
     <string name="note_desc_txt">Note:  Users can send notifications only to their followers. The notification limit per user is </string>
     <string name="note_descn_txt">Notification sent by vendors will appear to their followers if they are approved by the admin. Please follow the rules for speedy approval.</string>
     <string name="notification_description">Notification Description</string>
-    <string name="note_desc_et_txt">Enter notification Description</string>
+    <string name="note_desc_et_txt">Notification Description</string>
     <string name="notification_list">Notifications List</string>
     <string name="account">Account</string>
     <string name="transaction_details">Transaction Details</string>
