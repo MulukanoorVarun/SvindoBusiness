@@ -34,6 +34,7 @@ import `in`.webgrid.svindobusiness.services.ApiClient
 import `in`.webgrid.svindobusiness.services.ApiInterface
 import `in`.webgrid.svindobusiness.Utils.SharedPreference
 import `in`.webgrid.svindobusiness.Utils.getFileSizeInMB
+import `in`.webgrid.svindobusiness.Utils.rotateImage
 import `in`.webgrid.svindobusiness.Utils.showToast
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -479,7 +480,7 @@ class AddNewProduct : AppCompatActivity() {
             }
         }
     }
-    fun compressImage(filePath: String, targetMB: Double = 1.0) : File {
+    fun compressImage(filePath: String, targetMB: Double = 0.5) : File {
         var file = File(filePath)
         var fullSizeBitmap: Bitmap = BitmapFactory.decodeFile(filePath)
         val exif = ExifInterface(filePath)
@@ -492,9 +493,10 @@ class AddNewProduct : AppCompatActivity() {
         try {
 
             val fileSizeInMB = getFileSizeInMB(filePath)
+           // showToast(fileSizeInMB.toString())
 
             var quality = 100
-            if(fileSizeInMB > targetMB){//1.0 means target MB
+            if(fileSizeInMB > targetMB){//0.5 means target MB
                 quality = ((targetMB/fileSizeInMB)*100).toInt()
             }
             val fileOutputStream = FileOutputStream(filePath)

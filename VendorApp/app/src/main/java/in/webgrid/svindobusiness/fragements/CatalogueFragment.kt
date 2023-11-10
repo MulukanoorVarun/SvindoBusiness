@@ -6,8 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import`in`.webgrid.svindobusiness.R
 import`in`.webgrid.svindobusiness.adapters.CatalogueViewPageAdapter
@@ -15,6 +21,7 @@ import`in`.webgrid.svindobusiness.databinding.FragmentCatalogueBinding
 import `in`.webgrid.svindobusiness.Utils.SharedPreference
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import `in`.webgrid.svindobusiness.adapters.ViewPagerAdapter
 
 @SuppressLint("StaticFieldLeak")
 class CatalogueFragment : Fragment() {
@@ -68,3 +75,62 @@ class CatalogueFragment : Fragment() {
     }
 
 }
+
+
+//
+//class CatalogueFragment : Fragment() {
+//
+//    @SuppressLint("MissingInflatedId")
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        val view = inflater.inflate(R.layout.fragment_catalogue, container, false)
+//
+//        val tab_toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+//        val tab_viewpager = view.findViewById<ViewPager>(R.id.viewPager)
+//        val tab_tablayout = view.findViewById<TabLayout>(R.id.tabviews)
+//
+//        // Set the Toolbar as the ActionBar
+//            (requireActivity() as AppCompatActivity).setSupportActionBar(tab_toolbar)
+//
+//        setupViewPager(tab_viewpager)
+//        tab_tablayout.setupWithViewPager(tab_viewpager)
+//
+//        return view
+//    }
+//
+//    private fun setupViewPager(viewpager: ViewPager) {
+//        val adapter = ViewPagerAdapter(childFragmentManager)
+//        adapter.addFragment(ProductsFragment(), "Products")
+//        adapter.addFragment(CategoryFragment(), "Category")
+//        adapter.addFragment(AddonFragment(), "Addon")
+//        adapter.addFragment(SpotlightFragment(), "Spotlight")
+//
+//        adapter.also { viewpager.adapter = it }
+//    }
+//
+//    inner class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+//        private val fragmentList1 = ArrayList<Fragment>()
+//        private val fragmentTitleList1 = ArrayList<String>()
+//
+//        override fun getItem(position: Int): Fragment {
+//            return fragmentList1[position]
+//        }
+//
+//        override fun getPageTitle(position: Int): CharSequence? {
+//            return fragmentTitleList1[position]
+//        }
+//
+//        override fun getCount(): Int {
+//            return fragmentList1.size
+//        }
+//
+//        fun addFragment(fragment: Fragment, title: String) {
+//            fragmentList1.add(fragment)
+//            fragmentTitleList1.add(title)
+//        }
+//    }
+//}
+//
+
