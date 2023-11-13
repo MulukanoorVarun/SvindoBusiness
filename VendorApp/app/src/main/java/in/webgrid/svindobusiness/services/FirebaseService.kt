@@ -32,7 +32,7 @@ import kotlin.random.Random
 
 @SuppressLint("Registered")
 class FirebaseService : FirebaseMessagingService() {
-    // var i: Int = 0
+
     var notificationId: Int = Random.nextInt()
     override fun onNewToken(token: String){
         super.onNewToken(token)
@@ -115,20 +115,21 @@ class FirebaseService : FirebaseMessagingService() {
             val channelDescription = getString(R.string.channel_description)
             val importance = NotificationManager.IMPORTANCE_HIGH
 
-//            val audioAttributes = AudioAttributes.Builder()
-//                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-//                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-//                .build()
-//
-//            val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance).apply {
-//                description = channelDescription
-//                setSound(Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}"), audioAttributes)
+            val audioAttributes = AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ALARM)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build()
 
             val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance).apply {
                 description = channelDescription
+                enableLights(true)
+                setSound(Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}"), audioAttributes)
+
+//            val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance).apply {
+//                description = channelDescription
             }
 
-            // Register the channel with the system
+            //Register the channel with the system
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
         }
