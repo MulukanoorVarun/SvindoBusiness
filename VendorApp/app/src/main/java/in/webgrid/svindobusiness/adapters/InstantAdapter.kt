@@ -20,6 +20,7 @@ class InstantAdapter (private var pendingOrdersList: List<OrderX>, private val c
             binding.itemno.text = data.tot_items
             binding.cost.text = data.amount
             binding.dayandtime.text = data.delivery_date
+            binding.paymentType.text = data.payment_type
 //            ("₹"+data.net_amount).also { binding.amount.text = it }
             Picasso.get().load(data.image_path).into(binding.storeImage)
             context = itemView.context

@@ -1,5 +1,4 @@
 package `in`.webgrid.svindobusiness.adapters
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -22,6 +21,7 @@ class DashboardAdapter (private var pendingOrdersList: List<OrderXXX>, private v
             binding.itemno.text = data.tot_items
             binding.cost.text = data.amount
             binding.dayandtime.text = data.delivery_date
+            binding.paymentType.text = data.payment_type
             if(data.tot_items!="1"){
                 binding.item.text="Items"
             }

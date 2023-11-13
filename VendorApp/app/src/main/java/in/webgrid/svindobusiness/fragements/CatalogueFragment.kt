@@ -53,6 +53,7 @@ class CatalogueFragment : Fragment() {
 
     private fun setupViewPager(view: View) {
         val viewPager: ViewPager2 = catalogueBinding!!.viewpager
+        viewPager.setOffscreenPageLimit(3)
         val tabs: TabLayout = catalogueBinding!!.tabviews
         viewPager.adapter = CatalogueViewPageAdapter(childFragmentManager, lifecycle)
      //   catalogueBinding!!.viewpager.adapter = adapter
@@ -72,6 +73,11 @@ class CatalogueFragment : Fragment() {
         layoutParams.width = resources.getDimensionPixelSize(R.dimen.custom_tab_width) // Set the desired width in pixels or any other dimension
         tabView.layoutParams = layoutParams
     }.attach()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        catalogueBinding = null
     }
 
 }
