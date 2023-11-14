@@ -34,6 +34,7 @@ import kotlin.random.Random
 class FirebaseService : FirebaseMessagingService() {
 
     var notificationId: Int = Random.nextInt()
+
     override fun onNewToken(token: String){
         super.onNewToken(token)
 //        d("TAG ", "Refreshed token :: $token")
@@ -60,12 +61,15 @@ class FirebaseService : FirebaseMessagingService() {
 
         //val alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound)
         val alarmSound = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
+        Log.d("Sound", "Sound URI: $alarmSound")
+
 
         try {
             val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
             r.play()
         } catch (e: Exception) {
            Log.d("TAG", "showNotification: $e")
+            Log.e("varun", "showNotification: $e")
             e.printStackTrace()
         }
 
@@ -102,10 +106,10 @@ class FirebaseService : FirebaseMessagingService() {
                     android.Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-
-                return
+                notify(notificationId, builder.build())
+            }else{
+                Log.e("TAG", "Notification permission not granted.")
             }
-            notify(notificationId, builder.build())
         }
     }
 
@@ -123,10 +127,9 @@ class FirebaseService : FirebaseMessagingService() {
             val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance).apply {
                 description = channelDescription
                 enableLights(true)
-                setSound(Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}"), audioAttributes)
 
 //            val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance).apply {
-//                description = channelDescription
+//            description = channelDescription
             }
 
             //Register the channel with the system

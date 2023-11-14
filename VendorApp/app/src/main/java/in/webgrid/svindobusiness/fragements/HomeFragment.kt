@@ -2,6 +2,7 @@ package `in`.webgrid.svindobusiness.fragements
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class HomeFragment : Fragment() {
         sharedPreference = SharedPreference(requireContext())
         dashboardBinding = FragmentHomeBinding.inflate(layoutInflater)
         }
+    @SuppressLint("LogConditional")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dashboardBinding = FragmentHomeBinding.inflate(inflater, container, false)
         dashboardBinding = FragmentHomeBinding.inflate(layoutInflater)
@@ -49,6 +51,8 @@ class HomeFragment : Fragment() {
         dashboardBinding.newordersRequestsViewRecyclerview.hasFixedSize()
        // dashboardBinding.newordersRequestsViewRecyclerview.setNestedScrollingEnabled(false)
         var session_id=sharedPreference.getValueString("session")
+      //  Log.d("varun", "Title: $session_id")
+
 
 
         linearLayoutManager1 = LinearLayoutManager(context)
