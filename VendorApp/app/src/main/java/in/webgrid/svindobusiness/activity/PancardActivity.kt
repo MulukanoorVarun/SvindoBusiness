@@ -393,9 +393,4 @@ class PancardActivity : AppCompatActivity() {
                 showToast(e.message.toString())
             }
         }
-
-
-
-
-
     }

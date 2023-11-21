@@ -29,8 +29,8 @@ class CategoryAdapter (private var productsList: List<ProductX>, private val con
         @SuppressLint("SetTextI18n")
         fun bind(data: ProductX){
             //"#${data.store_name}".also { binding.storeName.text = it }
-            binding.productname.text = data.name
-            binding.productquanity.text = data.count
+            binding.productname.text = data.name?: " "
+            binding.productquanity.text = data.count?: " "
             if(data.count!="1"){
                 binding.items.text="Items"
             }

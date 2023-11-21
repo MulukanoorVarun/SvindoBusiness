@@ -20,6 +20,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import `in`.webgrid.svindobusiness.Utils.SharedPreference
+import `in`.webgrid.svindobusiness.Utils.closeKeyBoard
 import `in`.webgrid.svindobusiness.Utils.showToast
 import`in`.webgrid.svindobusiness.modelclass.Mobileotp_Response
 import`in`.webgrid.svindobusiness.services.ApiClient
@@ -97,6 +98,7 @@ class LoginActivity : AppCompatActivity() {
                 mobileloginbinding.mobileNumberEtxt.requestFocus()
                 showToast("Mobile number should be of minimum of 10 numbers")
             } else {
+                closeKeyBoard()
                 genotp(
                     mobileloginbinding.mobileNumberEtxt.text.toString().trim(),
                 )
@@ -192,6 +194,7 @@ class LoginActivity : AppCompatActivity() {
                 response: Response<Mobileotp_Response>
             ) {
                 progress.dismiss()
+
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
 

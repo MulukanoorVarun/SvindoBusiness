@@ -26,9 +26,9 @@ class AddonsListAdapter(private var addonsList: List<AddOn>, private val context
         private lateinit var sharedPreference: SharedPreference
         private lateinit var addonsdeleteresponse: Verify_otp_Response
         fun bind(data: AddOn) {
-            binding.AddonName.text = data.name
-            binding.AddonDescription.text = data.description
-            binding.AddonPrice.text = data.price
+            binding.AddonName.text = data.name?: " "
+            binding.AddonDescription.text = data.description?: " "
+            binding.AddonPrice.text = data.price?: " "
             Picasso.get().load(data.image).into(binding.Addonimage)
             val context = itemView.context
 

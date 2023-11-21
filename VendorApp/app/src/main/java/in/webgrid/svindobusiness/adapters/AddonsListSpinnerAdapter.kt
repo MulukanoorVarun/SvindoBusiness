@@ -37,9 +37,9 @@ class AddonsListSpinnerAdapter (private val context: Context, private val itemLi
         val textView1 = view.findViewById<TextView>(R.id.spinnertext1)
         val textView2 = view.findViewById<TextView>(R.id.spinnertext2)
 
-        textView.text = item.name
-        textView1.text = item.description
-        textView2.text = item.price
+        textView.text = item.name?: " "
+        textView1.text = item.description?: " "
+        textView2.text = item.price?: " "
         // Glide.with(context).load(item.image).into(imageView)
        // Picasso.get().load(item.image).into(imageView)
         return view

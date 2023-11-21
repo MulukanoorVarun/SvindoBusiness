@@ -25,6 +25,7 @@ import`in`.webgrid.svindobusiness.modelclass.Verify_otp_Response
 import`in`.webgrid.svindobusiness.services.ApiClient
 import`in`.webgrid.svindobusiness.services.ApiInterface
 import `in`.webgrid.svindobusiness.Utils.SharedPreference
+import `in`.webgrid.svindobusiness.Utils.isNetworkAvailable
 import `in`.webgrid.svindobusiness.activity.NetworkIssueActivity
 import `in`.webgrid.svindobusiness.activity.SearchingProductActivity
 import retrofit2.Call
@@ -67,9 +68,9 @@ class ProductsFragment : Fragment() {
         productsBinding.newordersRequestsViewRecyclerview.hasFixedSize()
 
         if (checkForInternet(requireContext())) {
-            // Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show()
+          //  Toast.makeText(context, "You're Online !", Toast.LENGTH_SHORT).show()
         } else {
-            //  Toast.makeText(context, "Disconnected", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(context, "You're Offline !, Check your network connection.", Toast.LENGTH_SHORT).show()
             val intent = Intent(getActivity(), NetworkIssueActivity::class.java)
             getActivity()?.startActivity(intent)
         }
@@ -105,6 +106,8 @@ class ProductsFragment : Fragment() {
         return productsBinding.root
 
     }
+
+
     private fun checkForInternet(context: Context): Boolean {
         // register activity with the connectivity manager service
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

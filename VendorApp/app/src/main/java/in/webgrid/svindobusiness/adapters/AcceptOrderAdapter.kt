@@ -15,13 +15,13 @@ class AcceptOrderAdapter(private var ordersList: List<OrderDetailsList>, private
         private lateinit var alertDialog: AlertDialog
 
         fun bind(data: OrderDetailsList) {
-            binding.productname.text = data.name
-            binding.productunit.text = data.unit
+            binding.productname.text = data.name ?: " "
+            binding.productunit.text = data.unit ?: " "
             //binding.productquanity.text = data.quantity
-            binding.productcount.text = data.cart_quantity
-            binding.productprice.text = data.sale_price
-            binding.productprice2.text = data.total_price
-            Picasso.get().load(data.image).into(binding.productImage)
+            binding.productcount.text = data.cart_quantity ?: " "
+            binding.productprice.text = data.sale_price ?: " "
+            binding.productprice2.text = data.total_price ?: " "
+            Picasso.get().load(data.image?: " ").into(binding.productImage)
              context = itemView.context
 
 //            binding.viewaddons.setOnClickListener {

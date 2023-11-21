@@ -19,7 +19,7 @@ class BannersAdapter (private var bannersList: List<BannerXXX>, private val cont
             val context = itemView.context
 
             binding.cardclicking.setOnClickListener {
-                var url=data.url
+                var url=data.url?: " "
                 if (!url.startsWith("http://") && !url.startsWith("https://")) {
                     url = "http://$url"
                 }

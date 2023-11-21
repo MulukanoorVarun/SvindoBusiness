@@ -57,9 +57,9 @@ class InstantsFragment : Fragment() {
 
 
         if (checkForInternet(requireContext())) {
-            // Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show()
+            // Toast.makeText(context, "You're Online !", Toast.LENGTH_SHORT).show()
         } else {
-            //  Toast.makeText(context, "Disconnected", Toast.LENGTH_SHORT).show()
+              //Toast.makeText(context, "You're Offline !, Check your network connection.", Toast.LENGTH_SHORT).show()
             val intent = Intent(getActivity(), NetworkIssueActivity::class.java)
             getActivity()?.startActivity(intent)
         }
