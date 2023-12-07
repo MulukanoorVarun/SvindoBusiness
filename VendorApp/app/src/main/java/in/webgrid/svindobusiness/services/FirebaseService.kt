@@ -33,7 +33,9 @@ import kotlin.random.Random
 @SuppressLint("Registered")
 class FirebaseService : FirebaseMessagingService() {
 
-    var notificationId: Int = Random.nextInt()
+   // var notificationId: Int = Random.nextInt()
+   var i: Int = 0
+    private var alarmSound: Uri? = null
 
     override fun onNewToken(token: String){
         super.onNewToken(token)
@@ -41,6 +43,7 @@ class FirebaseService : FirebaseMessagingService() {
     }
 
     @SuppressLint("LogConditional")
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onMessageReceived(message: RemoteMessage){
         super.onMessageReceived(message)
         Log.d("TAG", "onMessageReceived: ${message.data}")
@@ -57,10 +60,10 @@ class FirebaseService : FirebaseMessagingService() {
     @SuppressLint("UnspecifiedImmutableFlag", "LogConditional")
     fun showNotification(title: String, body: String){
 
-        Log.d("TAG", "Title: $title, Body: $body")
+        Log.d("businesspartner", "Title: $title, Body: $body")
 
         //val alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound)
-        val alarmSound = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
+        alarmSound = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
         Log.d("Sound", "Sound URI: $alarmSound")
 
 
@@ -68,8 +71,7 @@ class FirebaseService : FirebaseMessagingService() {
             val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
             r.play()
         } catch (e: Exception) {
-           Log.d("TAG", "showNotification: $e")
-            Log.e("varun", "showNotification: $e")
+            Log.e("svindo", "showNotification: $e")
             e.printStackTrace()
         }
 
@@ -93,8 +95,6 @@ class FirebaseService : FirebaseMessagingService() {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(launchIntent)
             .setGroup("Backend Notifications")
-            .setVibrate(longArrayOf( 1000, 1000, 1000, 1000, 1000 ))
-            .setLights(Color.WHITE, 3000, 3000)
             .setGroupSummary(true)
             .setAutoCancel(true)
             .setSound(alarmSound)
@@ -106,32 +106,28 @@ class FirebaseService : FirebaseMessagingService() {
                     android.Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                notify(notificationId, builder.build())
+                notify(i++, builder.build())
             }else{
                 Log.e("TAG", "Notification permission not granted.")
             }
         }
     }
-
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelName = getString(R.string.channel_name)
             val channelDescription = getString(R.string.channel_description)
             val importance = NotificationManager.IMPORTANCE_HIGH
 
-            val audioAttributes = AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_ALARM)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .build()
-
-            val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance).apply {
-                description = channelDescription
-                enableLights(true)
-
-//            val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance).apply {
-//            description = channelDescription
-            }
-
+            val channel =
+                NotificationChannel(getString(R.string.channel_id), channelName, importance).apply {
+                    description = channelDescription
+                    setSound(alarmSound,
+                        AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                            .build()
+                    )
+                }
+//            channel.setSound(alarmSound, null)
             //Register the channel with the system
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)

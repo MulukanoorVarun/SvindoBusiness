@@ -71,13 +71,14 @@
             android:name=".activity.NetworkIssueActivity"
             android:exported="false" />
 
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/svindobusiness" />
+<!--        <meta-data-->
+<!--            android:name="com.google.firebase.messaging.default_notification_icon"-->
+<!--            android:resource="@drawable/svindobusiness" />-->
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAA2ukvrb1kWQZ2dttsNIMynLJqVCYYrhw" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/notification_id" />
@@ -215,11 +216,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service
-            android:name=".services.LocationService"
-            android:enabled="true"
-            android:exported="false"
-            android:foregroundServiceType="location" /> <!-- <service -->
+       <!-- <service -->
         <!-- android:name=".MyFirebaseMessagingService" -->
         <!-- android:exported="false"> -->
         <!-- <intent-filter> -->
