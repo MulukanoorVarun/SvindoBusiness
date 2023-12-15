@@ -1,13 +1,19 @@
 package `in`.webgrid.svindobusiness.activity
 
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.ContentValues.TAG
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.media.AudioAttributes
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.WindowManager
-import`in`.webgrid.svindobusiness.R
+import androidx.appcompat.app.AppCompatActivity
+import `in`.webgrid.svindobusiness.R
 import `in`.webgrid.svindobusiness.Utils.SharedPreference
 
 
@@ -16,11 +22,20 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var sharedPreference: SharedPreference
 //    private val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.CAMERA, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 //    private val permissionRequestCode = 123
+ val CHANNEL_ID = "in.webgrid.svindobusiness"
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         sharedPreference = SharedPreference(this)
+
+        if (isNotificationChannelCreated(CHANNEL_ID)) {
+            Log.d("SplashActivity", "Notification channel already exists")
+        } else {
+            Log.d("SplashActivity", "Creating notification channel")
+            // Create the notification channel
+            createNotificationChannel()
+        }
 
 //        if (checkPermissions()) {
 //            startNextActivity()
@@ -42,6 +57,32 @@ class SplashActivity : AppCompatActivity() {
             finish()
         }, 3000) // 3000 milliseconds
 
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channelName = getString(R.string.channel_name)
+            val channelDescription = getString(R.string.channel_description)
+            val importance = NotificationManager.IMPORTANCE_HIGH
+
+            val channel = NotificationChannel(CHANNEL_ID, channelName, importance).apply{
+                description = channelDescription
+            }
+//            channel.setSound(alarmSound, null)
+            //Register the channel with the system
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+            Log.d("SplashActivity", "Notification channel created")
+        }
+    }
+
+    private fun isNotificationChannelCreated(channelId: String): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            val channel = notificationManager.getNotificationChannel(channelId)
+            return channel != null
+        }
+        return false // Notification channels are not supported on versions prior to Oreo
     }
 
 

@@ -4,14 +4,9 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.TaskStackBuilder
-import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.media.AudioAttributes
-import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
@@ -20,14 +15,10 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import `in`.webgrid.svindobusiness.R
-import `in`.webgrid.svindobusiness.activity.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import java.io.IOException
-import java.net.HttpURLConnection
-import java.net.URL
-import kotlin.random.Random
+import `in`.webgrid.svindobusiness.R
+import `in`.webgrid.svindobusiness.activity.MainActivity
 
 
 @SuppressLint("Registered")
@@ -35,6 +26,7 @@ class FirebaseService : FirebaseMessagingService() {
 
    // var notificationId: Int = Random.nextInt()
    var i: Int = 0
+    val CHANNEL_ID = "in.webgrid.svindobusiness"
     private var alarmSound: Uri? = null
 
     override fun onNewToken(token: String){
@@ -87,17 +79,17 @@ class FirebaseService : FirebaseMessagingService() {
 
 
         val builder = NotificationCompat.Builder(this, getString(R.string.channel_id))
+            .setSound(alarmSound)
             .setSmallIcon(R.drawable.svindobusiness)
-          //  .setContentTitle(type)
-            .setContentTitle(title)
-            .setContentText(body)
-            .setStyle(NotificationCompat.BigTextStyle().bigText(body))
+//            .setContentTitle(title)
+//            .setContentText(body)
+        //    .setStyle(NotificationCompat.BigTextStyle().bigText(body))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(launchIntent)
             .setGroup("Backend Notifications")
             .setGroupSummary(true)
             .setAutoCancel(true)
-            .setSound(alarmSound)
+
 
 
         with(NotificationManagerCompat.from(this)) {
@@ -119,8 +111,7 @@ class FirebaseService : FirebaseMessagingService() {
             val channelDescription = getString(R.string.channel_description)
             val importance = NotificationManager.IMPORTANCE_HIGH
 
-            val channel =
-                NotificationChannel(getString(R.string.channel_id), channelName, importance).apply {
+            val channel = NotificationChannel(CHANNEL_ID, channelName, importance).apply{
                     description = channelDescription
                     setSound(alarmSound,
                         AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION)
