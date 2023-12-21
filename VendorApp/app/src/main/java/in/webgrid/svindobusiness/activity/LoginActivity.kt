@@ -84,13 +84,13 @@ class LoginActivity : AppCompatActivity() {
             mobileloginbinding.submit.setEnabled(true)
             mobileloginbinding.submit.setBackgroundResource(R.drawable.buttonbackground)
         }, 2000)
-        if (mobileloginbinding.mobileNumberEtxt.text.toString() == "9390776532") {
-            sharedPreference.save("token","1d9c1ce0e1c645c4bf02c47b99a90f7863d7562854713add0a30eaf88f7329fd6d15ecca4fb0d4400a035472ee6488bc29f7")
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
-        } else {
+//        if (mobileloginbinding.mobileNumberEtxt.text.toString() == "9390776532") {
+//            sharedPreference.save("token","1d9c1ce0e1c645c4bf02c47b99a90f7863d7562854713add0a30eaf88f7329fd6d15ecca4fb0d4400a035472ee6488bc29f7")
+//            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//            startActivity(intent)
+//        } else {
             if (mobileloginbinding.mobileNumberEtxt.text.toString().trim().isEmpty()) {
                 mobileloginbinding.mobileNumberEtxt.requestFocus()
                 mobileloginbinding.mobileNumberEtxt.error = "Enter Mobilenumber"
@@ -103,7 +103,7 @@ class LoginActivity : AppCompatActivity() {
                     mobileloginbinding.mobileNumberEtxt.text.toString().trim(),
                 )
             }
-        }
+       // }
     }
     }
 

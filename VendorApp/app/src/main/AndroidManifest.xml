@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="in.webgrid.svindobusiness">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- <uses-permission -->
     <!-- android:name="android.permission.QUERY_ALL_PACKAGES" -->
@@ -71,17 +70,13 @@
             android:name=".activity.NetworkIssueActivity"
             android:exported="false" />
 
-<!--        <meta-data-->
-<!--            android:name="com.google.firebase.messaging.default_notification_icon"-->
-<!--            android:resource="@drawable/svindobusiness" />-->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/channel_id"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAA2ukvrb1kWQZ2dttsNIMynLJqVCYYrhw" />
-
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="@string/notification_id" />
 
         <activity
             android:name=".activity.GoogleMapsActivity"

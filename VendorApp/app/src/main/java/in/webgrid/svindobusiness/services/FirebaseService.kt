@@ -25,9 +25,6 @@ class FirebaseService : FirebaseMessagingService() {
 
    // var notificationId: Int = Random.nextInt()
    var i: Int = 0
- //   val CHANNEL_ID = "in.webgrid.svindobusiness"
-    private var alarmSound: Uri? = null
-
     override fun onNewToken(token: String){
         super.onNewToken(token)
 //        d("TAG ", "Refreshed token :: $token")
@@ -53,18 +50,9 @@ class FirebaseService : FirebaseMessagingService() {
 
         Log.d("businesspartner", "Title: $title, Body: $body")
 
-        alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound)
-     //   alarmSound = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
+       // alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound)
+        val alarmSound = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
         Log.d("Sound", "Sound URI: $alarmSound")
-
-
-//        try {
-//            val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
-//            r.play()
-//        } catch (e: Exception) {
-//            Log.e("svindo", "showNotification: $e")
-//            e.printStackTrace()
-//        }
 
         var intent1  = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -87,23 +75,22 @@ class FirebaseService : FirebaseMessagingService() {
             .setGroup("Backend Notifications")
             .setGroupSummary(true)
             .setAutoCancel(true)
-            .setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound))
+            .setSound(alarmSound)
 
-        try {
-            val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
-            r.play()
-        } catch (e: Exception) {
-            Log.e("svindo", "showNotification: $e")
-            e.printStackTrace()
-        }
-
+//        try {
+//            val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
+//            r.play()
+//        } catch (e: Exception) {
+//            Log.e("svindo", "showNotification: $e")
+//            e.printStackTrace()
+//        }
+//
 
 
         with(NotificationManagerCompat.from(this)) {
                 notify(i++, builder.build())
         }
     }
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelName = getString(R.string.channel_name)
@@ -111,15 +98,13 @@ class FirebaseService : FirebaseMessagingService() {
             val importance = NotificationManager.IMPORTANCE_HIGH
             val audioAttributes = AudioAttributes.Builder()
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                .setUsage(AudioAttributes.USAGE_ALARM)
                 .build()
-            val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance).apply{
-                    description = channelDescription
-                setSound(alarmSound, audioAttributes)
-//                    )
-                }
-           // channel.setSound(alarmSound, audioAttributes)
-            //Register the channel with the system
+            val Sound = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
+            val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance)
+            channel.description = channelDescription
+            channel.setSound(Sound, audioAttributes)
+            channel.enableVibration(true)
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
         }
