@@ -4,15 +4,14 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.TaskStackBuilder
+import android.content.ContentResolver
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.media.AudioAttributes
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -26,7 +25,7 @@ class FirebaseService : FirebaseMessagingService() {
 
    // var notificationId: Int = Random.nextInt()
    var i: Int = 0
-    val CHANNEL_ID = "in.webgrid.svindobusiness"
+ //   val CHANNEL_ID = "in.webgrid.svindobusiness"
     private var alarmSound: Uri? = null
 
     override fun onNewToken(token: String){
@@ -54,18 +53,18 @@ class FirebaseService : FirebaseMessagingService() {
 
         Log.d("businesspartner", "Title: $title, Body: $body")
 
-        //val alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound)
-        alarmSound = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
+        alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound)
+     //   alarmSound = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
         Log.d("Sound", "Sound URI: $alarmSound")
 
 
-        try {
-            val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
-            r.play()
-        } catch (e: Exception) {
-            Log.e("svindo", "showNotification: $e")
-            e.printStackTrace()
-        }
+//        try {
+//            val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
+//            r.play()
+//        } catch (e: Exception) {
+//            Log.e("svindo", "showNotification: $e")
+//            e.printStackTrace()
+//        }
 
         var intent1  = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -79,29 +78,29 @@ class FirebaseService : FirebaseMessagingService() {
 
 
         val builder = NotificationCompat.Builder(this, getString(R.string.channel_id))
-            .setSound(alarmSound)
             .setSmallIcon(R.drawable.svindobusiness)
-//            .setContentTitle(title)
-//            .setContentText(body)
-        //    .setStyle(NotificationCompat.BigTextStyle().bigText(body))
+            .setContentTitle(title)
+            .setContentText(body)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(body))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(launchIntent)
             .setGroup("Backend Notifications")
             .setGroupSummary(true)
             .setAutoCancel(true)
+            .setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound))
+
+        try {
+            val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
+            r.play()
+        } catch (e: Exception) {
+            Log.e("svindo", "showNotification: $e")
+            e.printStackTrace()
+        }
 
 
 
         with(NotificationManagerCompat.from(this)) {
-          //   notificationId is a unique int for each notification that you must define
-            if (ActivityCompat.checkSelfPermission(applicationContext,
-                    android.Manifest.permission.POST_NOTIFICATIONS
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
                 notify(i++, builder.build())
-            }else{
-                Log.e("TAG", "Notification permission not granted.")
-            }
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)
@@ -110,15 +109,16 @@ class FirebaseService : FirebaseMessagingService() {
             val channelName = getString(R.string.channel_name)
             val channelDescription = getString(R.string.channel_description)
             val importance = NotificationManager.IMPORTANCE_HIGH
-
-            val channel = NotificationChannel(CHANNEL_ID, channelName, importance).apply{
+            val audioAttributes = AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                .build()
+            val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance).apply{
                     description = channelDescription
-                    setSound(alarmSound,
-                        AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION)
-                            .build()
-                    )
+                setSound(alarmSound, audioAttributes)
+//                    )
                 }
-//            channel.setSound(alarmSound, null)
+           // channel.setSound(alarmSound, audioAttributes)
             //Register the channel with the system
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
