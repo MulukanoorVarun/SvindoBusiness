@@ -7,6 +7,7 @@ import android.app.TaskStackBuilder
 import android.content.ContentResolver
 import android.content.Intent
 import android.media.AudioAttributes
+import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
@@ -54,6 +55,27 @@ class FirebaseService : FirebaseMessagingService() {
         val alarmSound = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
         Log.d("Sound", "Sound URI: $alarmSound")
 
+//        try {
+//            val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
+//            r.play()
+//        } catch (e: Exception) {
+//            Log.e("MediaPlayerError", "Error playing notification sound: $e")
+//            e.printStackTrace()
+//        }
+//        try {
+//            val mediaPlayer = MediaPlayer.create(applicationContext, alarmSound)
+//            if (mediaPlayer != null && mediaPlayer.isPlaying) {
+//                mediaPlayer.stop()
+//                mediaPlayer.release()
+//            }
+//            mediaPlayer.setOnCompletionListener { mp -> mp.release() }
+//            mediaPlayer.start()
+//            mediaPlayer.prepareAsync()
+//        } catch (e: Exception) {
+//            Log.e("svindo", "showNotification: $e")
+//            e.printStackTrace()
+//        }
+
         var intent1  = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -77,16 +99,6 @@ class FirebaseService : FirebaseMessagingService() {
             .setAutoCancel(true)
             .setSound(alarmSound)
 
-//        try {
-//            val r = RingtoneManager.getRingtone(applicationContext,alarmSound)
-//            r.play()
-//        } catch (e: Exception) {
-//            Log.e("svindo", "showNotification: $e")
-//            e.printStackTrace()
-//        }
-//
-
-
         with(NotificationManagerCompat.from(this)) {
                 notify(i++, builder.build())
         }
@@ -100,11 +112,11 @@ class FirebaseService : FirebaseMessagingService() {
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                 .setUsage(AudioAttributes.USAGE_ALARM)
                 .build()
-            val Sound = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
+            val SoundUri = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
+            Log.d("SoundUri", "Sound URI: $SoundUri")
             val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance)
             channel.description = channelDescription
-            channel.setSound(Sound, audioAttributes)
-            channel.enableVibration(true)
+            channel.setSound(SoundUri, audioAttributes)
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
         }
