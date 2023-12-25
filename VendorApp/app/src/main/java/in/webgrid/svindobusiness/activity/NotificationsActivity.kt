@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -66,6 +67,8 @@ class NotificationsActivity : AppCompatActivity() {
     lateinit var progress: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
         notificationsBinding = ActivityNotificationsBinding.inflate(layoutInflater)
         //sharedPreference = SharedPreference(this)

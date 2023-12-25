@@ -1,20 +1,19 @@
 package `in`.webgrid.svindobusiness.services
+
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.TaskStackBuilder
-import android.content.ContentResolver
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.media.AudioAttributes
 import android.media.MediaPlayer
-import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import `in`.webgrid.svindobusiness.R
@@ -22,7 +21,7 @@ import `in`.webgrid.svindobusiness.activity.MainActivity
 
 
 @SuppressLint("Registered")
-class FirebaseService : FirebaseMessagingService() {
+    class FirebaseService : FirebaseMessagingService() {
 
    // var notificationId: Int = Random.nextInt()
    var i: Int = 0
@@ -40,8 +39,16 @@ class FirebaseService : FirebaseMessagingService() {
         val title : String = message.notification?.title!!
         val body : String = message.notification?.body!!
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            createNotificationChannel()
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//            createNotificationChannel()
+//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel =
+                NotificationChannel(getString(R.string.channel_id), "notification", NotificationManager.IMPORTANCE_HIGH)
+            val notificationManager = getSystemService(
+                NotificationManager::class.java
+            )
+            notificationManager.createNotificationChannel(channel)
         }
         showNotification(title,body)
     }
@@ -87,38 +94,60 @@ class FirebaseService : FirebaseMessagingService() {
 
 
 
-        val builder = NotificationCompat.Builder(this, getString(R.string.channel_id))
+            var CHANNEL_ID = getString(R.string.channel_id)
+
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.svindobusiness)
+            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.svindobusiness))
             .setContentTitle(title)
             .setContentText(body)
+            .setAutoCancel(true)
+//            .setSound(alarmSound)
             .setStyle(NotificationCompat.BigTextStyle().bigText(body))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(launchIntent)
+//            .setContentIntent(launchIntent)
             .setGroup("Backend Notifications")
-            .setGroupSummary(true)
-            .setAutoCancel(true)
-            .setSound(alarmSound)
+            val notificationSound: MediaPlayer =
+                MediaPlayer.create(this, R.raw.svindonotificationsound)
+            notificationSound.start()
 
-        with(NotificationManagerCompat.from(this)) {
-                notify(i++, builder.build())
-        }
+        val notificationManager = getSystemService(
+            NotificationManager::class.java
+        )
+            notificationManager.notify(i++,builder.build());
+//            .setGroupSummary(true)
+//            .setAutoCancel(false)
+
+
+
+//        with(NotificationManagerCompat.from(this)) {
+//                notify(i++, builder.build())
+//        }
     }
+
+
+
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelName = getString(R.string.channel_name)
             val channelDescription = getString(R.string.channel_description)
             val importance = NotificationManager.IMPORTANCE_HIGH
+
             val audioAttributes = AudioAttributes.Builder()
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .setUsage(AudioAttributes.USAGE_ALARM)
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
                 .build()
-            val SoundUri = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
-            Log.d("SoundUri", "Sound URI: $SoundUri")
-            val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance)
-            channel.description = channelDescription
-            channel.setSound(SoundUri, audioAttributes)
-            val notificationManager = getSystemService(NotificationManager::class.java)
-            notificationManager.createNotificationChannel(channel)
+            Log.d("Sound", "Sound URI: AKASH")
+//            notification.sound =Uri.parse("android.resource://"+context.getPackageName()+"/"+R.raw.FILE_NAME);//Here is FILE_NAME is the name of file that you want to play
+
+
+//            val SoundUri = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
+//            Log.d("SoundUri", "Sound URI: $SoundUri")
+//            val channel = NotificationChannel(getString(R.string.channel_id), channelName, importance)
+//            channel.description = channelDescription
+//            channel.setSound(SoundUri, audioAttributes)
+//            val notificationManager = getSystemService(NotificationManager::class.java)
+//            notificationManager.createNotificationChannel(channel)
         }
     }
 
