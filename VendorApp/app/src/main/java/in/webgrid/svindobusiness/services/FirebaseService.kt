@@ -1,10 +1,12 @@
 package `in`.webgrid.svindobusiness.services
 
 import android.annotation.SuppressLint
+import android.app.ActivityManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.TaskStackBuilder
+import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.AudioAttributes
@@ -43,11 +45,15 @@ import `in`.webgrid.svindobusiness.activity.MainActivity
 //            createNotificationChannel()
 //        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel =
-                NotificationChannel(getString(R.string.channel_id), "notification", NotificationManager.IMPORTANCE_HIGH)
-            val notificationManager = getSystemService(
-                NotificationManager::class.java
+            val channel = NotificationChannel(getString(R.string.channel_id), "notification", NotificationManager.IMPORTANCE_HIGH)
+
+            channel.setSound(Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}"),
+                AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .build()
             )
+            val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
         }
         showNotification(title,body)
@@ -106,14 +112,11 @@ import `in`.webgrid.svindobusiness.activity.MainActivity
             .setStyle(NotificationCompat.BigTextStyle().bigText(body))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 //            .setContentIntent(launchIntent)
-            .setGroup("Backend Notifications")
-            val notificationSound: MediaPlayer =
-                MediaPlayer.create(this, R.raw.svindonotificationsound)
+          //  .setGroup("Backend Notifications")
+            val notificationSound: MediaPlayer = MediaPlayer.create(this, R.raw.svindonotificationsound)
             notificationSound.start()
 
-        val notificationManager = getSystemService(
-            NotificationManager::class.java
-        )
+           val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.notify(i++,builder.build());
 //            .setGroupSummary(true)
 //            .setAutoCancel(false)
@@ -124,6 +127,7 @@ import `in`.webgrid.svindobusiness.activity.MainActivity
 //                notify(i++, builder.build())
 //        }
     }
+
 
 
 
