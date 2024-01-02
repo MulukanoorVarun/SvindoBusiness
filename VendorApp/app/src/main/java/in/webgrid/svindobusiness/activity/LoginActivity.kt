@@ -5,17 +5,23 @@ import android.os.Bundle
 import`in`.webgrid.svindobusiness.R
 import`in`.webgrid.svindobusiness.databinding.MobilenumberloginBinding
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.AlertDialog
+import android.app.NotificationManager
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Build
 import android.os.Handler
+import android.provider.Settings
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
@@ -43,6 +49,10 @@ class LoginActivity : AppCompatActivity() {
     private val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.CAMERA, android.Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.POST_NOTIFICATIONS)
     private val permissionRequestCode = 123
     private lateinit var locationRequest: LocationRequest
+
+    private val NOTIFICATION_PERMISSION_REQUEST_CODE = 123
+
+
 //    private lateinit var genrateotpresponse: GenrateotpResponse
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,7 +99,7 @@ class LoginActivity : AppCompatActivity() {
             mobileloginbinding.submit.setBackgroundResource(R.drawable.buttonbackground)
         }, 2000)
         if (mobileloginbinding.mobileNumberEtxt.text.toString() == "9390776532") {
-            sharedPreference.save("token","238f3a40037df8606fe10a4b1626484ef824538013a5fae3edd25bf406c6a638eaae14a038b1d645f84289aad73484aecfeb")
+            sharedPreference.save("token","b60a35abaece1e0f1b291038dc7319419af4e96f7cfa4684eaa16da2c413a82fc09cade99af0d92f6c3a7338fd8248d6f484")
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -109,6 +119,50 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+    checkAndRequestNotificationPermission()
+
+    }
+
+    private fun checkAndRequestNotificationPermission() {
+        if (!isNotificationPermissionGranted()) {
+            // Notification permission not granted, request it
+            showNotificationPermissionDialog()
+        }
+    }
+
+    private fun isNotificationPermissionGranted(): Boolean {
+        return NotificationManagerCompat.from(this).areNotificationsEnabled()
+    }
+
+    private fun showNotificationPermissionDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Notification Permission Required")
+            .setMessage("This feature requires notification permission. Please grant the permission to enable notifications.")
+            .setPositiveButton("Go to Settings") {  _, _ ->
+                openNotificationSettings()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    private fun openNotificationSettings() {
+        val intent = Intent()
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
+                intent.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
+                intent.putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+            }
+            else -> {
+                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                intent.addCategory(Intent.CATEGORY_DEFAULT)
+                intent.data = Uri.parse("package:$packageName")
+            }
+        }
+        startActivity(intent)
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
