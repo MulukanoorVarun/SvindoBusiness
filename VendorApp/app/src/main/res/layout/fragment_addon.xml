@@ -6,9 +6,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addonbtn"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/white"
+            android:textSize="13dp"
+            android:background="@drawable/buttonbackground"
+            android:padding="5dp"
+            android:text="@string/add_new_addon" />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/addonbtn"
             android:layout_marginStart="5dp"
             android:id="@+id/AddonsRecyclerview" />
         <include
@@ -29,16 +43,5 @@
             android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="16sp"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addonbtn"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/white"
-            android:background="@drawable/buttonbackground"
-            android:padding="5dp"
-            android:text="@string/add_new_addon" />
     </RelativeLayout>
 </layout>

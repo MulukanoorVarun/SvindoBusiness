@@ -512,6 +512,13 @@ import retrofit2.http.*
         @Field("id") id: String,
     ): Call<Bankdetails_Response>
 
+        @FormUrlEncoded
+        @POST("Home/fetch_addon_details")
+        fun Addonsdetails(
+            @Header("Sessionid") content_type:String?,
+            @Field("id") id: String,
+        ): Call<Addon_details_modal>
+
 
     @POST("Home/addon_icons")
     fun AddonsIconsDetails(

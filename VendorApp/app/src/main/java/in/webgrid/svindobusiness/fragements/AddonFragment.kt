@@ -48,6 +48,7 @@ class AddonFragment : Fragment() {
     private lateinit var addonsresponse: Bankdetails_Response
     private lateinit var addonsListresponse: AddonsListModal
     private lateinit var addonsIconsModalresponse: AddonIconsModal
+    private lateinit var addon_details_response: Addon_details_modal
     private lateinit var adapter: AddonsListAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
@@ -440,12 +441,57 @@ class AddonFragment : Fragment() {
             ) {
                 val selectedItem = items[position]
                 addon_id = selectedItem.id
+                fetch_addon_details(addon_id)
                 Picasso.get().load(selectedItem.image).into(binding.Addonimage)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // Do nothing when nothing is selected
             }
         }
+    }
+
+    fun fetch_addon_details(id:String){
+        try {
+            val add_addon_Service = ApiClient.buildService(ApiInterface::class.java)
+            val requestCall = add_addon_Service.Addonsdetails(sharedPreference.getValueString("token"),id)
+            requestCall.enqueue(object : Callback<Addon_details_modal> {
+                override fun onResponse(
+                    call: Call<Addon_details_modal>,
+                    response: Response<Addon_details_modal>
+                ) = //dashboardBinding.progressBarLay.visibility  = View.GONE
+                    try {
+                        when {
+                            response.code() == 200 -> {
+                                addon_details_response = response.body()!!
+                                if (addon_details_response.error == "0") {
+                                    binding.addonnameEt.setText(addon_details_response.addon_details.name)
+                                    binding.addondescEt.setText(addon_details_response.addon_details.description)
+                                } else {
+
+                                }
+                            }
+                            response.code() == 401 -> {
+                                Toast.makeText(context,getString(R.string.session_exp),Toast.LENGTH_SHORT).show()
+
+                            }
+                            else -> {
+                                Toast.makeText(context,getString(R.string.server_error),Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } catch (e: TimeoutException) {
+                        Toast.makeText(context,getString(R.string.time_out),Toast.LENGTH_SHORT).show()
+                    }
+
+                override fun onFailure(call: Call<Addon_details_modal>, t: Throwable) {
+                    //  dashboardBinding.progressBarLay.visibility  = View.GONE
+                    Toast.makeText(context,t.message.toString(),Toast.LENGTH_SHORT).show()
+                }
+            })
+        } catch (e: Exception) {
+            //dashboardBinding.progressBarLay.visibility = View.GONE
+            Toast.makeText(context,e.message.toString(),Toast.LENGTH_SHORT).show()
+        }
+
     }
 }
 
