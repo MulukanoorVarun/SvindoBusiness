@@ -212,7 +212,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
 
             if (addresses!!.isNotEmpty()) {
                  address = addresses[0].getAddressLine(0)
-                val locationDetails = "${latLng.latitude} ${latLng.longitude}"
+                val locationDetails = "${latLng.latitude}, ${latLng.longitude}"
                 mapsBinding.edtLocation.setText(locationDetails)
                 mapsBinding.location.setOnClickListener {
                     sharedPreference.save("latlong",locationDetails)

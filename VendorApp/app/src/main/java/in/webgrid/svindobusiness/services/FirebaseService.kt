@@ -41,9 +41,13 @@ import `in`.webgrid.svindobusiness.activity.MainActivity
         val title : String = message.notification?.title!!
         val body : String = message.notification?.body!!
 
+        val notificationSound: MediaPlayer = MediaPlayer.create(this, R.raw.svindonotificationsound)
+        notificationSound.start()
+
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
 //            createNotificationChannel()
 //        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(getString(R.string.channel_id), "notification", NotificationManager.IMPORTANCE_HIGH)
 
@@ -64,7 +68,6 @@ import `in`.webgrid.svindobusiness.activity.MainActivity
 
         Log.d("businesspartner", "Title: $title, Body: $body")
 
-       // alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + applicationContext.packageName + "/" + R.raw.svindonotificationsound)
         val alarmSound = Uri.parse("android.resource://${applicationContext.packageName}/${R.raw.svindonotificationsound}")
         Log.d("Sound", "Sound URI: $alarmSound")
 
@@ -73,19 +76,6 @@ import `in`.webgrid.svindobusiness.activity.MainActivity
 //            r.play()
 //        } catch (e: Exception) {
 //            Log.e("MediaPlayerError", "Error playing notification sound: $e")
-//            e.printStackTrace()
-//        }
-//        try {
-//            val mediaPlayer = MediaPlayer.create(applicationContext, alarmSound)
-//            if (mediaPlayer != null && mediaPlayer.isPlaying) {
-//                mediaPlayer.stop()
-//                mediaPlayer.release()
-//            }
-//            mediaPlayer.setOnCompletionListener { mp -> mp.release() }
-//            mediaPlayer.start()
-//            mediaPlayer.prepareAsync()
-//        } catch (e: Exception) {
-//            Log.e("svindo", "showNotification: $e")
 //            e.printStackTrace()
 //        }
 
@@ -111,13 +101,12 @@ import `in`.webgrid.svindobusiness.activity.MainActivity
 //            .setSound(alarmSound)
             .setStyle(NotificationCompat.BigTextStyle().bigText(body))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-//            .setContentIntent(launchIntent)
+            .setContentIntent(launchIntent)
           //  .setGroup("Backend Notifications")
-            val notificationSound: MediaPlayer = MediaPlayer.create(this, R.raw.svindonotificationsound)
-            notificationSound.start()
+
 
            val notificationManager = getSystemService(NotificationManager::class.java)
-            notificationManager.notify(i++,builder.build());
+            notificationManager.notify(i++,builder.build())
 //            .setGroupSummary(true)
 //            .setAutoCancel(false)
 

@@ -318,7 +318,7 @@ class  AccountsFragment : Fragment() {
         }
         }
 
-    fun showreportsdialog(){
+    fun showreportsdialog() {
         builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
         val rootView = reportbinding.root
         // Check if the rootView already has a parent
