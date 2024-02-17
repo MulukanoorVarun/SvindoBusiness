@@ -117,6 +117,7 @@ class AcceptOrder : AppCompatActivity() {
     }
 
     internal fun Delivered_order(order_id: String, otp: String) {
+        progress.show()
         val loginService = ApiClient.buildService(ApiInterface::class.java)
         val requestCall = loginService.Order_delivered(
             sharedPreference.getValueString("token"),
@@ -131,11 +132,12 @@ class AcceptOrder : AppCompatActivity() {
             override fun onResponse(
                 call: Call<Verify_otp_Response>,
                 response: Response<Verify_otp_Response>
-            ) {
+            ) {progress.dismiss()
                 when {
                     response.isSuccessful -> {//status code between 200 to 299
                         orderstatusresponse = response.body()!!
                         if (orderstatusresponse.error == "0") {
+                            progress.dismiss()
                             showToast(orderstatusresponse.message.toString())
                             val intent = Intent(this@AcceptOrder, MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -157,6 +159,7 @@ class AcceptOrder : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<Verify_otp_Response>, t: Throwable) {
+                progress.dismiss()
                 showToast(getString(R.string.session_exp))
             }
         })
