@@ -1,15 +1,19 @@
 package `in`.webgrid.svindobusiness.activity
 
 import android.annotation.SuppressLint
+import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Rational
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -168,19 +172,19 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingSuperCall")
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        AlertDialog.Builder(this)
-            .setTitle("Really Exit?")
-            .setMessage("Are you sure you want to exit?")
-            .setNegativeButton(android.R.string.no, null)
-            .setPositiveButton(
-                android.R.string.yes
-            ) { arg0, arg1 ->
-                setResult(RESULT_OK, Intent().putExtra("EXIT", true))
-//                val i = Intent(this@BusinessdetailsActivity, SplashActivity::class.java)
-//                startActivity(i)
-                moveTaskToBack(true)
-                exitProcess(-1)
-            }.create().show()
+//        AlertDialog.Builder(this)
+//            .setTitle("Really Exit?")
+//            .setMessage("Are you sure you want to exit?")
+//            .setNegativeButton(android.R.string.no, null)
+//            .setPositiveButton(
+//                android.R.string.yes
+//            ) { arg0, arg1 ->
+//                setResult(RESULT_OK, Intent().putExtra("EXIT", true))
+//                enterPictureInPictureMode()
+//                moveTaskToBack(true)
+//                exitProcess(-1)
+//            }.create().show()
+        enterPictureInPictureMode()
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -190,5 +194,45 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
 
         activeFragment = fragment
+    }
+
+    override fun onUserLeaveHint() {
+        super.onUserLeaveHint()
+        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.O) {
+            val aspectRatio = Rational(16, 9) // Example aspect ratio
+            val params = PictureInPictureParams.Builder().setAspectRatio(aspectRatio).build()
+            enterPictureInPictureMode(params)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onPictureInPictureModeChanged(
+        isInPictureInPictureMode: Boolean,
+        newConfig: Configuration
+    ) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
+        if (isInPictureInPictureMode) {
+            // The activity is in picture-in-picture mode.
+            // Resize your UI, show custom buttons, etc.
+        } else {
+            // The activity is not in picture-in-picture mode.
+            // Restore UI state, hide custom buttons, etc.
+        }
+    }
+
+    override fun onPictureInPictureRequested(): Boolean {
+        super.onPictureInPictureRequested()
+
+        // This method is called when the user triggers the picture-in-picture mode
+        // You can choose whether to enter picture-in-picture mode here or in another part of your app
+        // Typically, you would enter picture-in-picture mode when the user leaves the activity
+        return true
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (!isInPictureInPictureMode) {
+            // Activity is finishing, restore UI state if needed
+        }
     }
 }

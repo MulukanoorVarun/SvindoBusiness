@@ -26,7 +26,7 @@
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
+            android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <uses-feature
@@ -226,6 +226,8 @@
         <activity
             android:name=".activity.MainActivity"
             android:exported="false"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.RegistrationActivity"
@@ -253,6 +255,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <service android:name=".services.NotificationForegroundService"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
        <!-- <service -->
         <!-- android:name=".MyFirebaseMessagingService" -->
         <!-- android:exported="false"> -->

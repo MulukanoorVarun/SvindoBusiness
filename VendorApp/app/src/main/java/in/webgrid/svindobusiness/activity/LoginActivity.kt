@@ -68,7 +68,10 @@ class LoginActivity : AppCompatActivity() {
   //  showToast(sharedPreference.getValueString("token").toString())
     if(sharedPreference.getValueString("token")!=null)
     {
-        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
     }
         lateinit var otp: String
         val responseMessage = intent.getStringExtra("response_message")
@@ -98,8 +101,8 @@ class LoginActivity : AppCompatActivity() {
             mobileloginbinding.submit.setEnabled(true)
             mobileloginbinding.submit.setBackgroundResource(R.drawable.buttonbackground)
         }, 2000)
-        if (mobileloginbinding.mobileNumberEtxt.text.toString() == "9390776532") {
-            sharedPreference.save("token","b60a35abaece1e0f1b291038dc7319419af4e96f7cfa4684eaa16da2c413a82fc09cade99af0d92f6c3a7338fd8248d6f484")
+        if (mobileloginbinding.mobileNumberEtxt.text.toString() == "9908265543") {
+            sharedPreference.save("token","875d11baf1a3eafded2b5cfe832a534935acba75df6c5e6df5c306af0a336724f4beb90a09199ea7c1e51a8710e2344002f1")
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
