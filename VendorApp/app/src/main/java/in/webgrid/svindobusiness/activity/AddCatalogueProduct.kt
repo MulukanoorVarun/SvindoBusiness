@@ -389,6 +389,8 @@ class AddCatalogueProduct : AppCompatActivity() {
                                 if (productdetailsResponse.error == "0") {
                                     showToast(productdetailsResponse.message.toString())
                                     val i = Intent(this@AddCatalogueProduct, MainActivity::class.java)
+                                    i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                     startActivity(i)
                                     progress.dismiss()
                                 } else {

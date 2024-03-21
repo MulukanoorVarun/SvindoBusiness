@@ -101,8 +101,8 @@ class LoginActivity : AppCompatActivity() {
             mobileloginbinding.submit.setEnabled(true)
             mobileloginbinding.submit.setBackgroundResource(R.drawable.buttonbackground)
         }, 2000)
-        if (mobileloginbinding.mobileNumberEtxt.text.toString() == "9908265543") {
-            sharedPreference.save("token","875d11baf1a3eafded2b5cfe832a534935acba75df6c5e6df5c306af0a336724f4beb90a09199ea7c1e51a8710e2344002f1")
+        if (mobileloginbinding.mobileNumberEtxt.text.toString() == "9999999999") {
+            sharedPreference.save("token","c9712cdbfce47c77a126457b6855bc91e057e80a047b15ed5c12b58d0801f0ffe0c2629e4a227e01b9726867d9c6d94f03f9")
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
