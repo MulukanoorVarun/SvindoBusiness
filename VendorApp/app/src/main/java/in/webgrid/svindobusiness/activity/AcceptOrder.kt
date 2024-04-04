@@ -104,9 +104,9 @@ class AcceptOrder : AppCompatActivity() {
             if (otpbinding.firstPinView.text.toString().trim().isEmpty()) {
                 showToast("OTP should be of minimum of 6 numbers")
                 otpbinding.firstPinView.error = "Enter otp"
-            } else if (otpbinding.firstPinView.text.toString().trim().length != 6) {
+            } else if (otpbinding.firstPinView.text.toString().trim().length != 4) {
                 showToast("OTP should be of minimum of 6 numbers")
-            } else if (otpbinding.firstPinView.text.toString().trim().length == 6) {
+            } else if (otpbinding.firstPinView.text.toString().trim().length == 4) {
                 val otp: String = otpbinding.firstPinView.text.toString()
                 Delivered_order(
                     order_id.toString().trim(),

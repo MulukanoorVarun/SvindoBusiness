@@ -32,6 +32,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginEnd="5dp"
                 android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
                 tools:ignore="UselessParent">
                 <com.chaos.view.PinView
                     android:id="@+id/firstPinView"
@@ -46,7 +47,7 @@
                     android:textStyle="bold"
                     app:cursorWidth="1dp"
                     app:hideLineWhenFilled="true"
-                    app:itemCount="6"
+                    app:itemCount="4"
                     app:itemHeight="40dp"
                     app:itemRadius="4dp"
                     app:itemSpacing="6dp"
@@ -63,7 +64,7 @@
                 android:textColor="@color/white"
                 android:scaleType="center"
                 android:gravity="center"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="130dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/buttonbackground"/>
         </androidx.cardview.widget.CardView>
