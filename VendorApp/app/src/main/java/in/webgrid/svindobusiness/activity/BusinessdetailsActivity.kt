@@ -769,33 +769,38 @@ class BusinessdetailsActivity : AppCompatActivity() {
                         //    print(businessdetailsResponse)
                                 sharedPreference.save("token", businessdetailsResponse.token);
                                 showToast(businessdetailsResponse.message)
-                            if(sericeitem=="Food")
-                            {
-                                sharedPreference.save("gst_skip_enable","1")
-                                val i = Intent(this@BusinessdetailsActivity, FssaiActivity::class.java)
-                               i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                  i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                startActivity(i)
-                            }
-                            else if(sericeitem=="Services")
-                            {
-                                sharedPreference.save("gst_skip_enable","1")
-                                val i = Intent(this@BusinessdetailsActivity, GstinActivity::class.java)
-                                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                startActivity(i)
-                            }
-                            else if(sericeitem=="Product Sales"){
-                                if(sericeitem=="Product Sales") {
-                                    sharedPreference.save("gst_skip_enable","0")
-//                                    gstinBinding.skipbtn.isEnabled = false
-//                                    gstinBinding.skipbtn.isClickable = false
-                                }
-                                val i = Intent(this@BusinessdetailsActivity, GstinActivity::class.java)
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(i)
-                            }
+
+                            val i = Intent(this@BusinessdetailsActivity, MainActivity::class.java)
+                            i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            startActivity(i)
+//                            if(sericeitem=="Food")
+//                            {
+//                                sharedPreference.save("gst_skip_enable","1")
+//                                val i = Intent(this@BusinessdetailsActivity, FssaiActivity::class.java)
+//                               i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                  i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//                                startActivity(i)
+//                            }
+//                            else if(sericeitem=="Services")
+//                            {
+//                                sharedPreference.save("gst_skip_enable","1")
+//                                val i = Intent(this@BusinessdetailsActivity, GstinActivity::class.java)
+//                                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//                                startActivity(i)
+//                            }
+//                            else if(sericeitem=="Product Sales"){
+//                                if(sericeitem=="Product Sales") {
+//                                    sharedPreference.save("gst_skip_enable","0")
+////                                    gstinBinding.skipbtn.isEnabled = false
+////                                    gstinBinding.skipbtn.isClickable = false
+//                                }
+//                                val i = Intent(this@BusinessdetailsActivity, GstinActivity::class.java)
+//                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//                                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                startActivity(i)
+//                            }
                         }else{
                             progress.dismiss()
                             showToast(businessdetailsResponse.message)
