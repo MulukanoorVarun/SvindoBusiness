@@ -292,7 +292,6 @@ class AcceptOrder : AppCompatActivity() {
                                             )
                                         }
                                     }
-
                                     acceptOrderBinding.acceptbutton.setOnClickListener {
                                         if (orderstatus == "Order Placed"){
                                             orderstatus = "Order Accepted"
