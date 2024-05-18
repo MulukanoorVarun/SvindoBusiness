@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -204,6 +205,17 @@ class AcceptOrder : AppCompatActivity() {
                                     acceptOrderBinding.deliverytype.text = acceptorderresponse.order_details.delivery_type
                                     acceptOrderBinding.commentsDesc.text = acceptorderresponse.order_details.comment
 
+                                    val phoneNumber = acceptorderresponse.order_details.customer_mobile_number?.trim()
+                                    acceptOrderBinding.calltocustomer.setOnClickListener {
+                                        if (!phoneNumber.isNullOrEmpty()) {
+                                            val intent = Intent(Intent.ACTION_DIAL)
+                                            intent.data = Uri.parse("tel:$phoneNumber")
+                                            startActivity(intent)
+                                        } else {
+                                            Log.d("DialPad", "Phone number is empty or null")
+                                        }
+                                    }
+
                                     if(acceptorderresponse.order_details.delivery_type=="Genral") {
                                         acceptOrderBinding.deliverytype.text = "General"
                                     }else{
@@ -257,13 +269,19 @@ class AcceptOrder : AppCompatActivity() {
                                         acceptOrderBinding.acceptbutton.text = "Exchanged Order"
                                     }
 
+                                    if(acceptorderresponse.order_details.payment_type!="Pay to Shop") {
+                                        acceptOrderBinding.billdownloadbtn.isVisible=true
+                                        acceptOrderBinding.calltocustomer.isVisible=false
                                         acceptOrderBinding.billdownloadbtn.setOnClickListener {
                                             var url = acceptorderresponse.bills
-                                            //showToast(url.toString())
                                             val browserIntent =
                                                 Intent(Intent.ACTION_VIEW, Uri.parse(url))
                                             startActivity(browserIntent)
                                         }
+                                    }else{
+                                        acceptOrderBinding.billdownloadbtn.isVisible=false
+                                        acceptOrderBinding.calltocustomer.isVisible=true
+                                    }
 
                                     acceptOrderBinding.rejectbutton.setOnClickListener {
                                         if (orderstatus == "Order Placed") {

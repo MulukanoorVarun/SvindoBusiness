@@ -36,5 +36,6 @@ data class OrderDetails(
     val delivery_discount:String,
     val delivery_type:String,
     val comment:String,
+    val customer_mobile_number:String,
 
 )

@@ -513,35 +513,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1.5"
+                android:layout_weight="2"
                 android:text="@string/customer_details"
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/frame_2_"
                 android:textColor="@color/black"
                 android:textSize="13sp"
-                android:textStyle="bold"
-                />
-
-            <TextView
+                android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/calltocustomer"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="OTP:"
-                android:textColor="@color/green"
-                android:textSize="13sp"
-                android:visibility="gone"
-                tools:ignore="Hardcodedtext" />
-            <TextView
-                android:id="@+id/otptext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="2dp"
-                android:text=""
-                android:textColor="@color/green"
-                android:textSize="13sp"
-                tools:ignore="Hardcodedtext" />
-
+                android:layout_height="35dp"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/callicon"
+                android:text="Call to Customer"
+                android:textColor="@color/white"
+                android:layout_margin="8sp"
+                android:textSize="10sp"
+                android:padding="10dp"
+                android:background="@drawable/buttonbackground"
+                tools:ignore="HardcodedText,SmallSp" />
         </LinearLayout>
         <View
             android:id="@+id/View4"
