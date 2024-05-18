@@ -205,6 +205,7 @@ class AcceptOrder : AppCompatActivity() {
                                     acceptOrderBinding.deliverytype.text = acceptorderresponse.order_details.delivery_type
                                     acceptOrderBinding.commentsDesc.text = acceptorderresponse.order_details.comment
 
+
                                     val phoneNumber = acceptorderresponse.order_details.customer_mobile_number?.trim()
                                     acceptOrderBinding.calltocustomer.setOnClickListener {
                                         if (!phoneNumber.isNullOrEmpty()) {
