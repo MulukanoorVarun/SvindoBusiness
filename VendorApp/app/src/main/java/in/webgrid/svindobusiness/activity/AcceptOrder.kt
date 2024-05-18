@@ -282,7 +282,6 @@ class AcceptOrder : AppCompatActivity() {
                                         acceptOrderBinding.billdownloadbtn.isVisible=false
                                         acceptOrderBinding.calltocustomer.isVisible=true
                                     }
-
                                     acceptOrderBinding.rejectbutton.setOnClickListener {
                                         if (orderstatus == "Order Placed") {
                                             orderstatus = "Store Rejected"
